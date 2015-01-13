@@ -1,0 +1,34 @@
+{
+  "variables": {
+    "aws_access_key": "",
+    "aws_secret_key": "",
+    "release": null
+  },
+  "builders": [
+  {
+    "type": "amazon-ebs",
+    "name": "amazon-us-west-2",
+    "access_key": "{{user `aws_access_key`}}",
+    "secret_key": "{{user `aws_secret_key`}}",
+    "region": "us-west-2",
+    "source_ami": "ami-3d50120d",
+    "instance_type": "m3.medium",
+    "ssh_username": "ubuntu",
+    "ami_name": "mozilla nubis-base v{{user `release`}}",
+    "ami_description": "Nubis - Base",
+    "ami_regions" : [ "eu-west-1","us-east-1" ],
+    "tags" : {
+       "release": "{{user `release`}}"
+    }
+  }
+  ],
+  "provisioners": [
+  {
+    "type": "shell",
+    "inline": [
+      "sleep 30",
+      "sudo apt-get update",
+      "sudo apt-get -y install puppet=3.4.3-1"
+  ]}
+  ]
+}
