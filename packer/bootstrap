@@ -22,9 +22,6 @@ elif [[ -f /etc/redhat_release ]]; then
    # provided in Amazon's repositories.
    sudo rpm -ivh http://yum.puppetlabs.com/puppetlabs-release-el-6.noarch.rpm
 
-   # Update repository caches
-   sudo yum -y update
-
    # Install puppet
    sudo yum -y install puppet-${redhat_puppet_version}
 fi
