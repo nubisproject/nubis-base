@@ -25,10 +25,7 @@
   "provisioners": [
   {
     "type": "shell",
-    "inline": [
-      "sleep 30",
-      "sudo apt-get update",
-      "sudo apt-get -y install puppet=3.4.3-1"
-  ]}
+    "script": "bootstrap"
+  }
   ]
 }
