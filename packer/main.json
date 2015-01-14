@@ -27,14 +27,8 @@
     "type": "shell",
     "inline": [
       "sleep 30",
-      "test -f /etc/debian_version && wget -O /tmp/puppetlabs-release-precise.deb https://apt.puppetlabs.com/puppetlabs-release-precise.deb && sudo dpkg -i /tmp/puppetlabs-release-precise.deb",
-      "test -f /etc/redhat_release && sudo rpm -ivh http://yum.puppetlabs.com/puppetlabs-release-el-6.noarch.rpm",
-      "sudo apt-get update || sudo yum -y update",
-      "sudo apt-get -y upgrade || sudo yum -y upgrade",
-      "sudo apt-get -y install puppet=3.7.3-1puppetlabs1 || sudo yum -y install puppet-3.7.3-1",
-      "sudo apt-get -y install build-essential || sudo yum -y groupinstall 'Development tools'",
-      "sudo apt-get -y install ruby-dev || sudo yum -y install ruby-devel",
-      "sudo gem install librarian-puppet"]
-  }
+      "sudo apt-get update",
+      "sudo apt-get -y install puppet=3.4.3-1"
+  ]}
   ]
 }
