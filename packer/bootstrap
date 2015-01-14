@@ -25,7 +25,3 @@ elif [[ -f /etc/redhat_release ]]; then
    # Install puppet
    sudo yum -y install puppet-${redhat_puppet_version}
 fi
-
-# Remove SSH host keys, so we don't have a bunch of instances running with the exact same
-# key.
-find /etc/ssh -name 'ssh_host_*key*' -and -type f -delete
