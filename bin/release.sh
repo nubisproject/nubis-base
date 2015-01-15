@@ -1,9 +1,5 @@
 #!/bin/bash
 
-umask 077
-date=$(date)
-id=${USER-unknown}@$(hostname)
-
 usage(){
    echo "Usage: $0 -f <file> [-r] [-b]" 1>&2
    exit 1
@@ -25,12 +21,13 @@ done
 shift $((OPTIND-1))
 
 if [ -z "$file" ]; then
-   echo file blank
    usage
 fi
 
+umask 077
 if [ -f $file ]; then
-   source $file
+   release=$(grep release $file | cut -d ':' -f 2 | cut -d '"' -f 2)
+   build=$(grep build $file | cut -d ':' -f 2 | cut -d '"' -f 2)
 
    if [ ${increment_release:-0} -eq 1 ]; then
       release=$(($release + 1))
@@ -45,7 +42,8 @@ fi
 
 rm -f $file
 cat << EOF > $file
-release=$release
-build=$build
-id=$id
+{
+  "release": "$release",
+  "build": "$build",
+}
 EOF
