@@ -2,7 +2,7 @@
 
 umask 077
 date=$(date)
-id=${USER-root}@$(hostname)
+id=${USER-unknown}@$(hostname)
 
 usage(){
    echo "Usage: $0 -f <file> [-r] [-b]" 1>&2
@@ -47,4 +47,5 @@ rm -f $file
 cat << EOF > $file
 release=$release
 build=$build
+id=$id
 EOF
