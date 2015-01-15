@@ -3,6 +3,7 @@
     "aws_access_key": "",
     "aws_secret_key": "",
     "release": null
+    "build": null
   },
   "builders": [
   {
@@ -14,11 +15,11 @@
     "source_ami": "ami-3d50120d",
     "instance_type": "m3.medium",
     "ssh_username": "ubuntu",
-    "ami_name": "mozilla nubis-base v{{user `release`}}",
+    "ami_name": "mozilla nubis-base v{{user `release`}}.{{user `build`}}",
     "ami_description": "Nubis - Base",
     "ami_regions" : [ "eu-west-1","us-east-1" ],
     "tags" : {
-       "release": "{{user `release`}}"
+       "release": "{{user `release`}}.{{user `build`}}"
     }
   }
   ],
@@ -26,6 +27,12 @@
   {
     "type": "shell",
     "script": "bootstrap"
+  },
+  {
+    "type": "puppet-masterless",
+    "manifest_dir": "nubis-puppet/manifests",
+    "manifest_file": "init.pp",
+    "module_paths": ["nubis-puppet/modules"]
   }
   ]
 }
