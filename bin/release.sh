@@ -44,6 +44,6 @@ rm -f $file
 cat << EOF > $file
 {
   "release": "$release",
-  "build": "$build",
+  "build": "$build"
 }
 EOF
