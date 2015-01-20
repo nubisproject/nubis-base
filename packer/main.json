@@ -2,7 +2,8 @@
   "variables": {
     "aws_access_key": "",
     "aws_secret_key": "",
-    "release": null
+    "release": null,
+    "build": null
   },
   "builders": [
   {
@@ -14,21 +15,29 @@
     "source_ami": "ami-3d50120d",
     "instance_type": "m3.medium",
     "ssh_username": "ubuntu",
-    "ami_name": "mozilla nubis-base v{{user `release`}}",
+    "ami_name": "mozilla nubis-base v{{user `release`}}.{{user `build`}}",
     "ami_description": "Nubis - Base",
     "ami_regions" : [ "eu-west-1","us-east-1" ],
     "tags" : {
-       "release": "{{user `release`}}"
+       "release": "{{user `release`}}.{{user `build`}}"
     }
   }
   ],
   "provisioners": [
   {
+    "type": "file",
+    "source": "nubis-puppet.tar.gz",
+    "destination": "/tmp/nubis-puppet.tar.gz"
+  },
+  {
     "type": "shell",
-    "inline": [
-      "sleep 30",
-      "sudo apt-get update",
-      "sudo apt-get -y install puppet=3.4.3-1"
-  ]}
+    "script": "bin/packer-bootstrap"
+  },
+  {
+    "type": "puppet-masterless",
+    "manifest_dir": "nubis-puppet/manifests",
+    "manifest_file": "nubis-puppet/manifests/init.pp",
+    "module_paths": ["nubis-puppet/modules"]
+  }
   ]
 }

@@ -1,0 +1,40 @@
+#!/bin/bash
+
+debian_puppet_version="3.7.3-1puppetlabs1"
+redhat_puppet_version="3.7.3-1"
+
+set -e
+
+if [[ -f /etc/debian_version ]]; then
+   # Install puppetlabs repository, we'll want access to more up to date puppet agents than what's
+   # provided in Amazon's repositories.
+   wget -O /tmp/puppetlabs-release-precise.deb https://apt.puppetlabs.com/puppetlabs-release-precise.deb
+   sudo dpkg -i /tmp/puppetlabs-release-precise.deb
+   rm -f /tmp/puppetlabs-release-precise.deb
+
+   # Update repository caches
+   sudo apt-get update
+
+   # Install puppet
+   sudo apt-get -y install puppet=${debian_puppet_version}   
+elif [[ -f /etc/redhat_release ]]; then
+   # Install puppetlabs repository, we'll want access to more up to date puppet agents than what's
+   # provided in Amazon's repositories.
+   sudo rpm -ivh http://yum.puppetlabs.com/puppetlabs-release-el-6.noarch.rpm
+
+   # Install puppet
+   sudo yum -y install puppet-${redhat_puppet_version}
+fi
+
+# We have a file provisioner in main.json that'll copy over a .tar.gz of the nubis-puppet that's created
+# by make. We need to extract that so we can have a full puppet checkout ready for additional build
+# iterations.
+if [[ -f /tmp/nubis-puppet.tar.gz ]]; then
+   sudo tar -C /etc -zxvf /tmp/nubis-puppet.tar.gz
+   rm -f /tmp/nubis-puppet.tar.gz
+
+   # We're probably going to have secrets at some point. I use chown 0:0 to avoid having to figure out
+   # whether root's group is root, or wheel.
+   sudo chown 0:0 /etc/nubis-puppet
+   sudo chmod 700 /etc/nubis-puppet
+fi
