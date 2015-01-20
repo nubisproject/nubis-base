@@ -19,6 +19,8 @@ nubis-puppet: force
 	@[ -d $@ ] && cd $@ && git pull || \
 	git clone git@github.com:mozilla/$@.git
 	cd $@ && librarian-puppet install
+	rm -f nubis-puppet.tar.gz
+	tar -zpcf nubis-puppet.tar.gz nubis-puppet
 
 release-increment:
 	./bin/release.sh -f $(RELEASE_FILE) -r

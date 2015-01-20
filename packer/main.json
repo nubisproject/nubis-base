@@ -25,8 +25,13 @@
   ],
   "provisioners": [
   {
+    "type": "file",
+    "source": "nubis-puppet.tar.gz",
+    "destination": "/tmp/nubis-puppet.tar.gz"
+  },
+  {
     "type": "shell",
-    "script": "packer/bootstrap"
+    "script": "bin/packer-bootstrap"
   },
   {
     "type": "puppet-masterless",

@@ -25,3 +25,16 @@ elif [[ -f /etc/redhat_release ]]; then
    # Install puppet
    sudo yum -y install puppet-${redhat_puppet_version}
 fi
+
+# We have a file provisioner in main.json that'll copy over a .tar.gz of the nubis-puppet that's created
+# by make. We need to extract that so we can have a full puppet checkout ready for additional build
+# iterations.
+if [[ -f /tmp/nubis-puppet.tar.gz ]]; then
+   tar -C /etc -zxvf /tmp/nubis-puppet.tar.gz
+   rm -f /tmp/nubis-puppet.tar.gz
+
+   # We're probably going to have secrets at some point. I use chown 0:0 to avoid having to figure out
+   # whether root's group is root, or wheel.
+   chown 0:0 /etc/nubis-puppet
+   chmod 700 /etc/nubis-puppet
+fi
