@@ -30,11 +30,11 @@ fi
 # by make. We need to extract that so we can have a full puppet checkout ready for additional build
 # iterations.
 if [[ -f /tmp/nubis-puppet.tar.gz ]]; then
-   tar -C /etc -zxvf /tmp/nubis-puppet.tar.gz
+   sudo tar -C /etc -zxvf /tmp/nubis-puppet.tar.gz
    rm -f /tmp/nubis-puppet.tar.gz
 
    # We're probably going to have secrets at some point. I use chown 0:0 to avoid having to figure out
    # whether root's group is root, or wheel.
-   chown 0:0 /etc/nubis-puppet
-   chmod 700 /etc/nubis-puppet
+   sudo chown 0:0 /etc/nubis-puppet
+   sudo chmod 700 /etc/nubis-puppet
 fi
