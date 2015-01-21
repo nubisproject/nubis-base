@@ -40,6 +40,18 @@
     "manifest_dir": "nubis-puppet/manifests",
     "manifest_file": "nubis-puppet/manifests/init.pp",
     "module_paths": ["nubis-puppet/modules"]
+  },
+  {
+      "type": "file",
+      "source": "packer/consul-autojoin.sh",
+      "destination": "/tmp/autojoin.sh"
+  },
+  {
+      "type": "shell",
+      "inline" : [
+        "sudo mv /tmp/autojoin.sh /etc/rc.local",
+        "sudo chmod +x /etc/rc.local"
+      ]
   }
   ]
 }
