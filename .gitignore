@@ -1,3 +1,6 @@
 packer/variables.json
 nubis-puppet.tar.gz
 nubis-puppet
+Puppetfile.lock
+.tmp
+.librarian
