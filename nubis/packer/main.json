@@ -28,22 +28,22 @@
   "provisioners": [
   {
     "type": "file",
-    "source": "nubis-puppet.tar.gz",
+    "source": "nubis/nubis-puppet.tar.gz",
     "destination": "/tmp/nubis-puppet.tar.gz"
   },
   {
     "type": "shell",
-    "script": "bin/packer-bootstrap"
+    "script": "nubis/bin/packer-bootstrap"
   },
   {
     "type": "puppet-masterless",
-    "manifest_dir": "nubis-puppet/puppet/manifests",
-    "manifest_file": "nubis-puppet/puppet/manifests/init.pp",
-    "module_paths": ["nubis-puppet"]
+    "manifest_dir": "nubis/nubis-puppet/puppet/manifests",
+    "manifest_file": "nubis/nubis-puppet/puppet/manifests/init.pp",
+    "module_paths": ["nubis/nubis-puppet"]
   },
   {
       "type": "file",
-      "source": "packer/consul-autojoin.sh",
+      "source": "nubis/packer/consul-autojoin.sh",
       "destination": "/tmp/autojoin.sh"
   },
   {

@@ -14,23 +14,25 @@ usage(){
    exit 1
 }
 
-while true; do
+while [[ ! -z "$1" ]]; do
    case "$1" in
       -f | --file )
          file="$2"
-         shift 2 
+         shift
          ;;
       -r | --release )
          increment_release=1
-         shift
          ;;
       *)
+         echo wtf $1
          usage
     esac
+    shift
 done
 
 # Required argument.
 if [[ -z "$file" ]]; then
+echo erp
    usage
 fi
 
