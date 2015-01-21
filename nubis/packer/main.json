@@ -43,7 +43,7 @@
   },
   {
       "type": "file",
-      "source": "nubis/packer/consul-autojoin.sh",
+      "source": "nubis/bin/consul-autojoin.sh",
       "destination": "/tmp/autojoin.sh"
   },
   {
