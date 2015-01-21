@@ -4,3 +4,4 @@ nubis-puppet
 Puppetfile.lock
 .tmp
 .librarian
+terraform.tfstate*
