@@ -2,14 +2,14 @@
 #
 # This script will bump the build and/or the release numbers in $file, which is
 # a json file that's consumed by packer. It's currently called from the Makefile
-# to do this for you, allowing you to build a series of AMI quickly without
+# to do this for you, allowing you to build a series of AMIs quickly without
 # an additional step.
 #
 
 usage(){
    echo "Usage: $0 -f|--file <file> [-r|--release]" 1>&2
    echo
-   echo "Script is invoked automagically via make, but open me up read"
+   echo "Script is invoked automagically via make, but open me up and read"
    echo "comments for more information."
    exit 1
 }
