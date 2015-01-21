@@ -32,6 +32,11 @@
     "destination": "/tmp/nubis-puppet.tar.gz"
   },
   {
+      "type": "file",
+      "source": "nubis/bin/consul-autojoin.sh",
+      "destination": "/tmp/autojoin.sh"
+  },
+  {
     "type": "shell",
     "script": "nubis/bin/packer-bootstrap"
   },
@@ -40,18 +45,6 @@
     "manifest_dir": "nubis/nubis-puppet/puppet/manifests",
     "manifest_file": "nubis/nubis-puppet/puppet/manifests/init.pp",
     "module_paths": ["nubis/nubis-puppet"]
-  },
-  {
-      "type": "file",
-      "source": "nubis/bin/consul-autojoin.sh",
-      "destination": "/tmp/autojoin.sh"
-  },
-  {
-      "type": "shell",
-      "inline" : [
-        "sudo mv /tmp/autojoin.sh /etc/rc.local",
-        "sudo chmod +x /etc/rc.local"
-      ]
   }
   ]
 }
