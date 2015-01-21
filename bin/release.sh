@@ -1,31 +1,42 @@
 #!/bin/bash
+#
+# This script will bump the build and/or the release numbers in $file, which is
+# a json file that's consumed by packer. It's currently called from the Makefile
+# to do this for you, allowing you to build a series of AMI quickly without
+# an additional step.
+#
 
 usage(){
-   echo "Usage: $0 -f <file> [-r] [-b]" 1>&2
+   echo "Usage: $0 -f|--file <file> [-r|--release]" 1>&2
+   echo
+   echo "Script is invoked automagically via make, but open me up read"
+   echo "comments for more information."
    exit 1
 }
 
-while getopts "f:rb" o; do
-   case "${o}" in
-      f)
-         file=$OPTARG
+while true; do
+   case "$1" in
+      -f | --file )
+         file="$2"
+         shift 2 
          ;;
-      r)
+      -r | --release )
          increment_release=1
+         shift
          ;;
       *)
          usage
-         ;;
     esac
 done
-shift $((OPTIND-1))
 
-if [ -z "$file" ]; then
+# Required argument.
+if [[ -z "$file" ]]; then
    usage
 fi
 
 umask 077
 if [ -f $file ]; then
+   # Poor mans json parsing
    release=$(grep release $file | cut -d ':' -f 2 | cut -d '"' -f 2)
    build=$(grep build $file | cut -d ':' -f 2 | cut -d '"' -f 2)
 
@@ -41,6 +52,7 @@ else
 fi
 
 rm -f $file
+# Poor mans json writer
 cat << EOF > $file
 {
   "release": "$release",
