@@ -4,10 +4,13 @@
 
 eval `ec2metadata --user-data`
 
+INSTANCE_ID=`ec2metadata --instance-id`
+
 cat <<EOF | tee /etc/consul/zzz-startup.json
 {
   "encrypt": "$CONSUL_SECRET",
-  "datacenter": "$CONSUL_DC"
+  "datacenter": "$CONSUL_DC",
+  "node_name": "$INSTANCE_ID"
 }
 EOF
 
