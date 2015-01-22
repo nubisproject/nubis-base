@@ -38,3 +38,10 @@ if [[ -f /tmp/nubis-puppet.tar.gz ]]; then
    sudo chown 0:0 /etc/nubis-puppet
    sudo chmod 700 /etc/nubis-puppet
 fi
+
+# We copy this file over in main.json, but it needs to run at boot so we run this little shell snippit
+# as part of the bootstrap process.
+if [[ -f /tmp/autojoin.sh ]]; then
+   sudo mv /tmp/autojoin.sh /etc/rc.local
+   sudo chmod 755 /etc/rc.local
+fi

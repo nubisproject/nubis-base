@@ -3,7 +3,7 @@
 # Build AMIs using packer
 
 # Variables
-RELEASE_FILE=packer/release.json
+RELEASE_FILE=nubis/packer/release.json
 
 # Top level build targets
 all: build
@@ -16,14 +16,14 @@ release: release-increment nubis-puppet packer
 force: ;
 
 nubis-puppet: force
-	librarian-puppet install --path=nubis-puppet
-	tar --exclude='nubis-puppet/.*' -zpcvf nubis-puppet.tar.gz nubis-puppet
+	cd nubis && librarian-puppet install --path=nubis-puppet
+	tar --exclude='nubis-puppet/.*' -C nubis -zpcvf nubis/nubis-puppet.tar.gz nubis-puppet
 
 release-increment:
-	./bin/release.sh -f $(RELEASE_FILE) -r
+	./nubis/bin/release.sh -f $(RELEASE_FILE) -r
 
 build-increment:
-	./bin/release.sh -f $(RELEASE_FILE)
+	./nubis/bin/release.sh -f $(RELEASE_FILE)
 
 packer: force
-	packer build -var-file=packer/variables.json -var-file=$(RELEASE_FILE) packer/main.json
+	packer build -var-file=nubis/packer/variables.json -var-file=$(RELEASE_FILE) nubis/packer/main.json

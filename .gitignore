@@ -1,7 +1,7 @@
-packer/variables.json
-nubis-puppet.tar.gz
-nubis-puppet
-Puppetfile.lock
-.tmp
-.librarian
 terraform.tfstate*
+nubis/packer/variables.json
+nubis/nubis-puppet.tar.gz
+nubis/nubis-puppet
+nubis/Puppetfile.lock
+nubis/.tmp
+nubis/.librarian
