@@ -1,0 +1,3 @@
+This direcotry should only contain this file, init.pp and a folder corresponding to every backend module listed on https://wiki.mozilla.org/Web_Operations/Service_Matrix
+
+All class definitions and use of any classes must be specified with an absolute path (.i.e. use "::my:module" instead of "my::module")

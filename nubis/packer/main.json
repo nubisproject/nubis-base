@@ -42,8 +42,8 @@
   },
   {
     "type": "puppet-masterless",
-    "manifest_dir": "nubis/nubis-puppet/puppet/manifests",
-    "manifest_file": "nubis/nubis-puppet/puppet/manifests/init.pp",
+    "manifest_dir": "nubis/puppet",
+    "manifest_file": "nubis/puppet/init.pp",
     "module_paths": ["nubis/nubis-puppet"]
   }
   ]
