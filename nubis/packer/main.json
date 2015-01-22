@@ -45,6 +45,13 @@
     "manifest_dir": "nubis/puppet",
     "manifest_file": "nubis/puppet/init.pp",
     "module_paths": ["nubis/nubis-puppet"]
+  },
+  {
+    "type": "shell",
+    "inline": [
+        "sudo mv /tmp/autojoin.sh /etc/rc.local",
+	"sudo chmod 755 /etc/rc.local"
+    ]
   }
   ]
 }
