@@ -16,6 +16,7 @@ release: release-increment nubis-puppet packer
 force: ;
 
 nubis-puppet: force
+	cd nubis && librarian-puppet clean
 	cd nubis && librarian-puppet install --path=nubis-puppet
 	tar --exclude='nubis-puppet/.*' -C nubis -zpcvf nubis/nubis-puppet.tar.gz nubis-puppet
 
@@ -27,3 +28,6 @@ build-increment:
 
 packer: force
 	packer build -var-file=nubis/packer/variables.json -var-file=$(RELEASE_FILE) nubis/packer/main.json
+
+clean:
+	rm -rf nubis/nubis-puppet
