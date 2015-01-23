@@ -18,7 +18,7 @@ variable "region" {
 }
 
 variable "release" {
-  default = "55"
+  default = "0.84"
   description = "Release number of the architecture"
 }
 
