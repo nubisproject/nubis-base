@@ -28,3 +28,6 @@ build-increment:
 
 packer: force
 	packer build -var-file=nubis/packer/variables.json -var-file=$(RELEASE_FILE) nubis/packer/main.json
+
+clean:
+	rm -rf nubis/nubis-puppet
