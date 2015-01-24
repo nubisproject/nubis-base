@@ -21,10 +21,10 @@ nubis-puppet: force
 	tar --exclude='nubis-puppet/.*' -C nubis -zpcf nubis/nubis-puppet.tar.gz nubis-puppet
 
 release-increment:
-	jq '.release+=1' $(RELEASE_FILE) | sponge $(RELEASE_FILE)
+	./nubis/bin/release.sh -f $(RELEASE_FILE) -r
 
 build-increment:
-	jq '.build+=1' $(RELEASE_FILE)  | sponge $(RELEASE_FILE)
+	./nubis/bin/release.sh -f $(RELEASE_FILE)
 
 packer: force
 	packer build -var-file=nubis/packer/variables.json -var-file=$(RELEASE_FILE) nubis/packer/main.json
