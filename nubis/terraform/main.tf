@@ -20,7 +20,7 @@ resource "consul_keys" "app" {
     # Read the launch AMI from Consul
     key {
         name = "ami"
-        path = "nubis/${var.project}/releases/${var.release}/${var.region}"
+        path = "nubis/${var.project}/releases/${var.release}.${var.build}/${var.region}"
     }
 }
 
@@ -68,8 +68,8 @@ resource "aws_instance" "node" {
   ]
   
   tags {
-        Name = "Consul base (v/${var.release})"
-        Release = "${var.release}"
+        Name = "Consul base (v/${var.release}.${var.build})"
+        Release = "${var.release}.${var.build}"
   }
 
   user_data = "CONSUL_PUBLIC=1\nCONSUL_DC=${var.region}\nCONSUL_SECRET=${var.secret}\nCONSUL_JOIN=${var.consul}"
