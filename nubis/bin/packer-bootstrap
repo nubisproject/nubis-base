@@ -17,15 +17,22 @@ if [[ -f /etc/debian_version ]]; then
 
    # Install puppet
    sudo apt-get -y install puppet=${debian_puppet_version}   
-elif [[ -f /etc/redhat_release ]]; then
-   # Install puppetlabs repository, we'll want access to more up to date puppet agents than what's
-   # provided in Amazon's repositories.
-   sudo rpm -ivh http://yum.puppetlabs.com/puppetlabs-release-el-6.noarch.rpm
+elif [[ -f /etc/os-release ]]; then
+   . /etc/os-release
 
-   # Install puppet
-   sudo yum -y install puppet-${redhat_puppet_version}
+   if [[ "$NAME" = "Amazon Linux AMI" ]]; then
+      # Install puppetlabs repository, we'll want access to more up to date puppet agents than what's
+      # provided in Amazon's repositories.
+      sudo rpm -ivh http://yum.puppetlabs.com/puppetlabs-release-el-6.noarch.rpm
+
+      # Install puppet
+      sudo yum -y install puppet-${redhat_puppet_version}
+   else
+      echo "Operating system $NAME unsupported"
+      exit 1
+   fi
 else
-   echo Operating system unsupported
+   echo "Unknown operating system"
    exit 1
 fi
 
