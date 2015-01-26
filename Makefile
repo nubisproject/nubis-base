@@ -18,7 +18,7 @@ force: ;
 nubis-puppet: force
 	cd nubis && librarian-puppet clean
 	cd nubis && librarian-puppet install --path=nubis-puppet
-	tar --exclude='nubis-puppet/.*' -C nubis -zpcf nubis/nubis-puppet.tar.gz nubis-puppet
+	tar --exclude='nubis-puppet/.*' --exclude=.git -C nubis -zpcf nubis/nubis-puppet.tar.gz nubis-puppet
 
 release-increment:
 	./nubis/bin/release.sh -f $(RELEASE_FILE) -r
