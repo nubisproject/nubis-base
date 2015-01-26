@@ -24,6 +24,9 @@ elif [[ -f /etc/redhat_release ]]; then
 
    # Install puppet
    sudo yum -y install puppet-${redhat_puppet_version}
+else
+   echo Operating system unsupported
+   exit 1
 fi
 
 # We have a file provisioner in main.json that'll copy over a .tar.gz of the nubis-puppet that's created
