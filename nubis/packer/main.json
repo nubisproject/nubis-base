@@ -14,7 +14,7 @@
     "secret_key": "{{user `aws_secret_key`}}",
     "iam_instance_profile": "{{user `iam_instance_profile`}}",
     "region": "us-west-2",
-    "source_ami": "ami-3d50120d",
+    "source_ami": "ami-a7c59397",
     "instance_type": "m3.medium",
     "ssh_username": "ubuntu",
     "ami_name": "mozilla nubis-base v{{user `release`}}.{{user `build`}}",
