@@ -1,3 +1,0 @@
-https://github.com/mozilla/nubis-base
-https://github.com/mozilla/nubis-ci
-https://github.com/mozilla/nubis-consul
