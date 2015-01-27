@@ -6,6 +6,13 @@ amazon_linux_puppet_version="3.7.3"
 set -e
 
 if [[ -f /etc/debian_version ]]; then
+   # Install ec2-ami-tools to support the amazon instance builder. Installing this here vs puppet as
+   # this is required for packer, and feels like a better spot to do it instead of in nubis-puppet.
+   sudo apt-add-repository multiverse
+   sudo apt-get update
+   sudo apt-get -y install ec2-ami-tools
+   sudo apt-add-repository -r multiverse
+
    # Install puppetlabs repository, we'll want access to more up to date puppet agents than what's
    # provided in Amazon's repositories.
    wget -O /tmp/puppetlabs-release-precise.deb https://apt.puppetlabs.com/puppetlabs-release-precise.deb
@@ -21,6 +28,10 @@ elif [[ -f /etc/os-release ]]; then
    . /etc/os-release
 
    if [[ "$NAME" = "Amazon Linux AMI" ]]; then
+      # Install aws-amitools-ec2 to support the amazon instance builder. Installing this here vs puppet as
+      # this is required for packer, and feels like a better spot to do it instead of in nubis-puppet.
+      sudo yum -y install aws-amitools-ec2
+
       # Amazon Linux ships with Ruby 2.0, which doesn't work too well with Puppet. We'll need to install
       # 1.8 and set that as the default version.
       sudo yum -y install ruby18-1.8.7.374-2.42.3.amzn1
@@ -36,11 +47,14 @@ elif [[ -f /etc/os-release ]]; then
       # is to simply disable yum priorities.
       sudo sh -c 'echo -e "[main]\nenabled = 0" > /etc/yum/pluginconf.d/priorities.conf'
 
+      # Yum can be stinky
+      sudo yum clean all
+
       # Install puppet and rubygem18-json, which someone forgot to add to puppet's dependency list.
       sudo yum -y install puppet-${amazon_linux_puppet_version} rubygem18-json
 
       # Re-enable yum priorities
-      sudo rm -f /etc/yum/pluginconf.d/priorities.conf
+      sudo sh -c 'echo -e "[main]\nenabled = 1" > /etc/yum/pluginconf.d/priorities.conf'
    else
       echo "Operating system $NAME unsupported"
       exit 1
@@ -62,6 +76,8 @@ if [[ -f /tmp/nubis-puppet.tar.gz ]]; then
    sudo chown 0:0 /etc/nubis-puppet
    sudo chmod 700 /etc/nubis-puppet
 fi
+
+#find /tmp/packer-puppet-masterless/ -ls
 
 # We copy this file over in main.json, but it needs to run at boot so we run this little shell snippit
 # as part of the bootstrap process.
