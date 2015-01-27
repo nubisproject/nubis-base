@@ -1,0 +1,8 @@
+---
+:backends:
+  - yaml
+:yaml:
+  :datadir: /etc/nubis-puppet/hiera
+:hierarchy:
+  - "%{::osfamily}"
+  - site
