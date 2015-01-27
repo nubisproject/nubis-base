@@ -79,6 +79,11 @@ if [[ -f /tmp/nubis-puppet.tar.gz ]]; then
       rm -f /tmp/nubis-hiera.tar.gz
    fi
 
+   # If puppet.conf exists in nubis-puppet, let's copy that over to /etc/puppet.
+   if [[ -f /etc/nubis-puppet/puppet.conf ]]; then
+      sudo cp -f /etc/nubis-puppet/puppet.conf /etc/puppet/puppet.conf
+   fi
+
    # We're probably going to have secrets at some point. I use chown 0:0 to avoid having to figure out
    # whether root's group is root, or wheel.
    sudo chown 0:0 /etc/nubis-puppet
