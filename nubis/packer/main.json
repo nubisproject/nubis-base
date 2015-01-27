@@ -98,11 +98,6 @@
   },
   {
     "type": "file",
-    "source": "nubis/nubis-hiera.tar.gz",
-    "destination": "/tmp/nubis-hiera.tar.gz"
-  },
-  {
-    "type": "file",
     "source": "nubis/bin/consul-autojoin.sh",
     "destination": "/tmp/autojoin.sh"
   },
