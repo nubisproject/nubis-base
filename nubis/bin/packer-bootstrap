@@ -12,6 +12,8 @@ if [[ -f /etc/debian_version ]]; then
    sudo apt-get update
    sudo apt-get -y install ec2-ami-tools
    sudo apt-add-repository -r multiverse
+   # After removing multiverse we need to rebuild the indexes, since this won't happen on their own.
+   sudo apt-get update
 
    # Install puppetlabs repository, we'll want access to more up to date puppet agents than what's
    # provided in Amazon's repositories.
