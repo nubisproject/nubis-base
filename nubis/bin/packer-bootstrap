@@ -73,12 +73,6 @@ if [[ -f /tmp/nubis-puppet.tar.gz ]]; then
    sudo tar -C /etc -zxf /tmp/nubis-puppet.tar.gz
    rm -f /tmp/nubis-puppet.tar.gz
 
-   # Ditto for the hiera datastore
-   if [[ -f /tmp/nubis-hiera.tar.gz ]]; then
-      sudo tar -C /etc/nubis-puppet -zxf /tmp/nubis-hiera.tar.gz
-      rm -f /tmp/nubis-hiera.tar.gz
-   fi
-
    # If puppet.conf exists in nubis-puppet, let's copy that over to /etc/puppet.
    if [[ -f /etc/nubis-puppet/puppet.conf ]]; then
       sudo cp -f /etc/nubis-puppet/puppet.conf /etc/puppet/puppet.conf
