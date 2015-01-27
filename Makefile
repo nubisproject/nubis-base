@@ -20,6 +20,7 @@ nubis-puppet: force
 	cd nubis && rm -f Puppetfile.lock
 	cd nubis && librarian-puppet install --path=nubis-puppet
 	tar --exclude='nubis-puppet/.*' --exclude=.git -C nubis -zpcf nubis/nubis-puppet.tar.gz nubis-puppet
+	tar -C nubis -zpcf nubis/nubis-hiera.tar.gz hiera
 
 release-increment:
 	./nubis/bin/release.sh -f $(RELEASE_FILE) -r

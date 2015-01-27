@@ -66,12 +66,18 @@ else
    exit 1
 fi
 
-# We have a file provisioner in main.json that'll copy over a .tar.gz of the nubis-puppet that's created
-# by make. We need to extract that so we can have a full puppet checkout ready for additional build
+# We have a file provisioner in main.json that'll copy over a .tar.gz of the nubis-puppet tree that's
+# created by make. We need to extract that so we can have a full puppet checkout ready for additional build
 # iterations.
 if [[ -f /tmp/nubis-puppet.tar.gz ]]; then
    sudo tar -C /etc -zxf /tmp/nubis-puppet.tar.gz
    rm -f /tmp/nubis-puppet.tar.gz
+
+   # Ditto for the hiera datastore
+   if [[ -f /tmp/nubis-hiera.tar.gz ]]; then
+      sudo tar -C /etc/nubis-puppet -zxf /tmp/nubis-hiera.tar.gz
+      rm -f /tmp/nubis-hiera.tar.gz
+   fi
 
    # We're probably going to have secrets at some point. I use chown 0:0 to avoid having to figure out
    # whether root's group is root, or wheel.
