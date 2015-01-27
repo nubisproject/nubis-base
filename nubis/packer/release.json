@@ -1,8 +1,4 @@
 {
   "release": "0",
-<<<<<<< HEAD
-  "build": "106"
-=======
-  "build": "93"
->>>>>>> parent of 9686f9e... Adding support for Amazon Linux, changing default make target to a nag message and created two specific targets for ubuntu and amazon linux respectively
+  "build": "106
 }
