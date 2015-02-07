@@ -89,6 +89,7 @@ fi
 # We copy this file over in main.json, but it needs to run at boot so we run this little shell snippit
 # as part of the bootstrap process.
 if [[ -f /tmp/autojoin.sh ]]; then
+   sudo mkdir /etc/nubis.d
    sudo mv /tmp/autojoin.sh /etc/rc.local
    sudo chmod 755 /etc/rc.local
 fi
