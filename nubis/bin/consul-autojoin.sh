@@ -35,4 +35,8 @@ fi
 
 service consul restart
 
+if [ -d /etc/nubis.d ]; then
+  run-parts /etc/nubis.d
+fi
+
 exit 0
