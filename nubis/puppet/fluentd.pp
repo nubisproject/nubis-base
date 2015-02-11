@@ -3,6 +3,11 @@ class { 'fluentd':
   service_ensure => stopped
 }
 
+fluentd::install_plugin { 'ec2-metadata':
+  plugin_type => 'gem',
+  plugin_name => 'fluent-plugin-ec2-metadata',
+}
+
 fluentd::configfile { 'syslog': }
 
 fluentd::configfile { 'forward': }
