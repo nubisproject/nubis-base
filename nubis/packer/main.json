@@ -111,6 +111,10 @@
     "manifest_file": "nubis/puppet/init.pp",
     "module_paths": ["nubis/nubis-puppet"],
     "hiera_config_path": "nubis/nubis-puppet/puppet/hiera.yaml"
+    "facter": {
+      "nubis_release": "{{user `release`}}",
+      "nubis_build":   "{{user `build`}}"
+    }
   }
   ]
 }
