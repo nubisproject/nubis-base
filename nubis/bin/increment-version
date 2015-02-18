@@ -4,6 +4,10 @@
 # which is consumed by packer. This script is currently called by make which allows you
 # to quickly build a series of AMIs quickly without an additional step.
 #
+# In a multi developer environment your version numbers may collide, the proper solution
+# is to force versioning through a build automation pipeline but for now we're going to
+# query the AMI registry here and do some additional checking. Otherwise, you just wasted
+# 5 minutes of your time and have to kick off the build again.
 
 usage(){
    if [[ $# -gt 0 ]]; then
@@ -11,9 +15,10 @@ usage(){
       echo
    fi
 
-   echo "Usage: $0 --file <path to project.json> [--release] [--build]"
+   echo "Usage: $0 --file <path to project.json> [--release] [--build] [--skip-collision-detection]"
    echo
-   echo "This script will increment either the build or release variable inside a json file."
+   echo "This script will increment either the build or release variable inside a json file, and check"
+   echo "the AMI registry for version collisions. You can disable this by passing --skip-collision-detection"
    echo
    echo "Increment the release number, and set the build version to 1:"
    echo "$0 --file project.json --release"
@@ -31,9 +36,11 @@ fail(){
 }
 
 hash jq 2>/dev/null || fail "Please install jq to use this build tool. https://github.com/stedolan/jq"
+hash aws 2>/dev/null || fail "Please install the AWS CLI API to use this build tool. https://aws.amazon.com/cli/"
 
 increment_release=0
 increment_build=0
+skip_collision_detection=0
 
 while [[ ! -z "$1" ]]; do
    case "$1" in
@@ -55,6 +62,9 @@ while [[ ! -z "$1" ]]; do
       --build)
          increment_build=1
          ;;
+      --skip-collision-detection)
+         skip_collision_detection=1
+         ;;
       *)
          usage "Invalid option $1"
     esac
@@ -63,6 +73,11 @@ done
 
 umask 077
 if [[ $increment_release -eq 1 ]]; then
+   # The user has asked us to increment the release number, and we'll automatically reset the build number back to 0.
+
+   # Note: There is a bug where make will still call us again to increment the build, so while build 0 is set below
+   # the lowest build number you can ever get is 1.
+
    tmp_json_file=$(mktemp ${file}.XXXXXX)
    jq '.release = (.release | tonumber | . + 1 | tostring) | .build = (0 | tostring)' < $file > $tmp_json_file
 
@@ -73,6 +88,8 @@ if [[ $increment_release -eq 1 ]]; then
       fail "Failed to write to $tmp_json_file"
    fi
 elif [[ $increment_build -eq 1 ]]; then
+   # The user has asked us to increment the build number, and leave the release alone.
+
    tmp_json_file=$(mktemp ${file}.XXXXXX)
    jq '.build = (.build | tonumber | . + 1 | tostring)' < $file > $tmp_json_file
 
@@ -86,4 +103,40 @@ else
    fail "You must specify either --build or --release"
 fi
 
-echo Project is now at $(jq --raw-output '"\(.release).\(.build)"' < $file)
+# Let's parse $file and extract the project version. Even if we skip collision detection we'll print to confirm anyway
+project_local_version=$(jq --raw-output '"\(.release).\(.build)"' < $file)
+if [[ $skip_collision_detection -ne 1 ]]; then
+   project_name=$(cat $file | jq -r '.project')
+
+   # Hopefully this list is not too big, we'll just query all AMIs that are tagged with this project and parse the results with jq.
+   latest_ami_json=$(aws --output json --region us-west-2 ec2 describe-images --owners self --filters "Name=tag:project,Values=${project_name}")
+   if [[ "$latest_ami_json" ]]; then
+      project_ami_version=$(echo "$latest_ami_json" | jq -r '[.Images[] | .Tags[] | select(.Key=="release")] | sort_by(.Value) | .[length-1] | .Value')
+
+      if [[ "$project_ami_version" ]]; then
+         # Version collision is a bit of a misnomer since we're not actually checking if the local version already exists
+         # in the AMI registry. Instead we are looking at the highest version number in AWS and comparing that to our
+         # local version, forcing the number to increase with every build iteriation.
+
+         # Bash won't evaluate floating point numbers, so we'll use awk and exit code trickery to accomplish that.
+         awk "BEGIN { exit ($project_ami_version >= $project_local_version) ? 1 : 0 }"
+         if [[ $? -eq 1 ]]; then
+            # Let's be nice and suggest a version for the user. We're using awk vs jq because floating point version incrementing is hard.
+            suggested_ami_version=$(awk "BEGIN { split(\"${project_ami_version}\", version, \".\"); print version[1] \".\" version[2] + 1; }")
+            fail "Version collision detected! $project_name is at ${project_ami_version} in our AMI, we're building local version ${project_local_version}. Please edit $file and bump the version to ${suggested_ami_version:-something newer} and try again. (local version:${project_local_version}, AMI version:$project_ami_version)"
+         else
+            echo "OK: Project is at local version $project_local_version"
+         fi
+      else
+         echo "WARNING: json parsing failure when searching AMI for other versions of ${project_name}."
+      fi
+   else
+      echo "OK: No other versions of $project_name were found in our AMI registry."
+   fi
+else
+   echo "WARNING: Skipping version collision detection"
+   echo
+   echo "Project is at local version $project_local_version"
+   sleep 1
+fi
+
