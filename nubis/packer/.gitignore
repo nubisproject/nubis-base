@@ -1,3 +1,4 @@
 variables.json
 aws.crt.pem
 aws.key.pem
+ami.json

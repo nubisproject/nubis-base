@@ -1,0 +1,52 @@
+#!/bin/bash
+
+if [[ $# -lt 1 ]]; then
+   echo "Usage: <ami.json path>"
+   exit 1
+fi
+
+# Region
+aws_region="us-west-2"
+
+# Search for latest official Canonical Ubuntu Trusty EBS AMI
+aws_ubuntu_ebs_ami=$(aws-find-ami --owners 099720109477 \
+                     --region $aws_region \
+                     --virtualization-type hvm \
+                     --root-device-type ebs \
+                     --architecture x86_64 \
+                     --block-device-mapping.volume-type gp2 \
+                     --name 'ubuntu/images/hvm-ssd/ubuntu-trusty-14.04*')
+
+# Search for latest official Amazon Linux EBS AMI
+aws_amazon_linux_ebs_ami=$(aws-find-ami --owners amazon \
+                           --region $aws_region \
+                           --virtualization-type hvm \
+                           --root-device-type ebs \
+                           --architecture x86_64 \
+                           --block-device-mapping.volume-type gp2 \
+                           --name 'amzn-ami-hvm-*')
+
+# Search for official Canonical Ubuntu Trusty instance-store AMI
+aws_ubuntu_instance_ami=$(aws-find-ami --owners 099720109477 \
+                          --region $aws_region \
+                          --virtualization-type hvm \
+                          --root-device-type instance-store \
+                          --architecture x86_64 \
+                          --name 'ubuntu/images/hvm-instance/ubuntu-trusty-14.04*')
+
+# Search for latest official Amazon Linux instance-store AMI
+aws_amazon_linux_instance_ami=$(aws-find-ami --owners amazon \
+                                --region $aws_region \
+                                --virtualization-type hvm \
+                                --root-device-type instance-store \
+                                --architecture x86_64 \
+                                --name 'amzn-ami-hvm-*')
+
+cat << EOF > $1
+{
+  "aws_amazon_linux_ebs_ami": "$aws_amazon_linux_ebs_ami",
+  "aws_amazon_linux_instance_ami": "$aws_amazon_linux_instance_ami",
+  "aws_ubuntu_ebs_ami": "$aws_ubuntu_ebs_ami",
+  "aws_ubuntu_instance_ami": "$aws_ubuntu_instance_ami"
+}
+EOF
