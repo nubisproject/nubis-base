@@ -28,12 +28,13 @@
     "source_ami": "{{user `aws_ubuntu_ebs_ami`}}",
     "instance_type": "m3.medium",
     "ssh_username": "ubuntu",
-    "ami_name": "{{user `project`}} {{user `release`}}.{{user `build`}}",
+    "ami_name": "{{user `project`}} {{user `release`}}.{{user `build`}} ubuntu",
     "ami_description": "{{user `description`}}",
     "ami_regions" : ["eu-west-1", "us-east-1"],
     "tags" : {
        "project": "{{user `project`}}",
        "release": "{{user `release`}}.{{user `build`}}",
+       "platform": "ubuntu",
        "parent_source_ami": "{{user `aws_ubuntu_ebs_ami`}}"
     }
   },
@@ -47,12 +48,13 @@
     "source_ami": "{{user `aws_amazon_linux_ebs_ami`}}",
     "instance_type": "m3.medium",
     "ssh_username": "ec2-user",
-    "ami_name": "{{user `project`}} {{user `release`}}.{{user `build`}}",
+    "ami_name": "{{user `project`}} {{user `release`}}.{{user `build`}} amazon-linux",
     "ami_description": "{{user `description`}}",
     "ami_regions" : ["eu-west-1", "us-east-1"],
     "tags" : {
        "project": "{{user `project`}}",
        "release": "{{user `release`}}.{{user `build`}}",
+       "platform": "amazon-linux",
        "parent_source_ami": "{{user `aws_amazon_linux_ebs_ami`}}"
     }
   },
@@ -70,13 +72,14 @@
     "source_ami": "{{user `aws_ubuntu_instance_ami`}}",
     "instance_type": "m3.medium",
     "ssh_username": "ubuntu",
-    "ami_name": "{{user `project`}} {{user `release`}}.{{user `build`}}",
+    "ami_name": "{{user `project`}} {{user `release`}}.{{user `build`}} ubuntu",
     "ami_description": "{{user `description`}}",
     "ami_regions" : ["eu-west-1", "us-east-1"],
     "bundle_upload_command": "sudo -i -n ec2-upload-bundle -b {{.BucketName}} -m {{.ManifestPath}} -a {{.AccessKey}} -s {{.SecretKey}} -d {{.BundleDirectory}} --batch --location {{.Region}} --retry",
     "tags" : {
        "project": "{{user `project`}}",
        "release": "{{user `release`}}.{{user `build`}}",
+       "platform": "ubuntu",
        "parent_source_ami": "{{user `aws_ubuntu_instance_ami`}}"
     }
   },
@@ -94,7 +97,7 @@
     "source_ami": "{{user `aws_amazon_linux_instance_ami`}}",
     "instance_type": "m3.medium",
     "ssh_username": "ec2-user",
-    "ami_name": "{{user `project`}} {{user `release`}}.{{user `build`}}",
+    "ami_name": "{{user `project`}} {{user `release`}}.{{user `build`}} amazon-linux",
     "ami_description": "{{user `description`}}",
     "ami_regions" : ["eu-west-1", "us-east-1"],
     "bundle_vol_command": "sudo -i -n ec2-bundle-vol -k {{.KeyPath}} -u {{.AccountId}} -c {{.CertPath}} -r {{.Architecture}} -e {{.PrivatePath}}/* -d {{.Destination}} -p {{.Prefix}} --batch --no-filter",
@@ -102,6 +105,7 @@
     "tags" : {
        "project": "{{user `project`}}",
        "release": "{{user `release`}}.{{user `build`}}",
+       "platform": "amazon-linux",
        "parent_source_ami": "{{user `aws_amazon_linux_instance_ami`}}"
     }
   }
