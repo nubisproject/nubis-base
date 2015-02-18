@@ -13,6 +13,9 @@ all:
 	@echo "type \`make generate-ami-json' to find latest AMIs to build against"
 	@echo "type \`make packer' to build"
 	@echo
+	@echo "type \`make build' to do all three steps at once"
+	@echo "type \`make release' to increment the release, and then build"
+	@echo
 	@exit 0
 
 build: puppet generate-ami-json packer
