@@ -109,6 +109,11 @@
   "provisioners": [
   {
     "type": "file",
+    "source": "nubis/packer/project.json",
+    "destination": "/etc/{{user `project`}}-project.json"
+  },
+  {
+    "type": "file",
     "source": "nubis/nubis-puppet.tar.gz",
     "destination": "/tmp/nubis-puppet.tar.gz"
   },
