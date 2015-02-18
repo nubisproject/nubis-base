@@ -90,7 +90,7 @@ if [[ -f /tmp/nubis-puppet.tar.gz ]]; then
    sudo chmod 700 /etc/nubis-puppet
 
    # Document the installed version of packages for forensic analysis later, if needed.
-   puppet resource package | sudo tee -a /etc/nubis-puppet/package-versions.pp
+   puppet resource package | sudo tee -a /etc/nubis-puppet/package-versions.pp >/dev/null
 fi
 
 # We copy this file over in main.json, but it needs to run at boot so we run this little shell snippit
