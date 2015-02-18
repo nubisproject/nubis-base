@@ -28,10 +28,10 @@ puppet: force
 	cd nubis && librarian-puppet install --path=puppet
 	tar --exclude='puppet/.*' --exclude=.git -C nubis -zpcf nubis/puppet.tar.gz puppet
 
-release-increment:
+release-increment: force
 	./nubis/bin/release.sh -f $(RELEASE_FILE) -r
 
-build-increment:
+build-increment: force
 	./nubis/bin/release.sh -f $(RELEASE_FILE)
 
 generate-ami-json:
