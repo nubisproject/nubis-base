@@ -5,6 +5,7 @@
 # Variables
 PROJECT_FILE=nubis/packer/project.json
 AMI_FILE=nubis/packer/ami.json
+PROJECT=$(shell jq --raw-output .project < $(PROJECT_FILE))
 
 # Top level build targets
 all:
@@ -28,6 +29,7 @@ puppet: force
 	cd nubis && librarian-puppet clean
 	cd nubis && rm -f Puppetfile.lock
 	cd nubis && librarian-puppet install --path=nubis-puppet
+	cp -f $(PROJECT_FILE) nubis/nubis-puppet/$(PROJECT)-project.json
 	tar --exclude='nubis-puppet/.*' --exclude=.git -C nubis -zpcf nubis/nubis-puppet.tar.gz nubis-puppet
 
 release-increment: force

@@ -2,5 +2,5 @@
   "project": "nubis-base",
   "description": "Nubis base AMI",
   "release": "0",
-  "build": "175"
+  "build": "177"
 }
