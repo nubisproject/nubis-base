@@ -3,7 +3,6 @@
 # Build AMIs using packer
 
 # Variables
-RELEASE_FILE=nubis/packer/release.json
 PROJECT_FILE=nubis/packer/project.json
 AMI_FILE=nubis/packer/ami.json
 
@@ -18,7 +17,7 @@ all:
 	@echo
 	@exit 0
 
-build: puppet generate-ami-json packer
+build: build-increment puppet generate-ami-json packer
 
 release: release-increment build
 
@@ -32,10 +31,10 @@ puppet: force
 	tar --exclude='nubis-puppet/.*' --exclude=.git -C nubis -zpcf nubis/nubis-puppet.tar.gz nubis-puppet
 
 release-increment: force
-	./nubis/bin/release.sh -f $(RELEASE_FILE) -r
+	./nubis/bin/increment-version --file $(PROJECT_FILE) --release
 
 build-increment: force
-	./nubis/bin/release.sh -f $(RELEASE_FILE)
+	./nubis/bin/increment-version --file $(PROJECT_FILE) --build
 
 generate-ami-json:
 	PATH=$(PATH):./nubis/bin ./nubis/bin/generate-latest-amis $(AMI_FILE)
@@ -46,7 +45,7 @@ packer: build-increment
 		echo ;\
 		exit 1 ;\
 	fi
-	packer build -var-file=nubis/packer/variables.json -var-file=$(RELEASE_FILE) -var-file=$(PROJECT_FILE) -var-file=$(AMI_FILE) nubis/packer/main.json
+	packer build -var-file=nubis/packer/variables.json -var-file=$(PROJECT_FILE) -var-file=$(AMI_FILE) nubis/packer/main.json
 
 clean:
-	rm -rf nubis/puppet
+	rm -rf nubis/nubis-puppet
