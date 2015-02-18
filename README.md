@@ -20,6 +20,10 @@ This file contains your secret data like access keys, certificate paths, etc and
 ##### nubis/packer/release.json
 This file tracks the release and build number for the project. Build numbers are automatically incremented, while a `make release` is required to increment the release number. It's created for you automatically when you run your first build.
 
+## Dependencies
+
+You'll need the AWS cli installed and configured with your access keys <https://aws.amazon.com/cli/>, and jq <https://stedolan.github.io/jq/>
+
 ## Make targets
 
 ##### `make puppet`
