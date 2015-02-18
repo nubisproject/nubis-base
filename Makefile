@@ -15,18 +15,18 @@ all:
 	@echo
 	@exit 0
 
-build: build-increment nubis-puppet
+build: puppet generate-ami-json packer
 
-release: release-increment nubis-puppet
+release: release-increment build
 
 # Internal build targets
 force: ;
 
-nubis-puppet: force
+puppet: force
 	cd nubis && librarian-puppet clean
 	cd nubis && rm -f Puppetfile.lock
-	cd nubis && librarian-puppet install --path=nubis-puppet
-	tar --exclude='nubis-puppet/.*' --exclude=.git -C nubis -zpcf nubis/nubis-puppet.tar.gz nubis-puppet
+	cd nubis && librarian-puppet install --path=puppet
+	tar --exclude='puppet/.*' --exclude=.git -C nubis -zpcf nubis/puppet.tar.gz puppet
 
 release-increment:
 	./nubis/bin/release.sh -f $(RELEASE_FILE) -r
@@ -37,7 +37,7 @@ build-increment:
 generate-ami-json:
 	PATH=$(PATH):./nubis/bin ./nubis/bin/generate-latest-amis $(AMI_FILE)
 
-packer:
+packer: build-increment
 	@if [ ! -f $(AMI_FILE) ]; then \
 		echo $(AMI_FILE) is required for building. tip: run make generate-ami-json to automatically generate this file ;\
 		echo ;\
@@ -46,4 +46,4 @@ packer:
 	packer build -var-file=nubis/packer/variables.json -var-file=$(RELEASE_FILE) -var-file=$(PROJECT_FILE) -var-file=$(AMI_FILE) nubis/packer/main.json
 
 clean:
-	rm -rf nubis/nubis-puppet
+	rm -rf nubis/puppet
