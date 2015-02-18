@@ -1,21 +1,20 @@
 {
   "variables": {
-    "ami_regions": ["eu-west-1", "us-east-1"],
-    "aws_access_key": "",
-    "aws_account_id": "",
-    "aws_amazon_linux_ebs_ami": "",
-    "aws_amazon_linux_instance_ami": "",
-    "aws_instance_s3_bucket": "",
-    "aws_region": "",
-    "aws_secret_key": "",
-    "aws_ubuntu_ebs_ami": "",
-    "aws_ubuntu_instance_ami": ""
-    "aws_x509_cert_path": "",
-    "aws_x509_key_path": "",
+    "aws_access_key": null,
+    "aws_account_id": null,
+    "aws_amazon_linux_ebs_ami": null,
+    "aws_amazon_linux_instance_ami": null,
+    "aws_instance_s3_bucket": null,
+    "aws_region": null,
+    "aws_secret_key": null,
+    "aws_ubuntu_ebs_ami": null,
+    "aws_ubuntu_instance_ami": null,
+    "aws_x509_cert_path": null,
+    "aws_x509_key_path": null,
     "build": null,
-    "description": "",
+    "description": null,
     "iam_instance_profile": "",
-    "project": "",
+    "project": null,
     "release": null
   },
   "builders": [
@@ -31,11 +30,11 @@
     "ssh_username": "ubuntu",
     "ami_name": "{{user `project`}} {{user `release`}}.{{user `build`}}",
     "ami_description": "{{user `description`}}",
-    "ami_regions" : {{user `ami_regions`}},
+    "ami_regions" : ["eu-west-1", "us-east-1"],
     "tags" : {
        "project": "{{user `project`}}",
        "release": "{{user `release`}}.{{user `build`}}",
-       "parent_source_ami": "{{user `ubuntu-instance-ami`}}"
+       "parent_source_ami": "{{user `aws_ubuntu_ebs_ami`}}"
     }
   },
   {
@@ -50,7 +49,7 @@
     "ssh_username": "ec2-user",
     "ami_name": "{{user `project`}} {{user `release`}}.{{user `build`}}",
     "ami_description": "{{user `description`}}",
-    "ami_regions" : {{user `ami_regions`}},
+    "ami_regions" : ["eu-west-1", "us-east-1"],
     "tags" : {
        "project": "{{user `project`}}",
        "release": "{{user `release`}}.{{user `build`}}",
@@ -73,7 +72,7 @@
     "ssh_username": "ubuntu",
     "ami_name": "{{user `project`}} {{user `release`}}.{{user `build`}}",
     "ami_description": "{{user `description`}}",
-    "ami_regions" : {{user `ami_regions`}},
+    "ami_regions" : ["eu-west-1", "us-east-1"],
     "bundle_upload_command": "sudo -i -n ec2-upload-bundle -b {{.BucketName}} -m {{.ManifestPath}} -a {{.AccessKey}} -s {{.SecretKey}} -d {{.BundleDirectory}} --batch --location {{.Region}} --retry",
     "tags" : {
        "project": "{{user `project`}}",
@@ -97,7 +96,7 @@
     "ssh_username": "ec2-user",
     "ami_name": "{{user `project`}} {{user `release`}}.{{user `build`}}",
     "ami_description": "{{user `description`}}",
-    "ami_regions" : {{user `ami_regions`}},
+    "ami_regions" : ["eu-west-1", "us-east-1"],
     "bundle_vol_command": "sudo -i -n ec2-bundle-vol -k {{.KeyPath}} -u {{.AccountId}} -c {{.CertPath}} -r {{.Architecture}} -e {{.PrivatePath}}/* -d {{.Destination}} -p {{.Prefix}} --batch --no-filter",
     "bundle_upload_command": "sudo -i -n ec2-upload-bundle -b {{.BucketName}} -m {{.ManifestPath}} -a {{.AccessKey}} -s {{.SecretKey}} -d {{.BundleDirectory}} --batch --location {{.Region}} --retry",
     "tags" : {
