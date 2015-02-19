@@ -7,6 +7,8 @@
     "project_build": "1",
     "project_source_ami_project": "",
     "project_source_ami_version": "",
+    "automatic_version_bump": "1",
+    "skip_collision_detection": "0",
     "librarian_puppet_puppetfile": "nubis/Puppetfile"
   }
 }
