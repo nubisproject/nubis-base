@@ -1,4 +1,6 @@
 {
   "project": "",
-  "description": ""
+  "description": "",
+  "release": "0",
+  "build": "1"
 }

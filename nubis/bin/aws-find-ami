@@ -41,7 +41,7 @@ aws_owners=""
 aws_filters=""
 
 hash jq 2>/dev/null || fail "Please install jq to use this build tool. https://github.com/stedolan/jq"
-hash aws 2>/dev/null || fail "Please install the aws CLI API to use this build tool. https://aws.amazon.com/cli/"
+hash aws 2>/dev/null || fail "Please install the AWS CLI API to use this build tool. https://aws.amazon.com/cli/"
 
 while [[ "$1" ]]; do
    case "$1" in

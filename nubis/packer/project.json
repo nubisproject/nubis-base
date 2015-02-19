@@ -1,4 +1,6 @@
 {
   "project": "nubis-base",
-  "description": "Nubis base AMI"
+  "description": "Nubis base AMI",
+  "release": "0",
+  "build": "178"
 }

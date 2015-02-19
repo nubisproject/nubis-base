@@ -24,6 +24,9 @@ if [[ -f /etc/debian_version ]]; then
    # Update repository caches
    sudo apt-get update
 
+   # Apply full system updates
+   sudo apt-get -y dist-upgrade
+
    # Install puppet
    sudo apt-get -y install puppet=${ubuntu_puppet_version} puppet-common=${ubuntu_puppet_version}
 elif [[ -f /etc/os-release ]]; then
@@ -51,6 +54,9 @@ elif [[ -f /etc/os-release ]]; then
 
       # Yum can be stinky
       sudo yum clean all
+
+      # Apply full system updates
+      sudo yum -y update
 
       # Install puppet and rubygem18-json, which someone forgot to add to puppet's dependency list.
       sudo yum -y install puppet-${amazon_linux_puppet_version} rubygem18-json
@@ -82,9 +88,10 @@ if [[ -f /tmp/nubis-puppet.tar.gz ]]; then
    # whether root's group is root, or wheel.
    sudo chown 0:0 /etc/nubis-puppet
    sudo chmod 700 /etc/nubis-puppet
-fi
 
-#find /tmp/packer-puppet-masterless/ -ls
+   # Document the installed version of packages for forensic analysis later, if needed.
+   puppet resource package | sudo tee -a /etc/nubis-puppet/package-versions.pp >/dev/null
+fi
 
 # We copy this file over in main.json, but it needs to run at boot so we run this little shell snippit
 # as part of the bootstrap process.
