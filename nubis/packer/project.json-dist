@@ -5,7 +5,7 @@
     "project_release": "0",
     "project_build": "1",
     "project_source_ami_project": "",
-    "project_source_ami_version": null,
+    "project_source_ami_version": "",
     "librarian_puppet_puppetfile": "nubis/Puppetfile"
   }
 }
