@@ -2,12 +2,12 @@
   "variables": {
     "project_name": "nubis-base",
     "project_description": "Nubis base AMI",
-    "project_version": "0.185",
-    "project_release": "0",
-    "project_build": "185",
+    "project_version": "2.0",
+    "project_release": "2",
+    "project_build": "0",
     "project_source_ami_project": "base",
-    "automatic_version_bump": "1",
+    "automatic_version_bump": "0",
     "skip_collision_detection": "0",
-    "librarian_puppet_puppetfile": "nubis/Puppetfile"
+    "Xlibrarian_puppet_puppetfile": "nubis/Puppetfile"
   }
 }
