@@ -2,9 +2,7 @@
 
 ## Quick start
 0. `git clone git@github.com:bhourigan/nubis-builder.git`
-0. `cd nubis-builder`
-0. Setup secrets/variables.json
-0. `@PATH=$(PATH):./bin nubis-builder build --project-path ~/path-to-your-project --verbose`
+0. Refer to README.md in the nubis-builder project.
 
 ## File structure
 
