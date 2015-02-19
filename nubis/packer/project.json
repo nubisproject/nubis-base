@@ -4,6 +4,8 @@
     "project_description": "Nubis base AMI",
     "project_release": "0",
     "project_build": "185",
+    "project_parent_ami": "base",
+    "project_parent_ami_version": null,
     "librarian_puppet_puppetfile": "nubis/Puppetfile"
   }
 }
