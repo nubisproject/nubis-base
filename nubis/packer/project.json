@@ -2,6 +2,7 @@
   "variables": {
     "project_name": "nubis-base",
     "project_description": "Nubis base AMI",
+    "project_version": "0.185",
     "project_release": "0",
     "project_build": "185",
     "project_source_ami_project": "base",

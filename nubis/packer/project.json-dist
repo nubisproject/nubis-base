@@ -2,6 +2,7 @@
   "variables": {
     "project_name": "",
     "project_description": "",
+    "project_version": "0.1",
     "project_release": "0",
     "project_build": "1",
     "project_source_ami_project": "",
