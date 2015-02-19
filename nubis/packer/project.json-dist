@@ -1,6 +1,9 @@
 {
-  "project": "",
-  "description": "",
-  "release": "0",
-  "build": "1"
+  "variables": {
+    "project_name": "",
+    "project_description": "",
+    "project_release": "0",
+    "project_build": "1",
+    "librarian_puppet_puppetfile": "nubis/Puppetfile"
+  }
 }

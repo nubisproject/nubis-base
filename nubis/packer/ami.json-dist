@@ -1,6 +1,0 @@
-{
-  "aws_amazon_linux_ebs_ami": "",
-  "aws_amazon_linux_instance_ami": "",
-  "aws_ubuntu_ebs_ami": "",
-  "aws_ubuntu_instance_ami": ""
-}

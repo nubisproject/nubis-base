@@ -1,6 +1,9 @@
 {
-  "project": "nubis-base",
-  "description": "Nubis base AMI",
-  "release": "0",
-  "build": "185"
+  "variables": {
+    "project_name": "nubis-base",
+    "project_description": "Nubis base AMI",
+    "project_release": "0",
+    "project_build": "185",
+    "librarian_puppet_puppetfile": "nubis/Puppetfile"
+  }
 }
