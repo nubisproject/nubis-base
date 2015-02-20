@@ -1,0 +1,8 @@
+{
+  "provisioners": [
+  {
+    "type": "shell",
+    "script": "nubis/bin/packer-bootstrap"
+  }
+  ]
+}
