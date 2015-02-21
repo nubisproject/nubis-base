@@ -3,6 +3,10 @@
 ubuntu_puppet_version="3.7.3-1puppetlabs1"
 amazon_linux_puppet_version="3.7.3"
 
+if [[ "$1" == "--verbose" ]]; then
+   set -x
+fi
+
 set -e
 
 if [[ -f /etc/debian_version ]]; then
@@ -76,7 +80,7 @@ fi
 # created by make. We need to extract that so we can have a full puppet checkout ready for additional build
 # iterations.
 if [[ -f /tmp/nubis-puppet.tar.gz ]]; then
-   sudo tar -C /etc -zxf /tmp/nubis-puppet.tar.gz
+   sudo tar -C /etc -zxf /tmp/nubis-puppet.tar.gz 2>&1
    rm -f /tmp/nubis-puppet.tar.gz
 
    # If puppet.conf exists in nubis-puppet, let's copy that over to /etc/puppet.
