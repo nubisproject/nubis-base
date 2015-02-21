@@ -2,7 +2,8 @@
   "provisioners": [
   {
     "type": "shell",
-    "script": "nubis/bin/packer-bootstrap"
+    "script": "nubis/bin/packer-bootstrap",
+    "order": "5"
   }
   ]
 }

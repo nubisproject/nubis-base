@@ -3,7 +3,8 @@
   {
     "type": "file",
     "source": "nubis/bin/consul-autojoin.sh",
-    "destination": "/tmp/autojoin.sh"
+    "destination": "/tmp/autojoin.sh",
+    "order": "20"
   }
   ]
 }
