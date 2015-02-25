@@ -10,29 +10,36 @@ fi
 set -e
 
 if [[ -f /etc/debian_version ]]; then
+   # Make sure apt never prompts
+   export DEBIAN_FRONTEND=noninteractive
+
    # Install ec2-ami-tools to support the amazon instance builder. Installing this here vs puppet as
    # this is required for packer, and feels like a better spot to do it instead of in nubis-puppet.
-   sudo apt-add-repository multiverse
-   sudo apt-get update
-   sudo apt-get -y install ec2-ami-tools
-   sudo apt-add-repository -r multiverse
-   # After removing multiverse we need to rebuild the indexes, since this won't happen on their own.
-   sudo apt-get update
+   sudo -E apt-add-repository multiverse
+   sudo -E apt-get -y update
+   sudo -E apt-get -y install ec2-ami-tools
+   sudo -E apt-add-repository -r multiverse
+
+   # After removing multiverse we need to rebuild the indexes, since this won't happen on their own,
+   # apparently.
+   sudo -E apt-get -y update
 
    # Install puppetlabs repository, we'll want access to more up to date puppet agents than what's
    # provided in Amazon's repositories.
    wget -O /tmp/puppetlabs-release-precise.deb https://apt.puppetlabs.com/puppetlabs-release-precise.deb
-   sudo dpkg -i /tmp/puppetlabs-release-precise.deb
+   sudo -E dpkg -i /tmp/puppetlabs-release-precise.deb
    rm -f /tmp/puppetlabs-release-precise.deb
 
-   # Update repository caches
-   sudo apt-get update
-
+   # Running sudo -E for apt-get calls so $DEBIAN_FRONTEND is inherited, especially for dist-upgrade. Updates
+   # such as with linux-image-* can prompt for things like menu.lst merging which doesn't play nice with packer
+   #
    # Apply full system updates
-   sudo apt-get -y dist-upgrade
+   sudo -E apt-get -y update
+   sudo -E apt-get -y upgrade
+   sudo -E apt-get -y dist-upgrade
 
    # Install puppet
-   sudo apt-get -y install puppet=${ubuntu_puppet_version} puppet-common=${ubuntu_puppet_version}
+   sudo -E apt-get -y install puppet=${ubuntu_puppet_version} puppet-common=${ubuntu_puppet_version}
 elif [[ -f /etc/os-release ]]; then
    . /etc/os-release
 

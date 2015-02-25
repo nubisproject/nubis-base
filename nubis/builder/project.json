@@ -4,11 +4,13 @@
     "automatic_version_verify": "1",
     "builders": [
       "amazon-ebs-amazon-linux",
-      "amazon-ebs-ubuntu"
+      "amazon-ebs-ubuntu",
+      "amazon-instance-amazon-linux",
+      "amazon-instance-ubuntu"
     ],
     "project_description": "Nubis base AMI",
     "project_name": "nubis-base",
-    "project_version": "2.26",
+    "project_version": "2.35",
     "source_ami_project_name": "base"
   }
 }
