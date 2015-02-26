@@ -14,7 +14,7 @@ file { '/etc/nubis-release':
 
 # Simple node liveness check
 include nubis_discovery
-nubis::check { 'ping':
+nubis::discovery::check { 'ping':
   check => "ping -c1 google.com",
   interval => "10s",
 }
