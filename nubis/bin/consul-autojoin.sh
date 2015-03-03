@@ -36,7 +36,7 @@ fi
 if [ "$CONSUL_BOOTSTRAP_EXPECT" ]; then
 cat <<EOF | tee /etc/consul/zzz-bootstrap.json
 {
-  "bootstrap_expect": $CONSUL_BOOTSTRAP_EXPECT,
+  "bootstrap_expect": $CONSUL_BOOTSTRAP_EXPECT
 }
 EOF
 fi
