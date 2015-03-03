@@ -10,7 +10,7 @@
     ],
     "project_description": "Nubis base AMI",
     "project_name": "nubis-base",
-    "project_version": "2.35",
+    "project_version": "2.52",
     "source_ami_project_name": "base"
   }
 }

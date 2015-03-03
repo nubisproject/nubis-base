@@ -83,28 +83,23 @@ else
    exit 1
 fi
 
-# We have a file provisioner in main.json that'll copy over a .tar.gz of the nubis-puppet tree that's
+# We have a file provisioner in main.json that'll copy over a .tar.gz of the librarian-puppet tree that's
 # created by make. We need to extract that so we can have a full puppet checkout ready for additional build
 # iterations.
-if [[ -f /tmp/nubis-puppet.tar.gz ]]; then
-   sudo tar -C /etc -zxf /tmp/nubis-puppet.tar.gz 2>&1
-   rm -f /tmp/nubis-puppet.tar.gz
-
-   # If puppet.conf exists in nubis-puppet, let's copy that over to /etc/puppet.
-   if [[ -f /etc/nubis-puppet/puppet.conf ]]; then
-      sudo cp -f /etc/nubis-puppet/puppet.conf /etc/puppet/puppet.conf
-   fi
+if [[ -f /tmp/librarian-puppet.tar.gz ]]; then
+   sudo tar -C / -zxf /tmp/librarian-puppet.tar.gz 2>&1
+   rm -f /tmp/librarian-puppet.tar.gz
 
    # We're probably going to have secrets at some point. I use chown 0:0 to avoid having to figure out
    # whether root's group is root, or wheel.
-   sudo chown -R 0:0 /etc/nubis-puppet
-   sudo chmod 700 /etc/nubis-puppet
+   sudo chown -R 0:0 /etc/puppet
+   sudo chmod 700 /etc/puppet
 
    # Document the installed version of packages for forensic analysis later, if needed.
-   puppet resource package | sudo tee -a /etc/nubis-puppet/package-versions.pp >/dev/null
+   puppet resource package | sudo tee -a /etc/puppet/package-versions.pp >/dev/null
 fi
 
-# We copy this file over in main.json, but it needs to run at boot so we run this little shell snippit
+# We copy this file over in provisioners.json, but it needs to run at boot so we run this little shell snippit
 # as part of the bootstrap process.
 if [[ -f /tmp/autojoin.sh ]]; then
    sudo mkdir /etc/nubis.d

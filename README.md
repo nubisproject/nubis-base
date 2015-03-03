@@ -13,7 +13,7 @@ All files related to the nubis base project
 ##### `nubis/bin`
 Scripts related to configuring nubis-base AMIs creation
 
-##### `nubis/nubis-puppet`
+##### `nubis/librarian-puppet`
 This is the puppet tree that's populated with librarian-puppet, it's in .gitignore and gets reset on every build.
 
 ##### `nubis/builder`
