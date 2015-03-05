@@ -1,5 +1,5 @@
 class { 'consul':
-  version     => '0.4.1',
+  version     => '0.5.0'
 
   config_hash => {
       'data_dir'      => '/var/lib/consul',
@@ -10,6 +10,3 @@ class { 'consul':
       'enable_syslog' => true,
   }
 }
-
-# Need auto-join helper too, here for now, but needs to be merged into
-# puppet somehow... Not sure it's worth merging upstream, however.
