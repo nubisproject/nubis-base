@@ -18,8 +18,13 @@ variable "region" {
 }
 
 variable "release" {
-  default = "55"
+  default = "0"
   description = "Release number of the architecture"
+}
+
+variable "build" {
+  default = "91"
+  description = "Build number of the architecture"
 }
 
 variable "project" {

@@ -33,6 +33,18 @@ cat <<EOF | tee /etc/consul/zzz-public.json
 EOF
 fi
 
+if [ "$CONSUL_BOOTSTRAP_EXPECT" ]; then
+cat <<EOF | tee /etc/consul/zzz-bootstrap.json
+{
+  "bootstrap_expect": $CONSUL_BOOTSTRAP_EXPECT
+}
+EOF
+fi
+
 service consul restart
+
+if [ -d /etc/nubis.d ]; then
+  run-parts /etc/nubis.d
+fi
 
 exit 0

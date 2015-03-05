@@ -1,6 +1,5 @@
-nubis/packer/variables.json
-nubis/nubis-puppet.tar.gz
-nubis/nubis-puppet
+nubis/librarian-puppet.tar.gz
+nubis/librarian-puppet
 nubis/Puppetfile.lock
 nubis/.tmp
 nubis/.librarian

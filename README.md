@@ -1,14 +1,23 @@
 # nubis-base
 
-You can build an image like so:
+## Quick start
+0. `git clone git@github.com:nubisproject/nubis-base.git`
+0. `git clone git@github.com:nubisproject/nubis-builder.git`
+0. Refer to README.md in nubis-builder on how to build this project.
 
-$> cat packer/variables.json 
-{
-  "aws_access_key": "XXX",
-  "aws_secret_key": "XXX",
-}
+## File structure
 
-$> packer build -var-file=packer/variables.json -var release=20 packer/main.json
+##### `nubis`
+All files related to the nubis base project
 
+##### `nubis/bin`
+Scripts related to configuring nubis-base AMIs creation
 
+##### `nubis/librarian-puppet`
+This is the puppet tree that's populated with librarian-puppet, it's in .gitignore and gets reset on every build.
 
+##### `nubis/builder`
+JSON files that describe the project, configure settings, configure provisioners, etc.
+
+##### `nubis/terraform`
+Terraform deployment templates.

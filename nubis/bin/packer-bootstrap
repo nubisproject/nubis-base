@@ -1,47 +1,108 @@
 #!/bin/bash
 
-debian_puppet_version="3.7.3-1puppetlabs1"
-redhat_puppet_version="3.7.3-1"
+ubuntu_puppet_version="3.7.3-1puppetlabs1"
+amazon_linux_puppet_version="3.7.3"
+
+if [[ "$1" == "--verbose" ]]; then
+   set -x
+fi
 
 set -e
 
 if [[ -f /etc/debian_version ]]; then
+   # Make sure apt never prompts
+   export DEBIAN_FRONTEND=noninteractive
+
+   # Install ec2-ami-tools to support the amazon instance builder. Installing this here vs puppet as
+   # this is required for packer, and feels like a better spot to do it instead of in nubis-puppet.
+   sudo -E apt-add-repository multiverse
+   sudo -E apt-get -y update
+   sudo -E apt-get -y install ec2-ami-tools
+   sudo -E apt-add-repository -r multiverse
+
+   # After removing multiverse we need to rebuild the indexes, since this won't happen on their own,
+   # apparently.
+   sudo -E apt-get -y update
+
    # Install puppetlabs repository, we'll want access to more up to date puppet agents than what's
    # provided in Amazon's repositories.
    wget -O /tmp/puppetlabs-release-precise.deb https://apt.puppetlabs.com/puppetlabs-release-precise.deb
-   sudo dpkg -i /tmp/puppetlabs-release-precise.deb
+   sudo -E dpkg -i /tmp/puppetlabs-release-precise.deb
    rm -f /tmp/puppetlabs-release-precise.deb
 
-   # Update repository caches
-   sudo apt-get update
+   # Running sudo -E for apt-get calls so $DEBIAN_FRONTEND is inherited, especially for dist-upgrade. Updates
+   # such as with linux-image-* can prompt for things like menu.lst merging which doesn't play nice with packer
+   #
+   # Apply full system updates
+   sudo -E apt-get -y update
+   sudo -E apt-get -y upgrade
+   sudo -E apt-get -y dist-upgrade
 
    # Install puppet
-   sudo apt-get -y install puppet=${debian_puppet_version}   
-elif [[ -f /etc/redhat_release ]]; then
-   # Install puppetlabs repository, we'll want access to more up to date puppet agents than what's
-   # provided in Amazon's repositories.
-   sudo rpm -ivh http://yum.puppetlabs.com/puppetlabs-release-el-6.noarch.rpm
+   sudo -E apt-get -y install puppet=${ubuntu_puppet_version} puppet-common=${ubuntu_puppet_version}
+elif [[ -f /etc/os-release ]]; then
+   . /etc/os-release
 
-   # Install puppet
-   sudo yum -y install puppet-${redhat_puppet_version}
+   if [[ "$NAME" = "Amazon Linux AMI" ]]; then
+      # Install aws-amitools-ec2 to support the amazon instance builder. Installing this here vs puppet as
+      # this is required for packer, and feels like a better spot to do it instead of in nubis-puppet.
+      sudo yum -y install aws-amitools-ec2
+
+      # Amazon Linux ships with Ruby 2.0, which doesn't work too well with Puppet. We'll need to install
+      # 1.8 and set that as the default version.
+      sudo yum -y install ruby18-1.8.7.374-2.42.3.amzn1
+      sudo alternatives --set ruby /usr/bin/ruby1.8
+
+      # Install puppetlabs repository, we'll want access to more up to date puppet agents than what's
+      # provided in Amazon's repositories.
+      sudo rpm -ivh http://yum.puppetlabs.com/puppetlabs-release-el-6.noarch.rpm
+
+      # Amazon's repos ship with priority=10 and they are still shipping Puppet 2.x. Puppet has dependencies
+      # which exist in Amazon's repositories so we can't just --disablerepo for the install. After a bit
+      # of digging I'm using the method proposed in https://tickets.puppetlabs.com/browse/PUP-2132 which
+      # is to simply disable yum priorities.
+      sudo sh -c 'echo -e "[main]\nenabled = 0" > /etc/yum/pluginconf.d/priorities.conf'
+
+      # Yum can be stinky
+      sudo yum clean all
+
+      # Apply full system updates
+      sudo yum -y update
+
+      # Install puppet and rubygem18-json, which someone forgot to add to puppet's dependency list.
+      sudo yum -y install puppet-${amazon_linux_puppet_version} rubygem18-json
+
+      # Re-enable yum priorities
+      sudo sh -c 'echo -e "[main]\nenabled = 1" > /etc/yum/pluginconf.d/priorities.conf'
+   else
+      echo "Operating system $NAME unsupported"
+      exit 1
+   fi
+else
+   echo "Unknown operating system"
+   exit 1
 fi
 
-# We have a file provisioner in main.json that'll copy over a .tar.gz of the nubis-puppet that's created
-# by make. We need to extract that so we can have a full puppet checkout ready for additional build
+# We have a file provisioner in main.json that'll copy over a .tar.gz of the librarian-puppet tree that's
+# created by make. We need to extract that so we can have a full puppet checkout ready for additional build
 # iterations.
-if [[ -f /tmp/nubis-puppet.tar.gz ]]; then
-   sudo tar -C /etc -zxvf /tmp/nubis-puppet.tar.gz
-   rm -f /tmp/nubis-puppet.tar.gz
+if [[ -f /tmp/librarian-puppet.tar.gz ]]; then
+   sudo tar -C / -zxf /tmp/librarian-puppet.tar.gz 2>&1
+   rm -f /tmp/librarian-puppet.tar.gz
 
    # We're probably going to have secrets at some point. I use chown 0:0 to avoid having to figure out
    # whether root's group is root, or wheel.
-   sudo chown 0:0 /etc/nubis-puppet
-   sudo chmod 700 /etc/nubis-puppet
+   sudo chown -R 0:0 /etc/puppet
+   sudo chmod 700 /etc/puppet
+
+   # Document the installed version of packages for forensic analysis later, if needed.
+   puppet resource package | sudo tee -a /etc/puppet/package-versions.pp >/dev/null
 fi
 
-# We copy this file over in main.json, but it needs to run at boot so we run this little shell snippit
+# We copy this file over in provisioners.json, but it needs to run at boot so we run this little shell snippit
 # as part of the bootstrap process.
 if [[ -f /tmp/autojoin.sh ]]; then
+   sudo mkdir /etc/nubis.d
    sudo mv /tmp/autojoin.sh /etc/rc.local
    sudo chmod 755 /etc/rc.local
 fi
