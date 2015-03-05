@@ -62,6 +62,7 @@ cat <<EOF | tee /etc/consul/zzz-tls.json
   "verify_incoming" : true,
   "verify_outgoing" : true
 }
+EOF
 fi
 
 service consul restart
