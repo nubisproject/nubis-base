@@ -1,5 +1,4 @@
 class { 'dnsmasq':
-  reload_resolvconf => false,
 }
 
 dnsmasq::dnsserver { 'consul':
