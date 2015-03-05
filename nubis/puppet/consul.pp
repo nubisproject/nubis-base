@@ -1,6 +1,5 @@
 class { 'consul':
-  version     => '0.5.0'
-
+  version     => '0.5.0',
   config_hash => {
       'data_dir'      => '/var/lib/consul',
       'log_level'     => 'INFO',
@@ -25,7 +24,7 @@ file { "/opt/hashicorp/envconsul_0.5.0_linux_amd64/envconsul":
   group =>  0,
   mode  => '0555',
 } ->
-file { "/usr/local/bin/envconsul"
+file { "/usr/local/bin/envconsul":
   ensure => "link",
   target => '/opt/hashicorp/envconsul_0.5.0_linux_amd64/envconsul',
 }
@@ -44,7 +43,7 @@ file { "/opt/hashicorp/consul-template_0.7.0_linux_amd64/consul-template":
   group =>  0,
   mode  => '0555',
 } ->
-file { "/usr/local/bin/consul-template"
+file { "/usr/local/bin/consul-template":
   ensure => "link",
   target => '/opt/hashicorp/consul-template_0.7.0_linux_amd64/consul-template',
 }
