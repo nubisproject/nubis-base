@@ -1,14 +1,13 @@
 # nubis-base
 variable "aws_access_key" {}
 variable "aws_secret_key" {}
-variable "iam_instance_profile" {}
 
 variable "consul" {
   description = "URL to Consul"
   default = "127.0.0.1"
 }
 
-variable "secret" {
+variable "consul_secret" {
   description = "Security shared secret for consul membership (consul keygen)"
 }
 
@@ -36,3 +35,10 @@ variable "key_name" {
   description = "SSH key name in your AWS account for AWS instances."
 }
 
+variable "ssl_cert" {
+  description = "SSL Certificate file"
+}
+
+variable "ssl_key" {
+  description = "SSL Key file"
+}
