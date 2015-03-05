@@ -1,5 +1,4 @@
 class { 'dnsmasq':
-
 }
 
 dnsmasq::dnsserver { 'consul':

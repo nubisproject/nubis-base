@@ -41,6 +41,30 @@ cat <<EOF | tee /etc/consul/zzz-bootstrap.json
 EOF
 fi
 
+if [ "$CONSUL_CERT" ]; then
+  echo $CONSUL_CERT > /etc/consul/consul.pem
+  chown root:consul /etc/consul/consul.pem
+  chmod 640 /etc/consul/consul.pem
+fi
+
+if [ "$CONSUL_KEY" ]; then
+  echo $CONSUL_KEY > /etc/consul/consul.key
+  chown root:consul /etc/consul/consul.key
+  chmod 640 /etc/consul/consul.key
+fi
+
+if [ "$CONSUL_KEY" ] && [ "$CONSUL_CERT" ]; then
+cat <<EOF | tee /etc/consul/zzz-tls.json
+{
+  "ca_file"         : "/etc/consul/consul.pem",
+  "cert_file"       : "/etc/consul/consul.pem",
+  "key_file"        : "/etc/consul/consul.key",
+  "verify_incoming" : true,
+  "verify_outgoing" : true
+}
+EOF
+fi
+
 service consul restart
 
 if [ -d /etc/nubis.d ]; then
