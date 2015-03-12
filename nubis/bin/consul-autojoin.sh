@@ -18,7 +18,7 @@ EOF
 if [ "$CONSUL_JOIN" ]; then
 cat <<EOF | tee /etc/consul/zzz-join.json
 {
-  "start_join": [ "$CONSUL_JOIN" ]
+  "retry_join": [ "$CONSUL_JOIN" ]
 }
 EOF
 fi
@@ -66,6 +66,8 @@ EOF
 fi
 
 service consul restart
+
+### XXX: Wait for consul to start here
 
 if [ -d /etc/nubis.d ]; then
   run-parts /etc/nubis.d
