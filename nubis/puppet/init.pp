@@ -6,6 +6,7 @@ import 'fluentd.pp'
 import 'jq.pp'
 import 'packages.pp'
 import 'postfix.pp'
+import 'datadog.pp'
 
 file { '/etc/nubis-release':
       ensure  => 'present',
