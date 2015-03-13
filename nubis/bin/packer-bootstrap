@@ -26,9 +26,9 @@ if [[ -f /etc/debian_version ]]; then
 
    # Install puppetlabs repository, we'll want access to more up to date puppet agents than what's
    # provided in Amazon's repositories.
-   wget -O /tmp/puppetlabs-release-precise.deb https://apt.puppetlabs.com/puppetlabs-release-precise.deb
-   sudo -E dpkg -i /tmp/puppetlabs-release-precise.deb
-   rm -f /tmp/puppetlabs-release-precise.deb
+   wget -O /tmp/puppetlabs-release-trusty.deb https://apt.puppetlabs.com/puppetlabs-release-trusty.deb
+   sudo -E dpkg -i /tmp/puppetlabs-release-trusty.deb
+   rm -f /tmp/puppetlabs-release-trusty.deb
 
    # Running sudo -E for apt-get calls so $DEBIAN_FRONTEND is inherited, especially for dist-upgrade. Updates
    # such as with linux-image-* can prompt for things like menu.lst merging which doesn't play nice with packer
