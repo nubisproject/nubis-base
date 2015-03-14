@@ -10,13 +10,9 @@ class { 'consul':
   }
 }
 
-# XXX: The Service[dnsmasq] dependencies are to prevent a racing condition, seems like, between /etc/resolv.conf updating
-# XXX: and dnsmasq actually running. Needs investigation/fixing
-
 # XXX: need to move to puppet-envconsul proper
 staging::file { 'envconsul.tar.gz':
   source => "https://www.github.com/hashicorp/envconsul/releases/download/v0.5.0/envconsul_0.5.0_linux_amd64.tar.gz",
-  require => Service[dnsmasq],
 } ->
 staging::extract { 'envconsul.tar.gz':
   strip   => 0,
@@ -36,7 +32,6 @@ file { "/usr/local/bin/envconsul":
 # XXX: need to move to puppet-consul-template proper
 staging::file { 'consul-template.tar.gz':
   source => "https://www.github.com/hashicorp/consul-template/releases/download/v0.7.0/consul-template_0.7.0_linux_amd64.tar.gz",
-  require => Service[dnsmasq],
 } ->
 staging::extract { 'consul-template.tar.gz':
   strip   => 0,
