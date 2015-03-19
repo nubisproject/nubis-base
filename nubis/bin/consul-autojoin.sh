@@ -72,7 +72,7 @@ service consul restart
 ### XXX: Wait for consul to start here
 
 if [ -d /etc/nubis.d ]; then
-  run-parts /etc/nubis.d | $LOGGER
+  run-parts /etc/nubis.d 2>&1 | $LOGGER
 fi
 
 exit 0
