@@ -1,0 +1,19 @@
+{
+  "provisioners": [
+  {
+    "type": "file",
+    "source": "nubis/bin/datadog-discover",
+    "destination": "/tmp/datadog-discover",
+    "order": "5"
+  },
+  {
+    "type": "shell",
+    "inline": [
+      "sudo mv /tmp/datadog-discover /usr/local/bin/",
+      "sudo chmod 755 /usr/local/bin/datadog-discover",
+      "sudo chown root:root /usr/local/bin/datadog-discover"
+    ],
+    "order": "6"
+  }  
+  ]
+}
