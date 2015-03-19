@@ -6,6 +6,8 @@ eval `ec2metadata --user-data`
 
 INSTANCE_ID=`ec2metadata --instance-id`
 
+LOGGER="logger --stderr --priority local7.info --tag nubis-startup"
+
 cat <<EOF | tee /etc/consul/zzz-startup.json
 {
   "encrypt": "$CONSUL_SECRET",
@@ -70,7 +72,7 @@ service consul restart
 ### XXX: Wait for consul to start here
 
 if [ -d /etc/nubis.d ]; then
-  run-parts /etc/nubis.d
+  run-parts /etc/nubis.d | $LOGGER
 fi
 
 exit 0
