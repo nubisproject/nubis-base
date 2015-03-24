@@ -1,0 +1,10 @@
+{
+  "provisioners": [
+  {
+    "type": "file",
+    "source": "nubis/bin/consul-autojoin.sh",
+    "destination": "/tmp/autojoin.sh",
+    "order": "5"
+  }
+  ]
+}

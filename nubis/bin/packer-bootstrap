@@ -1,31 +1,45 @@
 #!/bin/bash
 
-ubuntu_puppet_version="3.7.3-1puppetlabs1"
-amazon_linux_puppet_version="3.7.3"
+ubuntu_puppet_version="3.7.4-1puppetlabs1"
+amazon_linux_puppet_version="3.7.4"
+
+if [[ "$1" == "--verbose" ]]; then
+   set -x
+fi
 
 set -e
 
 if [[ -f /etc/debian_version ]]; then
+   # Make sure apt never prompts
+   export DEBIAN_FRONTEND=noninteractive
+
    # Install ec2-ami-tools to support the amazon instance builder. Installing this here vs puppet as
    # this is required for packer, and feels like a better spot to do it instead of in nubis-puppet.
-   sudo apt-add-repository multiverse
-   sudo apt-get update
-   sudo apt-get -y install ec2-ami-tools
-   sudo apt-add-repository -r multiverse
-   # After removing multiverse we need to rebuild the indexes, since this won't happen on their own.
-   sudo apt-get update
+   sudo -E apt-add-repository multiverse
+   sudo -E apt-get -y update
+   sudo -E apt-get -y install ec2-ami-tools
+   sudo -E apt-add-repository -r multiverse
+
+   # After removing multiverse we need to rebuild the indexes, since this won't happen on their own,
+   # apparently.
+   sudo -E apt-get -y update
 
    # Install puppetlabs repository, we'll want access to more up to date puppet agents than what's
    # provided in Amazon's repositories.
-   wget -O /tmp/puppetlabs-release-precise.deb https://apt.puppetlabs.com/puppetlabs-release-precise.deb
-   sudo dpkg -i /tmp/puppetlabs-release-precise.deb
-   rm -f /tmp/puppetlabs-release-precise.deb
+   wget -O /tmp/puppetlabs-release-trusty.deb https://apt.puppetlabs.com/puppetlabs-release-trusty.deb
+   sudo -E dpkg -i /tmp/puppetlabs-release-trusty.deb
+   rm -f /tmp/puppetlabs-release-trusty.deb
 
-   # Update repository caches
-   sudo apt-get update
+   # Running sudo -E for apt-get calls so $DEBIAN_FRONTEND is inherited, especially for dist-upgrade. Updates
+   # such as with linux-image-* can prompt for things like menu.lst merging which doesn't play nice with packer
+   #
+   # Apply full system updates
+   sudo -E apt-get -y update
+   sudo -E apt-get -y upgrade
+   sudo -E apt-get -y dist-upgrade
 
    # Install puppet
-   sudo apt-get -y install puppet=${ubuntu_puppet_version}   
+   sudo -E apt-get -y install puppet=${ubuntu_puppet_version} puppet-common=${ubuntu_puppet_version}
 elif [[ -f /etc/os-release ]]; then
    . /etc/os-release
 
@@ -52,6 +66,9 @@ elif [[ -f /etc/os-release ]]; then
       # Yum can be stinky
       sudo yum clean all
 
+      # Apply full system updates
+      sudo yum -y update
+
       # Install puppet and rubygem18-json, which someone forgot to add to puppet's dependency list.
       sudo yum -y install puppet-${amazon_linux_puppet_version} rubygem18-json
 
@@ -66,29 +83,26 @@ else
    exit 1
 fi
 
-# We have a file provisioner in main.json that'll copy over a .tar.gz of the nubis-puppet tree that's
+# We have a file provisioner in main.json that'll copy over a .tar.gz of the librarian-puppet tree that's
 # created by make. We need to extract that so we can have a full puppet checkout ready for additional build
 # iterations.
-if [[ -f /tmp/nubis-puppet.tar.gz ]]; then
-   sudo tar -C /etc -zxf /tmp/nubis-puppet.tar.gz
-   rm -f /tmp/nubis-puppet.tar.gz
-
-   # If puppet.conf exists in nubis-puppet, let's copy that over to /etc/puppet.
-   if [[ -f /etc/nubis-puppet/puppet.conf ]]; then
-      sudo cp -f /etc/nubis-puppet/puppet.conf /etc/puppet/puppet.conf
-   fi
+if [[ -f /tmp/librarian-puppet.tar.gz ]]; then
+   sudo tar -C / -zxf /tmp/librarian-puppet.tar.gz 2>&1
+   rm -f /tmp/librarian-puppet.tar.gz
 
    # We're probably going to have secrets at some point. I use chown 0:0 to avoid having to figure out
    # whether root's group is root, or wheel.
-   sudo chown 0:0 /etc/nubis-puppet
-   sudo chmod 700 /etc/nubis-puppet
+   sudo chown -R 0:0 /etc/puppet
+   sudo chmod 700 /etc/puppet
+
+   # Document the installed version of packages for forensic analysis later, if needed.
+   puppet resource package | sudo tee -a /etc/puppet/package-versions.pp >/dev/null
 fi
 
-#find /tmp/packer-puppet-masterless/ -ls
-
-# We copy this file over in main.json, but it needs to run at boot so we run this little shell snippit
+# We copy this file over in provisioners.json, but it needs to run at boot so we run this little shell snippit
 # as part of the bootstrap process.
 if [[ -f /tmp/autojoin.sh ]]; then
+   sudo mkdir /etc/nubis.d
    sudo mv /tmp/autojoin.sh /etc/rc.local
    sudo chmod 755 /etc/rc.local
 fi
