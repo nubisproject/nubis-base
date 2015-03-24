@@ -3,6 +3,11 @@ class { 'fluentd':
   service_ensure => stopped
 }
 
+# For the ec2 plugin
+package { ["ruby-dev", "make"]:
+  ensure => "present",
+}
+
 fluentd::install_plugin { 'ec2-metadata':
   plugin_type => 'gem',
   plugin_name => 'fluent-plugin-ec2-metadata',
