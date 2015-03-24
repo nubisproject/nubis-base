@@ -15,7 +15,7 @@ fluentd::configfile { 'forward': }
 fluentd::match { 'forward':
   configfile => 'forward',
   type       => 'forward',
-  pattern    => '**',
+  pattern    => 'forward.**',
   config     => {
     'send_timeout'       => '60s',
     'recover_wait'       => '10s',
@@ -37,7 +37,7 @@ fluentd::source { 'syslog_main':
   configfile => 'syslog',
   type       => 'tail',
   format     => 'syslog',
-  tag        => 'system.syslog',
+  tag        => 'forward.system.syslog',
   config     => {
     'path'     => '/var/log/syslog',
     'pos_file' => '/tmp/td-agent.syslog.pos',
@@ -49,7 +49,7 @@ fluentd::source { 'syslog_kern':
   configfile => 'syslog',
   type       => 'tail',
   format     => 'syslog',
-  tag        => 'system.kern',
+  tag        => 'forward.system.kern',
   config     => {
     'path'     => '/var/log/kern.log',
     'pos_file' => '/tmp/td-agent.syslog.pos',
@@ -61,7 +61,7 @@ fluentd::source { 'syslog_mail':
   configfile => 'syslog',
   type       => 'tail',
   format     => 'syslog',
-  tag        => 'system.mail',
+  tag        => 'forward.system.mail',
   config     => {
     'path'     => '/var/log/mail.log',
     'pos_file' => '/tmp/td-agent.syslog.pos',
@@ -73,7 +73,7 @@ fluentd::source { 'syslog_mail_err':
   configfile => 'syslog',
   type       => 'tail',
   format     => 'syslog',
-  tag        => 'system.mail.err',
+  tag        => 'forward.system.mail.err',
   config     => {
     'path'     => '/var/log/mail.err',
     'pos_file' => '/tmp/td-agent.syslog.pos',
