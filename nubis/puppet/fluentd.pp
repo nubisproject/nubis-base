@@ -3,8 +3,15 @@ class { 'fluentd':
   service_ensure => stopped
 }
 
+if $osfamily == 'Debian' {
+  $ruby_dev = "ruby-dev"
+}
+else {
+  $ruby_dev = "ruby-devel"
+}
+
 # For the ec2 plugin
-package { ["ruby-dev", "make"]:
+package { [$ruby_dev, "make"]:
   ensure => "present",
 }
 
