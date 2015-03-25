@@ -11,7 +11,7 @@ else {
 }
 
 # For the ec2 plugin
-package { [$ruby_dev, "make"]:
+package { [$ruby_dev, "make", "gcc"]:
   ensure => "present",
 }
 
