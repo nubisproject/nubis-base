@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Load the settings from Consul
+source /etc/nubis-config/datadog.sh
+
+# fix the config file (poor-man's Augeas)
+perl -pi -e"s/^api_key: (.*)/api_key: $api_key/g" /etc/dd-agent/datadog.conf
+
+# Restart datadog is all is well
+/etc/init.d/datadog-agent configtest && /etc/init.d/datadog-agent restart
