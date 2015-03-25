@@ -20,7 +20,7 @@ fluentd::configfile { 'forward': }
 fluentd::match { 'forward':
   configfile => 'forward',
   type       => 'forward',
-  pattern    => 'forward.**',
+  pattern    => 'ec2.forward.**',
   config     => {
     'send_timeout'       => '60s',
     'recover_wait'       => '10s',
@@ -36,6 +36,34 @@ fluentd::match { 'forward':
       'port' => '24224',
     }
   ]
+}
+
+# Unfortunately, current fluentd::match doesn't allow for modules with
+# internal <blocks> it doesn't know about
+#
+#fluentd::match {'ec2':
+#  configfile => 'forward',
+#  type       => 'ec2_metadata',
+#  pattern    => 'forward.**',
+#  config     => {
+#  }
+#}
+
+file { "/etc/td-agent/config.d/ec2_metadata.conf":
+  ensure => "present",
+  owner	 => "td-agent",
+  group  => "td-agent",
+  content => '
+    <match forward.**>
+      type ec2_metadata
+      output_tag ec2.${tag}
+      <record>
+        instance_id   ${instance_id}
+        instance_type ${instance_type}
+        az            ${availability_zone}
+        region        ${region}
+      </record>
+    </match>',
 }
 
 fluentd::source { 'syslog_main':
