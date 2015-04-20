@@ -91,7 +91,10 @@ cat <<EOF | tee /etc/consul/zzz-tls.json
 EOF
 fi
 
-service consul restart
+# Perform a clean nuke and restart of Consul
+service consul stop
+rm -rf /var/lib/consul/serf/*
+service consul start
 
 ### XXX: Wait for consul to start here
 
