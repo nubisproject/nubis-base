@@ -16,7 +16,7 @@ CONSUL_DC=$REGION
 #XXX: For now, default to nubis.allizom.org if not told otherwise, it's a transition path
 #XXX: This is more or less a 1-to-1 mapping from environment name to domain, should be
 #XXX: made discoverable / derivable somehow
-if [ "$NUBIS_DOMAIN" ]; then
+if [ -z "$NUBIS_DOMAIN" ]; then
   NUBIS_DOMAIN="nubis.allizom.org"
 fi
 
