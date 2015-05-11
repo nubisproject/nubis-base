@@ -13,6 +13,8 @@ if [[ -f /etc/debian_version ]]; then
    # Make sure apt never prompts
    export DEBIAN_FRONTEND=noninteractive
 
+   sudo rm -rf /var/lib/apt/lists/*
+
    # Install ec2-ami-tools to support the amazon instance builder. Installing this here vs puppet as
    # this is required for packer, and feels like a better spot to do it instead of in nubis-puppet.
    sudo -E apt-add-repository multiverse
