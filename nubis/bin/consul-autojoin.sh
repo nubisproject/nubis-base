@@ -25,7 +25,7 @@ CONSUL_UI="http://ui.$REGION.consul.$NUBIS_ENVIRONMENT.$NUBIS_DOMAIN"
 CONSUL_JOIN="$REGION.consul.$NUBIS_ENVIRONMENT.$NUBIS_DOMAIN"
 
 # Auto-discover secret
-SECRET=`curl -s $CONSUL_UI/v1/kv/environments/$NUBIS_ENVIRONMENT/global/consul/secret?raw`
+SECRET=`curl -f -s $CONSUL_UI/v1/kv/environments/$NUBIS_ENVIRONMENT/global/consul/secret?raw`
 if [ "$SECRET" ]; then
   CONSUL_SECRET=$SECRET
 fi
@@ -58,8 +58,8 @@ EOF
 fi
 
 # Auto-discover certificate and key
-curl -s -o /etc/consul/consul.pem $CONSUL_UI/v1/kv/environments/$NUBIS_ENVIRONMENT/global/consul/cert?raw
-curl -s -o /etc/consul/consul.key $CONSUL_UI/v1/kv/environments/$NUBIS_ENVIRONMENT/global/consul/key?raw
+curl -f -s -o /etc/consul/consul.pem $CONSUL_UI/v1/kv/environments/$NUBIS_ENVIRONMENT/global/consul/cert?raw
+curl -f -s -o /etc/consul/consul.key $CONSUL_UI/v1/kv/environments/$NUBIS_ENVIRONMENT/global/consul/key?raw
 
 if [ "$CONSUL_CERT" ] && [ ! -f /etc/consul/consul.pem ]; then
   echo $CONSUL_CERT | tr " " "\n" | perl -pe 's/--BEGIN\n/--BEGIN /g' | perl -pe 's/--END\n/--END /g' > /etc/consul/consul.pem
