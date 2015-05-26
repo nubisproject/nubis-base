@@ -1,5 +1,5 @@
 class { 'consul':
-  version     => '0.5.0',
+  version     => '0.5.2',
   config_hash => {
       'data_dir'      => '/var/lib/consul',
       'log_level'     => 'INFO',
