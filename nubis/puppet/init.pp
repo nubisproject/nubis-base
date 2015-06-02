@@ -6,6 +6,7 @@ import 'jq.pp'
 import 'packages.pp'
 import 'postfix.pp'
 import 'datadog.pp'
+import 'mig.pp'
 
 # Simple node liveness check
 include nubis_discovery
