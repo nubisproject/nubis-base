@@ -1,0 +1,10 @@
+[template]
+src = "mig-agent.cfg.tmpl"
+dest = "/etc/mig/mig-agent.cfg"
+prefix = "/environments/%%ENVIRONMENT%%/global/mig"
+
+keys = [
+    "/config"
+]
+
+reload_cmd = "/sbin/mig-agent"
