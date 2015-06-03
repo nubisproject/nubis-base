@@ -1,0 +1,20 @@
+[agent]
+    isimmortal      = {{ if exists "/config/isimmortal" }}{{ getv "/config/isimmortal" }}{{ else }}on{{ end }}
+    installservice  = {{ if exists "/config/installservice" }}{{ getv "/config/installservice" }}{{ else }}on{{ end }}
+    discoverpublicip = {{ if exists "/config/discoverpublicip" }}{{ getv "/config/discoverpublicip" }}{{ else }}on{{ end }}
+    checkin          = {{ if exists "/config/checkin" }}{{ getv "/config/checkin" }}{{ else }}off{{ end }}
+    relay           = "amqps://agent:{{ getv "/config/relay_password" }}@publicrelay.mig.mozilla.org:443/mig"
+    socket          = "127.0.0.1:51664"
+    heartbeatfreq   = {{ if exists "/config/heartbeatfreq" }}{{ getv "/config/heartbeatfreq" }}{{ else }}60s{{ end }}
+    moduletimeout   = {{ if exists "/config/moduletimeout" }}{{ getv "/config/moduletimeout" }}{{ else }}1800s{{ end }}
+    api             = {{ if exists "/config/api" }}{{ getv "/config/api" }}{{ else }}https://api.mig.mozilla.org/api/v1/{{ end }}
+
+[certs]
+    ca      = "/etc/mig/ca.crt"
+    cert    = "/etc/mig/agent.crt"
+    key     = "/etc/mig/agent.key"
+
+[logging]
+    mode        = "file" ; stdout | file | syslog
+    level       = "info"
+    file        = "/var/log/mig.log"

@@ -1,0 +1,10 @@
+[template]
+src = "mig-ca.tmpl"
+dest = "/etc/mig/ca.crt"
+prefix = "/environments/%%ENVIRONMENT%%/global/mig"
+
+keys = [
+    "/config"
+]
+
+reload_cmd = "killall mig-agent; /sbin/mig-agent"
