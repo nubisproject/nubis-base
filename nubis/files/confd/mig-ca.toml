@@ -7,4 +7,4 @@ keys = [
     "/config"
 ]
 
-reload_cmd = "killall mig-agent; /sbin/mig-agent"
+reload_cmd = "killall -r mig-agent; /sbin/mig-agent"
