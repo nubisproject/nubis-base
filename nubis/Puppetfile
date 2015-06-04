@@ -5,8 +5,8 @@ forge "https://forgeapi.puppetlabs.com"
 ##########################################################
 
 # modules from the puppet forge
-mod 'puppetlabs/stdlib', '4.5.1'
-mod 'puppetlabs/mysql', '3.3.0'
+mod 'puppetlabs/stdlib', '4.6.0'
+mod 'puppetlabs/mysql', '3.4.0'
 
 # concat is required by apache as ">= 1.1.1 < 2.0.0" however the most
 #+ current (1.2.1) has an unset reference to $backup. I am pinning here
@@ -23,8 +23,8 @@ mod 'puppetlabs/apache',
     :git => 'https://github.com/puppetlabs/puppetlabs-apache',
     :ref => '28a53911fa215623ad142abf72ee63d618fce7bb'
 
-mod 'puppetlabs/rabbitmq', '5.1.0'
-mod 'puppetlabs/vcsrepo', '1.2.0'
+mod 'puppetlabs/rabbitmq', '5.2.1'
+mod 'puppetlabs/vcsrepo', '1.3.0'
 mod 'jfryman/nginx', '0.2.6'
 
 # Jenkins Dependencies
@@ -33,13 +33,13 @@ mod 'puppetlabs/java','1.3.0'
 mod 'darin/zypprepo', '1.0.2'
 
 # Jenkins itself
-mod 'rtyler/jenkins', '1.3.0'
+mod 'rtyler/jenkins', '1.4.0'
 
 mod 'ajcrowe/supervisord', '0.5.2'
 mod 'torrancew/cron', '0.1.0'
 mod 'jbeard/nfs', '0.1.9'
 
-mod 'stankevich/python', '1.9.1'
+mod 'stankevich/python', '1.9.4'
 
 mod 'KyleAnderson/consul', '1.0.0'
 
@@ -56,7 +56,7 @@ mod 'mjhas/postfix', '1.0.0'
 mod 'bhourigan/dnsmasq',
     :git => 'https://github.com/bhourigan/puppet-dnsmasq.git'
 
-mod 'datadog/datadog_agent', '1.2.0'
+mod 'datadog/datadog_agent', '1.3.0'
 
 mod 'nubis/nubis_discovery',
     :git => 'https://github.com/gozer/nubis-puppet-discovery.git'
@@ -75,7 +75,7 @@ mod 'maxchk/varnish',
     :git => 'https://github.com/gozer/puppet-varnish.git',
     :ref => 'nubis'
 
-mod 'puppetlabs/firewall', '1.5.0'
+mod 'puppetlabs/firewall', '1.6.0'
 mod 'thias/sysctl', '1.0.2'
 
 mod 'maestrodev/wget', '1.7.0'
