@@ -11,3 +11,12 @@ user { 'nubis':
     shell   => '/bin/bash',
     require => Group['nubis'],
 }
+
+file { '/etc/sudoers.d/nubis-sudoers':
+    ensure  => file,
+    owner   => root,
+    group   => root,
+    mode    => 0440,
+    content => "nubis   ALL=(ALL)   NOPASSWD:ALL\n",
+    require => [ User['nubis'], Group['nubis'] ],
+}
