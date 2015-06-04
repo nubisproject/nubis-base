@@ -1,9 +1,10 @@
+import 'packages.pp'
+
 import 'apt.pp'
 import 'confd.pp'
 import 'consul.pp'
 import 'fluentd.pp'
 import 'jq.pp'
-import 'packages.pp'
 import 'postfix.pp'
 import 'datadog.pp'
 import 'mig.pp'
