@@ -12,11 +12,12 @@ user { 'nubis':
     require => Group['nubis'],
 }
 
-file { '/etc/sudoers.d/nubis-sudoers':
-    ensure  => file,
-    owner   => root,
-    group   => root,
-    mode    => 0440,
-    content => "nubis   ALL=(ALL)   NOPASSWD:ALL\n",
-    require => [ User['nubis'], Group['nubis'] ],
+class { 'sudo':
+  purge               => false,
+  config_file_replace => false,
+}
+
+sudo::conf { 'nubis':
+  content  => "nubis ALL=(ALL) NOPASSWD: ALL",
+  require => [ User['nubis'], Group['nubis'] ],
 }

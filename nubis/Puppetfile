@@ -81,3 +81,5 @@ mod 'thias/sysctl', '1.0.2'
 mod 'maestrodev/wget', '1.7.0'
 
 mod 'elasticsearch/elasticsearch', '0.9.6'
+
+mod 'saz/sudo', '3.0.9'
