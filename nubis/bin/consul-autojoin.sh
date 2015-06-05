@@ -2,9 +2,9 @@
 
 # This is an auto-joiner for consul
 
-eval `ec2metadata --user-data`
+eval `curl -fq http://169.254.169.254/latest/user-data`
 
-INSTANCE_ID=`ec2metadata --instance-id`
+INSTANCE_ID=`curl -fq http://169.254.169.254/latest/meta-data/instance-id`
 REGION=`curl -s http://169.254.169.254/latest/dynamic/instance-identity/document | jq '.region' -r`
 
 LOGGER="logger --stderr --priority local7.info --tag nubis-startup"
