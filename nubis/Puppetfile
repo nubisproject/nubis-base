@@ -43,7 +43,9 @@ mod 'stankevich/python', '1.9.4'
 
 mod 'KyleAnderson/consul', '1.0.0'
 
-mod 'ajcrowe/confd', '0.2.2'
+# gozer's fork has minimal upstart support, upstream doesn't
+mod 'gozer/puppet-confd',
+    :git => 'https://github.com/gozer/puppet-confd.git'
 
 # Skeleton to get above confd happy
 mod 'nubis-confd_site',
