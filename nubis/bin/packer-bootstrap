@@ -82,7 +82,7 @@ if [[ -f /tmp/librarian-puppet.tar.gz ]]; then
    # Configure a local fileserver, accessible in puppet with puppet:///nubis/somefile
    cat <<EOF > /etc/puppet/fileserver.conf
 [nubis]
-    path /etc/puppet/nubis-files
+    path /tmp/nubis-files
     allow *
 EOF
 
