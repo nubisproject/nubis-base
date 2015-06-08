@@ -10,6 +10,11 @@ class { 'consul':
   }
 }
 
+# Install latest known consul-do
+class { 'consul_do':
+  version => "404d6180650e72e1881a260dab8d645815832c9e"
+}
+
 # XXX: need to move to puppet-envconsul proper
 staging::file { 'envconsul.tar.gz':
   source => "https://www.github.com/hashicorp/envconsul/releases/download/v0.5.0/envconsul_0.5.0_linux_amd64.tar.gz",
@@ -46,4 +51,27 @@ file { "/opt/hashicorp/consul-template_0.7.0_linux_amd64/consul-template":
 file { "/usr/local/bin/consul-template":
   ensure => "link",
   target => '/opt/consul-template_0.7.0_linux_amd64/consul-template',
+}
+
+# Download and install consul-do
+class consul_do (
+  $version
+  )
+{
+  $url = "https://raw.githubusercontent.com/zeroXten/consul-do/$version/consul-do"
+
+  notice ("Grabbing from $url")
+
+  wget::fetch { "download consul-do $version":
+      source => $url,
+      destination => "/usr/local/bin/consul-do-$version",
+      user => "root",
+      mode => "0755",
+      verbose => true,
+      redownload => true, # The file already exists, we replace it
+  } ->
+  file { "/usr/local/bin/consul-do":
+    ensure => "link",
+    target => "/usr/local/bin/consul-do-$version",
+  }
 }
