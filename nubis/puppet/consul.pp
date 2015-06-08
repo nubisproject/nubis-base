@@ -66,7 +66,6 @@ class consul_do (
       source => $url,
       destination => "/usr/local/bin/consul-do-$version",
       user => "root",
-      mode => "0755",
       verbose => true,
       redownload => true, # The file already exists, we replace it
   } ->
