@@ -45,7 +45,8 @@ mod 'KyleAnderson/consul', '1.0.0'
 
 # gozer's fork has minimal upstart support, upstream doesn't
 mod 'gozer/puppet-confd',
-    :git => 'https://github.com/gozer/puppet-confd.git'
+    :git => 'https://github.com/gozer/puppet-confd.git',
+    :ref => 'nubis'
 
 # Skeleton to get above confd happy
 mod 'nubis-confd_site',
