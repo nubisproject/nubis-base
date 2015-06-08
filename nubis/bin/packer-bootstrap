@@ -80,7 +80,7 @@ if [[ -f /tmp/librarian-puppet.tar.gz ]]; then
    sudo chmod 700 /etc/puppet
 
    # Configure a local fileserver, accessible in puppet with puppet:///nubis/somefile
-   cat <<EOF > /etc/puppet/fileserver.conf
+   sudo bash -c 'cat > /etc/puppet/fileserver.conf' << EOF
 [nubis]
     path /tmp/nubis-files
     allow *
