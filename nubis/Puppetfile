@@ -86,3 +86,5 @@ mod 'maestrodev/wget', '1.7.0'
 mod 'elasticsearch/elasticsearch', '0.9.6'
 
 mod 'mkrakowitzer/confluence', '999.999.999'
+
+mod 'thejandroman/kibana3', '0.0.4'
