@@ -67,6 +67,10 @@ else
    exit 1
 fi
 
+# Just make sure it's there
+sudo mkdir -p /etc/puppet
+sudo touch /etc/puppet/hiera.yaml
+
 # We have a file provisioner in main.json that'll copy over a .tar.gz of the librarian-puppet tree that's
 # created by make. We need to extract that so we can have a full puppet checkout ready for additional build
 # iterations.
@@ -79,6 +83,15 @@ if [[ -f /tmp/librarian-puppet.tar.gz ]]; then
    sudo chown -R 0:0 /etc/puppet
    sudo chmod 700 /etc/puppet
 
+   # Configure a local fileserver, accessible in puppet with puppet:///nubis/somefile
+   sudo mkdir -p /etc/nubis/puppet
+
+   sudo bash -c 'cat > /etc/puppet/fileserver.conf' << EOF
+[nubis]
+    path /etc/nubis/puppet
+    allow *
+EOF
+
    # Document the installed version of packages for forensic analysis later, if needed.
    puppet resource package | sudo tee -a /etc/puppet/package-versions.pp >/dev/null
 fi
@@ -87,6 +100,7 @@ fi
 # as part of the bootstrap process.
 if [[ -f /tmp/autojoin.sh ]]; then
    sudo mkdir /etc/nubis.d
-   sudo mv /tmp/autojoin.sh /etc/rc.local
+   sudo cp /tmp/autojoin.sh /etc/rc.local
+   sudo chown 0:0 /etc/rc.local
    sudo chmod 755 /etc/rc.local
 fi
