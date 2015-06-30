@@ -91,7 +91,9 @@ if [[ -f /tmp/librarian-puppet.tar.gz ]]; then
    sudo chmod 700 /etc/puppet
 
    # Configure a local fileserver, accessible in puppet with puppet:///nubis/somefile
-   sudo mkdir -p /etc/nubis/puppet
+   sudo mkdir -p /etc/nubis/puppet/{files,templates}
+   sudo chown 0:0 /etc/nubis/puppet/{files,templates}
+   sudo chmod 1777 /etc/nubis/puppet/{files,templates}
 
    sudo bash -c 'cat > /etc/puppet/fileserver.conf' << EOF
 [nubis]
