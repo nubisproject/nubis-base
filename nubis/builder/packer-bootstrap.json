@@ -3,7 +3,7 @@
   {
     "type": "shell",
     "script": "nubis/bin/packer-bootstrap",
-    "order": "10"
+    "order": "8"
   }
   ]
 }
