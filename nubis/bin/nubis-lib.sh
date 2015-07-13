@@ -126,6 +126,7 @@ key_up() {
             sleep 30
             COUNT=${COUNT}+1
         else
+            logmsg migrate "Key is ready"
             KEYS_UP=0
         fi
     done
