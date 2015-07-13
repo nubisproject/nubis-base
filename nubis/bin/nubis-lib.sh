@@ -14,7 +14,7 @@ if [ ${NUBIS_MIGRATE:-0} == '0' ]; then
 fi
 
 # Set up the consul url
-CONSUL="http://localhost:8500/v1/kv/$NUBIS_STACK/$NUBIS_ENVIRONMENT/config"
+CONSUL="http://localhost:8500/v1/kv/${NUBIS_STACK}/${NUBIS_ENVIRONMENT}/config"
 
 # Some handy variables here
 EC2_AVAIL_ZONE=$(curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone)
@@ -136,4 +136,3 @@ key_up() {
 hash jq 2>/dev/null || message_print CRITICAL "Please install jq to use this build tool. https://github.com/stedolan/jq"
 hash aws 2>/dev/null || message_print CRITICAL "Please install the AWS CLI API to use this build tool. https://aws.amazon.com/cli/"
 hash curl 2>/dev/null || message_print CRITICAL "Please install curl"
-
