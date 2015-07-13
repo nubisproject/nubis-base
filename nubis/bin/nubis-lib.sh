@@ -1,0 +1,101 @@
+# This is a bash library for a set functions and variables
+# that is used regularly
+
+# Source the consul connection details from the metadata api
+eval `curl -s -fq http://169.254.169.254/latest/user-data`
+
+# Check to see if NUBIS_MIGRATE was set in userdata. If not we exit quietly.
+if [ ${NUBIS_MIGRATE:-0} == '0' ]; then
+    exit 0
+fi
+
+# Set up the consul url
+CONSUL="http://localhost:8500/v1/kv/$NUBIS_STACK/$NUBIS_ENVIRONMENT/config"
+
+# Logs messages
+logmsg() {
+
+    local tag=$1
+    local msg=$2
+
+    LOGGER_BIN='/usr/bin/logger'
+
+    # Set up the logger command if the binary is installed
+    if [ ! -x $LOGGER_BIN ]; then
+        echo "ERROR: 'logger' binary not found - Aborting"
+        echo "ERROR: '$BASH_SOURCE' Line: '$LINENO'"
+        exit 2
+    else
+        $LOGGER_BIN --stderr --priority local7.info --tag ${tag} ${msg}
+    fi
+}
+
+# Print messages
+message_print(){
+    local exit_after=0
+
+    case "$1" in
+        OK)
+            code="0"
+            color="0;32"
+            ;;
+        WARNING)
+            code="1"
+            color="0;33"
+            ;;
+        CRITICAL)
+            code="2"
+            color="1;31"
+            exit_code=1
+            ;;
+    esac
+
+    if [[ -t 1 ]]; then
+        echo -e "\033[${color}m${2}\033[0m"
+    else
+        echo "${1}: ${2}"
+    fi
+
+    if [[ -n "$3" ]]; then
+        echo
+        echo "$3"
+        echo
+    fi
+
+    if [[ $exit_code -gt 0 ]]; then
+        exit $exit_code
+    fi
+}
+
+# Checks to see if consul is up and running
+consul_up() {
+
+    # We run early, so we need to account for Consul's startup time, unfortunately, magic isn't
+    # always free
+    CONSUL_UP=-1
+    COUNT=0
+    while [ "$CONSUL_UP" != "0" ]; do
+        if [ ${COUNT} == "6" ]; then
+            logmsg migrate "ERROR: Timeout while attempting to connect to consul."
+            exit 1
+        fi
+        QUERY=`curl -s ${CONSUL}?raw=1`
+        CONSUL_UP=$?
+
+        if [ "$QUERY" != "" ]; then
+            CONSUL_UP=-2
+        fi
+
+        if [ "$CONSUL_UP" != "0" ]; then
+            logmsg migrate "Consul not ready yet ($CONSUL_UP). Sleeping 10 seconds before retrying..."
+            sleep 10
+            COUNT=${COUNT}+1
+        fi
+    done
+}
+
+# Check pre-reqs
+hash jq 2>/dev/null || message_print CRITICAL "Please install jq to use this build tool. https://github.com/stedolan/jq"
+hash aws 2>/dev/null || message_print CRITICAL "Please install the AWS CLI API to use this build tool. https://aws.amazon.com/cli/"
+hash curl 2>/dev/null || message_print CRITICAL "Please install curl"
+
