@@ -22,6 +22,8 @@ EC2_REGION="`echo \"$EC2_AVAIL_ZONE\" | sed -e 's:\([0-9][0-9]*\)[a-z]*\$:\\1:'`
 
 # Some bash functions
 
+# Send message to log
+# usage: logmsg migrate "This is a log message"
 logmsg() {
 
     local tag=$1
@@ -35,11 +37,13 @@ logmsg() {
         echo "ERROR: '$BASH_SOURCE' Line: '$LINENO'"
         exit 2
     else
-        $LOGGER_BIN --stderr --priority local7.info --tag ${tag} ${msg}
+        $LOGGER_BIN --stderr --priority local7.info --tag "${tag}" "${msg}"
     fi
 }
 
 # Print messages
+# usage:    message_print CRITICAL "Unable to run script"
+#           message_print OK "all good"
 message_print(){
     local exit_after=0
 
@@ -77,6 +81,7 @@ message_print(){
 }
 
 # Checks to see if consul is up and running
+# usage: consul_up
 consul_up() {
 
     # We run early, so we need to account for Consul's startup time, unfortunately, magic isn't
@@ -104,6 +109,7 @@ consul_up() {
 }
 
 # Checks to see if if the consul key is up on consul
+# usage: key_up "keyname"
 key_up() {
 
     local consul_key=$1
@@ -126,7 +132,7 @@ key_up() {
             sleep 30
             COUNT=${COUNT}+1
         else
-            logmsg migrate "Key is ready"
+            logmsg migrate "Key ${consul_key} is ready"
             KEYS_UP=0
         fi
     done
