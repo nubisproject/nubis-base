@@ -1,5 +1,9 @@
 # This is a bash library for a set functions and variables
 # that is used regularly
+#
+# To use this library just include this line in your bash script:
+#
+# [ -e /usr/local/lib/nubis/nubis-lib.sh ] && . /usr/local/lib/nubis/nubis-lib.sh || exit 1
 
 # Source the consul connection details from the metadata api
 eval `curl -s -fq http://169.254.169.254/latest/user-data`
@@ -12,7 +16,12 @@ fi
 # Set up the consul url
 CONSUL="http://localhost:8500/v1/kv/$NUBIS_STACK/$NUBIS_ENVIRONMENT/config"
 
-# Logs messages
+# Some handy variables here
+EC2_AVAIL_ZONE=$(curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone)
+EC2_REGION="`echo \"$EC2_AVAIL_ZONE\" | sed -e 's:\([0-9][0-9]*\)[a-z]*\$:\\1:'`"
+
+# Some bash functions
+
 logmsg() {
 
     local tag=$1
@@ -90,6 +99,34 @@ consul_up() {
             logmsg migrate "Consul not ready yet ($CONSUL_UP). Sleeping 10 seconds before retrying..."
             sleep 10
             COUNT=${COUNT}+1
+        fi
+    done
+}
+
+# Checks to see if if the consul key is up on consul
+key_up() {
+
+    local consul_key=$1
+
+    # Grab the variables from consul
+    #+ If this is a new stack we need to wait for the values to be placed in consul
+    #+ We will test the first and sleep with a timeout
+    KEYS_UP=-1
+    COUNT=0
+    while [ "$KEYS_UP" != "0" ]; do
+        # Try for 20 minutes (30 seconds * 20160 attempts = 604800 seconds / 60 seconds / 60 minutes / 12 hours = 7 days)
+        if [ ${COUNT} == "20160" ]; then
+            logmsg migrate "ERROR: Timeout while waiting for keys to be populated in consul."
+            exit 1
+        fi
+        QUERY=$(curl -s ${CONSUL}/${consul_key}?raw=1)
+
+        if [ "$QUERY" == "" ]; then
+            logmsg migrate "Keys not ready yet. Sleeping 30 seconds before retrying..."
+            sleep 30
+            COUNT=${COUNT}+1
+        else
+            KEYS_UP=0
         fi
     done
 }
