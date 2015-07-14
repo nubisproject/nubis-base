@@ -28,6 +28,7 @@ EC2_REGION="`echo \"$EC2_AVAIL_ZONE\" | sed -e 's:\([0-9][0-9]*\)[a-z]*\$:\\1:'`
 # usage: logmsg migrate "This is a log message"
 logmsg() {
 
+    if [ -z "$1" ] || [ -z "$2" ]; then echo "Usage: $FUNCNAME [log tag] [log message]"; exit 1; fi
     local tag=$1
     local msg=$2
 
@@ -114,6 +115,7 @@ consul_up() {
 # usage: key_up "keyname"
 key_up() {
 
+    if [ -z "$1" ]; then echo "Usage: $FUNCNAME [consul key]"; exit 1; fi
     local consul_key=$1
 
     # Grab the variables from consul
