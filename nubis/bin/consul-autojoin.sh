@@ -20,9 +20,16 @@ if [ -z "$NUBIS_DOMAIN" ]; then
   NUBIS_DOMAIN="nubis.allizom.org"
 fi
 
+# CONSUL_SECRET is a proxy to detect this is a Consul Server starting up
+if [ -z "$CONSUL_SECRET" ]; then
+  CONSUL_SERVICE_NAME="consul"
+else
+  CONSUL_SERVICE_NAME="$NUBIS_PROJECT"
+fi
+
 # We assume these follow the standard naming scheme...
-CONSUL_UI="http://ui.$REGION.consul.$NUBIS_ENVIRONMENT.$NUBIS_DOMAIN"
-CONSUL_JOIN="$REGION.consul.$NUBIS_ENVIRONMENT.$NUBIS_DOMAIN"
+CONSUL_UI="http://ui.$REGION.$CONSUL_SERVICE_NAME.$NUBIS_ENVIRONMENT.$NUBIS_DOMAIN"
+CONSUL_JOIN="$REGION.$CONSUL_SERVICE_NAME.$NUBIS_ENVIRONMENT.$NUBIS_DOMAIN"
 
 # Auto-discover secret
 SECRET=`curl -f -s $CONSUL_UI/v1/kv/environments/$NUBIS_ENVIRONMENT/global/consul/secret?raw`
