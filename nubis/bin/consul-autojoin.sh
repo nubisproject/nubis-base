@@ -87,6 +87,16 @@ cat <<EOF | tee /etc/consul/zzz-acl.json
 EOF
 fi
 
+# Discover our ACL token (needs moving to nubis-consul)
+if [ "$CONSUL_ACL_TOKEN" ]; then
+
+cat <<EOF | tee /etc/consul/zzz-acl-token.json
+{
+  "acl_token": "$CONSUL_ACL_TOKEN",
+}
+EOF
+fi
+
 # Auto-discover certificate and key
 curl -f -s -o /etc/consul/consul.pem $CONSUL_UI/v1/kv/environments/$NUBIS_ENVIRONMENT/global/consul/cert?raw
 curl -f -s -o /etc/consul/consul.key $CONSUL_UI/v1/kv/environments/$NUBIS_ENVIRONMENT/global/consul/key?raw
