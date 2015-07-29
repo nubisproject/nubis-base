@@ -57,6 +57,29 @@ cat <<EOF | tee /etc/consul/zzz-bootstrap.json
 EOF
 fi
 
+# This is only used by Consul servers (needs moving to nubis-consul)
+if [ "$CONSUL_MASTER_ACL_TOKEN" ]; then
+
+  # Default to allow all
+  if [ -z "$CONSUL_ACL_DEFAULT_POLICY" ]; then
+    CONSUL_ACL_DEFAULT_POLICY="allow"
+  fi
+
+  # default to cached (and maybe stale) ACLs
+  if [ -z "$CONSUL_ACL_DOWN_POLICY" ]; then
+    CONSUL_ACL_DOWN_POLICY="extend-cache"
+  fi
+
+cat <<EOF | tee /etc/consul/zzz-acl.json
+{
+  "acl_datacenter": "$CONSUL_DC",
+  "acl_master_token": "$CONSUL_MASTER_ACL_TOKEN",
+  "acl_default_policy": "$CONSUL_ACL_DEFAULT_POLICY",
+  "acl_down_policy": "$CONSUL_ACL_DOWN_POLICY"
+}
+EOF
+fi
+
 # Auto-discover certificate and key
 curl -f -s -o /etc/consul/consul.pem $CONSUL_UI/v1/kv/environments/$NUBIS_ENVIRONMENT/global/consul/cert?raw
 curl -f -s -o /etc/consul/consul.key $CONSUL_UI/v1/kv/environments/$NUBIS_ENVIRONMENT/global/consul/key?raw
