@@ -111,7 +111,7 @@ if [ -f /etc/consul/consul.pem ]; then
 fi
 
 if [ "$CONSUL_KEY" ] && [ ! -f /etc/consul/consul.key ]; then
-  echo $CONSUL_KEY | tr " " "\n" | perl -pe 's/--(BEGIN|END)\n/--$1 /m' | perl -pe 's/ PRIVATE\n/ PRIVATE /g' > /etc/consul/consul.key
+  echo $CONSUL_KEY | tr " " "\n" | perl -pe 's/--(BEGIN|END)\n/--$1 /m' | perl -pe 's/ RSA\n/ RSA /g' | perl -pe 's/ PRIVATE\n/ PRIVATE /g' > /etc/consul/consul.key
 fi
 
 if [ -f /etc/consul/consul.key ]; then
