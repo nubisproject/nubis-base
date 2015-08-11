@@ -53,6 +53,13 @@ elif [[ -f /etc/os-release ]]; then
    . /etc/os-release
 
    if [[ "$NAME" = "Amazon Linux AMI" ]]; then
+
+      # Disable auto-updating!
+      echo "Disabling Amazon Auto-Updating"
+      sudo perl -pi -e's[^(\s*)repo_upgrade:.*][$1repo_upgrade: false]g' /etc/cloud/cloud.cfg
+      sudo /usr/sbin/update-motd --disable
+      sudo /usr/sbin/update-motd --force
+
       # Install aws-amitools-ec2 to support the amazon instance builder. Installing this here vs puppet as
       # this is required for packer, and feels like a better spot to do it instead of in nubis-puppet.
       sudo yum -y install aws-amitools-ec2
