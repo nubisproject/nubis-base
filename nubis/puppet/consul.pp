@@ -74,7 +74,6 @@ class consul_do (
       owner   => root,
       group   => root,
       mode    => '0755',
-      require => Wget::Fetch["download consul-do $version"]
   } ->
   file { "/usr/local/bin/consul-do":
     ensure => "link",
