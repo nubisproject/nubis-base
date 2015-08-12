@@ -41,16 +41,16 @@ staging::file { 'consul-template.tar.gz':
 staging::extract { 'consul-template.tar.gz':
   strip   => 0,
   target  => "/opt",
-  creates => "/opt/consul-template_0.7.0_linux_amd64",
+  creates => "/opt/consul-template_0.10.0_linux_amd64",
 } ->
-file { "/opt/hashicorp/consul-template_0.7.0_linux_amd64/consul-template":
+file { "/opt/hashicorp/consul-template_0.10.0_linux_amd64/consul-template":
   owner =>  0,
   group =>  0,
   mode  => '0555',
 } ->
 file { "/usr/local/bin/consul-template":
   ensure => "link",
-  target => '/opt/consul-template_0.7.0_linux_amd64/consul-template',
+  target => '/opt/consul-template_0.10.0_linux_amd64/consul-template',
 }
 
 # Download and install consul-do
