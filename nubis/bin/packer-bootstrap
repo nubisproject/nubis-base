@@ -57,8 +57,10 @@ elif [[ -f /etc/os-release ]]; then
       # Disable auto-updating!
       echo "Disabling Amazon Auto-Updating"
       sudo perl -pi -e's[^(\s*)repo_upgrade:.*][$1repo_upgrade: false]g' /etc/cloud/cloud.cfg
-      sudo /usr/sbin/update-motd --disable
-      sudo /usr/sbin/update-motd --force
+
+      # These check for update when regenerating MOTD, we don't care and it can run YUM behind
+      # our backs (because of the yum-update-motd plugin), creating racing conditions.
+      sudo rm -f /etc/update-motd.d/75-system-update /etc/update-motd.d/70-available-updates
 
       # Install aws-amitools-ec2 to support the amazon instance builder. Installing this here vs puppet as
       # this is required for packer, and feels like a better spot to do it instead of in nubis-puppet.
