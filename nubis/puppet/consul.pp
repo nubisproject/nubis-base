@@ -69,6 +69,12 @@ class consul_do (
       verbose => true,
       redownload => true, # The file already exists, we replace it
   } ->
+  file { "/usr/local/bin/consul-do-${version}":
+      ensure  => file,
+      owner   => root,
+      group   => root,
+      mode    => '0755',
+  } ->
   file { "/usr/local/bin/consul-do":
     ensure => "link",
     target => "/usr/local/bin/consul-do-$version",
