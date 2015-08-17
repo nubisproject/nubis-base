@@ -60,7 +60,7 @@ mod 'nubis/nubis_storage',
     :git => 'https://github.com/Nubisproject/nubis-puppet-storage.git'
 
 mod 'nubis/nubis_eip',
-    :git => 'https://github.com/Nubisproject/nubis-puppet-eip.git'
+    :git => 'https://github.com/Nubisproject/nubis-puppet-eip.git',
     :ref => '0.0.1'
 
 # This developer doesn't tag his releases on github
