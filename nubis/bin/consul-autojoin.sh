@@ -92,7 +92,7 @@ if [ "$CONSUL_ACL_TOKEN" ]; then
 
 cat <<EOF | tee /etc/consul/zzz-acl-token.json
 {
-  "acl_token": "$CONSUL_ACL_TOKEN",
+  "acl_token": "$CONSUL_ACL_TOKEN"
 }
 EOF
 fi
