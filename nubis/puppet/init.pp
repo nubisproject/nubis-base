@@ -9,6 +9,7 @@ import 'postfix.pp'
 import 'datadog.pp'
 import 'mig.pp'
 import 'credstash.pp'
+import 'consulate.pp'
 
 # Simple node liveness check
 include nubis_discovery
