@@ -1,4 +1,4 @@
- This is a bash library for a set functions and variables
+# This is a bash library for a set functions and variables
 # that is used regularly
 #
 # To use this library just include this line in your bash script:
