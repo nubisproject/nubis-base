@@ -43,7 +43,7 @@ function echo_green {
 
 # Send message to log
 # usage: logmsg migrate "This is a log message"
-function logmsg() {
+function logmsg {
 
     if [ -z "$1" ] || [ -z "$2" ]; then echo "Usage: $FUNCNAME [log tag] [log message]"; exit 1; fi
     local tag=$1
@@ -63,7 +63,7 @@ function logmsg() {
 
 # Checks to see if consul is up and running
 # usage: consul_up
-function consul_up() {
+function consul_up {
 
     # We run early, so we need to account for Consul's startup time, unfortunately, magic isn't
     # always free
@@ -90,8 +90,8 @@ function consul_up() {
 }
 
 # Checks to see if if the consul key is up on consul
-# usage: key_up "keyname"
-function key_up() {
+# usage: consul_key_up "keyname"
+function consul_key_up {
 
     if [ -z "$1" ]; then echo "Usage: $FUNCNAME [consul key]"; exit 1; fi
     local consul_key=$1
