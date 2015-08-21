@@ -1,4 +1,4 @@
-# This is a bash library for a set functions and variables
+ This is a bash library for a set functions and variables
 # that is used regularly
 #
 # To use this library just include this line in your bash script:
@@ -21,7 +21,30 @@ INSTANCE_ID=$(curl -s -fq http://169.254.169.254/latest/meta-data/instance-id)
 INSTANCE_IP=$(curl -s -fq http://169.254.169.254/latest/meta-data/local-ipv4)
 REGION=$(curl -s http://169.254.169.254/latest/dynamic/instance-identity/document | jq '.region' -r)
 
+# Check pre-reqs
+hash jq 2>/dev/null || echo_red "Please install jq to use this build tool. https://github.com/stedolan/jq"
+hash aws 2>/dev/null || echo_red "Please install the AWS CLI API to use this build tool. https://aws.amazon.com/cli/"
+hash curl 2>/dev/null || echo_red "Please install curl"
+
 # Some bash functions
+
+# Yellow colored echo
+# usage: echo_yellow "message"
+function echo_yellow {
+    echo -e "\033[0;33m$1\033[0m"
+}
+
+# Red colored echo
+# usage: echo_red "message"
+function echo_red {
+    echo -e "\033[0;31m$1\033[0m"
+}
+
+# Green colored echo
+# usage: echo_green "Message"
+function echo_green {
+    echo -e "\033[0;32m$1\033[0m"
+}
 
 # Send message to log
 # usage: logmsg migrate "This is a log message"
@@ -41,24 +64,6 @@ logmsg() {
     else
         $LOGGER_BIN --stderr --priority local7.info --tag "${tag}" "${msg}"
     fi
-}
-
-# Yellow colored echo
-# usage: echo_yellow "message"
-function echo_yellow {
-  echo -e "\033[0;33m$1\033[0m"
-}
-
-# Red colored echo
-# usage: echo_red "message"
-function echo_red {
-  echo -e "\033[0;31m$1\033[0m"
-}
-
-# Green colored echo
-# usage: echo_green "Message"
-function echo_green {
-  echo -e "\033[0;32m$1\033[0m"
 }
 
 # Checks to see if consul is up and running
@@ -119,8 +124,3 @@ key_up() {
         fi
     done
 }
-
-# Check pre-reqs
-hash jq 2>/dev/null || message_print CRITICAL "Please install jq to use this build tool. https://github.com/stedolan/jq"
-hash aws 2>/dev/null || message_print CRITICAL "Please install the AWS CLI API to use this build tool. https://aws.amazon.com/cli/"
-hash curl 2>/dev/null || message_print CRITICAL "Please install curl"
