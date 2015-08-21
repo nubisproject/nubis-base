@@ -122,5 +122,5 @@ function consul_key_up {
 
 # check pre-reqs
 hash jq 2>/dev/null || echo_red { "please install jq to use this build tool. https://github.com/stedolan/jq"; exit 1; }
-hash aws 2>/dev/null || echo_red { "please install the aws cli api to use this build tool. https://aws.amazon.com/cli/"; exit 1; }
+#hash aws 2>/dev/null || echo_red { "please install the aws cli api to use this build tool. https://aws.amazon.com/cli/"; exit 1; }
 hash curl 2>/dev/null || echo_red { "please install curl"; exit 1; }
