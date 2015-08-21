@@ -21,11 +21,6 @@ INSTANCE_ID=$(curl -s -fq http://169.254.169.254/latest/meta-data/instance-id)
 INSTANCE_IP=$(curl -s -fq http://169.254.169.254/latest/meta-data/local-ipv4)
 REGION=$(curl -s http://169.254.169.254/latest/dynamic/instance-identity/document | jq '.region' -r)
 
-# Check pre-reqs
-hash jq 2>/dev/null || echo_red "Please install jq to use this build tool. https://github.com/stedolan/jq"
-hash aws 2>/dev/null || echo_red "Please install the AWS CLI API to use this build tool. https://aws.amazon.com/cli/"
-hash curl 2>/dev/null || echo_red "Please install curl"
-
 # Some bash functions
 
 # Yellow colored echo
@@ -124,3 +119,8 @@ function key_up() {
         fi
     done
 }
+
+# check pre-reqs
+hash jq 2>/dev/null || echo_red { "please install jq to use this build tool. https://github.com/stedolan/jq"; exit 1; }
+hash aws 2>/dev/null || echo_red { "please install the aws cli api to use this build tool. https://aws.amazon.com/cli/"; exit 1; }
+hash curl 2>/dev/null || echo_red { "please install curl"; exit 1; }
