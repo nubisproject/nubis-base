@@ -43,43 +43,22 @@ logmsg() {
     fi
 }
 
-# Print messages
-# usage:    message_print CRITICAL "Unable to run script"
-#           message_print OK "all good"
-message_print(){
-    local exit_after=0
+# Yellow colored echo
+# usage: echo_yellow "message"
+function echo_yellow {
+  echo -e "\033[0;33m$1\033[0m"
+}
 
-    case "$1" in
-        OK)
-            code="0"
-            color="0;32"
-            ;;
-        WARNING)
-            code="1"
-            color="0;33"
-            ;;
-        CRITICAL)
-            code="2"
-            color="1;31"
-            exit_code=1
-            ;;
-    esac
+# Red colored echo
+# usage: echo_red "message"
+function echo_red {
+  echo -e "\033[0;31m$1\033[0m"
+}
 
-    if [[ -t 1 ]]; then
-        echo -e "\033[${color}m${2}\033[0m"
-    else
-        echo "${1}: ${2}"
-    fi
-
-    if [[ -n "$3" ]]; then
-        echo
-        echo "$3"
-        echo
-    fi
-
-    if [[ $exit_code -gt 0 ]]; then
-        exit $exit_code
-    fi
+# Green colored echo
+# usage: echo_green "Message"
+function echo_green {
+  echo -e "\033[0;32m$1\033[0m"
 }
 
 # Checks to see if consul is up and running
