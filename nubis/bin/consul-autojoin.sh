@@ -45,12 +45,15 @@ cat <<EOF | tee /etc/consul/zzz-startup.json
 }
 EOF
 
+# Auto-discover initial servers with fallback to $CONSUL_JOIN
+SERVERS=`curl -qfs $CONSUL_UI/v1/status/peers | jq '. |= .+ ["$CONSUL_JOIN"]'`
+
 #XXX: Wish there was a way to self-discover members of our autoscaling group...
 #XXX: For now, this points to the consul bootstrap node (SPOF)
-if [ "$CONSUL_JOIN" ]; then
+if [ "$SERVERS" ]; then
 cat <<EOF | tee /etc/consul/zzz-join.json
 {
-  "retry_join": [ "$CONSUL_JOIN" ]
+  "retry_join": $SERVERS
 }
 EOF
 fi
