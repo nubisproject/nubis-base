@@ -2,6 +2,7 @@
 
 ubuntu_puppet_version="3.7.4-1puppetlabs1"
 amazon_linux_puppet_package="puppet3-3.7.4-1.11.amzn1"
+redhat_puppet_package="puppet"
 
 if [[ "$1" == "--verbose" ]]; then
    set -x
@@ -78,6 +79,22 @@ elif [[ -f /etc/os-release ]]; then
       echo "Operating system $NAME unsupported"
       exit 1
    fi
+elif [[ -f /etc/redhat-release ]]; then
+   ELV=`rpm --queryformat '%{Version}' -qf /etc/redhat-release`
+
+   rpm -ivh https://yum.puppetlabs.com/puppetlabs-release-el-${ELV}.noarch.rpm
+   rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-${ELV}.noarch.rpm
+
+    # Yum can be stinky
+    sudo yum clean all
+
+    # Apply full system updates
+    sudo yum -y update
+
+    # Install puppet
+    sudo yum -y install ${redhat_puppet_package}
+    sudo yum -y install cloud-init
+
 else
    echo "Unknown operating system"
    exit 1
