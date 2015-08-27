@@ -10,7 +10,7 @@ REGION=`curl -s http://169.254.169.254/latest/dynamic/instance-identity/document
 LOGGER="logger --stderr --priority local7.info --tag nubis-startup"
 
 if [ ! -z "$NUBIS_ACCOUNT" ]; then
-  CONSUL_DC="${NUBIS_ENVIRONMENT}.${REGION}.${NUBIS_ACCOUNT}"
+  CONSUL_DC="${NUBIS_ENVIRONMENT}-${REGION}-${NUBIS_ACCOUNT}"
 else
   CONSUL_DC=$REGION
 fi
