@@ -9,6 +9,7 @@ REGION=`curl -s http://169.254.169.254/latest/dynamic/instance-identity/document
 
 LOGGER="logger --stderr --priority local7.info --tag nubis-startup"
 
+# backwards-compat for NUBIS_ACCOUNT
 if [ ! -z "$NUBIS_ACCOUNT" ]; then
   CONSUL_DC="${NUBIS_ENVIRONMENT}.${REGION}.${NUBIS_ACCOUNT}"
 else
@@ -29,11 +30,11 @@ else
   CONSUL_SERVICE_NAME="$NUBIS_PROJECT"
 fi
 
-# We assume these follow the standard naming scheme...
+# backwards-compat for NUBIS_ACCOUNT
 if [ -z ! "$NUBIS_ACCOUNT" ]; then
-  CONSUL_DOMAIN="$REGION.$CONSUL_SERVICE_NAME.$NUBIS_ENVIRONMENT.$NUBIS_DOMAIN"
+  CONSUL_DOMAIN="$CONSUL_SERVICE_NAME.$NUBIS_ENVIRONMENT.$REGION.$NUBIS_ACCOUNT.$NUBIS_DOMAIN"
 else
-  CONSUL_DOMAIN="$CONSUL_SERVICE_NAME.$NUBIS_ENVIRONMENT.$REGION.$NUBIS_ACCOUNT"
+  CONSUL_DOMAIN="$REGION.$CONSUL_SERVICE_NAME.$NUBIS_ENVIRONMENT.$NUBIS_DOMAIN"
 fi
 
 CONSUL_UI="http://ui.$CONSUL_DOMAIN"
