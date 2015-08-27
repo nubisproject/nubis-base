@@ -9,9 +9,11 @@ REGION=`curl -s http://169.254.169.254/latest/dynamic/instance-identity/document
 
 LOGGER="logger --stderr --priority local7.info --tag nubis-startup"
 
-# For now, we assume CONSUL_DC == REGION
-# XXX: but will need to eventually change to REGION + ENVIRONMENT (i.e. sandbox-us-west-2)
-CONSUL_DC=$REGION
+if [ ! -z "$NUBIS_ACCOUNT" ]; then
+  CONSUL_DC="${NUBIS_ENVIRONMENT}.${REGION}.${NUBIS_ACCOUNT}"
+else
+  CONSUL_DC=$REGION
+fi
 
 #XXX: For now, default to nubis.allizom.org if not told otherwise, it's a transition path
 #XXX: This is more or less a 1-to-1 mapping from environment name to domain, should be
@@ -28,8 +30,14 @@ else
 fi
 
 # We assume these follow the standard naming scheme...
-CONSUL_UI="http://ui.$REGION.$CONSUL_SERVICE_NAME.$NUBIS_ENVIRONMENT.$NUBIS_DOMAIN"
-CONSUL_JOIN="$REGION.$CONSUL_SERVICE_NAME.$NUBIS_ENVIRONMENT.$NUBIS_DOMAIN"
+if [ -z ! "$NUBIS_ACCOUNT" ]; then
+  CONSUL_DOMAIN="$REGION.$CONSUL_SERVICE_NAME.$NUBIS_ENVIRONMENT.$NUBIS_DOMAIN"
+else
+  CONSUL_DOMAIN="$CONSUL_SERVICE_NAME.$NUBIS_ENVIRONMENT.$REGION.$NUBIS_ACCOUNT"
+fi
+
+CONSUL_UI="http://ui.$CONSUL_DOMAIN"
+CONSUL_JOIN="$CONSUL_DOMAIN"
 
 # Auto-discover secret
 SECRET=`curl -f -s $CONSUL_UI/v1/kv/environments/$NUBIS_ENVIRONMENT/global/consul/secret?raw`
