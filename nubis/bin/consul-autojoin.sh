@@ -11,7 +11,7 @@ LOGGER="logger --stderr --priority local7.info --tag nubis-startup"
 
 # backwards-compat for NUBIS_ACCOUNT
 if [ ! -z "$NUBIS_ACCOUNT" ]; then
-  CONSUL_DC="${NUBIS_ENVIRONMENT}.${REGION}.${NUBIS_ACCOUNT}"
+  CONSUL_DC="${NUBIS_ENVIRONMENT}-${REGION}-${NUBIS_ACCOUNT}"
 else
   CONSUL_DC=$REGION
 fi
