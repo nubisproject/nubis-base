@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# This is an auto-joiner for consul
+# This is an auto-joiner for consul, should be moved to /etc/nubis.d/00-consul-bootstrap or similar
 
 eval `curl -fq http://169.254.169.254/latest/user-data`
 
@@ -23,11 +23,11 @@ if [ -z "$NUBIS_DOMAIN" ]; then
   NUBIS_DOMAIN="nubis.allizom.org"
 fi
 
-# CONSUL_SECRET is a proxy to detect this is a Consul Server starting up
-if [ -z "$CONSUL_SECRET" ]; then
-  CONSUL_SERVICE_NAME="consul"
-else
+# CONSUL_SERVER is set in user-data if we are a server
+if [ "$CONSUL_SERVER" ]; then
   CONSUL_SERVICE_NAME="$NUBIS_PROJECT"
+else
+  CONSUL_SERVICE_NAME="consul"
 fi
 
 # backwards-compat for NUBIS_ACCOUNT
@@ -37,28 +37,30 @@ else
   CONSUL_DOMAIN="$REGION.$CONSUL_SERVICE_NAME.$NUBIS_ENVIRONMENT.$NUBIS_DOMAIN"
 fi
 
+# The HTTP endpoint, constructed
 CONSUL_UI="http://ui.$CONSUL_DOMAIN"
-CONSUL_JOIN="$CONSUL_DOMAIN"
 
 # Auto-discover secret
-SECRET=`curl -f -s $CONSUL_UI/v1/kv/environments/$NUBIS_ENVIRONMENT/global/consul/secret?raw`
-if [ "$SECRET" ]; then
-  CONSUL_SECRET=$SECRET
+if [ -z "$CONSUL_SECRET" ]; then
+  SECRET=`curl -f -s $CONSUL_UI/v1/kv/environments/$NUBIS_ENVIRONMENT/global/consul/secret?raw`
+  if [ ! -z "$SECRET" ]; then
+    CONSUL_SECRET=$SECRET
+  fi
 fi
 
 cat <<EOF | tee /etc/consul/zzz-startup.json
 {
-  "encrypt": "$CONSUL_SECRET",
   "datacenter": "$CONSUL_DC",
   "node_name": "$INSTANCE_ID"
 }
 EOF
 
-# Auto-discover initial servers with fallback to $CONSUL_JOIN
-SERVERS=`curl -qfs $CONSUL_UI/v1/status/peers | jq "[ . |= .+ [\"$CONSUL_JOIN\"] | .[] | split(\":\") | .[0] ]"`
+# Auto-discover initial servers with fallback to $CONSUL_JOIN, but servers don't need it
+if [ ! "$CONSUL_SERVER" ]; then
+  CONSUL_JOIN="$CONSUL_DOMAIN"
+  SERVERS=`curl -qfs $CONSUL_UI/v1/status/peers | jq "[ . |= .+ [\"$CONSUL_JOIN\"] | .[] | split(\":\") | .[0] ]"`   
+fi
 
-#XXX: Wish there was a way to self-discover members of our autoscaling group...
-#XXX: For now, this points to the consul bootstrap node (SPOF)
 if [ "$SERVERS" ]; then
 cat <<EOF | tee /etc/consul/zzz-join.json
 {
@@ -68,7 +70,7 @@ EOF
 fi
 
 # This is only used by Consul servers (needs moving to nubis-consul)
-if [ "$CONSUL_BOOTSTRAP_EXPECT" ]; then
+if [ "$CONSUL_SERVER" ] && [ "$CONSUL_BOOTSTRAP_EXPECT" ]; then
 cat <<EOF | tee /etc/consul/zzz-bootstrap.json
 {
   "bootstrap_expect": $CONSUL_BOOTSTRAP_EXPECT
@@ -77,7 +79,7 @@ EOF
 fi
 
 # This is only used by Consul servers (needs moving to nubis-consul)
-if [ "$CONSUL_MASTER_ACL_TOKEN" ]; then
+if [ "$CONSUL_SERVER" ] && [ "$CONSUL_MASTER_ACL_TOKEN" ]; then
 
   # Default to allow all
   if [ -z "$CONSUL_ACL_DEFAULT_POLICY" ]; then
@@ -109,11 +111,14 @@ cat <<EOF | tee /etc/consul/zzz-acl-token.json
 EOF
 fi
 
-# Auto-discover certificate and key
+# Auto-discover certificate and key if we are a client
+if [ ! "$CONSUL_SERVER" ]; then
 curl -f -s -o /etc/consul/consul.pem $CONSUL_UI/v1/kv/environments/$NUBIS_ENVIRONMENT/global/consul/cert?raw
 curl -f -s -o /etc/consul/consul.key $CONSUL_UI/v1/kv/environments/$NUBIS_ENVIRONMENT/global/consul/key?raw
+fi
 
-if [ "$CONSUL_CERT" ] && [ ! -f /etc/consul/consul.pem ]; then
+# Grab the cert from user_data (server case)
+if [ "$CONSUL_SERVER" ] && [ "$CONSUL_CERT" ] && [ ! -f /etc/consul/consul.pem ]; then
   echo $CONSUL_CERT | tr " " "\n" | perl -pe 's/--BEGIN\n/--BEGIN /g' | perl -pe 's/--END\n/--END /g' > /etc/consul/consul.pem
 fi
 
@@ -122,7 +127,8 @@ if [ -f /etc/consul/consul.pem ]; then
   chmod 640 /etc/consul/consul.pem
 fi
 
-if [ "$CONSUL_KEY" ] && [ ! -f /etc/consul/consul.key ]; then
+# Grab the key from user_data (server case)
+if [ "$CONSUL_SERVER" ] && [ "$CONSUL_KEY" ] && [ ! -f /etc/consul/consul.key ]; then
   echo $CONSUL_KEY | tr " " "\n" | perl -pe 's/--(BEGIN|END)\n/--$1 /m' | perl -pe 's/ RSA\n/ RSA /g' | perl -pe 's/ PRIVATE\n/ PRIVATE /g' > /etc/consul/consul.key
 fi
 
@@ -131,9 +137,11 @@ if [ -f /etc/consul/consul.key ]; then
   chmod 640 /etc/consul/consul.key
 fi
 
-if [ -f /etc/consul/consul.key ] && [ -f /etc/consul/consul.pem ]; then
+# Sanity, if we didn't get all this, something wrong is going on
+if [ "$CONSUL_SECRET" ] && [ -f /etc/consul/consul.key ] && [ -f /etc/consul/consul.pem ]; then
 cat <<EOF | tee /etc/consul/zzz-tls.json
 {
+  "encrypt"         : "$CONSUL_SECRET",
   "ca_file"         : "/etc/consul/consul.pem",
   "cert_file"       : "/etc/consul/consul.pem",
   "key_file"        : "/etc/consul/consul.key",
@@ -141,6 +149,8 @@ cat <<EOF | tee /etc/consul/zzz-tls.json
   "verify_outgoing" : true
 }
 EOF
+else
+  echo "Failed to configure security, Consul is most likely broken!"
 fi
 
 # Perform a clean nuke and restart of Consul
