@@ -58,7 +58,7 @@ EOF
 # Auto-discover initial servers with fallback to $CONSUL_JOIN, but servers don't need it
 if [ ! "$CONSUL_SERVER" ]; then
   CONSUL_JOIN="$CONSUL_DOMAIN"
-  SERVERS=`curl -qfs $CONSUL_UI/v1/status/peers | jq "[ . |= .+ [\"$CONSUL_JOIN\"] | .[] | split(\":\") | .[0] ]"`   
+  SERVERS=`curl -qfs $CONSUL_UI/v1/status/peers | jq ". |= .+ [\"$CONSUL_JOIN\"]" | perl -pe's/:\d+//g'
 fi
 
 if [ "$SERVERS" ]; then
