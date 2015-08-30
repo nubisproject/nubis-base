@@ -1,6 +1,92 @@
 # Change Log
 
-## [v0.9.0](https://github.com/nubisproject/nubis-base/tree/v0.9.0) (2015-07-22)
+## [v1.0.0](https://github.com/nubisproject/nubis-base/tree/v1.0.0) (2015-08-30)
+
+[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v0.9.0...v1.0.0)
+
+**Implemented enhancements:**
+
+- Include nubis-puppet-eip in nubis-base [\#164](https://github.com/Nubisproject/nubis-base/issues/164)
+
+**Fixed bugs:**
+
+- Consul bootstrap uses a jq 1.4 feature, not available  yet. [\#187](https://github.com/Nubisproject/nubis-base/issues/187)
+
+- \[amazon-linux\] Have dhclient.conf set dnsmasq as our preferred resolver [\#180](https://github.com/Nubisproject/nubis-base/issues/180)
+
+- \[amazon-linux\] dnsmasq isn't the default resolver [\#170](https://github.com/Nubisproject/nubis-base/issues/170)
+
+- \[amazon-linux\] Disable automatic security updates on boot [\#153](https://github.com/Nubisproject/nubis-base/issues/153)
+
+**Closed issues:**
+
+- Consul retry\_join can't contain port numbers [\#178](https://github.com/Nubisproject/nubis-base/issues/178)
+
+- \[consul\] use /v1/status/peers to auto join nodes from the UI instead of relying [\#175](https://github.com/Nubisproject/nubis-base/issues/175)
+
+- \[amazon-linux\] dnsmasq isn't configured to forward to the DHCP provided nameserver [\#171](https://github.com/Nubisproject/nubis-base/issues/171)
+
+- Consul not starting up [\#168](https://github.com/Nubisproject/nubis-base/issues/168)
+
+- Include CPAN puppet module [\#161](https://github.com/Nubisproject/nubis-base/issues/161)
+
+- consul-template broken [\#159](https://github.com/Nubisproject/nubis-base/issues/159)
+
+- consul-do is not executable [\#157](https://github.com/Nubisproject/nubis-base/issues/157)
+
+- Install consulate on base images [\#150](https://github.com/Nubisproject/nubis-base/issues/150)
+
+- The DNS portion to discover Consul is hard-coded. [\#143](https://github.com/Nubisproject/nubis-base/issues/143)
+
+**Merged pull requests:**
+
+- Use perl to remove the port number from hosts, as jq's split\(\) is off limits for now [\#189](https://github.com/Nubisproject/nubis-base/pull/189) ([gozer](https://github.com/gozer))
+
+- Turn the Consul bootstrap script into something that's a lot more resilient to failures of all kinds. [\#186](https://github.com/Nubisproject/nubis-base/pull/186) ([gozer](https://github.com/gozer))
+
+- Prepend nameserver 127.0.0.1 if amazon linux [\#185](https://github.com/Nubisproject/nubis-base/pull/185) ([limed](https://github.com/limed))
+
+- Consul: Datacenter must be alpha-numeric with underscores and hypens only [\#184](https://github.com/Nubisproject/nubis-base/pull/184) ([gozer](https://github.com/gozer))
+
+- Add support for a new user-data variable, NUBIS\_ACOUNT. [\#183](https://github.com/Nubisproject/nubis-base/pull/183) ([gozer](https://github.com/gozer))
+
+- Plumbing to get nubis-lib included in base image [\#182](https://github.com/Nubisproject/nubis-base/pull/182) ([limed](https://github.com/limed))
+
+- Remove port numbers from peers, as retry\_join doesn't like it [\#179](https://github.com/Nubisproject/nubis-base/pull/179) ([gozer](https://github.com/gozer))
+
+- Use the Consul UI to discover peers first, then fallback on our DNS join endpoint [\#177](https://github.com/Nubisproject/nubis-base/pull/177) ([gozer](https://github.com/gozer))
+
+- Install consulate in base images [\#174](https://github.com/Nubisproject/nubis-base/pull/174) ([limed](https://github.com/limed))
+
+- \[do-not-merge\] \[review-request\] Nubis bash library [\#173](https://github.com/Nubisproject/nubis-base/pull/173) ([limed](https://github.com/limed))
+
+- Extra comma causes consul to not startup [\#169](https://github.com/Nubisproject/nubis-base/pull/169) ([limed](https://github.com/limed))
+
+- Missing comma [\#166](https://github.com/Nubisproject/nubis-base/pull/166) ([limed](https://github.com/limed))
+
+- Add nubis-puppet-eip module to Puppetfile [\#165](https://github.com/Nubisproject/nubis-base/pull/165) ([limed](https://github.com/limed))
+
+- Include meltwater/cpan 1.0.1 [\#162](https://github.com/Nubisproject/nubis-base/pull/162) ([gozer](https://github.com/gozer))
+
+- Fix incorrect references to consul-template 0.7.0. Fixes \#159 [\#160](https://github.com/Nubisproject/nubis-base/pull/160) ([gozer](https://github.com/gozer))
+
+- consul-do permission fix [\#158](https://github.com/Nubisproject/nubis-base/pull/158) ([limed](https://github.com/limed))
+
+- Include credstash in the base images [\#156](https://github.com/Nubisproject/nubis-base/pull/156) ([gozer](https://github.com/gozer))
+
+- Disable Amazon Linux auto-updating in our base images, and make sure it stays disabled in derived images. [\#155](https://github.com/Nubisproject/nubis-base/pull/155) ([gozer](https://github.com/gozer))
+
+- Upgrade modules from \#138 [\#151](https://github.com/Nubisproject/nubis-base/pull/151) ([gozer](https://github.com/gozer))
+
+- Don't break with SSL RSA keys \(as generated on a Mac\) [\#149](https://github.com/Nubisproject/nubis-base/pull/149) ([gozer](https://github.com/gozer))
+
+- Add support for CONSUL\_ACL\_TOKEN in bootstrap. [\#146](https://github.com/Nubisproject/nubis-base/pull/146) ([gozer](https://github.com/gozer))
+
+- When we detect we are a Consul server, use NUBIS\_PROJECT to build the DNS discovery name, don't hard-code .consul. Fixes \#143 [\#144](https://github.com/Nubisproject/nubis-base/pull/144) ([gozer](https://github.com/gozer))
+
+- Add support for 3 more Consul Server bootstrap options: [\#142](https://github.com/Nubisproject/nubis-base/pull/142) ([gozer](https://github.com/gozer))
+
+## [v0.9.0](https://github.com/nubisproject/nubis-base/tree/v0.9.0) (2015-07-23)
 
 [Full Changelog](https://github.com/nubisproject/nubis-base/compare/v0.1...v0.9.0)
 
@@ -12,6 +98,8 @@
 
 **Merged pull requests:**
 
+- Updating changelog for v0.9.0 release [\#141](https://github.com/Nubisproject/nubis-base/pull/141) ([gozer](https://github.com/gozer))
+
 - adding openldap module to Puppetfile [\#137](https://github.com/Nubisproject/nubis-base/pull/137) ([jdow](https://github.com/jdow))
 
 - fix ordering issue [\#136](https://github.com/Nubisproject/nubis-base/pull/136) ([gozer](https://github.com/gozer))
@@ -22,9 +110,11 @@
 
 ## [v0.1](https://github.com/nubisproject/nubis-base/tree/v0.1) (2015-06-11)
 
-**Fixed bugs:**
+[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v0.79...v0.1)
 
-- Amazon linux doesn't work [\#84](https://github.com/Nubisproject/nubis-base/issues/84)
+## [v0.79](https://github.com/nubisproject/nubis-base/tree/v0.79) (2015-06-11)
+
+[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v1.35...v0.79)
 
 **Closed issues:**
 
@@ -33,44 +123,6 @@
 - gozer-confd only installs an upstart script, needs fixing for RedHats [\#112](https://github.com/Nubisproject/nubis-base/issues/112)
 
 - Amazon Linux AMIs need the ec2metadata tool present. [\#111](https://github.com/Nubisproject/nubis-base/issues/111)
-
-- Merge nubis-puppet in [\#101](https://github.com/Nubisproject/nubis-base/issues/101)
-
-- upstart gives up on confd [\#94](https://github.com/Nubisproject/nubis-base/issues/94)
-
-- SPAM [\#91](https://github.com/Nubisproject/nubis-base/issues/91)
-
-- Disable the creation of /etc/nubis-release [\#81](https://github.com/Nubisproject/nubis-base/issues/81)
-
-- Need to integrate envconsul in the base image [\#66](https://github.com/Nubisproject/nubis-base/issues/66)
-
-- Move our nubis-puppet stuff to /etc/puppet/modules so they are in a default [\#65](https://github.com/Nubisproject/nubis-base/issues/65)
-
-- Make AMIs public by default once we are happy with our state [\#53](https://github.com/Nubisproject/nubis-base/issues/53)
-
-- Create an /etc/nubis-release file in the base images for release identification [\#45](https://github.com/Nubisproject/nubis-base/issues/45)
-
-- Build vagrant images for local development in addition to deployable AMIs [\#39](https://github.com/Nubisproject/nubis-base/issues/39)
-
-- let's be consistent and install librarian-puppet in the base image [\#35](https://github.com/Nubisproject/nubis-base/issues/35)
-
-- We need a tool to drive packer and publish AMIs \(and possibly other outputs\) into Consul [\#32](https://github.com/Nubisproject/nubis-base/issues/32)
-
-- Need to look into building a base image from Amazon Linux AMIs as well as Ubuntu. [\#27](https://github.com/Nubisproject/nubis-base/issues/27)
-
-- Integrate jq in the base image [\#14](https://github.com/Nubisproject/nubis-base/issues/14)
-
-- Need to integrate a log forwarder in the base image [\#12](https://github.com/Nubisproject/nubis-base/issues/12)
-
-- Need to integrate consul-template in the base images [\#11](https://github.com/Nubisproject/nubis-base/issues/11)
-
-- Need to get a provisionner working with amazon-instance [\#9](https://github.com/Nubisproject/nubis-base/issues/9)
-
-- Need to cleanly solve the MTA issue in the base image \(sendmail is not great\) [\#3](https://github.com/Nubisproject/nubis-base/issues/3)
-
-- Need to integrate confd in the base image [\#2](https://github.com/Nubisproject/nubis-base/issues/2)
-
-- Need to integrate consul agent in the base images [\#1](https://github.com/Nubisproject/nubis-base/issues/1)
 
 **Merged pull requests:**
 
@@ -99,6 +151,38 @@
 - convert to curl instaed of ec2metadata, fixes issue \#113 [\#114](https://github.com/Nubisproject/nubis-base/pull/114) ([gozer](https://github.com/gozer))
 
 - gozer's fork has minimal upstart support, upstream doesn't [\#110](https://github.com/Nubisproject/nubis-base/pull/110) ([gozer](https://github.com/gozer))
+
+## [v1.35](https://github.com/nubisproject/nubis-base/tree/v1.35) (2015-06-04)
+
+[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v0.165...v1.35)
+
+**Fixed bugs:**
+
+- Amazon linux doesn't work [\#84](https://github.com/Nubisproject/nubis-base/issues/84)
+
+**Closed issues:**
+
+- Merge nubis-puppet in [\#101](https://github.com/Nubisproject/nubis-base/issues/101)
+
+- upstart gives up on confd [\#94](https://github.com/Nubisproject/nubis-base/issues/94)
+
+- SPAM [\#91](https://github.com/Nubisproject/nubis-base/issues/91)
+
+- Disable the creation of /etc/nubis-release [\#81](https://github.com/Nubisproject/nubis-base/issues/81)
+
+- Need to integrate envconsul in the base image [\#66](https://github.com/Nubisproject/nubis-base/issues/66)
+
+- Move our nubis-puppet stuff to /etc/puppet/modules so they are in a default [\#65](https://github.com/Nubisproject/nubis-base/issues/65)
+
+- Make AMIs public by default once we are happy with our state [\#53](https://github.com/Nubisproject/nubis-base/issues/53)
+
+- Build vagrant images for local development in addition to deployable AMIs [\#39](https://github.com/Nubisproject/nubis-base/issues/39)
+
+- We need a tool to drive packer and publish AMIs \(and possibly other outputs\) into Consul [\#32](https://github.com/Nubisproject/nubis-base/issues/32)
+
+- Need to integrate consul-template in the base images [\#11](https://github.com/Nubisproject/nubis-base/issues/11)
+
+**Merged pull requests:**
 
 - Add ElasticSearch [\#108](https://github.com/Nubisproject/nubis-base/pull/108) ([gozer](https://github.com/gozer))
 
@@ -189,6 +273,30 @@
 - Numerous bug fixes [\#51](https://github.com/Nubisproject/nubis-base/pull/51) ([bhourigan](https://github.com/bhourigan))
 
 - Added automatic base AMI discovery, changed make target names, augmented README.md [\#50](https://github.com/Nubisproject/nubis-base/pull/50) ([bhourigan](https://github.com/bhourigan))
+
+## [v0.165](https://github.com/nubisproject/nubis-base/tree/v0.165) (2015-02-16)
+
+**Closed issues:**
+
+- Create an /etc/nubis-release file in the base images for release identification [\#45](https://github.com/Nubisproject/nubis-base/issues/45)
+
+- let's be consistent and install librarian-puppet in the base image [\#35](https://github.com/Nubisproject/nubis-base/issues/35)
+
+- Need to look into building a base image from Amazon Linux AMIs as well as Ubuntu. [\#27](https://github.com/Nubisproject/nubis-base/issues/27)
+
+- Integrate jq in the base image [\#14](https://github.com/Nubisproject/nubis-base/issues/14)
+
+- Need to integrate a log forwarder in the base image [\#12](https://github.com/Nubisproject/nubis-base/issues/12)
+
+- Need to get a provisionner working with amazon-instance [\#9](https://github.com/Nubisproject/nubis-base/issues/9)
+
+- Need to cleanly solve the MTA issue in the base image \(sendmail is not great\) [\#3](https://github.com/Nubisproject/nubis-base/issues/3)
+
+- Need to integrate confd in the base image [\#2](https://github.com/Nubisproject/nubis-base/issues/2)
+
+- Need to integrate consul agent in the base images [\#1](https://github.com/Nubisproject/nubis-base/issues/1)
+
+**Merged pull requests:**
 
 - Built Nubis Base 0.165 [\#48](https://github.com/Nubisproject/nubis-base/pull/48) ([gozer](https://github.com/gozer))
 
