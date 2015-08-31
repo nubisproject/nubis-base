@@ -10,13 +10,13 @@
 
 **Fixed bugs:**
 
-- Consul bootstrap uses a jq 1.4 feature, not available  yet. [\#187](https://github.com/Nubisproject/nubis-base/issues/187)
-
 - \[amazon-linux\] Have dhclient.conf set dnsmasq as our preferred resolver [\#180](https://github.com/Nubisproject/nubis-base/issues/180)
 
 - \[amazon-linux\] dnsmasq isn't the default resolver [\#170](https://github.com/Nubisproject/nubis-base/issues/170)
 
 - \[amazon-linux\] Disable automatic security updates on boot [\#153](https://github.com/Nubisproject/nubis-base/issues/153)
+
+- Consul bootstrap uses a jq 1.4 feature, not available  yet. [\#187](https://github.com/Nubisproject/nubis-base/issues/187)
 
 **Closed issues:**
 
@@ -38,7 +38,11 @@
 
 - The DNS portion to discover Consul is hard-coded. [\#143](https://github.com/Nubisproject/nubis-base/issues/143)
 
+- Tag v1.0.0 release [\#148](https://github.com/Nubisproject/nubis-base/issues/148)
+
 **Merged pull requests:**
+
+- Update CHANGELOG for v1.0.0 [\#190](https://github.com/Nubisproject/nubis-base/pull/190) ([gozer](https://github.com/gozer))
 
 - Use perl to remove the port number from hosts, as jq's split\(\) is off limits for now [\#189](https://github.com/Nubisproject/nubis-base/pull/189) ([gozer](https://github.com/gozer))
 
