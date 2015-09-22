@@ -152,3 +152,14 @@ if $osfamily == 'RedHat' {
     notify     => Class['fluentd::service']
   }
 }
+
+cron { 'fluent-watchdog':
+  ensure => 'present',
+  command => "service td-agent status 1>/dev/null || service td-agent start",
+  hour => '*',
+  minute => '*/11',
+  user => 'root',
+  environment => [
+    "PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin:/opt/aws/bin",
+  ],
+}
