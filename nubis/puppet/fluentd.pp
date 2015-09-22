@@ -3,11 +3,29 @@ class { 'fluentd':
   service_ensure => stopped
 }
 
+# Make fluentd run as root so it can read all log files
+file { "/etc/sysconfig":
+  ensure => "directory",
+  owner  => "root",
+  group  => "root",
+  mode    => '0755',
+}->
+file { "/etc/sysconfig/td-agent":
+  ensure => "present",
+  owner  => "root",
+  group  => "root",
+  content => "puppet:///nubis/files/fluentd.sysconfig",
+}
+
 if $osfamily == 'Debian' {
   $ruby_dev = "ruby-dev"
+  $syslog_main = "/var/log/syslog"
+  $syslog_mail = "/var/log/mail.log"
 }
 else {
   $ruby_dev = "ruby-devel"
+   $syslog_main = "/var/log/messages"
+   $syslog_mail = "/var/log/maillog"
 }
 
 # For the ec2 plugin
@@ -79,7 +97,7 @@ fluentd::source { 'syslog_main':
   format     => 'syslog',
   tag        => 'forward.system.syslog',
   config     => {
-    'path'     => '/var/log/syslog',
+    'path'     => $syslog_main,
     'pos_file' => '/tmp/td-agent.syslog.pos',
   },
   notify     => Class['fluentd::service']
@@ -103,7 +121,7 @@ fluentd::source { 'syslog_mail':
   format     => 'syslog',
   tag        => 'forward.system.mail',
   config     => {
-    'path'     => '/var/log/mail.log',
+    'path'     => $syslog_mail,
     'pos_file' => '/tmp/td-agent.syslog.pos',
   },
   notify     => Class['fluentd::service']
@@ -121,3 +139,16 @@ fluentd::source { 'syslog_mail_err':
   notify     => Class['fluentd::service']
 }
 
+if $osfamily == 'RedHat' {
+  fluentd::source { 'syslog_secure':
+    configfile => 'syslog',
+    type       => 'tail',
+    format     => 'syslog',
+    tag        => 'forward.system.secure',
+    config     => {
+      'path'     => '/var/log/secure',
+      'pos_file' => '/tmp/td-agent.syslog.pos',
+    },
+    notify     => Class['fluentd::service']
+  }
+}
