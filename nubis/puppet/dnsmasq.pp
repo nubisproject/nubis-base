@@ -1,4 +1,5 @@
 class { 'dnsmasq':
+  interface         => 'lo',
 }
 
 dnsmasq::dnsserver { 'consul':
