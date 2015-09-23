@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ubuntu_puppet_version="3.7.4-1puppetlabs1"
-amazon_linux_puppet_package="puppet3-3.7.4-1.11.amzn1"
+amazon_linux_puppet_package="puppet3"
 
 if [[ "$1" == "--verbose" ]]; then
    set -x
