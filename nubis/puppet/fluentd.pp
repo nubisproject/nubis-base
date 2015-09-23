@@ -14,7 +14,7 @@ file { "/etc/sysconfig/td-agent":
   ensure => "present",
   owner  => "root",
   group  => "root",
-  content => "puppet:///nubis/files/fluentd.sysconfig",
+  source => "puppet:///nubis/files/fluentd.sysconfig",
 }
 
 if $osfamily == 'Debian' {
