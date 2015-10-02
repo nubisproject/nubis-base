@@ -81,10 +81,6 @@ mod 'maestrodev/wget', '1.7.0'
 
 mod 'elasticsearch/elasticsearch', '0.9.8'
 
-mod 'mkrakowitzer/confluence', '999.999.999'
-
 mod 'thejandroman/kibana3', '0.0.4'
-
-mod 'camptocamp/openldap', '1.9.1'
 
 mod 'meltwater/cpan', '1.0.1'
