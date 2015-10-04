@@ -87,32 +87,24 @@ fi
 sudo mkdir -p /etc/puppet
 sudo touch /etc/puppet/hiera.yaml
 
-# We have a file provisioner in main.json that'll copy over a .tar.gz of the librarian-puppet tree that's
-# created by make. We need to extract that so we can have a full puppet checkout ready for additional build
-# iterations.
-if [[ -f /tmp/librarian-puppet.tar.gz ]]; then
-   sudo tar -C / -zxf /tmp/librarian-puppet.tar.gz 2>&1
-   rm -f /tmp/librarian-puppet.tar.gz
+# We're probably going to have secrets at some point. I use chown 0:0 to avoid having to figure out
+# whether root's group is root, or wheel.
+sudo chown -R 0:0 /etc/puppet
+sudo chmod 700 /etc/puppet
 
-   # We're probably going to have secrets at some point. I use chown 0:0 to avoid having to figure out
-   # whether root's group is root, or wheel.
-   sudo chown -R 0:0 /etc/puppet
-   sudo chmod 755 /etc/puppet
+# Configure a local fileserver, accessible in puppet with puppet:///nubis/somefile
+sudo mkdir -p /etc/nubis/puppet/{files,templates}
+sudo chown 0:0 /etc/nubis/puppet/{files,templates}
+sudo chmod 1777 /etc/nubis/puppet/{files,templates}
 
-   # Configure a local fileserver, accessible in puppet with puppet:///nubis/somefile
-   sudo mkdir -p /etc/nubis/puppet/{files,templates}
-   sudo chown 0:0 /etc/nubis/puppet/{files,templates}
-   sudo chmod 1777 /etc/nubis/puppet/{files,templates}
-
-   sudo bash -c 'cat > /etc/puppet/fileserver.conf' << EOF
+sudo bash -c 'cat > /etc/puppet/fileserver.conf' << EOF
 [nubis]
     path /etc/nubis/puppet
     allow *
 EOF
 
-   # Document the installed version of packages for forensic analysis later, if needed.
-   puppet resource package | sudo tee -a /etc/puppet/package-versions.pp >/dev/null
-fi
+# Document the installed version of packages for forensic analysis later, if needed.
+puppet resource package | sudo tee -a /etc/puppet/package-versions.pp >/dev/null
 
 # We copy this file over in provisioners.json, but it needs to run at boot so we run this little shell snippit
 # as part of the bootstrap process.
