@@ -90,7 +90,7 @@ sudo touch /etc/puppet/hiera.yaml
 # We're probably going to have secrets at some point. I use chown 0:0 to avoid having to figure out
 # whether root's group is root, or wheel.
 sudo chown -R 0:0 /etc/puppet
-sudo chmod 700 /etc/puppet
+sudo chmod 755 /etc/puppet
 
 # Configure a local fileserver, accessible in puppet with puppet:///nubis/somefile
 sudo mkdir -p /etc/nubis/puppet/{files,templates}
