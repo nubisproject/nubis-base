@@ -15,7 +15,7 @@
     checkin          = {{ if exists "/config/checkin" }}{{ getv "/config/checkin" }}{{ else }}off{{ end }}
 
     ; connection string to the MIG relay. must contain credentials.
-    relay           = "amqps://agent:{{ getv "/config/relay_password" }}@{{ if exists "/config/relay" }}{{ getv "/config/relay" }}{{ else }}publicrelay.mig.mozilla.org:443/mig{{ end }}"
+    relay           = "amqps://{{ if exists "/config/relay_user" }}{{ getv "/config/relay_user" }}{{ else }}agent{{ end }}:{{ getv "/config/relay_password" }}@{{ if exists "/config/relay" }}{{ getv "/config/relay" }}{{ else }}publicrelay.mig.mozilla.org:443/mig{{ end }}"
 
     ; location of the local stat socket
     socket          = "127.0.0.1:51664"
