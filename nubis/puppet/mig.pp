@@ -1,5 +1,6 @@
 class mig (
-  $version
+  $version,
+  $build
   )
 {
  case $::osfamily {
@@ -8,23 +9,25 @@ class mig (
       $prod = "prod-1."
       $silly = "-"
       $provider = "rpm"
+      $sep = "_"
     }
     'debian': {
       $ext = "deb"
       $prod = "prod_"
       $silly = "_"
       $provider = "dpkg"
+      $sep = "-"
     }
     default: {
       fail("Unsupported OS Family:  ${osfamily}.")
     }
   }
     
-   $url = "https://s3.amazonaws.com/mig-packages/mig-agent-nubis${silly}${version}.${prod}${::architecture}.${ext}"
+   $url = "https://s3.amazonaws.com/mig-packages/mig-agent-nubis${silly}${version}${sep}${build}.${prod}${::architecture}.${ext}"
    
    notice ("Grabbing from $url")
    
-   wget::fetch { "download MIG $version":
+   wget::fetch { "download MIG $version $build":
       source => $url,
       destination => "/tmp/mig.$ext",
       verbose => true,
@@ -39,5 +42,6 @@ class mig (
 }
 
 class {'mig':
-  version => "20150522%2B9ec761b"
+  version => "20150929",
+  build   => "0.9938905"
 }
