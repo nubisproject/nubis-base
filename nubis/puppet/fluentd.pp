@@ -5,12 +5,6 @@ class { 'fluentd':
 
 # Make fluentd run as root so it can read all log files
 if $osfamily == 'RedHat' {
-  file { "/etc/sysconfig":
-    ensure => "directory",
-    owner  => "root",
-    group  => "root",
-    mode    => '0755',
-  }->
   file { "/etc/sysconfig/td-agent":
     ensure => "present",
     owner  => "root",
