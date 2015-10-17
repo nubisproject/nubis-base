@@ -18,6 +18,9 @@ elsif $osfamily == 'Debian' {
     require => Class['Fluentd::Packages'],
   }
 }
+else {
+  fail("Don't know how to make fluentd run as root on osfamily:$osfamily")
+}
 
 if $osfamily == 'Debian' {
   $ruby_dev = "ruby-dev"
