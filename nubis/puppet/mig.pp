@@ -23,7 +23,7 @@ class mig (
     }
   }
     
-   $url = "https://s3.amazonaws.com/mig-packages/mig-agent-nubis${silly}${version}${sep}${build}.${prod}${::architecture}.${ext}"
+   $url = "https://s3.amazonaws.com/mozopsecrepo2/mig-public/it-nubis/mig-agent${silly}${version}${sep}${build}.${prod}${::architecture}.${ext}"
    
    notice ("Grabbing from $url")
    
@@ -42,6 +42,6 @@ class mig (
 }
 
 class {'mig':
-  version => "20150929",
-  build   => "0.9938905"
+  version => "20151105",
+  build   => "0.a7466ac"
 }
