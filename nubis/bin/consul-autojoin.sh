@@ -158,6 +158,9 @@ service consul stop
 rm -rf /var/lib/consul/serf/*
 service consul start
 
+# Make sure confd starts with consul up and running
+service confd restart
+
 ### XXX: Wait for consul to start here
 
 if [ -d /etc/nubis.d ]; then
