@@ -27,7 +27,7 @@
     moduletimeout   = {{ if exists "/config/moduletimeout" }}{{ getv "/config/moduletimeout" }}{{ else }}1800s{{ end }}
 
     ; location of the mig api
-    api             = {{ if exists "/config/api" }}{{ getv "/config/api" }}{{ else }}https://api.mig.mozilla.org/api/v1/{{ end }}
+    api             = {{ if exists "/config/api" }}{{ getv "/config/api" }}{{ else }}https://api.mig.mozilla.org/api/v1{{ end }}
 
 [certs]
     ca      = "/etc/mig/ca.crt"
