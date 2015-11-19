@@ -33,7 +33,7 @@
     "StacksVersion": {
       "Description": "Version of the Nubis Stacks",
       "Type": "String",
-      "Default": "v1.0.0"
+      "Default": "v1.0.1"
     }
   },
   "Mappings": {
@@ -56,7 +56,18 @@
     "EC2Stack": {
       "Type": "AWS::CloudFormation::Stack",
       "Properties": {
-        "TemplateURL": { "Fn::Join": [ "/", [ "https://s3.amazonaws.com/nubis-stacks", { "Ref": "StacksVersion" }, "ec2.template" ] ] },
+        "TemplateURL": {
+          "Fn::Join": [
+            "/",
+            [
+              "https://s3.amazonaws.com/nubis-stacks",
+              {
+                "Ref": "StacksVersion"
+              },
+              "ec2.template"
+            ]
+          ]
+        },
         "TimeoutInMinutes": "60",
         "Parameters": {
           "StackName": {
