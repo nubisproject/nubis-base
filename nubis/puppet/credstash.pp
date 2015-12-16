@@ -26,5 +26,5 @@ package { $pythonpip:
   ensure => present
 }
 python::pip { 'credstash' :
-    ensure        => '1.5'
+    ensure        => '1.8'
 }
