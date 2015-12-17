@@ -22,7 +22,7 @@ mod 'jbeard/nfs', '0.2.1'
 
 mod 'stankevich/python', '1.9.6'
 
-mod 'KyleAnderson/consul', '1.0.0'
+mod 'KyleAnderson/consul', '1.0.4'
 
 # gozer's fork has minimal upstart support, upstream doesn't
 mod 'gozer/puppet-confd',
