@@ -105,12 +105,3 @@ EOF
 
 # Document the installed version of packages for forensic analysis later, if needed.
 puppet resource package | sudo tee -a /etc/puppet/package-versions.pp >/dev/null
-
-# We copy this file over in provisioners.json, but it needs to run at boot so we run this little shell snippit
-# as part of the bootstrap process.
-if [[ -f /tmp/autojoin.sh ]]; then
-   sudo mkdir /etc/nubis.d
-   sudo cp /tmp/autojoin.sh /etc/rc.local
-   sudo chown 0:0 /etc/rc.local
-   sudo chmod 755 /etc/rc.local
-fi
