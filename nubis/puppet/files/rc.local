@@ -1,0 +1,7 @@
+#!/bin/sh
+
+if [ -d /etc/nubis.d ]; then
+  run-parts /etc/nubis.d 2>&1 | $LOGGER
+fi
+
+exit 0
