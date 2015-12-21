@@ -12,6 +12,16 @@ class { 'consul':
   }
 }
 
+# initv startup script is borked
+case $::osfamily {
+  'redhat': {
+    package { "daemonize":
+      ensure => 'present',
+      install_options => [ '--enablerepo=epel' ],
+    }
+  }
+}
+
 # Install latest known consul-do
 class { 'consul_do':
   version => "404d6180650e72e1881a260dab8d645815832c9e"

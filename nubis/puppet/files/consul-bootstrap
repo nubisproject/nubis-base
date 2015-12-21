@@ -153,9 +153,17 @@ else
   echo "Failed to configure security, Consul is most likely broken!"
 fi
 
+# RHEL sysv consul init scripts are buggy
+# https://github.com/nubisproject/nubis-base/issues/247
+OSFAMILY=$(facter osfamily)
+SERVICE=$(which service)
+if [ "$OSFAMILY" = "RedHat" ]; then
+  DAEMONIZE="daemonize"
+fi
+
 # Perform a clean nuke and restart of Consul
 service consul stop
 rm -rf /var/lib/consul/serf/*
-service consul start
+$DAEMONIZE $SERVICE consul start
 
 ### XXX: Wait for consul to start here
