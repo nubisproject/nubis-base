@@ -12,7 +12,16 @@ file { '/etc/nubis.d/00-consul':
   source  => 'puppet:///nubis/files/consul-bootstrap'
 }
 
-file { '/etc/rc.local':
+case $::osfamily {
+  'redhat': {
+    $rc_local = "/etc/rc.d/rc.local"
+  }
+  default: {
+    $rc_local = "/etc/rc.local"
+  }
+}
+
+file { $rc_local:
   ensure => 'present',
   links   => 'follow',
   mode    => '0755',
