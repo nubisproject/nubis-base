@@ -14,6 +14,7 @@ file { '/etc/nubis.d/00-consul':
 
 file { '/etc/rc.local':
   ensure => 'present',
+  links   => 'follow',
   mode    => '0755',
   owner   => 'root',
   group   => 'root',
