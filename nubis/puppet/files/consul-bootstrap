@@ -40,17 +40,18 @@ cat <<EOF | tee /etc/consul/zzz-startup.json
 }
 EOF
 
-# Auto-discover initial servers with fallback to $CONSUL_JOIN, just in case
-CONSUL_JOIN="$CONSUL_DOMAIN"
-SERVERS=`curl -qfs $CONSUL_UI/v1/status/peers | jq ". |= .+ [\"$CONSUL_JOIN\"]" | perl -pe's/:\d+//g'`
+if [ ! -f /etc/consul/zzz-join.json ]; then
+  # Auto-discover initial servers with fallback to $CONSUL_JOIN, just in case
+  CONSUL_JOIN="$CONSUL_DOMAIN"
+  SERVERS=`curl -qfs $CONSUL_UI/v1/status/peers | jq ". |= .+ [\"$CONSUL_JOIN\"]" | perl -pe's/:\d+//g'`
 
-
-if [ "$SERVERS" ]; then
-cat <<EOF | tee /etc/consul/zzz-join.json
+  if [ "$SERVERS" ]; then
+  cat <<EOF | tee /etc/consul/zzz-join.json
 {
   "retry_join": $SERVERS
 }
 EOF
+  fi
 fi
 
 # Discover our ACL token (needs moving to nubis-consul)
