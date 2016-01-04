@@ -40,7 +40,7 @@ cat <<EOF | tee /etc/consul/zzz-startup.json
 }
 EOF
 
-if [ ! -f /etc/consul/zzz-join.json ]; then
+if [ ! -f /etc/consul/zzz-join.skip ]; then
   # Auto-discover initial servers with fallback to $CONSUL_JOIN, just in case
   CONSUL_JOIN="$CONSUL_DOMAIN"
   SERVERS=`curl -qfs $CONSUL_UI/v1/status/peers | jq ". |= .+ [\"$CONSUL_JOIN\"]" | perl -pe's/:\d+//g'`
