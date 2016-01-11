@@ -54,7 +54,7 @@ mod 'nubis/nubis_storage',
     :git => 'https://github.com/Nubisproject/nubis-puppet-storage.git',
     :ref => 'v1.0.0'
 
-mod 'nubis/nubis_mig',
+mod 'nubis/mig',
     :git => 'https://github.com/nubisproject/nubis-puppet-mig.git',
     :ref => 'v1.0.1-1'
 
