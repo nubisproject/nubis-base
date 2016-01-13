@@ -96,13 +96,6 @@ function get_instance_ip() {
     echo "${instance_ip}"
 }
 
-# Gets instance IP, doesn't take into account eni that is attached
-# usage: get_instance_ip
-function get_instance_ip() {
-    local instance_ip=$(curl --retry 3 --retry-delay 0 -s -fq http://169.254.169.254/latest/meta-data/local-ipv4)
-    echo "${instance_ip}"
-}
-
 # Send message to log
 # usage: log migrate "This is a log message"
 function log {
