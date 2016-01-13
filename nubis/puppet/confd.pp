@@ -8,7 +8,7 @@ class { 'confd':
 
 cron { 'confd-watchdog':
   ensure => 'present',
-  command => "service confd status 1>/dev/null || service confd start",
+  command => "service confd start 1>/dev/null 2>/dev/null",
   hour => '*',
   minute => '*/11',
   user => 'root',
