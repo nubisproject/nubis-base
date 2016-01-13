@@ -6,7 +6,7 @@
 # [ -e /usr/local/lib/nubis/nubis-lib.sh ] && . /usr/local/lib/nubis/nubis-lib.sh || exit 1
 
 # Source the consul connection details from the metadata api
-eval `curl -s -fq http://169.254.169.254/latest/user-data`
+eval $(curl -s -fq http://169.254.169.254/latest/user-data)
 
 # Check to see if NUBIS_MIGRATE was set in userdata. If not we exit quietly.
 if [ ${NUBIS_MIGRATE:-0} == '0' ]; then
@@ -15,11 +15,6 @@ fi
 
 # Set up the consul url
 CONSUL="http://localhost:8500/v1/kv/${NUBIS_STACK}/${NUBIS_ENVIRONMENT}/config"
-
-# Some handy variables here
-INSTANCE_ID=$(curl -s -fq http://169.254.169.254/latest/meta-data/instance-id)
-INSTANCE_IP=$(curl -s -fq http://169.254.169.254/latest/meta-data/local-ipv4)
-REGION=$(curl -s http://169.254.169.254/latest/dynamic/instance-identity/document | jq '.region' -r)
 
 # Some bash functions
 
@@ -41,13 +36,79 @@ function echo_green {
     echo -e "\033[0;32m$1\033[0m"
 }
 
-# Send message to log
-# usage: logmsg migrate "This is a log message"
-function logmsg {
+# Get Mac address of an interface, this is an internal only function
+# Usage: __get_mac eth0
+function __get_mac {
+    if [[ -z "${1}" ]]; then echo "Usage: $FUNCNAME [interface]"; return 1; fi
 
-    if [ -z "$1" ] || [ -z "$2" ]; then echo "Usage: $FUNCNAME [log tag] [log message]"; exit 1; fi
-    local tag=$1
-    local msg=$2
+    local attempts=10
+    local interface=$1
+    false
+    while [[ "${?}" -gt 0 ]]; do
+        [[ "${attempts}" -eq 0 ]] && return
+        mac_addr=$(cat /sys/class/net/${interface}/address)
+        if [ "${?}" -gt 0 ]; then
+            let attempts--
+            sleep 3
+            false
+        fi
+    done
+    echo "${mac_addr}"
+}
+
+# Get eni id of whatever interface we request from
+# Usage: get_eni_id eth0
+function get_eni_id() {
+    if [ -z "$1" ]; then echo "Usage: $FUNCNAME [interface]"; return 1; fi
+
+    local interface=$1
+    local mac_addr=$(__get_mac "${interface}")
+
+    eni_id=$(curl --retry 5 --retry-delay 0 -s -fq "http://169.254.169.254/latest/meta-data/network/interfaces/macs/${mac_addr}/interface-id")
+    echo "${eni_id}"
+}
+
+# Get region aws instance is in
+# usage: get_region
+function get_region() {
+    local region=$(curl --retry 3 --retry-delay 0 -s -fq http://169.254.169.254/latest/dynamic/instance-identity/document | jq '.region' -r)
+    echo "${region}"
+}
+
+# Get availability_zone aws instance is in
+# usage: get_availability_zone
+function get_availability_zone() {
+    local availability_zone=$(curl --retry 3 --retry-delay 0 -s -fq http://169.254.169.254/latest/meta-data/placement/availability-zone)
+    echo "${availability_zone}"
+}
+
+# Get instance id of instance
+# usage: get_instance_id
+function get_instance_id() {
+    local instance_id=$(curl --retry 3 --retry-delay 0 -s -fq http://169.254.169.254/latest/meta-data/instance-id)
+    echo "${instance_id}"
+}
+
+# Gets instance IP, doesn't take into account eni that is attached
+# usage: get_instance_ip
+function get_instance_ip() {
+    local instance_ip=$(curl --retry 3 --retry-delay 0 -s -fq http://169.254.169.254/latest/meta-data/local-ipv4)
+    echo "${instance_ip}"
+}
+
+# Gets instance IP, doesn't take into account eni that is attached
+# usage: get_instance_ip
+function get_instance_ip() {
+    local instance_ip=$(curl --retry 3 --retry-delay 0 -s -fq http://169.254.169.254/latest/meta-data/local-ipv4)
+    echo "${instance_ip}"
+}
+
+# Send message to log
+# usage: log migrate "This is a log message"
+function log {
+
+    if [ -z "$1" ]; then echo "Usage: $FUNCNAME [log message]"; return 1; fi
+    local msg=$1
 
     LOGGER_BIN='/usr/bin/logger'
 
@@ -57,8 +118,16 @@ function logmsg {
         echo "ERROR: '$BASH_SOURCE' Line: '$LINENO'"
         exit 2
     else
-        $LOGGER_BIN --stderr --priority local7.info --tag "${tag}" "${msg}"
+        $LOGGER_BIN --stderr --priority local7.info --tag "$(basename $0)" "${msg}"
     fi
+}
+
+# Kills / stop running if this function is ran
+# Usage: die
+#        die "Message here"
+function die() {
+    [ -n "$1" ] && log "[ERROR]: $1"
+    exit 1
 }
 
 # Checks to see if consul is up and running
@@ -71,7 +140,7 @@ function consul_up {
     COUNT=0
     while [ "$CONSUL_UP" != "0" ]; do
         if [ ${COUNT} == "6" ]; then
-            logmsg migrate "ERROR: Timeout while attempting to connect to consul."
+            log "ERROR: Timeout while attempting to connect to consul."
             exit 1
         fi
         QUERY=`curl -s ${CONSUL}?raw=1`
@@ -82,7 +151,7 @@ function consul_up {
         fi
 
         if [ "$CONSUL_UP" != "0" ]; then
-            logmsg migrate "Consul not ready yet ($CONSUL_UP). Sleeping 10 seconds before retrying..."
+            log "Consul not ready yet ($CONSUL_UP). Sleeping 10 seconds before retrying..."
             sleep 10
             COUNT=${COUNT}+1
         fi
@@ -104,23 +173,18 @@ function consul_key_up {
     while [ "$KEYS_UP" != "0" ]; do
         # Try for 20 minutes (30 seconds * 20160 attempts = 604800 seconds / 60 seconds / 60 minutes / 12 hours = 7 days)
         if [ ${COUNT} == "20160" ]; then
-            logmsg migrate "ERROR: Timeout while waiting for keys to be populated in consul."
+            log "ERROR: Timeout while waiting for keys to be populated in consul."
             exit 1
         fi
         QUERY=$(curl -s ${CONSUL}/${consul_key}?raw=1)
 
         if [ "$QUERY" == "" ]; then
-            logmsg migrate "Keys not ready yet. Sleeping 30 seconds before retrying..."
+            log "Keys not ready yet. Sleeping 30 seconds before retrying..."
             sleep 30
             COUNT=${COUNT}+1
         else
-            logmsg migrate "Key ${consul_key} is ready"
+            log "Key ${consul_key} is ready"
             KEYS_UP=0
         fi
     done
 }
-
-# check pre-reqs
-hash jq 2>/dev/null || echo_red { "please install jq to use this build tool. https://github.com/stedolan/jq"; exit 1; }
-#hash aws 2>/dev/null || echo_red { "please install the aws cli api to use this build tool. https://aws.amazon.com/cli/"; exit 1; }
-hash curl 2>/dev/null || echo_red { "please install curl"; exit 1; }
