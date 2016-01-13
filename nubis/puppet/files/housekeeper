@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Cloud-init simply appends ssh keys, so after a build we want to truncate any
+# authorized_keys files to have positive control over configured keys.
+for homedir in $(getent passwd | cut -d ':' -f 6); do
+   if [[ -e ${homedir}/.ssh/authorized_keys ]]; then
+      sudo rm -f ${homedir}/.ssh/authorized_keys
+   elif [[ -e ${homedir}/.ssh/authorized_keys2 ]]; then
+      sudo rm -f ${homedir}/.ssh/authorized_keys2
+   fi
+done
+
+# Go through /var/log and truncate all files that have been modified since boot. We could
+# truncate everything but this should allow us to erase log entries related to the AMI
+# creation without being too pervasive.
+#
+# This should always run last, otherwise sudo logs will capture any other cleaning activity
+# above.
+if [[ -r /proc/uptime ]]; then
+   uptime=$(awk '{print $1}' /proc/uptime)
+
+   sudo find /var/log -newermt "$uptime seconds ago" -type f -print0 | xargs -0 sudo truncate -s 0
+fi
+
+# Remove leftover from packer
+sudo rm -rf /tmp/packer-puppet-masterless*
