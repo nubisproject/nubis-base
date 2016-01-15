@@ -1,5 +1,5 @@
 class { 'consul':
-  version     => '0.6.0',
+  version     => '0.6.2',
   service_enable => false,
   service_ensure => 'stopped',
   config_hash => {
