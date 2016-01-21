@@ -117,3 +117,7 @@ rm -rf /var/lib/consul/serf/*
 $DAEMONIZE $SERVICE consul start
 
 ### XXX: Wait for consul to start here
+sleep 5
+
+# Kick confd, now that Consul works
+$DAEMONIZE $SERVICE confd restart
