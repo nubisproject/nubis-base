@@ -10,6 +10,9 @@
     ; attempt to retrieve the public IP behind which the agent is running
     discoverpublicip = {{ if exists "/config/discoverpublicip" }}{{ getv "/config/discoverpublicip" }}{{ else }}on{{ end }}
 
+    ; attempt to discover AWS metadata such as instance ID on startup
+    discoverawsmeta = {{ if exists "/config/discoverawsmeta" }}{{ getv "/config/discoverawsmeta" }}{{ else }}on{{ end }}
+
     ; in check-in mode, the agent connects to the relay, runs all pending commands
     ; and exits. this mode is used to run the agent as a cron job, not a daemon.
     checkin          = {{ if exists "/config/checkin" }}{{ getv "/config/checkin" }}{{ else }}off{{ end }}

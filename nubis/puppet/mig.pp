@@ -6,6 +6,6 @@ if $osfamily == 'redhat' {
 }
 
 class {'mig':
-  version => "20151105",
-  build   => "0.a7466ac"
+  version => "20160126",
+  build   => "1.c128226"
 }
