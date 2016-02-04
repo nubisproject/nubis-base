@@ -17,7 +17,7 @@ else
   purpose=$1
   shift
   if [ "$purpose" == "$NUBIS_PURPOSE" ]; then
-    if [ -z "$@" ]; then
+    if [ -z "$*" ]; then
       # return success for the pipe use case
       exit 0
     else
