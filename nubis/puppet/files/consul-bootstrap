@@ -13,7 +13,7 @@ CONSUL_SERVICE_NAME="consul"
 CONSUL_DOMAIN="$CONSUL_SERVICE_NAME.$NUBIS_ENVIRONMENT.$REGION.$NUBIS_ACCOUNT.$NUBIS_DOMAIN"
 
 # The HTTP endpoint, constructed
-CONSUL_UI="http://ui.$CONSUL_DOMAIN"
+CONSUL_UI="https://ui.$CONSUL_DOMAIN"
 
 # Auto-discover secret
 if [ -z "$CONSUL_SECRET" ]; then
@@ -24,7 +24,7 @@ if [ -z "$CONSUL_SECRET" ]; then
   
   # discover via Consul
   if [ -z "$SECRET" ]; then
-    SECRET=`curl -f -s $CONSUL_UI/v1/kv/environments/$NUBIS_ENVIRONMENT/global/consul/secret?raw`
+    SECRET=`curl -fks $CONSUL_UI/v1/kv/environments/$NUBIS_ENVIRONMENT/global/consul/secret?raw`
   fi
   
   if [ ! -z "$SECRET" ]; then
@@ -43,7 +43,7 @@ EOF
 if [ ! -f /etc/consul/zzz-join.skip ]; then
   # Auto-discover initial servers with fallback to $CONSUL_JOIN, just in case
   CONSUL_JOIN="$CONSUL_DOMAIN"
-  SERVERS=`curl -qfs $CONSUL_UI/v1/status/peers | jq ". |= .+ [\"$CONSUL_JOIN\"]" | perl -pe's/:\d+//g'`
+  SERVERS=`curl -fks $CONSUL_UI/v1/status/peers | jq ". |= .+ [\"$CONSUL_JOIN\"]" | perl -pe's/:\d+//g'`
 
   if [ "$SERVERS" ]; then
   cat <<EOF | tee /etc/consul/zzz-join.json
@@ -66,10 +66,10 @@ fi
 
 # Auto-discover certificate and key
 if [ ! -f /etc/consul/consul.pem ]; then
-  curl -f -s -o /etc/consul/consul.pem $CONSUL_UI/v1/kv/environments/$NUBIS_ENVIRONMENT/global/consul/cert?raw
+  curl -fks -o /etc/consul/consul.pem $CONSUL_UI/v1/kv/environments/$NUBIS_ENVIRONMENT/global/consul/cert?raw
 fi
 if [ ! -f /etc/consul/consul.key ]; then
-  curl -f -s -o /etc/consul/consul.key $CONSUL_UI/v1/kv/environments/$NUBIS_ENVIRONMENT/global/consul/key?raw
+  curl -fks -o /etc/consul/consul.key $CONSUL_UI/v1/kv/environments/$NUBIS_ENVIRONMENT/global/consul/key?raw
 fi
 
 if [ -f /etc/consul/consul.pem ]; then
