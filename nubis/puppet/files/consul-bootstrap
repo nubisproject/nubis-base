@@ -24,7 +24,7 @@ CONSUL_CA_CERT=$(nubis-secret --global get ssl/cacert)
 if [ "$CONSUL_CA_CERT" != "" ]; then
   echo "$CONSUL_CA_CERT" > /etc/consul/ca.pem
   chown root:root /etc/consul/ca.pem
-  chmod 664 /etc/consul/consul.secret
+  chmod 664 /etc/consul/ca.pem
   openssl x509 -text -in /etc/consul/ca.pem
   CONSUL_CURL="curl -fs --cacert /etc/consul/ca.pem"
 fi
