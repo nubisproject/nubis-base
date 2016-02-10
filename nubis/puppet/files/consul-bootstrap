@@ -17,6 +17,18 @@ CONSUL_DOMAIN="$CONSUL_SERVICE_NAME.$NUBIS_ENVIRONMENT.$REGION.$NUBIS_ACCOUNT.$N
 # The HTTP endpoint, constructed
 CONSUL_UI="https://ui.$CONSUL_DOMAIN"
 
+CONSUL_CURL="curl -fks"
+
+# Auto-discover CA cert for Consul if present
+CONSUL_CA_CERT=$(nubis-secret --global get ssl/cacert)
+if [ "$CONSUL_CA_CERT" != "" ]; then
+  echo "$CONSUL_CA_CERT" > /etc/consul/ca.pem
+  chown root:root /etc/consul/ca.pem
+  chmod 664 /etc/consul/ca.pem
+  openssl x509 -text -in /etc/consul/ca.pem
+  CONSUL_CURL="curl -fs --cacert /etc/consul/ca.pem"
+fi
+
 # Auto-discover secret
 if [ -z "$CONSUL_SECRET" ]; then
   # check for an on-disk secret
@@ -26,7 +38,7 @@ if [ -z "$CONSUL_SECRET" ]; then
   
   # discover via Consul
   if [ -z "$SECRET" ]; then
-    SECRET=`curl -fks $CONSUL_UI/v1/kv/environments/$NUBIS_ENVIRONMENT/global/consul/secret?raw`
+    SECRET=`$CONSUL_CURL $CONSUL_UI/v1/kv/environments/$NUBIS_ENVIRONMENT/global/consul/secret?raw`
   fi
   
   if [ ! -z "$SECRET" ]; then
@@ -45,7 +57,7 @@ EOF
 if [ ! -f /etc/consul/zzz-join.skip ]; then
   # Auto-discover initial servers with fallback to $CONSUL_JOIN, just in case
   CONSUL_JOIN="$CONSUL_DOMAIN"
-  SERVERS=`curl -fks $CONSUL_UI/v1/status/peers | jq ". |= .+ [\"$CONSUL_JOIN\"]" | perl -pe's/:\d+//g'`
+  SERVERS=`$CONSUL_CURL $CONSUL_UI/v1/status/peers | jq ". |= .+ [\"$CONSUL_JOIN\"]" | perl -pe's/:\d+//g'`
 
   if [ "$SERVERS" ]; then
   cat <<EOF | tee /etc/consul/zzz-join.json
@@ -72,10 +84,10 @@ fi
 
 # Auto-discover certificate and key
 if [ ! -f /etc/consul/consul.pem ]; then
-  curl -fks -o /etc/consul/consul.pem $CONSUL_UI/v1/kv/environments/$NUBIS_ENVIRONMENT/global/consul/cert?raw
+  $CONSUL_CURL -o /etc/consul/consul.pem $CONSUL_UI/v1/kv/environments/$NUBIS_ENVIRONMENT/global/consul/cert?raw
 fi
 if [ ! -f /etc/consul/consul.key ]; then
-  curl -fks -o /etc/consul/consul.key $CONSUL_UI/v1/kv/environments/$NUBIS_ENVIRONMENT/global/consul/key?raw
+  $CONSUL_CURL -o /etc/consul/consul.key $CONSUL_UI/v1/kv/environments/$NUBIS_ENVIRONMENT/global/consul/key?raw
 fi
 
 if [ -f /etc/consul/consul.pem ]; then
