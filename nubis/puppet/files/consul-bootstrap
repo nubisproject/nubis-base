@@ -1,5 +1,7 @@
 #!/bin/sh
 
+export PATH=/usr/local/bin:$PATH
+
 # This is an auto-joiner for consul, should be moved to /etc/nubis.d/00-consul-bootstrap or similar
 
 eval `curl -fq http://169.254.169.254/latest/user-data`
@@ -54,7 +56,11 @@ EOF
   fi
 fi
 
-# Discover our ACL token (needs moving to nubis-consul)
+# Discover our ACL token with credstash if user-data didn't provide one
+if [ ! "$CONSUL_ACL_TOKEN" ] && [ ! -f /etc/consul/zzz-join.skip ]; then
+  CONSUL_ACL_TOKEN=$(nubis-secret --global get consul/acl_token)
+fi
+
 if [ "$CONSUL_ACL_TOKEN" ]; then
 
 cat <<EOF | tee /etc/consul/zzz-acl-token.json
