@@ -28,31 +28,19 @@ class { 'consul_do':
   version => "404d6180650e72e1881a260dab8d645815832c9e"
 }
 
-# XXX: need to move to puppet-envconsul proper
-staging::file { 'envconsul.tar.gz':
-  source => "https://www.github.com/hashicorp/envconsul/releases/download/v0.5.0/envconsul_0.5.0_linux_amd64.tar.gz",
-} ->
-staging::extract { 'envconsul.tar.gz':
-  strip   => 0,
-  target  => "/opt",
-  creates => "/opt/envconsul_0.5.0_linux_amd64",
-} ->
-file { "/opt/hashicorp/envconsul_0.5.0_linux_amd64/envconsul":
-  owner =>  0,
-  group =>  0,
-  mode  => '0555',
-} ->
-file { "/usr/local/bin/envconsul":
-  ensure => "link",
-  target => '/opt/envconsul_0.5.0_linux_amd64/envconsul',
-}
-
 class { 'consul_template':
     service_enable   => false,
     service_ensure   => 'stopped',
     version          => '0.11.0',
     user             => 'root',
     group            => 'root',
+}
+
+package { "tar":
+  ensure => "present",
+}->
+class { 'envconsul':
+  version  => '0.5.0',
 }
 
 # Download and install consul-do

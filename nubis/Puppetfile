@@ -27,6 +27,8 @@ mod 'stankevich/python', '1.11.0'
 
 mod 'KyleAnderson/consul', '1.0.5'
 
+mod 'reppard/envconsul','0.0.2'
+
 # gozer's fork has minimal upstart support, upstream doesn't
 mod 'gozer/puppet-confd',
     :git => 'https://github.com/gozer/puppet-confd.git',
