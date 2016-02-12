@@ -1,5 +1,5 @@
 class { 'consul':
-  version     => '0.6.2',
+  version     => '0.6.3',
   service_enable => false,
   service_ensure => 'stopped',
   manage_service => false,
@@ -47,23 +47,12 @@ file { "/usr/local/bin/envconsul":
   target => '/opt/envconsul_0.5.0_linux_amd64/envconsul',
 }
 
-# XXX: need to move to puppet-consul-template proper
-staging::file { 'consul-template.tar.gz':
-  source => "https://www.github.com/hashicorp/consul-template/releases/download/v0.10.0/consul-template_0.10.0_linux_amd64.tar.gz",
-} ->
-staging::extract { 'consul-template.tar.gz':
-  strip   => 0,
-  target  => "/opt",
-  creates => "/opt/consul-template_0.10.0_linux_amd64",
-} ->
-file { "/opt/hashicorp/consul-template_0.10.0_linux_amd64/consul-template":
-  owner =>  0,
-  group =>  0,
-  mode  => '0555',
-} ->
-file { "/usr/local/bin/consul-template":
-  ensure => "link",
-  target => '/opt/consul-template_0.10.0_linux_amd64/consul-template',
+class { 'consul_template':
+    service_enable   => false,
+    service_ensure   => 'stopped',
+    version          => '0.11.0',
+    user             => 'root',
+    group            => 'root',
 }
 
 # Download and install consul-do
