@@ -36,11 +36,10 @@ class { 'consul_template':
     group            => 'root',
 }
 
-package { "tar":
-  ensure => "present",
-}->
+# Package['tar'] is defined by consul_template above
 class { 'envconsul':
   version  => '0.5.0',
+  require  => Package['tar'],
 }
 
 # Download and install consul-do
