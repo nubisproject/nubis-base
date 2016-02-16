@@ -40,31 +40,3 @@ class { 'envconsul':
   version  => '0.5.0',
   require  => Package['tar'],
 }
-
-# Download and install consul-do
-class consul_do (
-  $version
-  )
-{
-  $url = "https://raw.githubusercontent.com/zeroXten/consul-do/$version/consul-do"
-
-  notice ("Grabbing from $url")
-
-  wget::fetch { "download consul-do $version":
-      source => $url,
-      destination => "/usr/local/bin/consul-do-$version",
-      user => "root",
-      verbose => true,
-      redownload => true, # The file already exists, we replace it
-  } ->
-  file { "/usr/local/bin/consul-do-${version}":
-      ensure  => file,
-      owner   => root,
-      group   => root,
-      mode    => '0755',
-  } ->
-  file { "/usr/local/bin/consul-do":
-    ensure => "link",
-    target => "/usr/local/bin/consul-do-$version",
-  }
-}
