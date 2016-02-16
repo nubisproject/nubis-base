@@ -36,6 +36,7 @@ class { 'consul_template':
     group            => 'root',
 }
 
+# Package['tar'] is defined by consul_template above
 class { 'envconsul':
   version  => '0.5.0',
   require  => Package['tar'],
