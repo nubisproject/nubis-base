@@ -16,7 +16,7 @@ case $::osfamily {
       ensure  => file,
       owner   => root,
       group   => root,
-      mode    => '0644',
+      mode    => '0755',
       source  => 'puppet:///nubis/files/node_exporter.init',
     }->
     service { "node_exporter":
