@@ -10,6 +10,7 @@ staging::extract { "node_exporter.${node_exporter_version}.tar.gz":
   creates => "/usr/local/bin/node_exporter",
 }
 
+# make sure the services are disabled on boot, confd starts conditionnally later
 case $::osfamily {
   'RedHat': {
     file { '/etc/init.d/node_exporter':
@@ -20,7 +21,7 @@ case $::osfamily {
       source  => 'puppet:///nubis/files/node_exporter.init',
     }->
     service { "node_exporter":
-      enable => true,
+      enable => false,
     }
   }
   'Debian': {
@@ -30,6 +31,13 @@ case $::osfamily {
       group   => root,
       mode    => '0644',
       source  => 'puppet:///nubis/files/node_exporter.upstart',
+    }
+    file { '/etc/init/node_exporter.override':
+      ensure  => file,
+      owner   => root,
+      group   => root,
+      mode    => '0644',
+      content => "manual",
     }
   }
 }
