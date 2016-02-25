@@ -24,3 +24,10 @@ fi
 
 # Remove leftover from packer
 sudo rm -rf /tmp/packer-puppet-masterless*
+
+# Remove mail spools
+sudo rm -f /var/spool/mail/*
+
+# Remove nubis cache
+sudo rm -f /var/cache/nubis/*
+
