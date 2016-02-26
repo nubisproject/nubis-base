@@ -107,6 +107,3 @@ sudo bash -c 'cat > /etc/puppet/fileserver.conf' << EOF
     path /etc/nubis/puppet
     allow *
 EOF
-
-# Document the installed version of packages for forensic analysis later, if needed.
-puppet resource package | sudo tee -a /etc/puppet/package-versions.pp >/dev/null
