@@ -6,3 +6,4 @@ nubis/.librarian
 terraform/terraform.tfstate*
 nubis/cloudformation/parameters*
 !nubis/cloudformation/parameters.json-dist
+nubis/builder/artifacts/*-dev/
