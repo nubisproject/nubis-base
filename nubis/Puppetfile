@@ -79,7 +79,7 @@ mod 'maxchk/varnish',
     :git => 'https://github.com/gozer/puppet-varnish.git',
     :ref => 'nubis'
 
-mod 'puppetlabs/firewall', '1.7.2'
+mod 'puppetlabs/firewall', '1.8.0'
 mod 'thias/sysctl', '1.0.6'
 
-mod 'maestrodev/wget', '1.7.1'
+mod 'maestrodev/wget', '1.7.3'
