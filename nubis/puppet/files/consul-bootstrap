@@ -57,7 +57,19 @@ EOF
 if [ ! -f /etc/consul/zzz-join.skip ]; then
   # Auto-discover initial servers with fallback to $CONSUL_JOIN, just in case
   CONSUL_JOIN="$CONSUL_DOMAIN"
-  SERVERS=`$CONSUL_CURL $CONSUL_UI/v1/status/peers | jq ". |= .+ [\"$CONSUL_JOIN\"]" | perl -pe's/:\d+//g'`
+
+  # We wait forever here for Consul to show up
+  PEERS=$($CONSUL_CURL $CONSUL_UI/v1/status/peers)
+
+  SLEEP=1
+  while [ "$PEERS" == "null" ] || [ "$PEERS" == "" ]; do
+    echo "Waiting $SLEEP secs for Consul discovery to find peers..."
+    sleep $SLEEP
+    PEERS=$($CONSUL_CURL $CONSUL_UI/v1/status/peers)
+    let SLEEP=SLEEP+1
+  done
+
+  SERVERS=`echo $PEERS | jq ". |= .+ [\"$CONSUL_JOIN\"]" | perl -pe's/:\d+//g'`
 
   if [ "$SERVERS" ]; then
   cat <<EOF | tee /etc/consul/zzz-join.json
