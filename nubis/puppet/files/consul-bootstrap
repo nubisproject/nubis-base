@@ -19,6 +19,20 @@ CONSUL_UI="https://ui.$CONSUL_DOMAIN"
 
 CONSUL_CURL="curl -fks"
 
+# We are a client
+if [ ! -f /etc/consul/zzz-join.skip ]; then
+  # We wait forever here for Consul to show up
+  CONSUL_PEERS=$($CONSUL_CURL $CONSUL_UI/v1/status/peers)
+
+  SLEEP=1
+  while [ "$CONSUL_PEERS" == "null" ] || [ "$CONSUL_PEERS" == "" ]; do
+    echo "Waiting $SLEEP secs for Consul discovery to find peers..."
+    sleep $SLEEP
+    CONSUL_PEERS=$($CONSUL_CURL $CONSUL_UI/v1/status/peers)
+    let SLEEP=SLEEP+1
+  done
+fi
+
 # Auto-discover CA cert for Consul if present
 CONSUL_CA_CERT=$(nubis-secret --global get ssl/cacert)
 if [ "$CONSUL_CA_CERT" != "" ]; then
@@ -58,18 +72,9 @@ if [ ! -f /etc/consul/zzz-join.skip ]; then
   # Auto-discover initial servers with fallback to $CONSUL_JOIN, just in case
   CONSUL_JOIN="$CONSUL_DOMAIN"
 
-  # We wait forever here for Consul to show up
-  PEERS=$($CONSUL_CURL $CONSUL_UI/v1/status/peers)
+  CONSUL_PEERS=$($CONSUL_CURL $CONSUL_UI/v1/status/peers)
 
-  SLEEP=1
-  while [ "$PEERS" == "null" ] || [ "$PEERS" == "" ]; do
-    echo "Waiting $SLEEP secs for Consul discovery to find peers..."
-    sleep $SLEEP
-    PEERS=$($CONSUL_CURL $CONSUL_UI/v1/status/peers)
-    let SLEEP=SLEEP+1
-  done
-
-  SERVERS=`echo $PEERS | jq ". |= .+ [\"$CONSUL_JOIN\"]" | perl -pe's/:\d+//g'`
+  SERVERS=`echo $CONSUL_PEERS | jq ". |= .+ [\"$CONSUL_JOIN\"]" | perl -pe's/:\d+//g'`
 
   if [ "$SERVERS" ]; then
   cat <<EOF | tee /etc/consul/zzz-join.json
