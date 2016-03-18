@@ -26,7 +26,7 @@ package { $pythonpip:
   ensure => present
 }
 python::pip { 'credstash' :
-    ensure        => '1.9.1'
+    ensure        => '1.10.0'
 }
 
 file { '/usr/local/bin/nubis-secret':
