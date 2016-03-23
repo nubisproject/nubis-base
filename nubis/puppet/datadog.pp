@@ -1,9 +1,10 @@
 class { 'datadog_agent':
     api_key => "%%DATADOG_API_KEY%%",
+    service_ensure => 'stopped',
+    service_enable => false,
 }
 
 include 'datadog_agent::integrations::process'
-
 
 include nubis_discovery
 nubis::discovery::service { 'datadog':
