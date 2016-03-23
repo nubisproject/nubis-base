@@ -31,6 +31,18 @@ if [ ! -f /etc/consul/zzz-join.skip ]; then
     CONSUL_PEERS=$($CONSUL_CURL $CONSUL_UI/v1/status/peers)
     let SLEEP=SLEEP+1
   done
+
+  # We also need to wait for Consul to report having completed its initial startup sequence
+  CONSUL_READY=$($CONSUL_CURL $CONSUL_UI/v1/kv/consul-ready)
+
+  SLEEP=1
+  while [ "$CONSUL_READY" == "null" ] || [ "$CONSUL_READY" == "" ]; do
+    echo "Waiting $SLEEP secs for Consul to report ready"
+    sleep $SLEEP
+    CONSUL_READY=$($CONSUL_CURL $CONSUL_UI/v1/kv/consul-ready)
+    let SLEEP=SLEEP+1
+  done
+
 fi
 
 # Auto-discover CA cert for Consul if present
