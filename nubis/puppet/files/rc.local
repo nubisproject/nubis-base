@@ -5,6 +5,11 @@ LOGGER="logger --stderr --priority local7.info --tag nubis-startup"
 PATH=/usr/local/bin:$PATH
 export PATH
 
+# Load up proxy settings
+if [ -r /etc/profile.d/proxy.sh ]; then
+  . /etc/profile.d/proxy.sh
+fi
+
 if [ -d /etc/nubis.d ]; then
   run-parts /etc/nubis.d 2>&1 | $LOGGER
 fi
