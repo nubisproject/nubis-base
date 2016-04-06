@@ -17,7 +17,7 @@ CONSUL_DOMAIN="$CONSUL_SERVICE_NAME.$NUBIS_ENVIRONMENT.$REGION.$NUBIS_ACCOUNT.$N
 # The HTTP endpoint, constructed
 CONSUL_UI="https://ui.$CONSUL_DOMAIN"
 
-CONSUL_CURL="curl -fks"
+CONSUL_CURL="curl --retry 10 -fks"
 
 # We are a client
 if [ ! -f /etc/consul/zzz-join.skip ]; then
@@ -52,7 +52,7 @@ if [ "$CONSUL_CA_CERT" != "" ]; then
   chown root:root /etc/consul/ca.pem
   chmod 664 /etc/consul/ca.pem
   openssl x509 -text -in /etc/consul/ca.pem
-  CONSUL_CURL="curl -fs --cacert /etc/consul/ca.pem"
+  CONSUL_CURL="curl --retry 10 -fs --cacert /etc/consul/ca.pem"
 fi
 
 # Auto-discover secret
