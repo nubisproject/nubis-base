@@ -34,7 +34,7 @@ mod 'reppard/envconsul',
 
 mod 'nubis/consul_do',
     :git => 'https://github.com/nubisproject/nubis-puppet-consul_do.git',
-    :ref => 'ec33343a36a3f5e579aa479920e74e9d12686992'
+    :ref => '1.0.1'
 
 # gozer's fork has minimal upstart support, upstream doesn't
 mod 'gozer/puppet-confd',
