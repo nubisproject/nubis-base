@@ -111,7 +111,8 @@ function log {
         echo "ERROR: '$BASH_SOURCE' Line: '$LINENO'"
         exit 2
     else
-        $LOGGER_BIN -i --stderr --priority local7.info --tag "$(basename $0)" "${msg}"
+        echo "${msg}"
+        $LOGGER_BIN -i --priority local7.info --tag "$(basename $0)" "${msg}"
     fi
 }
 
