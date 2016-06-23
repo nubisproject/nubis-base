@@ -2,7 +2,8 @@
   "variables": {
     "builders": [
       "amazon-ebs-amazon-linux",
-      "amazon-ebs-ubuntu"
+      "amazon-ebs-ubuntu",
+      "amazon-ebs-centos"
     ],
     "project_description": "Nubis base AMI",
     "project_name": "nubis-base",
