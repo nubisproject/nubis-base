@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -x
-
 redhat_puppet_package="puppet"
 ubuntu_puppet_version="3.8.6-1puppetlabs1"
 amazon_linux_puppet_package="puppet3"
