@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -x
+
 redhat_puppet_package="puppet"
 ubuntu_puppet_version="3.8.6-1puppetlabs1"
 amazon_linux_puppet_package="puppet3"
@@ -55,6 +57,21 @@ if [[ -f /etc/debian_version ]]; then
 
    # Install puppet
    sudo -E apt-get -y install puppet=${ubuntu_puppet_version} puppet-common=${ubuntu_puppet_version}
+elif [[ -f /etc/redhat-release ]]; then
+   ELV=`rpm --queryformat '%{Version}' -qf /etc/redhat-release`
+
+   sudo -E rpm -ivh https://yum.puppetlabs.com/puppetlabs-release-el-${ELV}.noarch.rpm
+   sudo -E rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-${ELV}.noarch.rpm
+
+   # Yum can be stinky
+   sudo -E yum clean all
+
+   # Apply full system updates
+   sudo -E yum -y update
+
+   # Install puppet & unzip
+   sudo -E yum -y install ${redhat_puppet_package} unzip compat-readline5
+
 elif [[ -f /etc/os-release ]]; then
    . /etc/os-release
 
@@ -84,21 +101,6 @@ elif [[ -f /etc/os-release ]]; then
       echo "Operating system $NAME unsupported"
       exit 1
    fi
-elif [[ -f /etc/redhat-release ]]; then
-   ELV=`rpm --queryformat '%{Version}' -qf /etc/redhat-release`
-
-   rpm -ivh https://yum.puppetlabs.com/puppetlabs-release-el-${ELV}.noarch.rpm
-   rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-${ELV}.noarch.rpm
-
-    # Yum can be stinky
-    sudo yum clean all
-
-    # Apply full system updates
-    sudo yum -y update
-
-    # Install puppet
-    sudo yum -y install ${redhat_puppet_package}
-    sudo yum -y install cloud-init
 
 else
    echo "Unknown operating system"
