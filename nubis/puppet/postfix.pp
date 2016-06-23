@@ -1,2 +1,5 @@
-include postfix
-
+class { "postfix":
+}->
+package {"sendmail":
+  ensure => absent,
+}

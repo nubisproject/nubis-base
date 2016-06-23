@@ -1,0 +1,36 @@
+#!/bin/bash
+eval "$(curl -fqs http://169.254.169.254/latest/user-data)"
+
+# Usage:
+#  $> nubis-purpose
+#  prints out your purpose
+#
+#  $> nubis-purpose "Web Server"
+#  exits with true/false if the purpose you specify is ours
+#
+#  $> nubis-purpose "Web Server" some command
+#  execs the specified command if the purpose specified is ours
+
+if [ -z "$1" ]; then
+  echo "$NUBIS_PURPOSE"
+else
+  purpose=$1
+  shift
+  if [ "$purpose" == "$NUBIS_PURPOSE" ]; then
+    if [ -z "$*" ]; then
+      # return success for the pipe use case
+      exit 0
+    else
+      exec "$@"
+    fi
+  else # We are not it
+    if [ -z "$@" ]; then
+      # return failure for the pipe use case
+      exit 1
+    else
+      # return success otherwise, we had a command included
+      exit 0
+    fi
+  fi
+fi
+

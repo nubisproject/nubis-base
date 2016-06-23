@@ -1,9 +1,10 @@
 class { 'datadog_agent':
     api_key => "%%DATADOG_API_KEY%%",
+    service_ensure => 'stopped',
+    service_enable => false,
 }
 
 include 'datadog_agent::integrations::process'
-
 
 include nubis_discovery
 nubis::discovery::service { 'datadog':
@@ -12,9 +13,18 @@ nubis::discovery::service { 'datadog':
   interval => "60s",
 }
 
+file { '/usr/local/bin/datadog-discover':
+    ensure => file,
+    owner  => root,
+    group  => root,
+    mode   => '0755',
+    source => 'puppet:///nubis/files/datadog-discover',
+}
+
 include nubis_configuration
 nubis::configuration{ 'datadog':
-  prefix => "/environments/%%ENVIRONMENT%%/global/datadog",
-  format => "sh",
-  reload => "/usr/local/bin/datadog-discover",
+  prefix  => "/environments/%%ENVIRONMENT%%/global/datadog",
+  format  => "sh",
+  reload  => "/usr/local/bin/datadog-discover",
+  require => File['/usr/local/bin/datadog-discover'],
 }

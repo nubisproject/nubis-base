@@ -1,43 +1,11 @@
-class mig (
-  $version
-  )
-{
- case $::osfamily {
-    'redhat': {
-      $ext = "rpm"
-      $prod = "prod-1."
-      $silly = "-"
-      $provider = "rpm"
-    }
-    'debian': {
-      $ext = "deb"
-      $prod = "prod_"
-      $silly = "_"
-      $provider = "dpkg"
-    }
-    default: {
-      fail("Unsupported OS Family:  ${osfamily}.")
-    }
+# MiG needs this on RHEL for lsb_release
+if $osfamily == 'redhat' {
+  package {"redhat-lsb-core":
+    ensure => "latest"
   }
-    
-   $url = "https://s3.amazonaws.com/mig-packages/mig-agent-nubis${silly}${version}.${prod}${::architecture}.${ext}"
-   
-   notice ("Grabbing from $url")
-   
-   wget::fetch { "download MIG $version":
-      source => $url,
-      destination => "/tmp/mig.$ext",
-      verbose => true,
-      redownload => true, # The file already exists, we replace it
-  }->
-  package { 'mig':
-    source => "/tmp/mig.$ext",
-    ensure => "present",
-    provider => $provider,
-  }
-
 }
 
 class {'mig':
-  version => "20150522%2B9ec761b"
+  version => "20160126",
+  build   => "1.c128226"
 }

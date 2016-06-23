@@ -1,0 +1,167 @@
+#!/bin/bash
+
+export PATH=/usr/local/bin:$PATH
+
+# This is an auto-joiner for consul, should be moved to /etc/nubis.d/00-consul-bootstrap or similar
+
+eval `curl -fq http://169.254.169.254/latest/user-data`
+
+INSTANCE_ID=`curl -fq http://169.254.169.254/latest/meta-data/instance-id`
+REGION=`curl -s http://169.254.169.254/latest/dynamic/instance-identity/document | jq '.region' -r`
+
+CONSUL_DC="${NUBIS_ENVIRONMENT}-${REGION}-${NUBIS_ACCOUNT}"
+CONSUL_SERVICE_NAME="consul"
+
+CONSUL_DOMAIN="$CONSUL_SERVICE_NAME.$NUBIS_ENVIRONMENT.$REGION.$NUBIS_ACCOUNT.$NUBIS_DOMAIN"
+
+# The HTTP endpoint, constructed
+CONSUL_UI="https://ui.$CONSUL_DOMAIN"
+
+CONSUL_CURL="curl --retry 10 -fks"
+
+# We are a client
+if [ ! -f /etc/consul/zzz-join.skip ]; then
+  # We wait forever here for Consul to show up
+  CONSUL_PEERS=$($CONSUL_CURL $CONSUL_UI/v1/status/peers)
+
+  SLEEP=1
+  while [ "$CONSUL_PEERS" == "null" ] || [ "$CONSUL_PEERS" == "" ]; do
+    echo "Waiting $SLEEP secs for Consul discovery to find peers..."
+    sleep $SLEEP
+    CONSUL_PEERS=$($CONSUL_CURL $CONSUL_UI/v1/status/peers)
+    let SLEEP=SLEEP+1
+  done
+
+  # We also need to wait for Consul to report having completed its initial startup sequence
+  CONSUL_READY=$($CONSUL_CURL $CONSUL_UI/v1/kv/consul-ready)
+
+  SLEEP=1
+  while [ "$CONSUL_READY" == "null" ] || [ "$CONSUL_READY" == "" ]; do
+    echo "Waiting $SLEEP secs for Consul to report ready"
+    sleep $SLEEP
+    CONSUL_READY=$($CONSUL_CURL $CONSUL_UI/v1/kv/consul-ready)
+    let SLEEP=SLEEP+1
+  done
+
+fi
+
+# Auto-discover CA cert for Consul if present
+CONSUL_CA_CERT=$(nubis-secret --global get ssl/cacert)
+if [ "$CONSUL_CA_CERT" != "" ]; then
+  echo "$CONSUL_CA_CERT" > /etc/consul/ca.pem
+  chown root:root /etc/consul/ca.pem
+  chmod 664 /etc/consul/ca.pem
+  openssl x509 -text -in /etc/consul/ca.pem
+  CONSUL_CURL="curl --retry 10 -fs --cacert /etc/consul/ca.pem"
+fi
+
+# Auto-discover secret
+if [ -z "$CONSUL_SECRET" ]; then
+  # check for an on-disk secret
+  if [ -f /etc/consul/consul.secret ]; then
+    SECRET=$(cat /etc/consul/consul.secret)
+  fi
+  
+  # discover via Consul
+  if [ -z "$SECRET" ]; then
+    SECRET=`$CONSUL_CURL $CONSUL_UI/v1/kv/environments/$NUBIS_ENVIRONMENT/global/consul/secret?raw`
+  fi
+  
+  if [ ! -z "$SECRET" ]; then
+    CONSUL_SECRET=$SECRET
+  fi
+
+fi
+
+cat <<EOF | tee /etc/consul/zzz-startup.json
+{
+  "datacenter": "$CONSUL_DC",
+  "node_name": "$INSTANCE_ID"
+}
+EOF
+
+if [ ! -f /etc/consul/zzz-join.skip ]; then
+  # Auto-discover initial servers with fallback to $CONSUL_JOIN, just in case
+  CONSUL_JOIN="$CONSUL_DOMAIN"
+
+  CONSUL_PEERS=$($CONSUL_CURL $CONSUL_UI/v1/status/peers)
+
+  SERVERS=`echo $CONSUL_PEERS | jq ". |= .+ [\"$CONSUL_JOIN\"]" | perl -pe's/:\d+//g'`
+
+  if [ "$SERVERS" ]; then
+  cat <<EOF | tee /etc/consul/zzz-join.json
+{
+  "retry_join": $SERVERS
+}
+EOF
+  fi
+fi
+
+# Discover our ACL token with credstash if user-data didn't provide one
+if $( [ "$CONSUL_ACL_TOKEN" == "anonymous" ] || [ "$CONSUL_ACL_TOKEN" == "" ] ) && [ ! -f /etc/consul/zzz-join.skip ]; then
+  CONSUL_ACL_TOKEN=$(nubis-secret --global get consul/acl_token)
+fi
+
+if [ "$CONSUL_ACL_TOKEN" ]; then
+
+cat <<EOF | tee /etc/consul/zzz-acl-token.json
+{
+  "acl_token": "$CONSUL_ACL_TOKEN"
+}
+EOF
+fi
+
+# Auto-discover certificate and key
+if [ ! -f /etc/consul/consul.pem ]; then
+  $CONSUL_CURL -o /etc/consul/consul.pem $CONSUL_UI/v1/kv/environments/$NUBIS_ENVIRONMENT/global/consul/cert?raw
+fi
+if [ ! -f /etc/consul/consul.key ]; then
+  $CONSUL_CURL -o /etc/consul/consul.key $CONSUL_UI/v1/kv/environments/$NUBIS_ENVIRONMENT/global/consul/key?raw
+fi
+
+if [ -f /etc/consul/consul.pem ]; then
+  chown root:consul /etc/consul/consul.pem
+  chmod 640 /etc/consul/consul.pem
+fi
+
+if [ -f /etc/consul/consul.key ]; then
+  chown root:consul /etc/consul/consul.key
+  chmod 640 /etc/consul/consul.key
+fi
+
+if [ -f /etc/consul/consul.secret ]; then
+  chown root:consul /etc/consul/consul.secret
+  chmod 640 /etc/consul/consul.secret
+fi
+
+# Sanity, if we didn't get all this, something wrong is going on
+if [ "$CONSUL_SECRET" ] && [ -f /etc/consul/consul.key ] && [ -f /etc/consul/consul.pem ]; then
+cat <<EOF | tee /etc/consul/zzz-tls.json
+{
+  "encrypt"         : "$CONSUL_SECRET",
+  "ca_file"         : "/etc/consul/consul.pem",
+  "cert_file"       : "/etc/consul/consul.pem",
+  "key_file"        : "/etc/consul/consul.key",
+  "verify_incoming" : true,
+  "verify_outgoing" : true
+}
+EOF
+else
+  echo "Failed to configure security, Consul is most likely broken!"
+fi
+
+# RHEL sysv consul init scripts are buggy
+# https://github.com/nubisproject/nubis-base/issues/247
+OSFAMILY=$(facter osfamily)
+SERVICE=$(which service)
+if [ "$OSFAMILY" = "RedHat" ]; then
+  DAEMONIZE="daemonize"
+fi
+
+# Perform a clean nuke and restart of Consul
+service consul stop
+rm -rf /var/lib/consul/serf/*
+$DAEMONIZE $SERVICE consul start
+
+### XXX: Wait for consul to start here
+sleep 5

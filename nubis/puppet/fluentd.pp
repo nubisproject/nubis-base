@@ -3,11 +3,34 @@ class { 'fluentd':
   service_ensure => stopped
 }
 
+# Make fluentd run as root so it can read all log files
+if $osfamily == 'RedHat' {
+  file { "/etc/sysconfig/td-agent":
+    ensure => "present",
+    owner  => "root",
+    group  => "root",
+    source => "puppet:///nubis/files/fluentd.sysconfig",
+  }
+}
+elsif $osfamily == 'Debian' {
+  exec { "change-fluentd-user":
+    command => "/usr/bin/perl -pi -e's/^(USER|GROUP)=td-agent/\$1=root/g' /etc/init.d/td-agent",
+    require => Class['Fluentd::Packages'],
+  }
+}
+else {
+  fail("Don't know how to make fluentd run as root on osfamily:$osfamily")
+}
+
 if $osfamily == 'Debian' {
   $ruby_dev = "ruby-dev"
+  $syslog_main = "/var/log/syslog"
+  $syslog_mail = "/var/log/mail.log"
 }
 else {
   $ruby_dev = "ruby-devel"
+   $syslog_main = "/var/log/messages"
+   $syslog_mail = "/var/log/maillog"
 }
 
 # For the ec2 plugin
@@ -18,6 +41,7 @@ package { [$ruby_dev, "make", "gcc"]:
 fluentd::install_plugin { 'ec2-metadata':
   plugin_type => 'gem',
   plugin_name => 'fluent-plugin-ec2-metadata',
+  ensure      => '0.0.7',
 }
 
 fluentd::configfile { 'syslog': }
@@ -79,7 +103,7 @@ fluentd::source { 'syslog_main':
   format     => 'syslog',
   tag        => 'forward.system.syslog',
   config     => {
-    'path'     => '/var/log/syslog',
+    'path'     => $syslog_main,
     'pos_file' => '/tmp/td-agent.syslog.pos',
   },
   notify     => Class['fluentd::service']
@@ -103,7 +127,7 @@ fluentd::source { 'syslog_mail':
   format     => 'syslog',
   tag        => 'forward.system.mail',
   config     => {
-    'path'     => '/var/log/mail.log',
+    'path'     => $syslog_mail,
     'pos_file' => '/tmp/td-agent.syslog.pos',
   },
   notify     => Class['fluentd::service']
@@ -121,3 +145,27 @@ fluentd::source { 'syslog_mail_err':
   notify     => Class['fluentd::service']
 }
 
+if $osfamily == 'RedHat' {
+  fluentd::source { 'syslog_secure':
+    configfile => 'syslog',
+    type       => 'tail',
+    format     => 'syslog',
+    tag        => 'forward.system.secure',
+    config     => {
+      'path'     => '/var/log/secure',
+      'pos_file' => '/tmp/td-agent.syslog.pos',
+    },
+    notify     => Class['fluentd::service']
+  }
+}
+
+cron { 'fluent-watchdog':
+  ensure => 'present',
+  command => "service td-agent status 1>/dev/null || service td-agent start",
+  hour => '*',
+  minute => '*/11',
+  user => 'root',
+  environment => [
+    "PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin:/opt/aws/bin",
+  ],
+}

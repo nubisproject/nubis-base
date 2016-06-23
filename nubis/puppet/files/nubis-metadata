@@ -1,0 +1,24 @@
+#!/bin/bash
+
+USERDATA_FILE=/var/cache/nubis/userdata
+
+if [ ! -d "$(dirname $USERDATA_FILE)" ]; then
+  mkdir "$(dirname $USERDATA_FILE)"
+fi
+
+# the -z flag lets us do a conditionnal get if-modified-since
+curl --retry 5 -fqs -z $USERDATA_FILE -o $USERDATA_FILE http://169.254.169.254/latest/user-data
+
+CURL_RV=$?
+if [ "$CURL_RV" != "0" ]; then
+  echo "ERROR: curl failed! ($CURL_RV)"
+  exit $CURL_RV
+fi
+
+if [ "$1" ]; then
+  source $USERDATA_FILE
+  eval VALUE="\$$1"
+  echo "$VALUE"
+else
+  cat $USERDATA_FILE
+fi

@@ -3,8 +3,7 @@
   {
     "type": "shell",
     "inline": [
-      "sudo mkdir /etc/mig",
-      "mkdir /tmp/confd" 
+      "mkdir /tmp/confd"
     ],
     "order": 20
   },
@@ -20,7 +19,7 @@
         "sudo mv /tmp/confd/*.toml /etc/confd/conf.d/",
         "sudo mv /tmp/confd/*.tmpl /etc/confd/templates/"
       ],
-    "order": 23 
+    "order": 23
   }
   ]
 }
