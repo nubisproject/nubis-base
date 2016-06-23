@@ -49,7 +49,7 @@ mod 'nubis-confd_site',
 #mod 'srf/fluentd', '0.1.4'
 mod 'srf/fluentd',
     :git => 'https://github.com/gozer/puppet-fluentd.git',
-    :ref => 'gozer'
+    :ref => 'd3b744bd591b2c44169f664f53f888ad4dc33041'
 
 mod 'mjhas/postfix', '1.0.0'
 
