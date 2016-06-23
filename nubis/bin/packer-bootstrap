@@ -68,7 +68,7 @@ elif [[ -f /etc/redhat-release ]]; then
    sudo -E yum -y update
 
    # Install puppet & unzip
-   sudo -E yum -y install ${redhat_puppet_package} unzip compat-readline5
+   sudo -E yum -y install ${redhat_puppet_package} unzip
 
 elif [[ -f /etc/os-release ]]; then
    . /etc/os-release
