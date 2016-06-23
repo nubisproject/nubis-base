@@ -46,14 +46,17 @@ mod 'nubis-confd_site',
     :git => 'https://github.com/gozer/nubis-site_confd.git',
     :ref => '0.1.1'
 
-mod 'srf/fluentd', '0.1.4'
+mod 'srf/fluentd',
+    :git => 'https://github.com/gozer/puppet-fluentd.git',
+    :ref => 'd3b744bd591b2c44169f664f53f888ad4dc33041'
+
 mod 'mjhas/postfix', '1.0.0'
 
 #mod 'lex/dnsmasq','2.6.1'
 mod 'bhourigan/dnsmasq',
     :git => 'https://github.com/bhourigan/puppet-dnsmasq.git'
 
-mod 'datadog/datadog_agent', '1.6.0'
+mod 'datadog/datadog_agent', '1.7.1'
 
 mod 'nubis/nubis_discovery',
     :git => 'https://github.com/Nubisproject/nubis-puppet-discovery.git',
