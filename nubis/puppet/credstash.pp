@@ -9,7 +9,7 @@
 #}
 
 $pythondev = $::osfamily ? {
-    'RedHat' => $::osname ? {
+    'RedHat' => $::operatingsystem ? {
        'Amazon' => "python27-devel",
        default  => "python-devel",
      },
@@ -17,7 +17,7 @@ $pythondev = $::osfamily ? {
 }
 
 $pythonpip = $::osfamily ? {
-    'RedHat' => $::osname ? {
+    'RedHat' => $::operatingsystem ? {
        'Amazon' => "python27-pip",
        default  => "python-pip",
     },

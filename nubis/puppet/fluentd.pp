@@ -34,7 +34,7 @@ else {
 }
 
 # For the ec2 plugin
-package { [$ruby_dev, "make", "gcc", "rubygems" ]:
+package { [$ruby_dev, "make", "gcc"]:
   ensure => "present",
 }->
 fluentd::install_plugin { 'ec2-metadata':
