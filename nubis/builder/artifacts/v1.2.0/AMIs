@@ -1,11 +1,11 @@
 amazon-ebs-amazon-linux:
-us-east-1: ami-a4b803b3
-us-west-2: ami-53d81933
+us-east-1: ami-d4088cc3
+us-west-2: ami-c30fcfa3
 
 amazon-ebs-ubuntu:
-us-east-1: ami-a7bf04b0
-us-west-2: ami-00d81960
+us-east-1: ami-04088c13
+us-west-2: ami-6709c907
 
 amazon-ebs-centos:
-us-east-1: ami-babf04ad
-us-west-2: ami-a0d716c0
+us-east-1: ami-880e8a9f
+us-west-2: ami-6609c906
