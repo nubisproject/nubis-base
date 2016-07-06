@@ -188,7 +188,7 @@ package { 'dash':
   ensure => '0.5.5.1-4.5.amzn1',
 }
 package { 'datadog-agent':
-  ensure => '5.8.0-1',
+  ensure => '5.8.3-1',
 }
 package { 'db4':
   ensure => '4.7.25-18.11.amzn1',

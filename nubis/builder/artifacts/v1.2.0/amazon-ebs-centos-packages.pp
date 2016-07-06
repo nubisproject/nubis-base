@@ -71,7 +71,7 @@ package { 'boto3':
   ensure => '1.3.1',
 }
 package { 'botocore':
-  ensure => '1.4.34',
+  ensure => '1.4.35',
 }
 package { 'btrfs-progs':
   ensure => '3.19.1-1.el7',
@@ -158,7 +158,7 @@ package { 'daemonize':
   ensure => '1.7.7-1.el7',
 }
 package { 'datadog-agent':
-  ensure => '5.8.0-1',
+  ensure => '5.8.3-1',
 }
 package { 'dbus':
   ensure => '1.6.12-13.el7',
