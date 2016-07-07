@@ -1,5 +1,28 @@
 # Change Log
 
+## [v1.2.0](https://github.com/nubisproject/nubis-base/tree/v1.2.0) (2016-07-07)
+[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v1.1.0...v1.2.0)
+
+**Implemented enhancements:**
+
+- nubis-lib should include pid of process when we log [\#391](https://github.com/nubisproject/nubis-base/issues/391)
+
+**Closed issues:**
+
+- \[consul\] Don't use any proxy when talking to consul during bootup [\#388](https://github.com/nubisproject/nubis-base/issues/388)
+- Tag v1.1.0 release [\#147](https://github.com/nubisproject/nubis-base/issues/147)
+
+**Merged pull requests:**
+
+- Update builder artifacts for v1.2.0 release [\#400](https://github.com/nubisproject/nubis-base/pull/400) ([tinnightcap](https://github.com/tinnightcap))
+- Update builder artifacts for v1.2.0 release [\#398](https://github.com/nubisproject/nubis-base/pull/398) ([tinnightcap](https://github.com/tinnightcap))
+- Work around problem with fluent-plugin-ec2-metadata on Ubuntu. [\#396](https://github.com/nubisproject/nubis-base/pull/396) ([gozer](https://github.com/gozer))
+- Small CentOS fixups [\#395](https://github.com/nubisproject/nubis-base/pull/395) ([gozer](https://github.com/gozer))
+- Add CentOS base images [\#394](https://github.com/nubisproject/nubis-base/pull/394) ([gozer](https://github.com/gozer))
+- Output pid in log messages [\#393](https://github.com/nubisproject/nubis-base/pull/393) ([limed](https://github.com/limed))
+- Output log message to stdout [\#392](https://github.com/nubisproject/nubis-base/pull/392) ([limed](https://github.com/limed))
+- start the v1.2.0-dev cycle [\#389](https://github.com/nubisproject/nubis-base/pull/389) ([gozer](https://github.com/gozer))
+
 ## [v1.1.0](https://github.com/nubisproject/nubis-base/tree/v1.1.0) (2016-04-18)
 [Full Changelog](https://github.com/nubisproject/nubis-base/compare/v1.0.1...v1.1.0)
 
@@ -73,9 +96,11 @@
 - Cleanup unused puppet modules [\#209](https://github.com/nubisproject/nubis-base/issues/209)
 - /etc/nubis.d scripts should have /usr/local/bin/ in their PATHs [\#176](https://github.com/nubisproject/nubis-base/issues/176)
 - Create a nubis-metadata tool to hide away the AWS EC2 metadata [\#115](https://github.com/nubisproject/nubis-base/issues/115)
+- Tag v1.1.0 release [\#253](https://github.com/nubisproject/nubis-base/issues/253)
 
 **Merged pull requests:**
 
+- Update CHANGELOG for v1.1.0 release [\#387](https://github.com/nubisproject/nubis-base/pull/387) ([tinnightcap](https://github.com/tinnightcap))
 - Update builder artifacts for v1.1.0 release [\#386](https://github.com/nubisproject/nubis-base/pull/386) ([tinnightcap](https://github.com/tinnightcap))
 - Update builder artifacts for v1.1.0 release [\#385](https://github.com/nubisproject/nubis-base/pull/385) ([tinnightcap](https://github.com/tinnightcap))
 - Update versions for  release [\#384](https://github.com/nubisproject/nubis-base/pull/384) ([tinnightcap](https://github.com/tinnightcap))
@@ -124,7 +149,6 @@
 - Remove a provisioner line [\#307](https://github.com/nubisproject/nubis-base/pull/307) ([limed](https://github.com/limed))
 - Improve comments and handle a bit better the case [\#306](https://github.com/nubisproject/nubis-base/pull/306) ([gozer](https://github.com/gozer))
 - Create a small nubis-purpose wrapper script to work with our specified purpose [\#302](https://github.com/nubisproject/nubis-base/pull/302) ([gozer](https://github.com/gozer))
-- Update MIG agent to 20160126-1.c128226 [\#299](https://github.com/nubisproject/nubis-base/pull/299) ([ameihm0912](https://github.com/ameihm0912))
 - Upgrade to credstash 1.9.1 [\#297](https://github.com/nubisproject/nubis-base/pull/297) ([gozer](https://github.com/gozer))
 - Upgrade to confd 0.11.0 [\#295](https://github.com/nubisproject/nubis-base/pull/295) ([gozer](https://github.com/gozer))
 - Restart confd once Consul is bootstrapped [\#293](https://github.com/nubisproject/nubis-base/pull/293) ([gozer](https://github.com/gozer))
@@ -148,6 +172,7 @@
 - Move Consul startup out of rc.local and into /etc/nubis.d/00-consul [\#259](https://github.com/nubisproject/nubis-base/pull/259) ([gozer](https://github.com/gozer))
 - Upgrade Consul to v0.6.0 [\#257](https://github.com/nubisproject/nubis-base/pull/257) ([gozer](https://github.com/gozer))
 - Upgrade to credstash v1.8, fixes \#255 [\#256](https://github.com/nubisproject/nubis-base/pull/256) ([gozer](https://github.com/gozer))
+- Update MIG agent to 20160126-1.c128226 [\#299](https://github.com/nubisproject/nubis-base/pull/299) ([ameihm0912](https://github.com/ameihm0912))
 
 ## [v1.0.1](https://github.com/nubisproject/nubis-base/tree/v1.0.1) (2015-11-20)
 [Full Changelog](https://github.com/nubisproject/nubis-base/compare/v1.0.0...v1.0.1)
