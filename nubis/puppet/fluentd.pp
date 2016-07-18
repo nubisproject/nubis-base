@@ -38,30 +38,15 @@ package { [$ruby_dev, "make", "gcc"]:
   ensure => "present",
 }
 
-if $osfamily == 'Debian' {
-  # Needed until https://github.com/takus/fluent-plugin-ec2-metadata/pull/17 lands
-  package { "fluent-plugin-ec2-metadata":
-    ensure   => "0.0.10",
-    provider => "fluentgem",
-    source   => "http://people.mozilla.org/~pchiasson/ruby",
-    require     => [
-      Package["make"],
-      Package["gcc"],
-      Package[$ruby_dev],
-    ],
-  }
-}
-else {
-  fluentd::install_plugin { 'ec2-metadata':
-    plugin_type => 'gem',
-    plugin_name => 'fluent-plugin-ec2-metadata',
-    ensure      => '0.0.10',
-    require     => [
-      Package["make"],
-      Package["gcc"],
-      Package[$ruby_dev],
-    ],
-  }
+fluentd::install_plugin { 'ec2-metadata':
+  plugin_type => 'gem',
+  plugin_name => 'fluent-plugin-ec2-metadata',
+  ensure      => '0.0.11',
+  require     => [
+    Package["make"],
+    Package["gcc"],
+    Package[$ruby_dev],
+  ],
 }
 
 fluentd::configfile { 'syslog': }
