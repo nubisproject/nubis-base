@@ -1,5 +1,21 @@
 # Change Log
 
+## [v1.2.1](https://github.com/nubisproject/nubis-base/tree/v1.2.1) (2016-07-30)
+[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v1.2.0...v1.2.1)
+
+**Closed issues:**
+
+- \[datadog\] needs to know about our proxies [\#407](https://github.com/nubisproject/nubis-base/issues/407)
+- Upgrade to td-agent 2.x \(fluentd 0.14.x\) [\#399](https://github.com/nubisproject/nubis-base/issues/399)
+
+**Merged pull requests:**
+
+- Update builder artifacts for v1.2.1 release [\#410](https://github.com/nubisproject/nubis-base/pull/410) ([tinnightcap](https://github.com/tinnightcap))
+- Bake proxies in our DataDog configs [\#408](https://github.com/nubisproject/nubis-base/pull/408) ([gozer](https://github.com/gozer))
+- MIG agent update to 20160715\_0.a06734a [\#406](https://github.com/nubisproject/nubis-base/pull/406) ([ameihm0912](https://github.com/ameihm0912))
+- Fix the Ubnutu fluentd repo issue, getting us finally on td-agent 2.x on all platforms [\#405](https://github.com/nubisproject/nubis-base/pull/405) ([gozer](https://github.com/gozer))
+- Update builder artifacts for v1.3.0-dev release [\#403](https://github.com/nubisproject/nubis-base/pull/403) ([tinnightcap](https://github.com/tinnightcap))
+
 ## [v1.2.0](https://github.com/nubisproject/nubis-base/tree/v1.2.0) (2016-07-07)
 [Full Changelog](https://github.com/nubisproject/nubis-base/compare/v1.1.0...v1.2.0)
 
@@ -9,11 +25,13 @@
 
 **Closed issues:**
 
-- \[consul\] Don't use any proxy when talking to consul during bootup [\#388](https://github.com/nubisproject/nubis-base/issues/388)
 - Tag v1.1.0 release [\#147](https://github.com/nubisproject/nubis-base/issues/147)
+- Tag v1.2.0 release [\#401](https://github.com/nubisproject/nubis-base/issues/401)
+- \[consul\] Don't use any proxy when talking to consul during bootup [\#388](https://github.com/nubisproject/nubis-base/issues/388)
 
 **Merged pull requests:**
 
+- Update CHANGELOG for v1.2.0 release [\#402](https://github.com/nubisproject/nubis-base/pull/402) ([tinnightcap](https://github.com/tinnightcap))
 - Update builder artifacts for v1.2.0 release [\#400](https://github.com/nubisproject/nubis-base/pull/400) ([tinnightcap](https://github.com/tinnightcap))
 - Update builder artifacts for v1.2.0 release [\#398](https://github.com/nubisproject/nubis-base/pull/398) ([tinnightcap](https://github.com/tinnightcap))
 - Work around problem with fluent-plugin-ec2-metadata on Ubuntu. [\#396](https://github.com/nubisproject/nubis-base/pull/396) ([gozer](https://github.com/gozer))
@@ -298,7 +316,7 @@
 - Add support for 3 more Consul Server bootstrap options: [\#142](https://github.com/nubisproject/nubis-base/pull/142) ([gozer](https://github.com/gozer))
 
 ## [v0.9.0](https://github.com/nubisproject/nubis-base/tree/v0.9.0) (2015-07-23)
-[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v0.79...v0.9.0)
+[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v0.1...v0.9.0)
 
 **Closed issues:**
 
@@ -314,11 +332,11 @@
 - Move creation of /etc/puppet/nubis/{files,templates} to base image. Fixes \#134 [\#135](https://github.com/nubisproject/nubis-base/pull/135) ([gozer](https://github.com/gozer))
 - Ubuntu repositories have very old versions of the ec2-ami-tools that just don't work at all. [\#130](https://github.com/nubisproject/nubis-base/pull/130) ([gozer](https://github.com/gozer))
 
-## [v0.79](https://github.com/nubisproject/nubis-base/tree/v0.79) (2015-06-11)
-[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v0.1...v0.79)
-
 ## [v0.1](https://github.com/nubisproject/nubis-base/tree/v0.1) (2015-06-11)
-[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v1.35...v0.1)
+[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v0.79...v0.1)
+
+## [v0.79](https://github.com/nubisproject/nubis-base/tree/v0.79) (2015-06-11)
+[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v1.35...v0.79)
 
 **Closed issues:**
 
