@@ -14,7 +14,7 @@ if $osfamily == 'RedHat' {
 }
 elsif $osfamily == 'Debian' {
   exec { "change-fluentd-user":
-    command => "/usr/bin/perl -pi -e's/^(USER|GROUP)=td-agent/\$1=root/g' /etc/init.d/td-agent",
+    command => "/usr/bin/perl -pi -e's/^TD_AGENT_(USER|GROUP)=td-agent/\$1=root/g' /etc/init.d/td-agent",
     require => Class['Fluentd::Packages'],
   }
 }
