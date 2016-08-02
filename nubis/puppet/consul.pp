@@ -10,6 +10,7 @@ class { 'consul':
       'client_addr'   => '0.0.0.0',
       'server'        => false,
       'enable_syslog' => true,
+      'leave_on_terminate' => true,
   }
 }
 
