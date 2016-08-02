@@ -1,5 +1,21 @@
 # Change Log
 
+## [v1.2.2](https://github.com/nubisproject/nubis-base/tree/v1.2.2) (2016-08-02)
+[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v1.2.1...v1.2.2)
+
+**Closed issues:**
+
+- \[ntp\] Enable NTP explicitely [\#416](https://github.com/nubisproject/nubis-base/issues/416)
+- \[consul\] Enable leave-on-terminate [\#414](https://github.com/nubisproject/nubis-base/issues/414)
+- \[fluentd\] Ubuntu renamed user/group parameters [\#412](https://github.com/nubisproject/nubis-base/issues/412)
+
+**Merged pull requests:**
+
+- Update builder artifacts for v1.2.2 release [\#419](https://github.com/nubisproject/nubis-base/pull/419) ([tinnightcap](https://github.com/tinnightcap))
+- Install and enable NTPd by default [\#417](https://github.com/nubisproject/nubis-base/pull/417) ([gozer](https://github.com/gozer))
+- Set leave\_on\_terminate = true [\#415](https://github.com/nubisproject/nubis-base/pull/415) ([gozer](https://github.com/gozer))
+- Change user variables from USER|GROUP to TD\_AGENT\_USER|TD\_AGENT\_USER [\#413](https://github.com/nubisproject/nubis-base/pull/413) ([gozer](https://github.com/gozer))
+
 ## [v1.2.1](https://github.com/nubisproject/nubis-base/tree/v1.2.1) (2016-07-30)
 [Full Changelog](https://github.com/nubisproject/nubis-base/compare/v1.2.0...v1.2.1)
 
@@ -7,9 +23,11 @@
 
 - \[datadog\] needs to know about our proxies [\#407](https://github.com/nubisproject/nubis-base/issues/407)
 - Upgrade to td-agent 2.x \(fluentd 0.14.x\) [\#399](https://github.com/nubisproject/nubis-base/issues/399)
+- Tag v1.2.1 release [\#409](https://github.com/nubisproject/nubis-base/issues/409)
 
 **Merged pull requests:**
 
+- Update CHANGELOG for v1.2.1 release [\#411](https://github.com/nubisproject/nubis-base/pull/411) ([tinnightcap](https://github.com/tinnightcap))
 - Update builder artifacts for v1.2.1 release [\#410](https://github.com/nubisproject/nubis-base/pull/410) ([tinnightcap](https://github.com/tinnightcap))
 - Bake proxies in our DataDog configs [\#408](https://github.com/nubisproject/nubis-base/pull/408) ([gozer](https://github.com/gozer))
 - MIG agent update to 20160715\_0.a06734a [\#406](https://github.com/nubisproject/nubis-base/pull/406) ([ameihm0912](https://github.com/ameihm0912))
