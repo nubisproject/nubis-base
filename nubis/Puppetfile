@@ -86,3 +86,5 @@ mod 'puppetlabs/firewall', '1.8.0'
 mod 'thias/sysctl', '1.0.6'
 
 mod 'maestrodev/wget', '1.7.3'
+
+mod 'puppetlabs/ntp', '4.2.0'
