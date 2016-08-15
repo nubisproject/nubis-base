@@ -1,0 +1,7 @@
+[template]
+src = "nubis-users.tmpl"
+dest = "/etc/puppet/yaml/common.yaml"
+prefix = "/nubis-users"
+
+keys = [
+]
