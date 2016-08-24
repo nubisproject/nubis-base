@@ -10,5 +10,5 @@ setgid root
 script
   exec >> /var/log/node_exporter.log
   exec 2>&1
-  exec /usr/local/bin/node_exporter
+  exec /usr/local/bin/node_exporter -collector.textfile.directory /var/lib/node_exporter/metrics
 end script
