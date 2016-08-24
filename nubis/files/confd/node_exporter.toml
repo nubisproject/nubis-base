@@ -1,6 +1,6 @@
 [template]
 src = "node_exporter.tmpl"
-dest = "/var/run/node_exporter"
+dest = "/usr/local/bin/nubis-node_exporter"
 prefix = "/environments/%%ENVIRONMENT%%/global/node_exporter"
 
 uid = 0
@@ -11,4 +11,4 @@ keys = [
     "/config"
 ]
 
-reload_cmd = "/var/run/node_exporter"
+reload_cmd = "/usr/local/bin/nubis-node_exporter"
