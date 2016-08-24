@@ -20,7 +20,7 @@ export PATH
 
 name=node_exporter
 program="/usr/local/bin/$name"
-args=""
+args="-collector.textfile.directory /var/lib/node_exporter/metrics"
 pidfile=/var/run/$name.pid
 user=root
 group=root

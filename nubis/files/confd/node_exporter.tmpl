@@ -1,8 +1,32 @@
 #!/bin/bash
 
+PROM_DIR=/var/lib/node_exporter/metrics
+
 ENABLED={{ if exists "/config/enabled" }}{{ getv "/config/enabled" }}{{ else }}0{{ end }}
 
 if [ "$ENABLED" == "1" ]; then
+  # Generate fake metrics for Nubis propreties
+  NUBIS_PROJECT=$(nubis-metadata NUBIS_PROJECT)
+  NUBIS_ENVIRONMENT=$(nubis-metadata NUBIS_ENVIRONMENT)
+  NUBIS_ACCOUNT=$(nubis-metadata NUBIS_ACCOUNT)
+  NUBIS_PURPOSE=$(nubis-metadata NUBIS_PURPOSE}
+
+  cat <<EOF > $PROM_DIR/nubis.prom
+nubis{project="$NUBIS_PROJECT",environment="$NUBIS_ENVIRONMENT",account="$NUBIS_ACCOUNT",purpose="$PURPOSE"} 1
+EOF
+
+  # generate fake metrics for AWS propreties
+  INSTANCE_ID=$(curl -fqs http://169.254.169.254/latest/meta-data/instance-id)
+  REGION=$(curl -fqs http://169.254.169.254/latest/dynamic/instance-identity/document | jq '.region' -r)
+  AZ=$(curl -fqs http://169.254.169.254/latest/meta-data/placement/availability-zone)
+  TYPE=$(curl -fqs http://169.254.169.254/latest/meta-data/instance-type)
+  AMI=$(curl -fqs http://169.254.169.254/latest/meta-data/ami-id)
+  INSTANCE=$(curl -fqs http://169.254.169.254/latest/meta-data/instance-id)
+
+  cat <<EOF > $PROM_DIR/aws.prom
+aws{region="$REGION",availability_zone="$AZ",instance_type="$TYPE",ami_id="$AMI",instance_id="$INSTANCE"} 1
+EOF
+
   service node_exporter start
 else
   service node_exporter stop
