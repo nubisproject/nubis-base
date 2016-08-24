@@ -1,1 +1,1 @@
-DAEMON_ARGS="--user root"
+TD_AGENT_USER="root"
