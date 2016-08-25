@@ -10,6 +10,12 @@ staging::extract { "node_exporter.${node_exporter_version}.tar.gz":
   creates => "/usr/local/bin/node_exporter",
 }
 
+file { "/var/lib/node_exporter":
+  ensure => directory,
+  owner  => root,
+  group  => root,
+  mode   => '0755',
+}->
 file { "/var/lib/node_exporter/metrics":
   ensure => directory,
   owner  => root,
