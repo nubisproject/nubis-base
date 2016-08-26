@@ -16,7 +16,7 @@ if [ "$CURL_RV" != "0" ]; then
 fi
 
 if [ "$1" ]; then
-  source $USERDATA_FILE
+  source $USERDATA_FILE 2>/dev/null
   eval VALUE="\$$1"
   echo "$VALUE"
 else
