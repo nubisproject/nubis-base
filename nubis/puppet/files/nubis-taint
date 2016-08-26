@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [ "$PAM_TYPE" == "open_session" ]; then
+  if [ ! -r /.tainted ]; then
+    NOW=$(date)
+    HOST=$PAM_RHOST
+    USER=$PAM_USER
+    echo "Instance tainted by $USER from $HOST on $NOW" > /.tainted
+  fi
+fi

@@ -1,0 +1,32 @@
+#!/bin/bash
+
+PATH=/usr/local/sbin:/usr/local/bin:$PATH
+
+# Are we tainted to start with?
+nubis-tainted
+TAINTED=$?
+
+if [ "$TAINTED" == "0" ]; then
+  exit
+fi
+
+# Is there anybody logged on ?
+LOGGED_ON_USERS=$(w -h | wc -l)
+if [ "$LOGGED_ON_USERS" != 0 ]; then
+  exit
+fi
+
+# Tainted = 1 is just a warning we are tainted
+# Tainted > 1 means we have expired
+if [ "$TAINTED" -gt "1" ]; then
+  NUBIS_ENVIRONMENT=$(nubis-metadata NUBIS_ENVIRONMENT)
+  EXPIRE_FLAG="environments/$NUBIS_ENVIRONMENT/global/delete_tainted"
+  EXPIRE_ENABLED=$(consulate kv get "$EXPIRE_FLAG")
+
+  if [ "$EXPIRE_ENABLED" == "1" ]; then
+    echo "Expiring this instance NOW"
+    echo "NOTIMPLEMENTEDYET: shutdown -p now"
+  else
+    echo "Would have expired this resource, set $EXPIRE_FLAG to enable"
+  fi
+fi

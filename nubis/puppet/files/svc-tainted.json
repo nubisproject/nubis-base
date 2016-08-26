@@ -1,0 +1,11 @@
+{
+  "service": {
+    "name": "tainted",
+
+    "check": {
+      "notes": "Check to determine if a node is tainted, and if it has expired its grace period",
+      "script": "/usr/local/bin/nubis-tainted",
+      "interval": "30m"
+    }
+  }
+}

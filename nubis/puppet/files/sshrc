@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Bail when no terminal
+if [ "$SSH_TTY" == "" ]; then
+ exit
+fi
+
+/usr/local/bin/nubis-tainted
