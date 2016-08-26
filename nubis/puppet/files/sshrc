@@ -1,8 +1,5 @@
-#!/bin/bash
-
-# Bail when no terminal
-if [ "$SSH_TTY" == "" ]; then
- exit
+# Only check taintedness if we are a terminal
+if [ ! -z "$SSH_TTY" ]; then
+  /usr/local/bin/nubis-tainted
 fi
 
-/usr/local/bin/nubis-tainted
