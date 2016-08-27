@@ -1,6 +1,7 @@
 #!/bin/bash
 
-PATH=/usr/local/sbin:/usr/local/bin:$PATH
+# Be explicit to be safe
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 # Are we tainted to start with?
 nubis-tainted
@@ -25,7 +26,7 @@ if [ "$TAINTED" -gt "1" ]; then
 
   if [ "$EXPIRE_ENABLED" == "1" ]; then
     echo "Expiring this instance NOW"
-    echo "NOTIMPLEMENTEDYET: shutdown -p now"
+    echo "NOTIMPLEMENTEDYET: shutdown -h now"
   else
     echo "Would have expired this resource, set $EXPIRE_FLAG to enable"
   fi
