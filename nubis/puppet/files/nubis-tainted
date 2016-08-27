@@ -1,0 +1,29 @@
+#!/bin/bash
+
+PATH=/usr/local/sbin:/usr/local/bin:$PATH
+
+# Are we tainted ?
+if [ ! -r /.tainted ]; then
+  exit 0
+fi
+
+# Get this from Consul, possibly ?
+GRACE="1 day"
+
+TAINTED_ON=$(stat -c %z /.tainted)
+EXPIRE_ON=$(date --date "$TAINTED_ON +$GRACE" '+%s')
+UNIX_NOW=$(date '+%s')
+
+if [ "$EXPIRE_ON" -gt "$UNIX_NOW" ]; then
+  echo "Instance is tainted and expires on $(date --date "@$EXPIRE_ON")"
+  # Warning
+  STATUS=1
+else
+  echo "Instance is tainted and has expired since $(date --date "@$EXPIRE_ON")"
+  # error
+  STATUS=2
+fi
+
+cat /.tainted
+
+exit $STATUS

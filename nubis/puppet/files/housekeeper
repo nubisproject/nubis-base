@@ -31,6 +31,9 @@ sudo rm -f /var/spool/mail/*
 # Remove nubis cache
 sudo rm -f /var/cache/nubis/*
 
+# Remove taintededness
+sudo rm -f /.tainted
+
 # Document the installed version of packages for forensic analysis later, if needed.
 puppet resource package | sudo tee /etc/puppet/package-versions.pp >/dev/null
 

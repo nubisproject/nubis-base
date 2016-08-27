@@ -1,0 +1,5 @@
+# Only check taintedness if we are a terminal
+if [ ! -z "$SSH_TTY" ]; then
+  /usr/local/bin/nubis-tainted
+fi
+

@@ -90,3 +90,5 @@ mod 'maestrodev/wget', '1.7.3'
 mod 'puppetlabs/ntp', '4.2.0'
 
 mod 'saz/sudo', '3.1.0'
+
+mod 'herculesteam/augeasproviders_pam', '2.1.0'
