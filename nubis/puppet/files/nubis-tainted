@@ -4,11 +4,18 @@ PATH=/usr/local/sbin:/usr/local/bin:$PATH
 
 # Are we tainted ?
 if [ ! -r /.tainted ]; then
+  # OK
   exit 0
 fi
 
-# Get this from Consul, possibly ?
-GRACE="1 day"
+NUBIS_ENVIRONMENT=$(nubis-metadata NUBIS_ENVIRONMENT)
+GRACE_FLAG="environments/$NUBIS_ENVIRONMENT/global/tainted/grace"
+GRACE=$(consulate kv get "$GRACE_FLAG")
+
+# Grace period not enabled
+if [ "$GRACE_PERIOD" == "None" ]; then
+  GRACE="1 hour"
+fi
 
 TAINTED_ON=$(stat -c %z /.tainted)
 EXPIRE_ON=$(date --date "$TAINTED_ON +$GRACE" '+%s')

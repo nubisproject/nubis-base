@@ -21,13 +21,13 @@ fi
 # Tainted > 1 means we have expired
 if [ "$TAINTED" -gt "1" ]; then
   NUBIS_ENVIRONMENT=$(nubis-metadata NUBIS_ENVIRONMENT)
-  EXPIRE_FLAG="environments/$NUBIS_ENVIRONMENT/global/delete_tainted"
-  EXPIRE_ENABLED=$(consulate kv get "$EXPIRE_FLAG")
+  DELETE_FLAG="environments/$NUBIS_ENVIRONMENT/global/tainted/delete"
+  DELETE_ENABLED=$(consulate kv get "$DELETE_FLAG")
 
-  if [ "$EXPIRE_ENABLED" == "1" ]; then
+  if [ "$DELETE_ENABLED" == "1" ]; then
     echo "Expiring this instance NOW"
-    echo "NOTIMPLEMENTEDYET: shutdown -h now"
+    shutdown -h now
   else
-    echo "Would have expired this resource, set $EXPIRE_FLAG to enable"
+    echo "Would have expired this resource, set $DELETE_FLAG to enable"
   fi
 fi
