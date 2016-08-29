@@ -10,10 +10,10 @@ fi
 
 NUBIS_ENVIRONMENT=$(nubis-metadata NUBIS_ENVIRONMENT)
 GRACE_FLAG="environments/$NUBIS_ENVIRONMENT/global/tainted/grace"
-GRACE=$(consulate kv get "$GRACE_FLAG")
+GRACE=$(consulate kv get "$GRACE_FLAG" 2>/dev/null)
 
 # Grace period not enabled
-if [ "$GRACE_PERIOD" == "None" ]; then
+if [ "$GRACE" == "None" ] || [ "$GRACE" == "" ]; then
   GRACE="1 hour"
 fi
 
