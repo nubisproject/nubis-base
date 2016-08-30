@@ -23,6 +23,7 @@ if [ "$CURL_RV" == "23" ] && [ "$(id -u)" != "0" ]; then
     USERDATA_FILE=~/.nubis-metadata
     curl --retry 5 -fqs -z $USERDATA_FILE -o $USERDATA_FILE http://169.254.169.254/latest/user-data
     CURL_RV=$?
+  fi
 fi
 
 if [ "$CURL_RV" != "0" ]; then
