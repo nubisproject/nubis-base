@@ -13,7 +13,7 @@ file { '/etc/puppet/hiera.yaml':
     source => 'puppet:///nubis/files/hiera.yaml',
 }
 
-file { 'etc/puppet/yaml/nubis_users':
+file { '/etc/puppet/yaml/nubis_users':
   ensure => directory,
   owner  => root,
   group  => root,
@@ -26,7 +26,7 @@ file { 'nubis_users_yaml':
   group   => root,
   recurse => 'true',
   source  => 'puppet:///nubis/files/nubis_users/hiera',
-  require => File['etc/puppet/yaml/nubis_users'],
+  require => File['/etc/puppet/yaml/nubis_users'],
 }
 
 file { '/etc/confd/conf.d/nubis-users.toml':
