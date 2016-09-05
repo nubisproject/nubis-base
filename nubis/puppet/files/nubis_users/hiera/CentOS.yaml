@@ -1,10 +1,10 @@
 # These users are users that come default on the centos os
 ---
-nubis_users::managed::managehome: false
-nubis_users::managed::shell: '/sbin/nologin'
-
+nubis_users::managed::user:
   centos:
     ensure: present
     managehome: true
     shell: /bin/bash
 
+nubis_users::managed::managehome: false
+nubis_users::managed::shell: '/sbin/nologin'

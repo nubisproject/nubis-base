@@ -1,10 +1,9 @@
 ---
-nubis_users::managed::managehome: false
-nubis_users::managed::shell: '/sbin/nologin'
-
-nubis_users::managed:
+nubis_users::managed::user:
   ec2-user:
     ensure: present
     managehome: true
     shell: /bin/bash
 
+nubis_users::managed::managehome: false
+nubis_users::managed::shell: '/sbin/nologin'
