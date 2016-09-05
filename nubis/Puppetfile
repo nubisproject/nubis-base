@@ -75,7 +75,7 @@ mod 'nubis/mig',
     :ref => 'v1.0.1-2'
 
 mod 'nubis/nubis_users',
-    :git => 'https://github.com/limed/nubis-puppet-nubis_users'
+    :git => 'https://github.com/nubisproject/nubis-puppet-nubis_users'
 
 # This developer doesn't tag his releases on github
 # https://github.com/maxchk/puppet-varnish/pull/57
