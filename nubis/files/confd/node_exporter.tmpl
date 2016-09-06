@@ -9,7 +9,7 @@ if [ "$ENABLED" == "1" ]; then
   NUBIS_PROJECT=$(nubis-metadata NUBIS_PROJECT)
   NUBIS_ENVIRONMENT=$(nubis-metadata NUBIS_ENVIRONMENT)
   NUBIS_ACCOUNT=$(nubis-metadata NUBIS_ACCOUNT)
-  NUBIS_PURPOSE=$(nubis-metadata NUBIS_PURPOSE}
+  NUBIS_PURPOSE=$(nubis-metadata NUBIS_PURPOSE)
 
   cat <<EOF > $PROM_DIR/nubis.prom
 nubis{project="$NUBIS_PROJECT",environment="$NUBIS_ENVIRONMENT",account="$NUBIS_ACCOUNT",purpose="$PURPOSE"} 1
