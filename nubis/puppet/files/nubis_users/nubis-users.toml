@@ -1,7 +1,7 @@
 [template]
 src = "nubis-users.tmpl"
 dest = "/etc/puppet/yaml/nubis_users/common.yaml"
-prefix = "/nubis-users"
+prefix = "/environment/nubis-users"
 
 keys = [
     "/global-admins",
