@@ -29,7 +29,7 @@ file { '/etc/confd/conf.d/nubis-users.toml':
     source => 'puppet:///nubis/files/nubis_users/nubis-users.toml',
 }
 
-file { '/etc/confd/templates/nubis-users.toml':
+file { '/etc/confd/templates/nubis-users.tmpl':
     ensure => file,
     owner  => root,
     group  => root,
