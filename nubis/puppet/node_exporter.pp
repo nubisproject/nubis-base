@@ -7,6 +7,7 @@ staging::file { "node_exporter.${node_exporter_version}.tar.gz":
 }->
 staging::extract { "node_exporter.${node_exporter_version}.tar.gz":
   target  => "/usr/local/bin",
+  strip   => 1,
   creates => "/usr/local/bin/node_exporter",
 }
 
