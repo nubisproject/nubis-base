@@ -1,0 +1,10 @@
+---
+:backends:
+  - yaml
+:yaml:
+  :datadir: '/etc/puppet/yaml'
+
+:hierarchy:
+  - "nubis_users/%{::operatingsystem}"
+  - nubis_users/common
+  - common
