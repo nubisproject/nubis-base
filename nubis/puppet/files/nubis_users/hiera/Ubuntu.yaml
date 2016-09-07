@@ -5,5 +5,8 @@ nubis_users::managed::user:
     managehome: true
     shell: /bin/bash
 
+  consul:
+    ensure: present
+
 nubis_users::managed::managehome: false
 nubis_users::managed::shell: '/sbin/nologin'
