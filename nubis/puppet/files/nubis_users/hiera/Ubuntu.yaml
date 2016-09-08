@@ -9,4 +9,4 @@ nubis_users::managed::user:
     ensure: present
 
 nubis_users::managed::managehome: false
-nubis_users::managed::shell: '/sbin/nologin'
+nubis_users::managed::shell: '/usr/sbin/nologin'
