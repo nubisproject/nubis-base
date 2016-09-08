@@ -1,0 +1,16 @@
+{
+  "provisioners": [
+  {
+    "type": "file",
+    "source": "nubis/tests",
+    "destination": "/tmp",
+    "order": "100"
+  },
+  {
+    "type": "shell",
+    "script": "nubis/tests/run-tests",
+    "except" : [ "amazon-ebs-ubuntu" ],
+    "order": "101"
+  }
+  ]
+}
