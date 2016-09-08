@@ -1,3 +1,10 @@
+# Sudo module actually purges out config, this here tells it to not do that
+# This basically leaves whatever is in /etc/sudoers and /etc/sudoers.d alone
+class { 'sudo':
+  purge               => false,
+  config_file_replace => false,
+}
+
 file { '/etc/puppet/yaml':
     ensure => directory,
     owner  => root,
