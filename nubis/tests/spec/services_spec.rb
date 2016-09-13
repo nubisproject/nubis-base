@@ -5,7 +5,15 @@ describe service('consul') do
   it { should_not be_enabled }
 end
 
+describe service('node_exporter') do
+  it { should_not be_enabled }
+end
+
 # These should be enabled
+describe service('sshd') do
+  it { should be_enabled }
+end
+
 describe service('confd') do
   it { should be_enabled }
 end
