@@ -39,6 +39,5 @@ class { 'consul_template':
 
 # Package['tar'] is defined by consul_template above
 class { 'envconsul':
-  version  => '0.5.0',
-  require  => Package['tar'],
+  version  => '0.6.1',
 }
