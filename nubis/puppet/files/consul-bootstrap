@@ -150,6 +150,20 @@ else
   echo "Failed to configure security, Consul is most likely broken!"
 fi
 
+
+if [ "$NUBIS_ENVIRONMENT" != "" ]; then
+  find /etc/consul -type f -name '*.json' | xargs --verbose sed -i -e "s/%%ENVIRONMENT%%/$NUBIS_ENVIRONMENT/g"
+fi
+
+if [ "$NUBIS_STACK" != "" ]; then
+  find /etc/consul -type f -name '*.json' | xargs --verbose sed -i -e "s/%%STACK%%/$NUBIS_STACK/g"
+fi
+
+if [ "$NUBIS_PROJECT" != "" ]; then
+  find /etc/consul -type f -name '*.json' | xargs --verbose sed -i -e "s/%%PROJECT%%/$NUBIS_PROJECT/g"
+fi
+
+
 # RHEL sysv consul init scripts are buggy
 # https://github.com/nubisproject/nubis-base/issues/247
 OSFAMILY=$(facter osfamily)
