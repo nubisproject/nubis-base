@@ -58,7 +58,7 @@ mod 'datadog/datadog_agent', '1.7.1'
 
 mod 'nubis/nubis_discovery',
     :git => 'https://github.com/Nubisproject/nubis-puppet-discovery.git',
-    :ref => 'v1.0.0'
+    :ref => 'v1.2.2'
 
 mod 'nubis/nubis_configuration',
     :git => 'https://github.com/Nubisproject/nubis-puppet-configuration.git',
