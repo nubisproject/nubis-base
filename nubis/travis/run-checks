@@ -5,14 +5,16 @@ if [ "$BUNDLE_GEMFILE" == "" ]; then
   export BUNDLE_GEMFILE="$(dirname $0)/Gemfile"
 fi
 
+STATUS=0
+
 echo "Running Puppet Lint"
-bundle exec puppet-lint --no-puppet_url_without_modules-check --no-80chars-check --no-140chars-check --fail-on-warnings nubis/puppet/*pp
+bundle exec puppet-lint --no-puppet_url_without_modules-check --no-80chars-check --no-140chars-check --fail-on-warnings nubis/puppet/*pp || STATUS=1
 
 echo "Running ShellCheck"
-find nubis/ -path nubis/travis/vendor -prune -o -type f -print0 | xargs -0 file | grep 'shell script' | cut -d: -f1 | xargs shellcheck
+find nubis/ -path nubis/travis/vendor -prune -o -type f -print0 | xargs -0 file | grep 'shell script' | cut -d: -f1 | xargs shellcheck || STATUS=1
 
 echo "Running JSON Lint"
-find nubis/ -path nubis/travis/vendor -prune -o -name '*.json' -print0 | xargs -0 bundle exec jsonlint
+find nubis/ -path nubis/travis/vendor -prune -o -name '*.json' -print0 | xargs -0 bundle exec jsonlint || STATUS=1
 
 if [ -f "nubis/Puppetfile" ]; then
   echo "Installing specified puppet modules"
@@ -23,3 +25,4 @@ if [ -f "nubis/Puppetfile" ]; then
   ( cd nubis && bundle exec librarian-puppet outdated )
 fi
 
+exit $STATUS
