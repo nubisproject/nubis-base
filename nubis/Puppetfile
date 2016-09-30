@@ -45,8 +45,8 @@ mod 'nubis-confd_site',
     :ref => '0.1.1'
 
 mod 'srf/fluentd',
-    :git => 'https://github.com/gozer/puppet-fluentd.git',
-    :ref => 'df5b93d7dddf8f43b82dced9e27c52df6a270642'
+    :git => 'https://github.com/mmz-srf/puppet-fluentd.git',
+    :ref => 'c5c8b7872b1359caaa4d89ace170ff230b1c9d76'
 
 mod 'mjhas/postfix', '1.0.0'
 
