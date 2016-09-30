@@ -10,11 +10,8 @@ addons:
   apt:
     sources:
     - debian-sid
-    - sourceline: 'deb http://apt.puppetlabs.com trusty dependencies'
-      key_url: 'https://apt.puppetlabs.com/DEB-GPG-KEY-puppetlabs'
     packages:
     - shellcheck
-    - puppet
 script:
 - nubis/travis/run-checks
 notifications:
