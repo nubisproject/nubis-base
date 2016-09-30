@@ -56,10 +56,10 @@ if [[ -f /etc/debian_version ]]; then
    # Install puppet
    sudo -E apt-get -y install puppet=${ubuntu_puppet_version} puppet-common=${ubuntu_puppet_version}
 elif [[ -f /etc/redhat-release ]]; then
-   ELV=`rpm --queryformat '%{Version}' -qf /etc/redhat-release`
+   ELV=$(rpm --queryformat '%{Version}' -qf /etc/redhat-release)
 
-   sudo -E rpm -ivh https://yum.puppetlabs.com/puppetlabs-release-el-${ELV}.noarch.rpm
-   sudo -E rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-${ELV}.noarch.rpm
+   sudo -E rpm -ivh "https://yum.puppetlabs.com/puppetlabs-release-el-${ELV}.noarch.rpm"
+   sudo -E rpm -ivh "https://dl.fedoraproject.org/pub/epel/epel-release-latest-${ELV}.noarch.rpm"
 
    # Yum can be stinky
    sudo -E yum clean all
@@ -77,6 +77,8 @@ elif [[ -f /etc/os-release ]]; then
 
       # Disable auto-updating!
       echo "Disabling Amazon Auto-Updating"
+
+      # shellcheck disable=SC2016
       sudo perl -pi -e's[^(\s*)repo_upgrade:.*][$1repo_upgrade: false]g' /etc/cloud/cloud.cfg
 
       # These check for update when regenerating MOTD, we don't care and it can run YUM behind

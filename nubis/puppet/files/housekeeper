@@ -3,10 +3,10 @@
 # Cloud-init simply appends ssh keys, so after a build we want to truncate any
 # authorized_keys files to have positive control over configured keys.
 for homedir in $(getent passwd | cut -d ':' -f 6); do
-   if [[ -e ${homedir}/.ssh/authorized_keys ]]; then
-      sudo rm -f ${homedir}/.ssh/authorized_keys
-   elif [[ -e ${homedir}/.ssh/authorized_keys2 ]]; then
-      sudo rm -f ${homedir}/.ssh/authorized_keys2
+   if [[ -e "${homedir}/.ssh/authorized_keys" ]]; then
+      sudo rm -f "${homedir}/.ssh/authorized_keys"
+   elif [[ -e "${homedir}/.ssh/authorized_keys2" ]]; then
+      sudo rm -f "${homedir}/.ssh/authorized_keys2"
    fi
 done
 

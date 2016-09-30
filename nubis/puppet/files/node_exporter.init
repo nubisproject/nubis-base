@@ -67,8 +67,9 @@ stop() {
   if status ; then
     pid=$(cat "$pidfile")
     trace "Killing $name (pid $pid) with SIGTERM"
-    kill -TERM $pid
+    kill -TERM "$pid"
     # Wait for it to exit.
+    # shellcheck disable=SC2034
     for i in 1 2 3 4 5 ; do
       trace "Waiting $name (pid $pid) to die..."
       status || break
@@ -85,7 +86,7 @@ stop() {
 status() {
   if [ -f "$pidfile" ] ; then
     pid=$(cat "$pidfile")
-    if ps -p $pid > /dev/null 2> /dev/null ; then
+    if ps -p "$pid" > /dev/null 2> /dev/null ; then
       # process by this pid is running.
       # It may not be our pid, but that's what you get with just pidfiles.
       # TODO(sissel): Check if this process seems to be the same as the one we
@@ -103,7 +104,7 @@ status() {
 force_stop() {
   if status ; then
     stop
-    status && kill -KILL $(cat "$pidfile")
+    status && kill -KILL "$(cat "$pidfile")"
   fi
 }
 
@@ -116,7 +117,6 @@ esac
 
 case "$1" in
   force-start)
-    PRESTART=no
     exec "$0" start
     ;;
   start)
