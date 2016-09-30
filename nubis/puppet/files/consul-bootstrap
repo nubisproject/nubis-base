@@ -154,15 +154,15 @@ fi
 
 
 if [ "$NUBIS_ENVIRONMENT" != "" ]; then
-  find /etc/consul -type f -name '*.json' | xargs --verbose sed -i -e "s/%%ENVIRONMENT%%/$NUBIS_ENVIRONMENT/g"
+  find /etc/consul -type f -name '*.json' -print0 | xargs -0 --verbose sed -i -e "s/%%ENVIRONMENT%%/$NUBIS_ENVIRONMENT/g"
 fi
 
 if [ "$NUBIS_STACK" != "" ]; then
-  find /etc/consul -type f -name '*.json' | xargs --verbose sed -i -e "s/%%STACK%%/$NUBIS_STACK/g"
+  find /etc/consul -type f -name '*.json' -print0 | xargs -0 --verbose sed -i -e "s/%%STACK%%/$NUBIS_STACK/g"
 fi
 
 if [ "$NUBIS_PROJECT" != "" ]; then
-  find /etc/consul -type f -name '*.json' | xargs --verbose sed -i -e "s/%%PROJECT%%/$NUBIS_PROJECT/g"
+  find /etc/consul -type f -name '*.json' -print0 | xargs -0 --verbose sed -i -e "s/%%PROJECT%%/$NUBIS_PROJECT/g"
 fi
 
 
