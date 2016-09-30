@@ -71,6 +71,7 @@ elif [[ -f /etc/redhat-release ]]; then
    sudo -E yum -y install ${redhat_puppet_package} unzip
 
 elif [[ -f /etc/os-release ]]; then
+   # shellcheck disable=SC1091
    . /etc/os-release
 
    if [[ "$NAME" = "Amazon Linux AMI" ]]; then

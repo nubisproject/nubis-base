@@ -3,6 +3,7 @@
 declare api_key
 
 # Load the settings from Consul
+# shellcheck disable=SC1091
 source /etc/nubis-config/datadog.sh
 
 # fix the config file (poor-man's Augeas)

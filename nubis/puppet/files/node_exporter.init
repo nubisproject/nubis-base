@@ -27,7 +27,9 @@ group=root
 chroot="/"
 chdir="/"
 
+# shellcheck disable=SC1090
 [ -r /etc/default/$name ] && . /etc/default/$name
+# shellcheck disable=SC1090
 [ -r /etc/sysconfig/$name ] && . /etc/sysconfig/$name
 
 trace() {
