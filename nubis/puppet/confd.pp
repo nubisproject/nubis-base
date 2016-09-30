@@ -7,12 +7,12 @@ class { 'confd':
 }
 
 cron { 'confd-watchdog':
-  ensure => 'present',
-  command => "service confd start 1>/dev/null 2>/dev/null",
-  hour => '*',
-  minute => '*/11',
-  user => 'root',
+  ensure      => 'present',
+  command     => 'service confd start 1>/dev/null 2>/dev/null',
+  hour        => '*',
+  minute      => '*/11',
+  user        => 'root',
   environment => [
-    "PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin:/opt/aws/bin",
+    'PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin:/opt/aws/bin',
   ],
 }

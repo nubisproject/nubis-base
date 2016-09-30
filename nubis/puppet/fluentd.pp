@@ -5,46 +5,46 @@ class { 'fluentd':
 
 # Make fluentd run as root so it can read all log files
 if $osfamily == 'RedHat' {
-  file { "/etc/sysconfig/td-agent":
-    ensure => "present",
-    owner  => "root",
-    group  => "root",
-    source => "puppet:///nubis/files/fluentd.sysconfig",
+  file { '/etc/sysconfig/td-agent':
+    ensure => 'present',
+    owner  => 'root',
+    group  => 'root',
+    source => 'puppet:///nubis/files/fluentd.sysconfig',
   }
 }
 elsif $osfamily == 'Debian' {
-  exec { "change-fluentd-user":
+  exec { 'change-fluentd-user':
     command => "/usr/bin/perl -pi -e's/^(TD_AGENT_(USER|GROUP))=td-agent/\$1=root/g' /etc/init.d/td-agent",
     require => Class['Fluentd::Packages'],
   }
 }
 else {
-  fail("Don't know how to make fluentd run as root on osfamily:$osfamily")
+  fail("Don't know how to make fluentd run as root on osfamily:${osfamily}")
 }
 
 if $osfamily == 'Debian' {
-  $ruby_dev = "ruby-dev"
-  $syslog_main = "/var/log/syslog"
-  $syslog_mail = "/var/log/mail.log"
+  $ruby_dev = 'ruby-dev'
+  $syslog_main = '/var/log/syslog'
+  $syslog_mail = '/var/log/mail.log'
 }
 else {
-  $ruby_dev = "ruby-devel"
-   $syslog_main = "/var/log/messages"
-   $syslog_mail = "/var/log/maillog"
+  $ruby_dev = 'ruby-devel'
+  $syslog_main = '/var/log/messages'
+  $syslog_mail = '/var/log/maillog'
 }
 
 # For the ec2 plugin
-package { [$ruby_dev, "make", "gcc"]:
-  ensure => "present",
+package { [$ruby_dev, 'make', 'gcc']:
+  ensure => 'present',
 }
 
 fluentd::install_plugin { 'ec2-metadata':
+  ensure      => '0.0.11',
   plugin_type => 'gem',
   plugin_name => 'fluent-plugin-ec2-metadata',
-  ensure      => '0.0.11',
   require     => [
-    Package["make"],
-    Package["gcc"],
+    Package['make'],
+    Package['gcc'],
     Package[$ruby_dev],
   ],
 }
@@ -85,10 +85,12 @@ fluentd::match { 'forward':
 #  }
 #}
 
-file { "/etc/td-agent/config.d/ec2_metadata.conf":
-  ensure => "present",
-  owner	 => "td-agent",
-  group  => "td-agent",
+file { '/etc/td-agent/config.d/ec2_metadata.conf':
+  ensure  => 'present',
+  owner   => 'td-agent',
+  group   => 'td-agent',
+
+  # lint:ignore:single_quote_string_with_variables
   content => '
     <match forward.**>
       type ec2_metadata
@@ -100,6 +102,7 @@ file { "/etc/td-agent/config.d/ec2_metadata.conf":
         region        ${region}
       </record>
     </match>',
+  # lint:endignore
 }
 
 fluentd::source { 'syslog_main':
@@ -165,12 +168,12 @@ if $osfamily == 'RedHat' {
 }
 
 cron { 'fluent-watchdog':
-  ensure => 'present',
-  command => "service td-agent status 1>/dev/null || service td-agent start",
-  hour => '*',
-  minute => '*/11',
-  user => 'root',
+  ensure      => 'present',
+  command     => 'service td-agent status 1>/dev/null || service td-agent start',
+  hour        => '*',
+  minute      => '*/11',
+  user        => 'root',
   environment => [
-    "PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin:/opt/aws/bin",
+    'PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin:/opt/aws/bin',
   ],
 }

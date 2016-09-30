@@ -32,6 +32,7 @@ if [ "$CURL_RV" != "0" ]; then
 fi
 
 if [ "$1" ]; then
+  # shellcheck disable=SC1090
   source $USERDATA_FILE 2>/dev/null
   eval VALUE="\$$1"
   echo "$VALUE"

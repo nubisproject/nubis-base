@@ -2,11 +2,11 @@
 
 if $osfamily == 'RedHat' {
   service { 'rpcbind':
-    enable => false,
     ensure => 'stopped',
+    enable => false,
   }
   service { 'nfslock':
-    enable => false,
     ensure => 'stopped',
+    enable => false,
   }
 }
