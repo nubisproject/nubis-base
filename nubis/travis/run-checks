@@ -2,7 +2,8 @@
 set -e
 
 if [ "$BUNDLE_GEMFILE" == "" ]; then
-  export BUNDLE_GEMFILE="$(dirname $0)/Gemfile"
+  BUNDLE_GEMFILE="$(dirname "$0")/Gemfile"
+  export BUNDLE_GEMFILE
 fi
 
 STATUS=0
