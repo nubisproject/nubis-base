@@ -4,10 +4,10 @@ export PATH=/usr/local/bin:$PATH
 
 # This is an auto-joiner for consul, should be moved to /etc/nubis.d/00-consul-bootstrap or similar
 
-eval `curl -fq http://169.254.169.254/latest/user-data`
+eval "$(curl -fq http://169.254.169.254/latest/user-data)"
 
-INSTANCE_ID=`curl -fq http://169.254.169.254/latest/meta-data/instance-id`
-REGION=`curl -s http://169.254.169.254/latest/dynamic/instance-identity/document | jq '.region' -r`
+INSTANCE_ID=$(curl -fq http://169.254.169.254/latest/meta-data/instance-id)
+REGION=$(curl -s http://169.254.169.254/latest/dynamic/instance-identity/document | jq '.region' -r)
 
 CONSUL_DC="${NUBIS_ENVIRONMENT}-${REGION}-${NUBIS_ACCOUNT}"
 CONSUL_SERVICE_NAME="consul"
@@ -22,24 +22,24 @@ CONSUL_CURL="curl --retry 10 -fks"
 # We are a client
 if [ ! -f /etc/consul/zzz-join.skip ]; then
   # We wait forever here for Consul to show up
-  CONSUL_PEERS=$($CONSUL_CURL $CONSUL_UI/v1/status/peers)
+  CONSUL_PEERS=$($CONSUL_CURL "$CONSUL_UI/v1/status/peers")
 
   SLEEP=1
   while [ "$CONSUL_PEERS" == "null" ] || [ "$CONSUL_PEERS" == "" ]; do
     echo "Waiting $SLEEP secs for Consul discovery to find peers..."
     sleep $SLEEP
-    CONSUL_PEERS=$($CONSUL_CURL $CONSUL_UI/v1/status/peers)
+    CONSUL_PEERS=$($CONSUL_CURL "$CONSUL_UI/v1/status/peers")
     let SLEEP=SLEEP+1
   done
 
   # We also need to wait for Consul to report having completed its initial startup sequence
-  CONSUL_READY=$($CONSUL_CURL $CONSUL_UI/v1/kv/consul-ready)
+  CONSUL_READY=$($CONSUL_CURL "$CONSUL_UI/v1/kv/consul-ready")
 
   SLEEP=1
   while [ "$CONSUL_READY" == "null" ] || [ "$CONSUL_READY" == "" ]; do
     echo "Waiting $SLEEP secs for Consul to report ready"
     sleep $SLEEP
-    CONSUL_READY=$($CONSUL_CURL $CONSUL_UI/v1/kv/consul-ready)
+    CONSUL_READY=$($CONSUL_CURL "$CONSUL_UI/v1/kv/consul-ready")
     let SLEEP=SLEEP+1
   done
 
@@ -64,7 +64,7 @@ if [ -z "$CONSUL_SECRET" ]; then
   
   # discover via Consul
   if [ -z "$SECRET" ]; then
-    SECRET=`$CONSUL_CURL $CONSUL_UI/v1/kv/environments/$NUBIS_ENVIRONMENT/global/consul/secret?raw`
+    SECRET=$($CONSUL_CURL "$CONSUL_UI/v1/kv/environments/$NUBIS_ENVIRONMENT/global/consul/secret?raw")
   fi
   
   if [ ! -z "$SECRET" ]; then
@@ -84,9 +84,9 @@ if [ ! -f /etc/consul/zzz-join.skip ]; then
   # Auto-discover initial servers with fallback to $CONSUL_JOIN, just in case
   CONSUL_JOIN="$CONSUL_DOMAIN"
 
-  CONSUL_PEERS=$($CONSUL_CURL $CONSUL_UI/v1/status/peers)
+  CONSUL_PEERS=$($CONSUL_CURL "$CONSUL_UI/v1/status/peers")
 
-  SERVERS=`echo $CONSUL_PEERS | jq ". |= .+ [\"$CONSUL_JOIN\"]" | perl -pe's/:\d+//g'`
+  SERVERS=$(echo "$CONSUL_PEERS" | jq ". |= .+ [\"$CONSUL_JOIN\"]" | perl -pe's/:\d+//g')
 
   if [ "$SERVERS" ]; then
   cat <<EOF | tee /etc/consul/zzz-join.json
@@ -113,10 +113,10 @@ fi
 
 # Auto-discover certificate and key
 if [ ! -f /etc/consul/consul.pem ]; then
-  $CONSUL_CURL -o /etc/consul/consul.pem $CONSUL_UI/v1/kv/environments/$NUBIS_ENVIRONMENT/global/consul/cert?raw
+  $CONSUL_CURL -o /etc/consul/consul.pem "$CONSUL_UI/v1/kv/environments/$NUBIS_ENVIRONMENT/global/consul/cert?raw"
 fi
 if [ ! -f /etc/consul/consul.key ]; then
-  $CONSUL_CURL -o /etc/consul/consul.key $CONSUL_UI/v1/kv/environments/$NUBIS_ENVIRONMENT/global/consul/key?raw
+  $CONSUL_CURL -o /etc/consul/consul.key "$CONSUL_UI/v1/kv/environments/$NUBIS_ENVIRONMENT/global/consul/key?raw"
 fi
 
 if [ -f /etc/consul/consul.pem ]; then
@@ -161,7 +161,7 @@ fi
 # Perform a clean nuke and restart of Consul
 service consul stop
 rm -rf /var/lib/consul/serf/*
-$DAEMONIZE $SERVICE consul start
+$DAEMONIZE "$SERVICE" consul start
 
 ### XXX: Wait for consul to start here
 sleep 5
