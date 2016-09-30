@@ -1,5 +1,7 @@
 #!/bin/bash
 
+declare api_key
+
 # Load the settings from Consul
 source /etc/nubis-config/datadog.sh
 
