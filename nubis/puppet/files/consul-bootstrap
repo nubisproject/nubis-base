@@ -98,8 +98,10 @@ EOF
 fi
 
 # Discover our ACL token with credstash if user-data didn't provide one
-if $( [ "$CONSUL_ACL_TOKEN" == "anonymous" ] || [ "$CONSUL_ACL_TOKEN" == "" ] ) && [ ! -f /etc/consul/zzz-join.skip ]; then
-  CONSUL_ACL_TOKEN=$(nubis-secret --global get consul/acl_token)
+if [ "$CONSUL_ACL_TOKEN" == "anonymous" ] || [ "$CONSUL_ACL_TOKEN" == "" ]; then
+  if [ ! -f /etc/consul/zzz-join.skip ]; then
+    CONSUL_ACL_TOKEN=$(nubis-secret --global get consul/acl_token)
+  fi
 fi
 
 if [ "$CONSUL_ACL_TOKEN" ]; then
