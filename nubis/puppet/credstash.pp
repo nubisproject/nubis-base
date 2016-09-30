@@ -9,19 +9,19 @@
 #}
 
 $pythondev = $::osfamily ? {
-    'RedHat' => $::operatingsystem ? {
-       'Amazon' => "python27-devel",
-       default  => "python-devel",
-     },
-    'Debian' => "python-dev"
+  'RedHat' => $::operatingsystem ? {
+    'Amazon' => 'python27-devel',
+    default  => 'python-devel',
+  },
+  'Debian' => 'python-dev'
 }
 
 $pythonpip = $::osfamily ? {
-    'RedHat' => $::operatingsystem ? {
-       'Amazon' => "python27-pip",
-       default  => "python-pip",
-    },
-    'Debian' => "python-pip"
+  'RedHat' => $::operatingsystem ? {
+    'Amazon' => 'python27-pip',
+    default  => 'python-pip',
+  },
+  'Debian' => 'python-pip'
 }
 
 package { $pythondev:

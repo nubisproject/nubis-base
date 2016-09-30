@@ -1,8 +1,8 @@
 class { 'dnsmasq':
   interface         => 'lo',
-  reload_resolvconf        => false,
-  restart                  => false,
-  service_ensure           => 'stopped',
+  reload_resolvconf => false,
+  restart           => false,
+  service_ensure    => 'stopped',
 }
 
 dnsmasq::dnsserver { 'consul':
