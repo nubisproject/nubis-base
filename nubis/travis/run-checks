@@ -12,7 +12,7 @@ echo "Running Puppet Lint"
 bundle exec puppet-lint --no-puppet_url_without_modules-check --no-80chars-check --no-140chars-check --fail-on-warnings nubis/puppet/*pp || STATUS=1
 
 echo "Running ShellCheck"
-find nubis/ -path nubis/travis/vendor -prune -o -type f -a \! -name '*.tmpl' -print0 | xargs -0 file | grep 'shell script' | cut -d: -f1 | xargs shellcheck || STATUS=1
+find nubis/ -path nubis/travis/vendor -prune -o -path nubis/librarian-puppet -prune -o -path nubis/.tmp -prune -o -type f -a \! -name '*.tmpl' -print0 | xargs -0 file | grep 'shell script' | cut -d: -f1 | xargs shellcheck || STATUS=1
 
 echo "Running JSON Lint"
 find nubis/ -path nubis/travis/vendor -prune -o -name '*.json' -print0 | xargs -0 bundle exec jsonlint || STATUS=1
