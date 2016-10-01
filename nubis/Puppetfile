@@ -45,8 +45,8 @@ mod 'nubis-confd_site',
     :ref => '0.1.1'
 
 mod 'srf/fluentd',
-    :git => 'https://github.com/gozer/puppet-fluentd.git',
-    :ref => 'df5b93d7dddf8f43b82dced9e27c52df6a270642'
+    :git => 'https://github.com/mmz-srf/puppet-fluentd.git',
+    :ref => 'c5c8b7872b1359caaa4d89ace170ff230b1c9d76'
 
 mod 'mjhas/postfix', '1.0.0'
 
@@ -58,7 +58,7 @@ mod 'datadog/datadog_agent', '1.7.1'
 
 mod 'nubis/nubis_discovery',
     :git => 'https://github.com/Nubisproject/nubis-puppet-discovery.git',
-    :ref => 'v1.0.0'
+    :ref => 'v1.2.2'
 
 mod 'nubis/nubis_configuration',
     :git => 'https://github.com/Nubisproject/nubis-puppet-configuration.git',

@@ -1,9 +1,10 @@
 #!/bin/bash
 
 # Be explicitly all-inclusive in our PATH, just to be safe
-export PATH="$HOME/bin:$(ruby -e 'puts Gem.user_dir')/bin:$PATH:/usr/local/sbin:/usr/sbin:/sbin"
+PATH="$HOME/bin:$(ruby -e 'puts Gem.user_dir')/bin:$PATH:/usr/local/sbin:/usr/sbin:/sbin"
+export PATH
 
-cd /tmp/tests
+cd /tmp/tests || exit 1
 
 gem install bundler --no-ri --no-rdoc --user-install
 

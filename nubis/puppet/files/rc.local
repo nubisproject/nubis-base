@@ -7,6 +7,7 @@ export PATH
 
 # Load up proxy settings
 if [ -r /etc/profile.d/proxy.sh ]; then
+  # shellcheck disable=SC1091
   . /etc/profile.d/proxy.sh
 fi
 
