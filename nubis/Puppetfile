@@ -5,28 +5,30 @@ forge "https://forgeapi.puppetlabs.com"
 ##########################################################
 
 # modules from the puppet forge
-mod 'puppetlabs/stdlib', '4.11.0'
-mod 'puppetlabs/mysql', '3.6.2'
+mod 'puppetlabs/stdlib', '4.12.0'
+mod 'puppetlabs/mysql', '3.9.0'
 
-mod 'puppetlabs/concat', '1.2.4'
+mod 'puppetlabs/concat', '1.2.5'
 
-mod 'puppetlabs/apache', '1.8.1'
+mod 'puppetlabs/apache', '1.10.0'
 
 # 2.x is out, but it causes strange apt update race conditions in fluentd+datadog
 mod 'puppetlabs/apt', '1.8.0'
 
-mod 'puppetlabs/rabbitmq', '5.3.1'
-mod 'puppetlabs/vcsrepo', '1.3.2'
-mod 'jfryman/nginx', '0.3.0'
+mod 'puppetlabs/rabbitmq', '5.5.0'
+mod 'puppetlabs/vcsrepo', '1.4.0'
 
-mod 'ajcrowe/supervisord', '0.6.0'
-mod 'torrancew/cron', '0.1.0'
+# New versions coming from https://github.com/voxpupuli/puppet-nginx, not released yet
+mod 'jfryman/nginx', '999.999.999'
+
+mod 'ajcrowe/supervisord', '0.6.1'
+mod 'torrancew/cron', '0.2.1'
 mod 'echocat/nfs', '1.8.1'
 
-mod 'stankevich/python', '1.11.0'
+mod 'stankevich/python', '1.17.0'
 
-mod 'KyleAnderson/consul', '1.0.5'
-mod 'gdhbashton/consul_template', '0.2.4'
+mod 'KyleAnderson/consul', '1.1.0'
+mod 'gdhbashton/consul_template', '0.2.8'
 
 mod 'reppard/envconsul', '0.0.7'
 
@@ -46,7 +48,7 @@ mod 'nubis-confd_site',
 
 mod 'srf/fluentd',
     :git => 'https://github.com/gozer/puppet-fluentd.git',
-    :ref => 'df5b93d7dddf8f43b82dced9e27c52df6a270642'
+    :ref => '7e6d45117f1f4da6c5f379c2dbdec636d91647a0'
 
 mod 'mjhas/postfix', '1.0.0'
 
@@ -54,7 +56,7 @@ mod 'mjhas/postfix', '1.0.0'
 mod 'bhourigan/dnsmasq',
     :git => 'https://github.com/bhourigan/puppet-dnsmasq.git'
 
-mod 'datadog/datadog_agent', '1.7.1'
+mod 'datadog/datadog_agent', '1.8.1'
 
 mod 'nubis/nubis_discovery',
     :git => 'https://github.com/Nubisproject/nubis-puppet-discovery.git',
@@ -84,7 +86,7 @@ mod 'maxchk/varnish',
     :git => 'https://github.com/gozer/puppet-varnish.git',
     :ref => 'nubis'
 
-mod 'puppetlabs/firewall', '1.8.0'
+mod 'puppetlabs/firewall', '1.8.1'
 mod 'thias/sysctl', '1.0.6'
 
 mod 'maestrodev/wget', '1.7.3'
