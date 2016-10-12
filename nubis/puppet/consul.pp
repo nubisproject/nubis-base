@@ -11,6 +11,8 @@ class { 'consul':
       'server'             => false,
       'enable_syslog'      => true,
       'leave_on_terminate' => true,
+      'disable_remote_exec' => true,
+      'disable_update_check' => true,
   }
 }
 
