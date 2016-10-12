@@ -6,8 +6,15 @@ declare api_key
 # shellcheck disable=SC1091
 source /etc/nubis-config/datadog.sh
 
+# Is DataDog disabled ?
+if [[ "$api_key" == *"DISABLED"* ]]; then
+  /etc/init.d/datadog-agent stop
+else
+
 # fix the config file (poor-man's Augeas)
 perl -pi -e"s/^api_key: (.*)/api_key: $api_key/g" /etc/dd-agent/datadog.conf
 
 # Restart datadog is all is well
 /etc/init.d/datadog-agent configtest && /etc/init.d/datadog-agent restart
+
+fi
