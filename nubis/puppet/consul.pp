@@ -4,13 +4,15 @@ class { 'consul':
   service_ensure => 'stopped',
   manage_service => false,
   config_hash    => {
-      'data_dir'           => '/var/lib/consul',
-      'log_level'          => 'INFO',
-      'ui_dir'             => '/var/lib/consul/ui',
-      'client_addr'        => '0.0.0.0',
-      'server'             => false,
-      'enable_syslog'      => true,
-      'leave_on_terminate' => true,
+      'data_dir'             => '/var/lib/consul',
+      'log_level'            => 'INFO',
+      'ui_dir'               => '/var/lib/consul/ui',
+      'client_addr'          => '0.0.0.0',
+      'server'               => false,
+      'enable_syslog'        => true,
+      'leave_on_terminate'   => true,
+      'disable_remote_exec'  => true,
+      'disable_update_check' => true,
   }
 }
 
