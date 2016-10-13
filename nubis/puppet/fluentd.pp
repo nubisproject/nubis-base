@@ -5,21 +5,23 @@ class { 'fluentd':
 
 # Make fluentd run as root so it can read all log files
 if $osfamily == 'RedHat' {
-  file { '/etc/sysconfig/td-agent':
-    ensure => 'present',
-    owner  => 'root',
-    group  => 'root',
-    source => 'puppet:///nubis/files/fluentd.sysconfig',
-  }
+  $td_agent_default = '/etc/sysconfig/td-agent'
 }
 elsif $osfamily == 'Debian' {
-  exec { 'change-fluentd-user':
-    command => "/usr/bin/perl -pi -e's/^(TD_AGENT_(USER|GROUP))=td-agent/\$1=root/g' /etc/init.d/td-agent",
-    require => Class['Fluentd::Packages'],
-  }
+  $td_agent_default = '/etc/default/td-agent'
 }
 else {
-  fail("Don't know how to make fluentd run as root on osfamily:${osfamily}")
+  fail("Don't know where fluentd default settings file is on osfamily:${osfamily}")
+}
+
+file { $td_agent_default:
+  ensure  => 'present',
+  owner   => 'root',
+  group   => 'root',
+  source  => 'puppet:///nubis/files/fluentd.sysconfig',
+  require => [
+    Class['fluentd'],
+  ],
 }
 
 if $osfamily == 'Debian' {
