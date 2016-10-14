@@ -4,3 +4,15 @@ if [ -r /etc/profile.d/proxy.sh ]; then
 fi
 
 TD_AGENT_USER="root"
+
+# Expose our project to fluentd
+NUBIS_PROJECT=$(nubis-metadata NUBIS_PROJECT)
+export NUBIS_PROJECT
+
+# Expose our purpose to fluentd
+NUBIS_PURPOSE=$(nubis-metadata NUBIS_PURPOSE)
+export NUBIS_PURPOSE
+
+#Expose our stack to fluentd
+NUBIS_STACK=$(nubis-metadata NUBIS_STACK)
+export NUBIS_STACK
