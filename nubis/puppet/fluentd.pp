@@ -102,6 +102,14 @@ file { '/etc/td-agent/config.d/ec2_metadata.conf':
         instance_type ${instance_type}
         az            ${availability_zone}
         region        ${region}
+        vpc_id        ${vpc_id}
+        subnet_id     ${subnet_id}
+        private_ip    ${private_ip}
+        ami_id        ${image_id}
+        mac           ${mac}
+        project       "#{ENV[\'NUBIS_PROJECT\']}"
+        stack         "#{ENV[\'NUBIS_STACK\']}"
+        purpose       "#{ENV[\'NUBIS_PURPOSE\']}"
       </record>
     </match>',
   # lint:endignore
