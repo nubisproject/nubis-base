@@ -4,7 +4,7 @@
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 # Are we tainted to start with?
-nubis-tainted
+nubis-tainted > /dev/null
 TAINTED=$?
 
 if [ "$TAINTED" == "0" ]; then
