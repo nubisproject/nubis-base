@@ -52,8 +52,8 @@ fluentd::install_plugin { 'ec2-metadata':
 }
 
 fluentd::configfile { 'syslog': }
-
 fluentd::configfile { 'forward': }
+fluentd::configfile { 'unix': }
 
 fluentd::match { 'forward':
   configfile => 'forward',
@@ -161,6 +161,21 @@ fluentd::source { 'syslog_mail_err':
     'pos_file' => '/tmp/td-agent.syslog.pos',
   },
   notify     => Class['fluentd::service']
+}
+
+fluentd::source { 'unix':
+  configfile => 'unix',
+  type       => 'unix',
+  config     => {
+    'path'     => '/var/run/fluent/fluent.sock',
+  },
+  notify     => Class['fluentd::service']
+}
+
+# Simplify our lives and drop fluent-cat in $PATH
+file { '/usr/bin/fluent-cat':
+  ensure => 'link',
+  target => '/opt/td-agent/embedded/bin/fluent-cat',
 }
 
 if $osfamily == 'RedHat' {
