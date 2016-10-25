@@ -58,3 +58,12 @@ case $::osfamily {
     fail("Unsupported OS for node_exporter ${::osfamily}")
   }
 }
+
+file { '/etc/consul/svc-node-exporter.json':
+  ensure  => file,
+  owner   => root,
+  group   => root,
+  mode    => '0644',
+  source  => 'puppet:///nubis/files/svc-node-exporter.json',
+  require => Class['consul'],
+}
