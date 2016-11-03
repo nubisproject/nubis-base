@@ -28,6 +28,21 @@ aws{region="$REGION",availability_zone="$AZ",instance_type="$TYPE",ami_id="$AMI"
 EOF
 
   service node_exporter start
+
+  # Enable Consul service check
+  if [ -r "/etc/consul/svc-node-exporter.json.gz" ]; then
+    gunzip /etc/consul/svc-node-exporter.json.gz
+    /etc/init.d/consul reload
+  fi
+
 else
+
+  # Disable Consul service check
+  if [ -r "/etc/consul/svc-node-exporter.json" ]; then
+    gzip /etc/consul/svc-node-exporter.json
+    /etc/init.d/consul reload
+  fi
+
   service node_exporter stop
+
 fi
