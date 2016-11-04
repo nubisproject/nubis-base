@@ -31,6 +31,6 @@ sudo rm -f /.tainted
 if [[ -r /proc/uptime ]]; then
    uptime=$(awk '{print $1}' /proc/uptime)
 
-   sudo find /var/log -newermt "$uptime seconds ago" -type f -print0 | xargs --verbose -0 sudo truncate -s 0
+   sudo find /var/log -newermt "$uptime seconds ago" -type f -print0 | xargs -0 sudo truncate -s 0
 fi
 
