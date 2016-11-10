@@ -31,15 +31,4 @@ class { 'nubis_users::setup':
 }
 EOF
 
-# Generate the confd templates
-if [ -f '/etc/nubis/puppet/nubis_users.pp' ]; then
-    puppet apply --modulepath=/etc/puppet/modules /etc/nubis/puppet/nubis_users.pp
-fi
-
-# Make sure environment is set for good measure
-if [ "$NUBIS_ENVIRONMENT" != "" ]; then
-    find /etc/confd/conf.d -type f -name '*.toml' -print0 | xargs -0 --verbose sed -i -e "s/%%ENVIRONMENT%%/$NUBIS_ENVIRONMENT/g"
-fi
-
-# run confd
-confd -backend=consul -confdir=/etc/confd/ -onetime
+puppet apply --modulepath=/etc/puppet/modules /etc/nubis/puppet/nubis_users.pp
