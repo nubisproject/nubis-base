@@ -31,3 +31,10 @@ class { 'nubis_users::setup':
 EOF
 
 puppet apply --modulepath=/etc/puppet/modules /etc/nubis/puppet/nubis_users.pp
+
+# this needs to be here because we are calling this script over a cronjob
+if [ "$NUBIS_ENVIRONMENT" != "" ]; then
+    find /etc/confd -type f -name 'nubis-users.*' -print0 | xargs -0 --verbose sed -i -e "s/%%ENVIRONMENT%%/$NUBIS_ENVIRONMENT/g"
+fi
+
+confd -onetime -backend consul
