@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [ -f '/etc/puppet/yaml/nubis_users/common.yaml' ]; then
+    # ensure that puppet apply on a periodic basis
+    # in case someone nukes a home directory it will get regenerated
+    puppet apply --hiera_config /etc/puppet/hiera.yaml --modulepath /etc/puppet/modules/ -e 'include nubis_users'
+    RV=$?
+fi
+
+exit "${RV}"
