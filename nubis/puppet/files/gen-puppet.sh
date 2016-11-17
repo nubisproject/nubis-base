@@ -2,9 +2,6 @@
 
 set -e
 
-# shellcheck disable=SC1091
-[ -e /usr/local/lib/nubis/nubis-lib.sh ] && . /usr/local/lib/nubis/nubis-lib.sh || exit 1
-
 # /usr/local/bin isn't set yet in our PATH
 export PATH=/usr/local/bin:$PATH
 
