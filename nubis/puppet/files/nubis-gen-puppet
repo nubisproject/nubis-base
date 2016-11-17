@@ -5,6 +5,7 @@ if [ -f '/etc/puppet/yaml/nubis_users/common.yaml' ]; then
     # in case someone nukes a home directory it will get regenerated
     puppet apply --hiera_config /etc/puppet/hiera.yaml --modulepath /etc/puppet/modules/ -e 'include nubis_users'
     RV=$?
+    exit "${RV}"
 fi
 
-exit "${RV}"
+exit 1
