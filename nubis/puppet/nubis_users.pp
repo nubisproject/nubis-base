@@ -1,4 +1,4 @@
-file { '/etc/nubis.d/01-gen-puppet.sh':
+file { '/etc/nubis.d/01-gen-puppet':
   ensure => file,
   owner  => root,
   group  => root,
