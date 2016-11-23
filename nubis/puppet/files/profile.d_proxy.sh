@@ -25,9 +25,11 @@ if [ -z "${PROXY}" ]; then
 fi
 
 if [ ! -z "${PROXY}" ]; then
+    # For now, we safely assume every instance we could care about are in a /24 network
+    NETWORK_IPS=$(/usr/local/bin/nubis-network-ips 24)
     export http_proxy="http://${PROXY}:3128/"
     export https_proxy="http://${PROXY}:3128/"
-    export no_proxy="localhost,127.0.0.1,.localdomain,10.0.0.0/8,169.254.169.254"
+    export no_proxy="localhost,127.0.0.1,.localdomain,169.254.169.254,$NETWORK_IPS"
     export HTTP_PROXY="$http_proxy"
     export HTTPS_PROXY="$https_proxy"
     export NO_PROXY="$no_proxy"
