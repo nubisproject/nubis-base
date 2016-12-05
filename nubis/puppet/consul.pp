@@ -1,9 +1,10 @@
 class { 'consul':
-  version        => '0.7.1',
-  service_enable => false,
-  service_ensure => 'stopped',
-  manage_service => false,
-  config_hash    => {
+  version           => '0.7.1',
+  service_enable    => false,
+  service_ensure    => 'stopped',
+  manage_service    => false,
+  restart_on_change => false,
+  config_hash       => {
       'data_dir'             => '/var/lib/consul',
       'log_level'            => 'INFO',
       'ui_dir'               => '/var/lib/consul/ui',
