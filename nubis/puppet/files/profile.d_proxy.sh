@@ -29,7 +29,7 @@ if [ ! -z "${PROXY}" ]; then
     NETWORK_IPS=$(/usr/local/bin/nubis-network-ips 24)
     export http_proxy="http://${PROXY}:3128/"
     export https_proxy="http://${PROXY}:3128/"
-    export no_proxy="localhost,127.0.0.1,.localdomain,169.254.169.254,$NETWORK_IPS"
+    export no_proxy="localhost,127.0.0.1,.localdomain,.service.consul,service.consul,169.254.169.254,$NETWORK_IPS"
     export HTTP_PROXY="$http_proxy"
     export HTTPS_PROXY="$https_proxy"
     export NO_PROXY="$no_proxy"
