@@ -16,7 +16,7 @@ file { '/usr/local/bin/nubis-gen-puppet':
 
 cron { 'nubis-gen-puppet-watchdog':
   ensure      => present,
-  command     => '/usr/local/bin/nubis-gen-puppet',
+  command     => 'nubis-cron gen-puppet-watchdog /usr/local/bin/nubis-gen-puppet',
   hour        => '*',
   minute      => '*/30',
   user        => 'root',

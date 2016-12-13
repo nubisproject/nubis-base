@@ -21,7 +21,7 @@ file { '/var/lib/node_exporter/metrics':
   ensure => directory,
   owner  => root,
   group  => root,
-  mode   => '0755',
+  mode   => '1777',
 }
 
 # make sure the services are disabled on boot, confd starts conditionnally later
