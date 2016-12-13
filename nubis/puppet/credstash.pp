@@ -19,7 +19,7 @@ $pythondev = $::osfamily ? {
 $pythonpip = $::osfamily ? {
   'RedHat' => $::operatingsystem ? {
     'Amazon' => 'python27-pip',
-    default  => 'python-pip',
+    default  => 'python2-pip',
   },
   'Debian' => 'python-pip'
 }
@@ -30,7 +30,7 @@ package { $pythondev:
 
 package { $pythonpip:
   ensure => present
-}
+}->
 python::pip { 'credstash' :
     ensure        => '1.10.0'
 }
