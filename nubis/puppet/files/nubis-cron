@@ -31,3 +31,6 @@ nubis_cron_status{cronjob="$JOB"} $RV
 EOF
 
 mv -f "$METRICS" "$METRICS_PATH/nubis_cron_$JOB.prom"
+
+# Propagate exit code
+exit $RV
