@@ -1,0 +1,36 @@
+#!/bin/bash -l
+
+# Run a cronjob, and record start/end/status to prometheus metrics
+# usage:
+#  nubis-cron name-of-cron-job "commands to execute"
+
+cleanup () {
+ rm -f "$METRICS" 2>/dev/null
+}
+trap cleanup EXIT
+
+METRICS_PATH=/var/lib/node_exporter/metrics
+
+METRICS=$(mktemp)
+
+JOB=$1
+shift
+
+START=$(date +%s)
+
+bash -c "$@"
+
+RV=$?
+
+END=$(date +%s)
+
+cat <<EOF > $METRICS
+nubis_cron_end{cronjob="$JOB"} $END
+nubis_cron_start{cronjob="$JOB"} $START
+nubis_cron_status{cronjob="$JOB"} $RV
+EOF
+
+mv -f "$METRICS" "$METRICS_PATH/nubis_cron_$JOB.prom"
+
+# Propagate exit code
+exit $RV

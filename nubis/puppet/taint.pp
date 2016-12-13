@@ -47,7 +47,7 @@ file {'/etc/ssh/sshrc':
 cron::hourly {
   'nubis-taint-reap':
     user    => 'root',
-    command => '/usr/local/sbin/nubis-taint-reap',
+    command => 'nubis-cron nubis-taint-reap /usr/local/sbin/nubis-taint-reap',
 }
 
 file { '/etc/consul/svc-tainted.json':
