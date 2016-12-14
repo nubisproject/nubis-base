@@ -23,10 +23,12 @@ bash -c "$@"
 RV=$?
 
 END=$(date +%s)
+DURATION=$(( END - START ))
 
 cat <<EOF > "$METRICS"
 nubis_cron_end{cronjob="$JOB"} $END
 nubis_cron_start{cronjob="$JOB"} $START
+nubis_cron_duration{cronjob="$JOB"} $DURATION
 nubis_cron_status{cronjob="$JOB"} $RV
 EOF
 
