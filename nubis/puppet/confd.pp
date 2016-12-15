@@ -8,7 +8,7 @@ class { 'confd':
 
 cron { 'confd-watchdog':
   ensure      => 'present',
-  command     => 'nubis-cron confd-watchdog "service confd start 1>/dev/null 2>/dev/null"',
+  command     => 'nubis-cron confd-watchdog "( service confd start || true ) 1>/dev/null 2>/dev/null"',
   hour        => '*',
   minute      => '*/11',
   user        => 'root',
