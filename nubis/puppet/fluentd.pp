@@ -194,7 +194,7 @@ if $osfamily == 'RedHat' {
 
 cron { 'fluent-watchdog':
   ensure      => 'present',
-  command     => 'nubis-cron fluent-watchdog "service td-agent status 1>/dev/null || service td-agent start"',
+  command     => 'nubis-cron fluent-watchdog "service td-agent status 1>/dev/null || service td-agent start || true"',
   hour        => '*',
   minute      => '*/11',
   user        => 'root',
