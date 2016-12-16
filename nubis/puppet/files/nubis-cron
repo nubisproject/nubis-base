@@ -18,7 +18,7 @@ shift
 
 START=$(date +%s)
 
-bash -c "$@"
+bash -c "$*"
 
 RV=$?
 
