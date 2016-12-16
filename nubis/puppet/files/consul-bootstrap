@@ -17,20 +17,29 @@ CONSUL_DOMAIN="$CONSUL_SERVICE_NAME.$NUBIS_ENVIRONMENT.$REGION.$NUBIS_ACCOUNT.$N
 # The HTTP endpoint, constructed
 CONSUL_UI="https://ui.$CONSUL_DOMAIN"
 
-CONSUL_CURL="curl --retry 10 -fks"
+CONSUL_CURL="curl --retry 60 -fks"
+
+function consul_peers() {
+  # We wait forever here for Consul to show up
+  local consul_peers
+
+  consul_peers=$($CONSUL_CURL "$CONSUL_UI/v1/status/peers")
+
+  SLEEP=1
+  while [ "$consul_peers" == "null" ] || [ "$consul_peers" == "" ]; do
+    echo "Waiting $SLEEP secs for Consul discovery to find peers..."
+    sleep $SLEEP
+    consul_peers=$($CONSUL_CURL "$CONSUL_UI/v1/status/peers")
+    let SLEEP=SLEEP+1
+  done
+
+  echo "$consul_peers"
+}
 
 # We are a client
 if [ ! -f /etc/consul/zzz-join.skip ]; then
   # We wait forever here for Consul to show up
-  CONSUL_PEERS=$($CONSUL_CURL "$CONSUL_UI/v1/status/peers")
-
-  SLEEP=1
-  while [ "$CONSUL_PEERS" == "null" ] || [ "$CONSUL_PEERS" == "" ]; do
-    echo "Waiting $SLEEP secs for Consul discovery to find peers..."
-    sleep $SLEEP
-    CONSUL_PEERS=$($CONSUL_CURL "$CONSUL_UI/v1/status/peers")
-    let SLEEP=SLEEP+1
-  done
+  CONSUL_PEERS=$(consul_peers)
 
   # We also need to wait for Consul to report having completed its initial startup sequence
   CONSUL_READY=$($CONSUL_CURL "$CONSUL_UI/v1/kv/consul-ready")
@@ -42,7 +51,6 @@ if [ ! -f /etc/consul/zzz-join.skip ]; then
     CONSUL_READY=$($CONSUL_CURL "$CONSUL_UI/v1/kv/consul-ready")
     let SLEEP=SLEEP+1
   done
-
 fi
 
 # Auto-discover CA cert for Consul if present
@@ -84,7 +92,7 @@ if [ ! -f /etc/consul/zzz-join.skip ]; then
   # Auto-discover initial servers with fallback to $CONSUL_JOIN, just in case
   CONSUL_JOIN="$CONSUL_DOMAIN"
 
-  CONSUL_PEERS=$($CONSUL_CURL "$CONSUL_UI/v1/status/peers")
+  CONSUL_PEERS=$(consul_peers)
 
   SERVERS=$(echo "$CONSUL_PEERS" | jq ". |= .+ [\"$CONSUL_JOIN\"]" | perl -pe's/:\d+//g')
 
