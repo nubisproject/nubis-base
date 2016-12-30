@@ -24,7 +24,7 @@ else
       exec "$@"
     fi
   else # We are not it
-    if [ -z "$@" ]; then
+    if [ -z "$*" ]; then
       # return failure for the pipe use case
       exit 1
     else
