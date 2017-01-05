@@ -19,6 +19,9 @@ sudo rm -f /var/spool/mail/*
 # Remove nubis cache
 sudo rm -f /var/cache/nubis/*
 
+# Remove metrics
+sudo rm -f /var/lib/node_exporter/metrics/*
+
 # Remove taintededness
 sudo rm -f /.tainted
 
