@@ -19,6 +19,8 @@
 
 **Closed issues:**
 
+- \[fluentd\] TreasureData updated their GPG keys [\#574](https://github.com/nubisproject/nubis-base/issues/574)
+- Cleanup metrics \(from cronjobs\) during image cleanup [\#567](https://github.com/nubisproject/nubis-base/issues/567)
 - Make consul peer discovery more robust [\#555](https://github.com/nubisproject/nubis-base/issues/555)
 - Don't use proxy for .service.consul URLs [\#547](https://github.com/nubisproject/nubis-base/issues/547)
 - Try and avoid starting/restarting Consul at build time [\#544](https://github.com/nubisproject/nubis-base/issues/544)
@@ -73,6 +75,7 @@
 
 **Merged pull requests:**
 
+- Cleanup /var/lib/node\_exporter/metrics during image housekeeping [\#568](https://github.com/nubisproject/nubis-base/pull/568) ([gozer](https://github.com/gozer))
 - Update builder artifacts for v1.3.0 release [\#561](https://github.com/nubisproject/nubis-base/pull/561) ([tinnightcap](https://github.com/tinnightcap))
 - Fix small \*bad\* tyop [\#557](https://github.com/nubisproject/nubis-base/pull/557) ([gozer](https://github.com/gozer))
 - Don't assume we can always sucessfully find peers once Consul is up, retry [\#556](https://github.com/nubisproject/nubis-base/pull/556) ([gozer](https://github.com/gozer))

@@ -1,32 +1,35 @@
 amazon-ebs-amazon-linux:
-ap-northeast-1: ami-ffd8b098
-ap-southeast-1: ami-86c36de5
-ap-southeast-2: ami-b8cbf0db
-eu-central-1: ami-1706c678
-eu-west-1: ami-1905256a
-sa-east-1: ami-f8e37b94
-us-east-1: ami-07293c10
-us-west-1: ami-ca3465aa
-us-west-2: ami-e6308486
+ap-northeast-1: ami-a6f787c1
+ap-northeast-2: ami-e45e888a
+ap-southeast-1: ami-f7802894
+ap-southeast-2: ami-561e1b35
+eu-central-1: ami-22ae634d
+eu-west-1: ami-ed61489e
+sa-east-1: ami-b5178cd9
+us-east-1: ami-4d789d5b
+us-west-1: ami-15abfb75
+us-west-2: ami-02b10262
 
 amazon-ebs-ubuntu:
-ap-northeast-1: ami-22c6ae45
-ap-southeast-1: ami-65de7006
-ap-southeast-2: ami-3dcbf05e
-eu-central-1: ami-6306c60c
-eu-west-1: ami-bb0525c8
-sa-east-1: ami-2cb82040
-us-east-1: ami-bfd5c0a8
-us-west-1: ami-d23869b2
-us-west-2: ami-f6358196
+ap-northeast-1: ami-d7f888b0
+ap-northeast-2: ami-525d8b3c
+ap-southeast-1: ami-b38129d0
+ap-southeast-2: ami-9c1e1bff
+eu-central-1: ami-20ae634f
+eu-west-1: ami-2d6e475e
+sa-east-1: ami-9820bbf4
+us-east-1: ami-877d9891
+us-west-1: ami-85abfbe5
+us-west-2: ami-4bcd7e2b
 
 amazon-ebs-centos:
-ap-northeast-1: ami-08d8b06f
-ap-southeast-1: ami-3cc16f5f
-ap-southeast-2: ami-d5d5eeb6
-eu-central-1: ami-4f07c720
-eu-west-1: ami-d50323a6
-sa-east-1: ami-944ed6f8
-us-east-1: ami-ab2b3ebc
-us-west-1: ami-ec35648c
-us-west-2: ami-9d3682fd
+ap-northeast-1: ami-93f989f4
+ap-northeast-2: ami-415c8a2f
+ap-southeast-1: ami-24832b47
+ap-southeast-2: ami-4e1f1a2d
+eu-central-1: ami-bcac61d3
+eu-west-1: ami-106f4663
+sa-east-1: ami-a921bac5
+us-east-1: ami-fc7c99ea
+us-west-1: ami-deabfbbe
+us-west-2: ami-27b60547

@@ -71,13 +71,13 @@ package { 'binutils':
   ensure => '2.25.1-22.base.el7',
 }
 package { 'boto':
-  ensure => '2.43.0',
+  ensure => '2.44.0',
 }
 package { 'boto3':
-  ensure => '1.4.2',
+  ensure => '1.4.3',
 }
 package { 'botocore':
-  ensure => '1.4.88',
+  ensure => '1.4.93',
 }
 package { 'btrfs-progs':
   ensure => '4.4.1-1.el7',
@@ -1055,7 +1055,7 @@ package { 'python-urllib3':
   ensure => '1.10.2-2.el7_1',
 }
 package { 'python2-boto':
-  ensure => '2.43.0-1.el7',
+  ensure => '2.44.0-1.el7',
 }
 package { 'python2-pip':
   ensure => '8.1.2-5.el7',
@@ -1232,7 +1232,7 @@ package { 'tcp_wrappers-libs':
   ensure => '7.6-77.el7',
 }
 package { 'td-agent':
-  ensure => '2.3.3-0.el7',
+  ensure => '2.3.4-0.el7',
 }
 package { 'teamd':
   ensure => '1.25-4.el7',
@@ -1265,7 +1265,7 @@ package { 'util-linux':
   ensure => '2.23.2-33.el7',
 }
 package { 'vim-minimal':
-  ensure => '7.4.160-1.el7',
+  ensure => '7.4.160-1.el7_3.1',
 }
 package { 'virt-what':
   ensure => '1.13-8.el7',
