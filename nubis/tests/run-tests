@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -x
+
 # Be explicitly all-inclusive in our PATH, just to be safe
 PATH="$HOME/bin:$(ruby -e 'puts Gem.user_dir')/bin:$PATH:/usr/local/sbin:/usr/sbin:/sbin"
 export PATH
@@ -7,12 +9,12 @@ export PATH
 cd /tmp/tests || exit 1
 
 gem install bundler --no-ri --no-rdoc --user-install
-
-# This is an optionnal (but good) dependency of bundler
 gem install io-console --no-ri --no-rdoc --user-install
 
 # Install serverspec and what it needs
-bundle install --path=vendor
+bundle install
+bundle env
+bundle show
 
 # Run spec tests
 bundle exec rake spec
