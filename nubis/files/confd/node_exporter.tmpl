@@ -12,7 +12,7 @@ if [ "$ENABLED" == "1" ]; then
   NUBIS_PURPOSE=$(nubis-metadata NUBIS_PURPOSE)
 
   cat <<EOF > $PROM_DIR/nubis.prom
-nubis{project="$NUBIS_PROJECT",environment="$NUBIS_ENVIRONMENT",account="$NUBIS_ACCOUNT",purpose="$PURPOSE"} 1
+nubis{project="$NUBIS_PROJECT",environment="$NUBIS_ENVIRONMENT",account="$NUBIS_ACCOUNT",purpose="$NUBIS_PURPOSE"} 1
 EOF
 
   # generate fake metrics for AWS propreties
