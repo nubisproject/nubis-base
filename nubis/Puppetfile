@@ -56,7 +56,7 @@ mod 'mjhas/postfix', '1.0.0'
 mod 'bhourigan/dnsmasq',
     :git => 'https://github.com/bhourigan/puppet-dnsmasq.git'
 
-mod 'datadog/datadog_agent', '1.8.1'
+mod 'datadog/datadog_agent', '1.9.0'
 
 mod 'nubis/nubis_discovery',
     :git => 'https://github.com/Nubisproject/nubis-puppet-discovery.git',
