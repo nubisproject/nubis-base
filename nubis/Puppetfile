@@ -10,7 +10,9 @@ mod 'puppetlabs/mysql', '3.9.0'
 
 mod 'puppetlabs/concat', '1.2.5'
 
-mod 'puppetlabs/apache', '1.10.0'
+mod 'nubis/nubis_apache',
+    :git => 'https://github.com/nubisproject/nubis-puppet-apache.git',
+    :ref => 'v0.1.6'
 
 # 2.x is out, but it causes strange apt update race conditions in fluentd+datadog
 mod 'puppetlabs/apt', '1.8.0'
