@@ -101,7 +101,7 @@ package { 'boto3':
   ensure => '1.4.4',
 }
 package { 'botocore':
-  ensure => '1.5.17',
+  ensure => '1.5.26',
 }
 package { 'bzip2':
   ensure => '1.0.6-8.12.amzn1',
@@ -479,10 +479,10 @@ package { 'kernel':
   ensure => '4.4.41-36.55.amzn1',
 }
 package { 'kernel-headers':
-  ensure => '4.4.44-39.55.amzn1',
+  ensure => '4.4.51-40.58.amzn1',
 }
 package { 'kernel-tools':
-  ensure => '4.4.44-39.55.amzn1',
+  ensure => '4.4.51-40.58.amzn1',
 }
 package { 'keyutils':
   ensure => '1.5.8-3.12.amzn1',
@@ -827,7 +827,7 @@ package { 'openssh-server':
   ensure => '6.6.1p1-31.63.amzn1',
 }
 package { 'openssl':
-  ensure => '1.0.1k-15.96.amzn1',
+  ensure => '1.0.1k-15.99.amzn1',
 }
 package { 'p11-kit':
   ensure => '0.18.5-2.3.amzn1',
@@ -1094,7 +1094,7 @@ package { 'python27-configobj':
   ensure => '4.7.2-7.15.amzn1',
 }
 package { 'python27-crypto':
-  ensure => '2.6.1-1.12.amzn1',
+  ensure => '2.6.1-1.14.amzn1',
 }
 package { 'python27-daemon':
   ensure => '1.5.2-1.5.amzn1',

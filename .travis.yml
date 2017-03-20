@@ -1,6 +1,9 @@
 language: ruby
 sudo: false
 gemfile: nubis/travis/Gemfile
+branches:
+  except:
+  - master
 cache:
   bundler: true
   pip: true
