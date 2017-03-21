@@ -1,17 +1,59 @@
 # Change Log
 
-## [v1.3.0](https://github.com/nubisproject/nubis-base/tree/v1.3.0) (2016-12-20)
+## [v1.4.0](https://github.com/nubisproject/nubis-base/tree/v1.4.0) (2017-03-20)
+[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v1.3.0...v1.4.0)
+
+**Closed issues:**
+
+- Tag v1.3.1 release [\#606](https://github.com/nubisproject/nubis-base/issues/606)
+- \[puppet\] Include nubis/nubis\_apache module [\#604](https://github.com/nubisproject/nubis-base/issues/604)
+- \[consul\] Upgrade to 0.7.5 [\#602](https://github.com/nubisproject/nubis-base/issues/602)
+- \[travis\] Upgrade to nubis-travis v1.3.6 [\#595](https://github.com/nubisproject/nubis-base/issues/595)
+- \[travis\] Upgrade to v1.3.5 [\#593](https://github.com/nubisproject/nubis-base/issues/593)
+- Upgrade Consul to 0.7.4 [\#589](https://github.com/nubisproject/nubis-base/issues/589)
+- Upgrade Consul to v0.7.3 [\#586](https://github.com/nubisproject/nubis-base/issues/586)
+- \[node\_exporter\] purpose isn't reported proprely [\#581](https://github.com/nubisproject/nubis-base/issues/581)
+- gen-puppet-watchdog cron is noisy [\#571](https://github.com/nubisproject/nubis-base/issues/571)
+- \[typo\] nubis-purpose doens't handle the empty case cleanly [\#569](https://github.com/nubisproject/nubis-base/issues/569)
+- Upgrade Consul to 0.7.2 [\#564](https://github.com/nubisproject/nubis-base/issues/564)
+- upgrade to nubis\_discovery v1.3.0 [\#563](https://github.com/nubisproject/nubis-base/issues/563)
+- remove "mesg n" from root's ~/.profile [\#558](https://github.com/nubisproject/nubis-base/issues/558)
+
+**Merged pull requests:**
+
+- Convert over to nubis\_apache [\#605](https://github.com/nubisproject/nubis-base/pull/605) ([gozer](https://github.com/gozer))
+- Upgrade to Consul v0.7.5 [\#603](https://github.com/nubisproject/nubis-base/pull/603) ([gozer](https://github.com/gozer))
+- Upgrade to nubis-travis v1.3.7 [\#601](https://github.com/nubisproject/nubis-base/pull/601) ([gozer](https://github.com/gozer))
+- Exclude master branch from Travis CI builds [\#600](https://github.com/nubisproject/nubis-base/pull/600) ([gozer](https://github.com/gozer))
+- Update builder artifacts for v1.4.0 release \[skip ci\] [\#598](https://github.com/nubisproject/nubis-base/pull/598) ([tinnightcap](https://github.com/tinnightcap))
+- Update builder artifacts for v1.4.0 release \[skip ci\] [\#597](https://github.com/nubisproject/nubis-base/pull/597) ([tinnightcap](https://github.com/tinnightcap))
+- Upgrade to nubis-travis v1.3.6 [\#596](https://github.com/nubisproject/nubis-base/pull/596) ([gozer](https://github.com/gozer))
+- Upgrade nubis-travis to v1.3.5 [\#594](https://github.com/nubisproject/nubis-base/pull/594) ([gozer](https://github.com/gozer))
+- Upgrade datadog puppet module to 1.9.0 [\#592](https://github.com/nubisproject/nubis-base/pull/592) ([gozer](https://github.com/gozer))
+- Upgrade Consul to 0.7.4 [\#590](https://github.com/nubisproject/nubis-base/pull/590) ([gozer](https://github.com/gozer))
+- whitespace fixup [\#588](https://github.com/nubisproject/nubis-base/pull/588) ([gozer](https://github.com/gozer))
+- Fix errors installing gems with tests [\#584](https://github.com/nubisproject/nubis-base/pull/584) ([tinnightcap](https://github.com/tinnightcap))
+- Fix typo preventing exporting the purpose to metrics [\#582](https://github.com/nubisproject/nubis-base/pull/582) ([gozer](https://github.com/gozer))
+- Remove /root/.profile, it's not needed and causes tons of noise [\#580](https://github.com/nubisproject/nubis-base/pull/580) ([gozer](https://github.com/gozer))
+- Update builder artifacts for v1.4.0-dev release [\#577](https://github.com/nubisproject/nubis-base/pull/577) ([tinnightcap](https://github.com/tinnightcap))
+- Start v1.4.0-dev cycle [\#576](https://github.com/nubisproject/nubis-base/pull/576) ([gozer](https://github.com/gozer))
+- Silence gen-puppet-watchdog cronjob [\#572](https://github.com/nubisproject/nubis-base/pull/572) ([gozer](https://github.com/gozer))
+- Use $\* as it should have been [\#570](https://github.com/nubisproject/nubis-base/pull/570) ([gozer](https://github.com/gozer))
+- Upgrade to Consul 0.7.2 [\#566](https://github.com/nubisproject/nubis-base/pull/566) ([gozer](https://github.com/gozer))
+- Upgrade to nubis\_discovery v1.3.0 [\#565](https://github.com/nubisproject/nubis-base/pull/565) ([gozer](https://github.com/gozer))
+
+## [v1.3.0](https://github.com/nubisproject/nubis-base/tree/v1.3.0) (2017-01-06)
 [Full Changelog](https://github.com/nubisproject/nubis-base/compare/v1.2.2...v1.3.0)
 
 **Implemented enhancements:**
 
 - \[user-management\] Script cleanups [\#531](https://github.com/nubisproject/nubis-base/issues/531)
-- \[user-management\] Remove datetime from nubis-users.tmpl file [\#470](https://github.com/nubisproject/nubis-base/issues/470)
 - Include /usr/local/bin and /usr/local/sbin in path [\#464](https://github.com/nubisproject/nubis-base/issues/464)
 - \[user-management\] Periodic puppet update for nubis\_user module [\#460](https://github.com/nubisproject/nubis-base/issues/460)
+- nubis-lib log function shouldn't output to stderr [\#390](https://github.com/nubisproject/nubis-base/issues/390)
+- \[user-management\] Remove datetime from nubis-users.tmpl file [\#470](https://github.com/nubisproject/nubis-base/issues/470)
 - Include nubis-users puppet module [\#430](https://github.com/nubisproject/nubis-base/issues/430)
 - Include sudo puppet module in base [\#426](https://github.com/nubisproject/nubis-base/issues/426)
-- nubis-lib log function shouldn't output to stderr [\#390](https://github.com/nubisproject/nubis-base/issues/390)
 
 **Fixed bugs:**
 
@@ -65,17 +107,20 @@
 - Tag v1.2.3 release [\#423](https://github.com/nubisproject/nubis-base/issues/423)
 - \[consul\] Need a mechanism to hunt for Consul in the case it catastrophically self-destructed [\#422](https://github.com/nubisproject/nubis-base/issues/422)
 - \[fluentd\] Ubuntu renamed user/group parameters [\#412](https://github.com/nubisproject/nubis-base/issues/412)
-- \[fluentd\] Silence td-agent watchdog [\#404](https://github.com/nubisproject/nubis-base/issues/404)
 - \[nubis-metadata\] Handle cases where user-data is invalid shell content [\#397](https://github.com/nubisproject/nubis-base/issues/397)
 - nubis-secret: Need a way to store secrets too [\#325](https://github.com/nubisproject/nubis-base/issues/325)
 - Include consul-cli [\#298](https://github.com/nubisproject/nubis-base/issues/298)
 - \[envconsul\] Upgrade to v0.6.1 [\#261](https://github.com/nubisproject/nubis-base/issues/261)
 - Use serverspec to perform AMI conformance testing [\#133](https://github.com/nubisproject/nubis-base/issues/133)
 - provide a helper shell script to wait for consul startup [\#67](https://github.com/nubisproject/nubis-base/issues/67)
+- Tag v1.3.0 release [\#560](https://github.com/nubisproject/nubis-base/issues/560)
+- \[fluentd\] Silence td-agent watchdog [\#404](https://github.com/nubisproject/nubis-base/issues/404)
+- Upgrade to td-agent 2.x \(fluentd 0.14.x\) [\#399](https://github.com/nubisproject/nubis-base/issues/399)
 
 **Merged pull requests:**
 
 - Cleanup /var/lib/node\_exporter/metrics during image housekeeping [\#568](https://github.com/nubisproject/nubis-base/pull/568) ([gozer](https://github.com/gozer))
+- Update CHANGELOG for v1.3.0 release [\#562](https://github.com/nubisproject/nubis-base/pull/562) ([tinnightcap](https://github.com/tinnightcap))
 - Update builder artifacts for v1.3.0 release [\#561](https://github.com/nubisproject/nubis-base/pull/561) ([tinnightcap](https://github.com/tinnightcap))
 - Fix small \*bad\* tyop [\#557](https://github.com/nubisproject/nubis-base/pull/557) ([gozer](https://github.com/gozer))
 - Don't assume we can always sucessfully find peers once Consul is up, retry [\#556](https://github.com/nubisproject/nubis-base/pull/556) ([gozer](https://github.com/gozer))
@@ -152,6 +197,7 @@
 - Update builder artifacts for v1.3.0-dev release [\#425](https://github.com/nubisproject/nubis-base/pull/425) ([gozer](https://github.com/gozer))
 - Update builder artifacts for v1.2.3 release [\#424](https://github.com/nubisproject/nubis-base/pull/424) ([gozer](https://github.com/gozer))
 - Previous fix was broken, this one is finally correct [\#421](https://github.com/nubisproject/nubis-base/pull/421) ([gozer](https://github.com/gozer))
+- Update puppet-fluentd for new package signing keys [\#575](https://github.com/nubisproject/nubis-base/pull/575) ([gozer](https://github.com/gozer))
 
 ## [v1.2.2](https://github.com/nubisproject/nubis-base/tree/v1.2.2) (2016-08-02)
 [Full Changelog](https://github.com/nubisproject/nubis-base/compare/v1.2.1...v1.2.2)
@@ -176,7 +222,6 @@
 **Closed issues:**
 
 - \[datadog\] needs to know about our proxies [\#407](https://github.com/nubisproject/nubis-base/issues/407)
-- Upgrade to td-agent 2.x \(fluentd 0.14.x\) [\#399](https://github.com/nubisproject/nubis-base/issues/399)
 - Tag v1.2.1 release [\#409](https://github.com/nubisproject/nubis-base/issues/409)
 
 **Merged pull requests:**
