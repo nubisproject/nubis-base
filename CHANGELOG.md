@@ -1,5 +1,12 @@
 # Change Log
 
+## [v1.4.0](https://github.com/nubisproject/nubis-base/tree/v1.4.0) (2017-03-22)
+[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v1.4.0...v1.4.0)
+
+**Merged pull requests:**
+
+- Merge v1.4.0 release into develop. \[skip ci\] [\#608](https://github.com/nubisproject/nubis-base/pull/608) ([tinnightcap](https://github.com/tinnightcap))
+
 ## [v1.4.0](https://github.com/nubisproject/nubis-base/tree/v1.4.0) (2017-03-20)
 [Full Changelog](https://github.com/nubisproject/nubis-base/compare/v1.3.0...v1.4.0)
 
@@ -21,6 +28,7 @@
 
 **Merged pull requests:**
 
+- Update CHANGELOG for v1.4.0 release \[skip ci\] [\#607](https://github.com/nubisproject/nubis-base/pull/607) ([tinnightcap](https://github.com/tinnightcap))
 - Convert over to nubis\_apache [\#605](https://github.com/nubisproject/nubis-base/pull/605) ([gozer](https://github.com/gozer))
 - Upgrade to Consul v0.7.5 [\#603](https://github.com/nubisproject/nubis-base/pull/603) ([gozer](https://github.com/gozer))
 - Upgrade to nubis-travis v1.3.7 [\#601](https://github.com/nubisproject/nubis-base/pull/601) ([gozer](https://github.com/gozer))
