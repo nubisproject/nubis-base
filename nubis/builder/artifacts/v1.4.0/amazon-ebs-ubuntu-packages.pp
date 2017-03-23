@@ -89,7 +89,7 @@ package { 'boto3':
   ensure => '1.4.4',
 }
 package { 'botocore':
-  ensure => '1.5.26',
+  ensure => '1.5.28',
 }
 package { 'bsdmainutils':
   ensure => '9.0.5ubuntu1',
@@ -173,7 +173,7 @@ package { 'dash':
   ensure => '0.5.7-4ubuntu1',
 }
 package { 'datadog-agent':
-  ensure => '1:5.11.2-1',
+  ensure => '1:5.12.0-1',
 }
 package { 'dbus':
   ensure => '1.6.18-0ubuntu4.5',
@@ -509,16 +509,16 @@ package { 'libbz2-1.0':
   ensure => '1.0.6-5',
 }
 package { 'libc-bin':
-  ensure => '2.19-0ubuntu6.9',
+  ensure => '2.19-0ubuntu6.11',
 }
 package { 'libc-dev-bin':
-  ensure => '2.19-0ubuntu6.9',
+  ensure => '2.19-0ubuntu6.11',
 }
 package { 'libc6':
-  ensure => '2.19-0ubuntu6.9',
+  ensure => '2.19-0ubuntu6.11',
 }
 package { 'libc6-dev':
-  ensure => '2.19-0ubuntu6.9',
+  ensure => '2.19-0ubuntu6.11',
 }
 package { 'libcap-ng0':
   ensure => '0.7.3-1ubuntu2',
@@ -614,7 +614,7 @@ package { 'libfile-fcntllock-perl':
   ensure => '0.14-2build1',
 }
 package { 'libfreetype6':
-  ensure => '2.5.2-1ubuntu2.5',
+  ensure => '2.5.2-1ubuntu2.6',
 }
 package { 'libfribidi0':
   ensure => '0.19.6-1',
@@ -662,10 +662,10 @@ package { 'libgmp10':
   ensure => '2:5.1.3+dfsg-1ubuntu1',
 }
 package { 'libgnutls-openssl27':
-  ensure => '2.12.23-12ubuntu2.6',
+  ensure => '2.12.23-12ubuntu2.7',
 }
 package { 'libgnutls26':
-  ensure => '2.12.23-12ubuntu2.6',
+  ensure => '2.12.23-12ubuntu2.7',
 }
 package { 'libgomp1':
   ensure => '4.8.4-2ubuntu1~14.04.3',
@@ -1069,23 +1069,32 @@ package { 'linux-headers-3.13.0-112':
 package { 'linux-headers-3.13.0-112-generic':
   ensure => '3.13.0-112.159',
 }
+package { 'linux-headers-3.13.0-113':
+  ensure => '3.13.0-113.160',
+}
+package { 'linux-headers-3.13.0-113-generic':
+  ensure => '3.13.0-113.160',
+}
 package { 'linux-headers-generic':
-  ensure => '3.13.0.112.120',
+  ensure => '3.13.0.113.123',
 }
 package { 'linux-headers-virtual':
-  ensure => '3.13.0.112.120',
+  ensure => '3.13.0.113.123',
 }
 package { 'linux-image-3.13.0-112-generic':
   ensure => '3.13.0-112.159',
 }
+package { 'linux-image-3.13.0-113-generic':
+  ensure => '3.13.0-113.160',
+}
 package { 'linux-image-virtual':
-  ensure => '3.13.0.112.120',
+  ensure => '3.13.0.113.123',
 }
 package { 'linux-libc-dev':
   ensure => '3.13.0-113.160',
 }
 package { 'linux-virtual':
-  ensure => '3.13.0.112.120',
+  ensure => '3.13.0.113.123',
 }
 package { 'locales':
   ensure => '2.13+git20120306-12.1',
@@ -1154,7 +1163,7 @@ package { 'mtr-tiny':
   ensure => '0.85-2',
 }
 package { 'multiarch-support':
-  ensure => '2.19-0ubuntu6.9',
+  ensure => '2.19-0ubuntu6.11',
 }
 package { 'nano':
   ensure => '2.2.6-1ubuntu1',
