@@ -1,13 +1,17 @@
 # Change Log
 
-## [v1.4.0](https://github.com/nubisproject/nubis-base/tree/v1.4.0) (2017-03-22)
+## [v1.4.0](https://github.com/nubisproject/nubis-base/tree/v1.4.0) (2017-03-23)
 [Full Changelog](https://github.com/nubisproject/nubis-base/compare/v1.4.0...v1.4.0)
+
+**Closed issues:**
+
+- Amazon-Linux releasever changes [\#612](https://github.com/nubisproject/nubis-base/issues/612)
 
 **Merged pull requests:**
 
-- Merge v1.4.0 release into develop. \[skip ci\] [\#608](https://github.com/nubisproject/nubis-base/pull/608) ([tinnightcap](https://github.com/tinnightcap))
+- Upgrade to latest puppet-fluentd module [\#613](https://github.com/nubisproject/nubis-base/pull/613) ([gozer](https://github.com/gozer))
 
-## [v1.4.0](https://github.com/nubisproject/nubis-base/tree/v1.4.0) (2017-03-20)
+## [v1.4.0](https://github.com/nubisproject/nubis-base/tree/v1.4.0) (2017-03-22)
 [Full Changelog](https://github.com/nubisproject/nubis-base/compare/v1.3.0...v1.4.0)
 
 **Closed issues:**
@@ -25,9 +29,13 @@
 - Upgrade Consul to 0.7.2 [\#564](https://github.com/nubisproject/nubis-base/issues/564)
 - upgrade to nubis\_discovery v1.3.0 [\#563](https://github.com/nubisproject/nubis-base/issues/563)
 - remove "mesg n" from root's ~/.profile [\#558](https://github.com/nubisproject/nubis-base/issues/558)
+- Tag v1.4.0 release [\#583](https://github.com/nubisproject/nubis-base/issues/583)
 
 **Merged pull requests:**
 
+- Merge v1.4.0 release into develop. \[skip ci\] [\#610](https://github.com/nubisproject/nubis-base/pull/610) ([tinnightcap](https://github.com/tinnightcap))
+- Update CHANGELOG for v1.4.0 release \[skip ci\] [\#609](https://github.com/nubisproject/nubis-base/pull/609) ([tinnightcap](https://github.com/tinnightcap))
+- Merge v1.4.0 release into develop. \[skip ci\] [\#608](https://github.com/nubisproject/nubis-base/pull/608) ([tinnightcap](https://github.com/tinnightcap))
 - Update CHANGELOG for v1.4.0 release \[skip ci\] [\#607](https://github.com/nubisproject/nubis-base/pull/607) ([tinnightcap](https://github.com/tinnightcap))
 - Convert over to nubis\_apache [\#605](https://github.com/nubisproject/nubis-base/pull/605) ([gozer](https://github.com/gozer))
 - Upgrade to Consul v0.7.5 [\#603](https://github.com/nubisproject/nubis-base/pull/603) ([gozer](https://github.com/gozer))
