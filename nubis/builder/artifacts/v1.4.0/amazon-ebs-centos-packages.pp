@@ -77,7 +77,7 @@ package { 'boto3':
   ensure => '1.4.4',
 }
 package { 'botocore':
-  ensure => '1.5.26',
+  ensure => '1.5.28',
 }
 package { 'btrfs-progs':
   ensure => '4.4.1-1.el7',
@@ -164,7 +164,7 @@ package { 'daemonize':
   ensure => '1.7.7-1.el7',
 }
 package { 'datadog-agent':
-  ensure => '5.11.2-1',
+  ensure => '5.12.0-1',
 }
 package { 'dbus':
   ensure => '1.6.12-17.el7',
@@ -1232,7 +1232,7 @@ package { 'tcp_wrappers-libs':
   ensure => '7.6-77.el7',
 }
 package { 'td-agent':
-  ensure => '2.3.4-0.el7',
+  ensure => '2.3.4-1.el2016',
 }
 package { 'teamd':
   ensure => '1.25-4.el7',
