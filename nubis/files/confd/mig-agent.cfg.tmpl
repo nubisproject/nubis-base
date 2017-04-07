@@ -22,6 +22,11 @@
 
     ; location of the local stat socket
     socket          = "127.0.0.1:51664"
+    
+    ; comma delimited list of host:port proxies to use, if desired
+    ; the agent will attempt to try to proxies for public ip retrieval
+    ; and the relay connection before a direct connection
+    proxies = "proxy.service.consul:3128"
 
     ; frequency at which heartbeat messages are sent to the MIG relay
     heartbeatfreq   = {{ if exists "/config/heartbeatfreq" }}{{ getv "/config/heartbeatfreq" }}{{ else }}60s{{ end }}
