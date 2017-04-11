@@ -1,21 +1,23 @@
 # Change Log
 
-## [v1.4.0](https://github.com/nubisproject/nubis-base/tree/v1.4.0) (2017-03-23)
-[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v1.4.0...v1.4.0)
+## [v1.4.1](https://github.com/nubisproject/nubis-base/tree/v1.4.1) (2017-04-11)
+[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v1.4.0...v1.4.1)
 
 **Closed issues:**
 
-- Amazon-Linux releasever changes [\#612](https://github.com/nubisproject/nubis-base/issues/612)
+- \[mig\] Now needs to be directly proxy-aware [\#616](https://github.com/nubisproject/nubis-base/issues/616)
 
 **Merged pull requests:**
 
-- Upgrade to latest puppet-fluentd module [\#613](https://github.com/nubisproject/nubis-base/pull/613) ([gozer](https://github.com/gozer))
+- Remove no longer necessary variable [\#618](https://github.com/nubisproject/nubis-base/pull/618) ([tinnightcap](https://github.com/tinnightcap))
+- Explicitely configure MiG with our proxy service [\#617](https://github.com/nubisproject/nubis-base/pull/617) ([gozer](https://github.com/gozer))
 
-## [v1.4.0](https://github.com/nubisproject/nubis-base/tree/v1.4.0) (2017-03-22)
+## [v1.4.0](https://github.com/nubisproject/nubis-base/tree/v1.4.0) (2017-03-23)
 [Full Changelog](https://github.com/nubisproject/nubis-base/compare/v1.3.0...v1.4.0)
 
 **Closed issues:**
 
+- Amazon-Linux releasever changes [\#612](https://github.com/nubisproject/nubis-base/issues/612)
 - Tag v1.3.1 release [\#606](https://github.com/nubisproject/nubis-base/issues/606)
 - \[puppet\] Include nubis/nubis\_apache module [\#604](https://github.com/nubisproject/nubis-base/issues/604)
 - \[consul\] Upgrade to 0.7.5 [\#602](https://github.com/nubisproject/nubis-base/issues/602)
@@ -29,10 +31,14 @@
 - Upgrade Consul to 0.7.2 [\#564](https://github.com/nubisproject/nubis-base/issues/564)
 - upgrade to nubis\_discovery v1.3.0 [\#563](https://github.com/nubisproject/nubis-base/issues/563)
 - remove "mesg n" from root's ~/.profile [\#558](https://github.com/nubisproject/nubis-base/issues/558)
+- Tag v1.4.0 release [\#611](https://github.com/nubisproject/nubis-base/issues/611)
 - Tag v1.4.0 release [\#583](https://github.com/nubisproject/nubis-base/issues/583)
 
 **Merged pull requests:**
 
+- Merge v1.4.0 release into develop. \[skip ci\] [\#615](https://github.com/nubisproject/nubis-base/pull/615) ([tinnightcap](https://github.com/tinnightcap))
+- Update CHANGELOG for v1.4.0 release \[skip ci\] [\#614](https://github.com/nubisproject/nubis-base/pull/614) ([tinnightcap](https://github.com/tinnightcap))
+- Upgrade to latest puppet-fluentd module [\#613](https://github.com/nubisproject/nubis-base/pull/613) ([gozer](https://github.com/gozer))
 - Merge v1.4.0 release into develop. \[skip ci\] [\#610](https://github.com/nubisproject/nubis-base/pull/610) ([tinnightcap](https://github.com/tinnightcap))
 - Update CHANGELOG for v1.4.0 release \[skip ci\] [\#609](https://github.com/nubisproject/nubis-base/pull/609) ([tinnightcap](https://github.com/tinnightcap))
 - Merge v1.4.0 release into develop. \[skip ci\] [\#608](https://github.com/nubisproject/nubis-base/pull/608) ([tinnightcap](https://github.com/tinnightcap))
@@ -362,13 +368,9 @@
 - Don't restart confd ourselves, confd takes care of itself later. [\#376](https://github.com/nubisproject/nubis-base/pull/376) ([gozer](https://github.com/gozer))
 - Wait until Consul has reported it's done bootstrapping before moving on [\#374](https://github.com/nubisproject/nubis-base/pull/374) ([gozer](https://github.com/gozer))
 - Disable datadog on bootup, rely on confd to start it later, configured [\#372](https://github.com/nubisproject/nubis-base/pull/372) ([gozer](https://github.com/gozer))
-- Upgrade Credstash to v1.10.0 [\#370](https://github.com/nubisproject/nubis-base/pull/370) ([gozer](https://github.com/gozer))
 - Upgrade consul to 0.6.4 [\#368](https://github.com/nubisproject/nubis-base/pull/368) ([gozer](https://github.com/gozer))
 - Move Consul peer lookup and looping earlier in consul bootstraping [\#366](https://github.com/nubisproject/nubis-base/pull/366) ([gozer](https://github.com/gozer))
-- Loop forever on startup for as long as we can't discover some Consul peers. [\#365](https://github.com/nubisproject/nubis-base/pull/365) ([gozer](https://github.com/gozer))
 - Disable NFS related services on Amazon Linux \(rpcbind & nfslock\) [\#363](https://github.com/nubisproject/nubis-base/pull/363) ([gozer](https://github.com/gozer))
-- Bump puppetlabs/firewall =\> 1.8.0, maestrodev/wget =\> 1.7.3 [\#362](https://github.com/nubisproject/nubis-base/pull/362) ([gozer](https://github.com/gozer))
-- add artifacts for v1.0.1-sec1 [\#360](https://github.com/nubisproject/nubis-base/pull/360) ([gozer](https://github.com/gozer))
 - Move package puppet resource generation into houskeeper script, so it gets run at the end of every build, not just base. [\#359](https://github.com/nubisproject/nubis-base/pull/359) ([gozer](https://github.com/gozer))
 - start v1.0.2-dev cycle [\#357](https://github.com/nubisproject/nubis-base/pull/357) ([gozer](https://github.com/gozer))
 - Cleanup /var/spool/mail/\* and /var/cache/nubis/\* [\#355](https://github.com/nubisproject/nubis-base/pull/355) ([gozer](https://github.com/gozer))
@@ -380,11 +382,8 @@
 - Fix envconsul's tar related issues [\#343](https://github.com/nubisproject/nubis-base/pull/343) ([gozer](https://github.com/gozer))
 - Ensure /usr/local/bin is in the PATH when we invoke nubis.d scripts [\#341](https://github.com/nubisproject/nubis-base/pull/341) ([gozer](https://github.com/gozer))
 - Switch over to using envconsul puppet module [\#340](https://github.com/nubisproject/nubis-base/pull/340) ([gozer](https://github.com/gozer))
-- Update outdated puppet modules: [\#339](https://github.com/nubisproject/nubis-base/pull/339) ([gozer](https://github.com/gozer))
 - Forgot to include module in Puppetfile [\#337](https://github.com/nubisproject/nubis-base/pull/337) ([gozer](https://github.com/gozer))
-- Upgrade Consul to v0.6.3 [\#336](https://github.com/nubisproject/nubis-base/pull/336) ([gozer](https://github.com/gozer))
 - This startup script needs bash, not sh, as I've introduced some subshell foo in there, and /bin/sh doesn't like it. Dhu. [\#334](https://github.com/nubisproject/nubis-base/pull/334) ([gozer](https://github.com/gozer))
-- Fix small logical error, by default, we specify CONSUL\_ACL to be 'anonymous' [\#332](https://github.com/nubisproject/nubis-base/pull/332) ([gozer](https://github.com/gozer))
 - Look for a Consul CA cert published in the credstash platform location, and if we find it, use it to verify our SSL connections to consul during server bootstrap [\#331](https://github.com/nubisproject/nubis-base/pull/331) ([gozer](https://github.com/gozer))
 - If user-data didn't contain an explcit Consul ACL token, ask credstash for one. [\#329](https://github.com/nubisproject/nubis-base/pull/329) ([gozer](https://github.com/gozer))
 - nubis-secret: prefix secrets with $NUBIS\_PROJECT/$NUBIS\_ENVIRONMENT by default [\#327](https://github.com/nubisproject/nubis-base/pull/327) ([gozer](https://github.com/gozer))
@@ -399,7 +398,6 @@
 - Upgrade and cleanup our puppet modules [\#308](https://github.com/nubisproject/nubis-base/pull/308) ([gozer](https://github.com/gozer))
 - Remove a provisioner line [\#307](https://github.com/nubisproject/nubis-base/pull/307) ([limed](https://github.com/limed))
 - Improve comments and handle a bit better the case [\#306](https://github.com/nubisproject/nubis-base/pull/306) ([gozer](https://github.com/gozer))
-- Create a small nubis-purpose wrapper script to work with our specified purpose [\#302](https://github.com/nubisproject/nubis-base/pull/302) ([gozer](https://github.com/gozer))
 - Upgrade to credstash 1.9.1 [\#297](https://github.com/nubisproject/nubis-base/pull/297) ([gozer](https://github.com/gozer))
 - Upgrade to confd 0.11.0 [\#295](https://github.com/nubisproject/nubis-base/pull/295) ([gozer](https://github.com/gozer))
 - Restart confd once Consul is bootstrapped [\#293](https://github.com/nubisproject/nubis-base/pull/293) ([gozer](https://github.com/gozer))
@@ -454,8 +452,6 @@
 - Update MiG to 20150929 [\#218](https://github.com/nubisproject/nubis-base/issues/218)
 - Pin fluent-plugin-ec2-metadata at a specific version [\#216](https://github.com/nubisproject/nubis-base/issues/216)
 - \[fluent\] Ensure td-agent is running [\#203](https://github.com/nubisproject/nubis-base/issues/203)
-- \[Amazon Linux\] Sendmail is installed [\#200](https://github.com/nubisproject/nubis-base/issues/200)
-- Upgrade confd to v0.10.0 [\#198](https://github.com/nubisproject/nubis-base/issues/198)
 - Tag v1.0.1 release [\#246](https://github.com/nubisproject/nubis-base/issues/246)
 - Mig process not starting up [\#199](https://github.com/nubisproject/nubis-base/issues/199)
 - Bump nubis-puppet-eip version [\#195](https://github.com/nubisproject/nubis-base/issues/195)
@@ -509,13 +505,10 @@
 
 - Consul retry\_join can't contain port numbers [\#178](https://github.com/nubisproject/nubis-base/issues/178)
 - \[consul\] use /v1/status/peers to auto join nodes from the UI instead of relying [\#175](https://github.com/nubisproject/nubis-base/issues/175)
-- \[amazon-linux\] dnsmasq isn't configured to forward to the DHCP provided nameserver [\#171](https://github.com/nubisproject/nubis-base/issues/171)
 - Consul not starting up [\#168](https://github.com/nubisproject/nubis-base/issues/168)
 - Include CPAN puppet module [\#161](https://github.com/nubisproject/nubis-base/issues/161)
 - consul-template broken [\#159](https://github.com/nubisproject/nubis-base/issues/159)
-- consul-do is not executable [\#157](https://github.com/nubisproject/nubis-base/issues/157)
 - Install consulate on base images [\#150](https://github.com/nubisproject/nubis-base/issues/150)
-- The DNS portion to discover Consul is hard-coded. [\#143](https://github.com/nubisproject/nubis-base/issues/143)
 - Install credstash on base images [\#152](https://github.com/nubisproject/nubis-base/issues/152)
 - Tag v1.0.0 release [\#148](https://github.com/nubisproject/nubis-base/issues/148)
 - \[puppet\] Update outdated modules [\#138](https://github.com/nubisproject/nubis-base/issues/138)
@@ -696,24 +689,9 @@
 - Install jq, a cool JSON cli query tool in the base image. [\#30](https://github.com/nubisproject/nubis-base/pull/30) ([gozer](https://github.com/gozer))
 - Silence the tar job a little [\#29](https://github.com/nubisproject/nubis-base/pull/29) ([gozer](https://github.com/gozer))
 - Include DNSMasq in the base image [\#28](https://github.com/nubisproject/nubis-base/pull/28) ([gozer](https://github.com/gozer))
-- bump version [\#26](https://github.com/nubisproject/nubis-base/pull/26) ([gozer](https://github.com/gozer))
-- Just some cleaning ups [\#25](https://github.com/nubisproject/nubis-base/pull/25) ([gozer](https://github.com/gozer))
-- Finish up confd integration. [\#24](https://github.com/nubisproject/nubis-base/pull/24) ([gozer](https://github.com/gozer))
-- move terraform semples under nubis/ [\#23](https://github.com/nubisproject/nubis-base/pull/23) ([gozer](https://github.com/gozer))
-- move base puppet manifests in tree [\#22](https://github.com/nubisproject/nubis-base/pull/22) ([gozer](https://github.com/gozer))
-- use instance-id for node name [\#21](https://github.com/nubisproject/nubis-base/pull/21) ([gozer](https://github.com/gozer))
-- Documenting release.sh [\#20](https://github.com/nubisproject/nubis-base/pull/20) ([bhourigan](https://github.com/bhourigan))
 - add a simple terraform template to just launch one base image with consul lookups [\#19](https://github.com/nubisproject/nubis-base/pull/19) ([gozer](https://github.com/gozer))
-- Add consul auto-discovery in packer template. Needs to move into puppet eventually [\#18](https://github.com/nubisproject/nubis-base/pull/18) ([gozer](https://github.com/gozer))
-- Convert base to use puppet-librarian itself too to pull in nubis-puppet [\#17](https://github.com/nubisproject/nubis-base/pull/17) ([gozer](https://github.com/gozer))
-- Adding back manifest\_file until patch is accepted upstream [\#16](https://github.com/nubisproject/nubis-base/pull/16) ([bhourigan](https://github.com/bhourigan))
-- add support for IAM instance profiles [\#15](https://github.com/nubisproject/nubis-base/pull/15) ([gozer](https://github.com/gozer))
 - see commits [\#13](https://github.com/nubisproject/nubis-base/pull/13) ([bhourigan](https://github.com/bhourigan))
 - Adding MPL2 License [\#8](https://github.com/nubisproject/nubis-base/pull/8) ([tinnightcap](https://github.com/tinnightcap))
-- Initial commit of updated main.json and bootstrap script which installs ... [\#7](https://github.com/nubisproject/nubis-base/pull/7) ([bhourigan](https://github.com/bhourigan))
-- add bare-bones registry [\#6](https://github.com/nubisproject/nubis-base/pull/6) ([gozer](https://github.com/gozer))
-- cleanup and doc [\#5](https://github.com/nubisproject/nubis-base/pull/5) ([gozer](https://github.com/gozer))
-- Base import [\#4](https://github.com/nubisproject/nubis-base/pull/4) ([gozer](https://github.com/gozer))
 
 
 
