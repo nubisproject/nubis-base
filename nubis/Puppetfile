@@ -12,7 +12,7 @@ mod 'puppetlabs/concat', '1.2.5'
 
 mod 'nubis/nubis_apache',
     :git => 'https://github.com/nubisproject/nubis-puppet-apache.git',
-    :ref => 'v0.1.6'
+    :ref => 'v0.1.8'
 
 # 2.x is out, but it causes strange apt update race conditions in fluentd+datadog
 mod 'puppetlabs/apt', '1.8.0'
