@@ -6,7 +6,7 @@ forge "https://forgeapi.puppetlabs.com"
 
 # modules from the puppet forge
 mod 'puppetlabs/stdlib', '4.12.0'
-mod 'puppetlabs/mysql', '3.9.0'
+mod 'puppetlabs/mysql', '3.10.0'
 
 mod 'puppetlabs/concat', '1.2.5'
 
