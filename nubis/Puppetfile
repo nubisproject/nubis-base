@@ -18,7 +18,7 @@ mod 'nubis/nubis_apache',
 mod 'puppetlabs/apt', '1.8.0'
 
 mod 'puppetlabs/rabbitmq', '5.5.0'
-mod 'puppetlabs/vcsrepo', '1.4.0'
+mod 'puppetlabs/vcsrepo', '1.5.0'
 
 # New versions coming from https://github.com/voxpupuli/puppet-nginx, not released yet
 mod 'jfryman/nginx', '999.999.999'
