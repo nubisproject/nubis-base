@@ -81,12 +81,9 @@ mod 'nubis/nubis_users',
     :ref => 'v1.3.0'
 
 # This developer doesn't tag his releases on github
-# https://github.com/maxchk/puppet-varnish/pull/57
-# https://github.com/maxchk/puppet-varnish/pull/60
-# https://github.com/maxchk/puppet-varnish/pull/61
 mod 'maxchk/varnish',
-    :git => 'https://github.com/gozer/puppet-varnish.git',
-    :ref => 'nubis'
+    :git => 'https://github.com/maxchk/puppet-varnish.git',
+    :ref => 'b55587388f016bc1327aba6a0700ba76c5f13f99'
 
 mod 'puppetlabs/firewall', '1.8.1'
 mod 'thias/sysctl', '1.0.6'
