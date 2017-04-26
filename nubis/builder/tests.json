@@ -4,6 +4,7 @@
     "type": "file",
     "source": "nubis/tests",
     "destination": "/tmp",
+    "except" : [ "amazon-ebs-ubuntu" ],
     "order": "100"
   },
   {
