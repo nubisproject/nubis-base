@@ -1,7 +1,7 @@
 # Change Log
 
-## [v1.4.2](https://github.com/nubisproject/nubis-base/tree/v1.4.2) (2017-05-02)
-[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v1.4.1...v1.4.2)
+## [v1.5.0-dev](https://github.com/nubisproject/nubis-base/tree/v1.5.0-dev) (2017-05-02)
+[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v1.4.1...v1.5.0-dev)
 
 **Implemented enhancements:**
 
@@ -19,9 +19,11 @@
 - confd templates and toml files are owned by ec2-user [\#193](https://github.com/nubisproject/nubis-base/issues/193)
 - awscli tool is not installed by default on ubuntu [\#172](https://github.com/nubisproject/nubis-base/issues/172)
 - create a nubis user with sudo and amz ssh-keys in all images [\#62](https://github.com/nubisproject/nubis-base/issues/62)
+- Tag v1.5.0-dev release [\#640](https://github.com/nubisproject/nubis-base/issues/640)
 
 **Merged pull requests:**
 
+- Update CHANGELOG for v1.5.0-dev release \[skip ci\] [\#641](https://github.com/nubisproject/nubis-base/pull/641) ([gozer](https://github.com/gozer))
 - Revert to upstream varnish module [\#636](https://github.com/nubisproject/nubis-base/pull/636) ([gozer](https://github.com/gozer))
 - Skip uploading test harness on ubuntu \(disabled\) [\#635](https://github.com/nubisproject/nubis-base/pull/635) ([gozer](https://github.com/gozer))
 - Use puppet to manage /etc/confd [\#633](https://github.com/nubisproject/nubis-base/pull/633) ([gozer](https://github.com/gozer))
