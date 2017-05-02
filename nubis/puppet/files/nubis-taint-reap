@@ -24,10 +24,10 @@ if [ "$TAINTED" -gt "1" ]; then
   DELETE_FLAG="environments/$NUBIS_ENVIRONMENT/global/tainted/delete"
   DELETE_ENABLED=$(consulate kv get "$DELETE_FLAG")
 
-  if [ "$DELETE_ENABLED" == "1" ]; then
+  if [ "$DELETE_ENABLED" == "0" ]; then
+    echo "Would have expired this resource, unset $DELETE_FLAG to enable"
+  else
     echo "Expiring this instance NOW"
     shutdown -h now
-  else
-    echo "Would have expired this resource, set $DELETE_FLAG to enable"
   fi
 fi

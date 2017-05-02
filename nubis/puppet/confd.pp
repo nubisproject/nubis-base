@@ -4,6 +4,7 @@ class { 'confd':
   backend    => 'consul',
   watch      => true,
   nodes      => [ 'localhost:8500' ],
+  source     => 'puppet:///nubis/files/confd',
 }
 
 cron { 'confd-watchdog':
