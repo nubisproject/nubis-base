@@ -1,5 +1,16 @@
 # Change Log
 
+## [v1.4.2](https://github.com/nubisproject/nubis-base/tree/v1.4.2) (2017-05-03)
+[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v1.5.0-dev...v1.4.2)
+
+**Closed issues:**
+
+- Tag v1.4.2 release [\#639](https://github.com/nubisproject/nubis-base/issues/639)
+
+**Merged pull requests:**
+
+- Update CHANGELOG for v1.4.2 release \[skip ci\] [\#645](https://github.com/nubisproject/nubis-base/pull/645) ([tinnightcap](https://github.com/tinnightcap))
+
 ## [v1.5.0-dev](https://github.com/nubisproject/nubis-base/tree/v1.5.0-dev) (2017-05-02)
 [Full Changelog](https://github.com/nubisproject/nubis-base/compare/v1.4.1...v1.5.0-dev)
 
@@ -23,6 +34,7 @@
 
 **Merged pull requests:**
 
+- Merge v1.4.2 release into develop. \[skip ci\] [\#646](https://github.com/nubisproject/nubis-base/pull/646) ([tinnightcap](https://github.com/tinnightcap))
 - Update CHANGELOG for v1.5.0-dev release \[skip ci\] [\#641](https://github.com/nubisproject/nubis-base/pull/641) ([gozer](https://github.com/gozer))
 - Revert to upstream varnish module [\#636](https://github.com/nubisproject/nubis-base/pull/636) ([gozer](https://github.com/gozer))
 - Skip uploading test harness on ubuntu \(disabled\) [\#635](https://github.com/nubisproject/nubis-base/pull/635) ([gozer](https://github.com/gozer))
