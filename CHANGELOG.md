@@ -1,21 +1,59 @@
 # Change Log
 
-## [v1.4.0](https://github.com/nubisproject/nubis-base/tree/v1.4.0) (2017-03-23)
-[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v1.4.0...v1.4.0)
+## [v1.5.0-dev](https://github.com/nubisproject/nubis-base/tree/v1.5.0-dev) (2017-05-02)
+[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v1.4.1...v1.5.0-dev)
+
+**Implemented enhancements:**
+
+- Expose the technical owner to instances [\#131](https://github.com/nubisproject/nubis-base/issues/131)
 
 **Closed issues:**
 
-- Amazon-Linux releasever changes [\#612](https://github.com/nubisproject/nubis-base/issues/612)
+- \[test\] don't copy the test harness on disabled platform [\#634](https://github.com/nubisproject/nubis-base/issues/634)
+- \[puppet\] Switch back to maxchk/varnish [\#632](https://github.com/nubisproject/nubis-base/issues/632)
+- Add nubis/builder/artifacts/AMIs.json to .gitignore [\#627](https://github.com/nubisproject/nubis-base/issues/627)
+- \[nubis\_apache\] Upgraade to v0.1.8 [\#624](https://github.com/nubisproject/nubis-base/issues/624)
+- \[taint\] Make self-termination the default in v1.4.0 [\#447](https://github.com/nubisproject/nubis-base/issues/447)
+- Consider exposing the purpose as a consul tag by default [\#304](https://github.com/nubisproject/nubis-base/issues/304)
+- \[datadog\] move use\_mount to disk.yaml [\#248](https://github.com/nubisproject/nubis-base/issues/248)
+- confd templates and toml files are owned by ec2-user [\#193](https://github.com/nubisproject/nubis-base/issues/193)
+- awscli tool is not installed by default on ubuntu [\#172](https://github.com/nubisproject/nubis-base/issues/172)
+- create a nubis user with sudo and amz ssh-keys in all images [\#62](https://github.com/nubisproject/nubis-base/issues/62)
+- Tag v1.5.0-dev release [\#640](https://github.com/nubisproject/nubis-base/issues/640)
 
 **Merged pull requests:**
 
-- Upgrade to latest puppet-fluentd module [\#613](https://github.com/nubisproject/nubis-base/pull/613) ([gozer](https://github.com/gozer))
+- Update CHANGELOG for v1.5.0-dev release \[skip ci\] [\#641](https://github.com/nubisproject/nubis-base/pull/641) ([gozer](https://github.com/gozer))
+- Revert to upstream varnish module [\#636](https://github.com/nubisproject/nubis-base/pull/636) ([gozer](https://github.com/gozer))
+- Skip uploading test harness on ubuntu \(disabled\) [\#635](https://github.com/nubisproject/nubis-base/pull/635) ([gozer](https://github.com/gozer))
+- Use puppet to manage /etc/confd [\#633](https://github.com/nubisproject/nubis-base/pull/633) ([gozer](https://github.com/gozer))
+- Update vcs repo module [\#631](https://github.com/nubisproject/nubis-base/pull/631) ([limed](https://github.com/limed))
+- Updating mysql puppet module to 3.10 [\#630](https://github.com/nubisproject/nubis-base/pull/630) ([limed](https://github.com/limed))
+- Add nubis/builder/artifacts/AMIs.json to .gitignore [\#628](https://github.com/nubisproject/nubis-base/pull/628) ([gozer](https://github.com/gozer))
+- Turn on taint reaping by default [\#626](https://github.com/nubisproject/nubis-base/pull/626) ([gozer](https://github.com/gozer))
+- Upgrade to nubis-apache v0.1.8 [\#625](https://github.com/nubisproject/nubis-base/pull/625) ([gozer](https://github.com/gozer))
 
-## [v1.4.0](https://github.com/nubisproject/nubis-base/tree/v1.4.0) (2017-03-22)
+## [v1.4.1](https://github.com/nubisproject/nubis-base/tree/v1.4.1) (2017-04-11)
+[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v1.4.0...v1.4.1)
+
+**Closed issues:**
+
+- \[mig\] Now needs to be directly proxy-aware [\#616](https://github.com/nubisproject/nubis-base/issues/616)
+- Tag v1.4.1 release [\#619](https://github.com/nubisproject/nubis-base/issues/619)
+
+**Merged pull requests:**
+
+- Merge v1.4.1 release into develop. \[skip ci\] [\#621](https://github.com/nubisproject/nubis-base/pull/621) ([tinnightcap](https://github.com/tinnightcap))
+- Update CHANGELOG for v1.4.1 release \[skip ci\] [\#620](https://github.com/nubisproject/nubis-base/pull/620) ([tinnightcap](https://github.com/tinnightcap))
+- Remove no longer necessary variable [\#618](https://github.com/nubisproject/nubis-base/pull/618) ([tinnightcap](https://github.com/tinnightcap))
+- Explicitely configure MiG with our proxy service [\#617](https://github.com/nubisproject/nubis-base/pull/617) ([gozer](https://github.com/gozer))
+
+## [v1.4.0](https://github.com/nubisproject/nubis-base/tree/v1.4.0) (2017-03-23)
 [Full Changelog](https://github.com/nubisproject/nubis-base/compare/v1.3.0...v1.4.0)
 
 **Closed issues:**
 
+- Amazon-Linux releasever changes [\#612](https://github.com/nubisproject/nubis-base/issues/612)
 - Tag v1.3.1 release [\#606](https://github.com/nubisproject/nubis-base/issues/606)
 - \[puppet\] Include nubis/nubis\_apache module [\#604](https://github.com/nubisproject/nubis-base/issues/604)
 - \[consul\] Upgrade to 0.7.5 [\#602](https://github.com/nubisproject/nubis-base/issues/602)
@@ -29,10 +67,14 @@
 - Upgrade Consul to 0.7.2 [\#564](https://github.com/nubisproject/nubis-base/issues/564)
 - upgrade to nubis\_discovery v1.3.0 [\#563](https://github.com/nubisproject/nubis-base/issues/563)
 - remove "mesg n" from root's ~/.profile [\#558](https://github.com/nubisproject/nubis-base/issues/558)
+- Tag v1.4.0 release [\#611](https://github.com/nubisproject/nubis-base/issues/611)
 - Tag v1.4.0 release [\#583](https://github.com/nubisproject/nubis-base/issues/583)
 
 **Merged pull requests:**
 
+- Merge v1.4.0 release into develop. \[skip ci\] [\#615](https://github.com/nubisproject/nubis-base/pull/615) ([tinnightcap](https://github.com/tinnightcap))
+- Update CHANGELOG for v1.4.0 release \[skip ci\] [\#614](https://github.com/nubisproject/nubis-base/pull/614) ([tinnightcap](https://github.com/tinnightcap))
+- Upgrade to latest puppet-fluentd module [\#613](https://github.com/nubisproject/nubis-base/pull/613) ([gozer](https://github.com/gozer))
 - Merge v1.4.0 release into develop. \[skip ci\] [\#610](https://github.com/nubisproject/nubis-base/pull/610) ([tinnightcap](https://github.com/tinnightcap))
 - Update CHANGELOG for v1.4.0 release \[skip ci\] [\#609](https://github.com/nubisproject/nubis-base/pull/609) ([tinnightcap](https://github.com/tinnightcap))
 - Merge v1.4.0 release into develop. \[skip ci\] [\#608](https://github.com/nubisproject/nubis-base/pull/608) ([tinnightcap](https://github.com/tinnightcap))
