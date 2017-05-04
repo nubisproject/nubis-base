@@ -27,4 +27,4 @@ class { 'nubis_users::setup':
 }
 EOF
 
-puppet apply --modulepath=/etc/puppet/modules /etc/nubis/puppet/nubis_users.pp
+nohup puppet apply --modulepath=/etc/puppet/modules /etc/nubis/puppet/nubis_users.pp >/dev/null 2>&1 &
