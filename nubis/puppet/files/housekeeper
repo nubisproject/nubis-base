@@ -22,6 +22,9 @@ sudo rm -f /var/cache/nubis/*
 # Remove metrics
 sudo rm -f /var/lib/node_exporter/metrics/*
 
+# Remove Consul node-id
+sudo rm -f /var/lib/consul/node-id
+
 # Remove taintededness
 sudo rm -f /.tainted
 
