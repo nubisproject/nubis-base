@@ -41,7 +41,7 @@ package { [$ruby_dev, 'make', 'gcc']:
 }
 
 fluentd::install_plugin { 'ec2-metadata':
-  ensure      => '0.0.12',
+  ensure      => '0.0.16',
   plugin_type => 'gem',
   plugin_name => 'fluent-plugin-ec2-metadata',
   require     => [
