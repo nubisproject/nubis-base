@@ -17,3 +17,9 @@ cron { 'confd-watchdog':
     'PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin:/opt/aws/bin',
   ],
 }
+
+# Generic
+include nubis_configuration
+nubis::configuration{ 'base':
+  format => 'sh',
+}
