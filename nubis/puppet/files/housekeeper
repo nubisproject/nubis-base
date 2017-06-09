@@ -20,7 +20,7 @@ sudo rm -f /var/spool/mail/*
 sudo rm -f /var/cache/nubis/*
 
 # Remove puppet cache
-sudo rm -f /var/lib/puppet/*
+sudo rm -rf /var/lib/puppet/*
 
 # Remove metrics
 sudo rm -f /var/lib/node_exporter/metrics/*
