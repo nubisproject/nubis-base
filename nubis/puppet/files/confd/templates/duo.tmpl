@@ -1,0 +1,33 @@
+[duo]
+; Duo integration key
+ikey={{ if exists "/config/ikey" }}{{ getv "/config/ikey" }}{{else}}XXXX{{ end }}
+
+; Duo secret key
+skey={{ if exists "/config/skey" }}{{ getv "/config/skey" }}{{else}}XXXX{{ end }}
+
+; Duo API host
+host={{ if exists "/config/host" }}{{ getv "/config/host" }}{{else}}duo_host_not_configured{{ end }}
+
+; Fallback local IP
+fallback_local_ip=no
+
+; Failure mode
+failmode={{ if exists "/config/failmode" }}{{ getv "/config/failmode" }}{{else}}safe{{ end }}
+
+; Push info
+pushinfo=yes
+
+; Auto push
+autopush=no
+
+; Prompts
+prompts=3
+
+; Accept environment factor
+accept_env_factor=no
+
+; HTTP proxy
+http_proxy=proxy.service.consul:3128
+
+; Send user comment instead of user name
+send_gecos=yes
