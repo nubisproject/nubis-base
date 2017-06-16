@@ -1,5 +1,5 @@
 class { 'postfix':
-}->
-package {'sendmail':
+}
+->package {'sendmail':
   ensure => absent,
 }

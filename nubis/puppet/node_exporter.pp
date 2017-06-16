@@ -4,8 +4,8 @@ $node_exporter_url = "https://github.com/prometheus/node_exporter/releases/downl
 notice ("Grabbing node_exporter ${node_exporter_version}")
 staging::file { "node_exporter.${node_exporter_version}.tar.gz":
   source => $node_exporter_url,
-}->
-staging::extract { "node_exporter.${node_exporter_version}.tar.gz":
+}
+->staging::extract { "node_exporter.${node_exporter_version}.tar.gz":
   target  => '/usr/local/bin',
   strip   => 1,
   creates => '/usr/local/bin/node_exporter',
@@ -16,8 +16,8 @@ file { '/var/lib/node_exporter':
   owner  => root,
   group  => root,
   mode   => '0755',
-}->
-file { '/var/lib/node_exporter/metrics':
+}
+->file { '/var/lib/node_exporter/metrics':
   ensure => directory,
   owner  => root,
   group  => root,
@@ -33,8 +33,8 @@ case $::osfamily {
       group  => root,
       mode   => '0755',
       source => 'puppet:///nubis/files/node_exporter.init',
-    }->
-    service { 'node_exporter':
+    }
+    ->service { 'node_exporter':
       enable => false,
     }
   }
