@@ -1,0 +1,9 @@
+[template]
+src = "duo.tmpl"
+dest = "/etc/duo/pam_duo.conf"
+prefix = "/environments/%%ENVIRONMENT%%/global/instance_mfa"
+keys = [
+    "/config"
+]
+
+reload_cmd = "puppet apply /etc/duo/duo_sshd_config_runtime.pp"
