@@ -15,15 +15,15 @@ case $::osfamily {
 }
 
 class { 'duo_unix':
-  usage      => 'pam',
-  ikey       => 'XXXX',
-  skey       => 'XXXX',
-  host       => 'duo_host_not_configured',
-  failmode   => 'safe',
-  pushinfo   => 'yes',
-  http_proxy => 'proxy.service.consul:3128',
-  send_gecos => 'yes',
-  package_version => "$package_version"
+  usage           => 'pam',
+  ikey            => 'XXXX',
+  skey            => 'XXXX',
+  host            => 'duo_host_not_configured',
+  failmode        => 'safe',
+  pushinfo        => 'yes',
+  http_proxy      => 'proxy.service.consul:3128',
+  send_gecos      => 'yes',
+  package_version => $package_version
 }
 
 file { '/etc/duo/duo_sshd_config_runtime.pp':
