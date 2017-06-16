@@ -1,15 +1,16 @@
-case $::operatingsystem {
-  'Amazon': {
-    $package_version = '1.9.21-0.el6'
+case $::osfamily {
+  'RedHat': {
+    $package_version = $::operatingsystemrelease ? {
+      /^5/        => '1.9.21-0.el5',
+      /^(6|2017)/ => '1.9.21-0.el6',
+      /^7/        => '1.9.21-0.el7'
+    }
   }
-  'CentOS': {
-    $package_version = '1.9.21-0.el7'
-  }
-  'Ubuntu': {
+  'Debian': {
     $package_version = '1.9.21-0'
   }
   default: {
-    fail("Module duo_unix does not support ${::operatingsystem}")
+    fail("Module duo_unix does not support ${::osfamily}")
   }
 }
 
@@ -23,4 +24,13 @@ class { 'duo_unix':
   http_proxy => 'proxy.service.consul:3128',
   send_gecos => 'yes',
   package_version => "$package_version"
+}
+
+file { '/etc/duo/duo_sshd_config_runtime.pp':
+  ensure  => present,
+  owner   => 'root',
+  group   => 'root',
+  mode    => '0600',
+  source  => 'puppet:///nubis/files/duo_sshd_config_runtime.pp',
+  require => Class['duo_unix'];
 }
