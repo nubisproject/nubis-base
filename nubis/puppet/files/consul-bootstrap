@@ -84,6 +84,7 @@ fi
 cat <<EOF | tee /etc/consul/zzz-startup.json
 {
   "datacenter": "$CONSUL_DC",
+  "acl_datacenter": "$CONSUL_DC",
   "node_name": "$INSTANCE_ID"
 }
 EOF

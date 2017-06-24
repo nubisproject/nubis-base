@@ -1,4 +1,4 @@
-file { '/etc/nubis.d/01-gen-puppet':
+file { '/etc/nubis.d/00-gen-puppet':
   ensure => file,
   owner  => root,
   group  => root,
@@ -18,7 +18,7 @@ cron { 'nubis-gen-puppet-watchdog':
   ensure      => present,
   command     => 'nubis-cron gen-puppet-watchdog /usr/local/bin/nubis-gen-puppet',
   hour        => '*',
-  minute      => '*/30',
+  minute      => [fqdn_rand(30), ( fqdn_rand(30) + 30 ) % 60],
   user        => 'root',
   require     => File['/usr/local/bin/nubis-gen-puppet'],
   environment => [

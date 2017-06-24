@@ -8,4 +8,4 @@ if [ -f '/etc/puppet/yaml/nubis_users/common.yaml' ]; then
     exit "${RV}"
 fi
 
-exit 1
+exit 0

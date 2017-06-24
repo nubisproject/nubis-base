@@ -12,9 +12,9 @@ mod 'puppetlabs/concat', '1.2.5'
 
 mod 'nubis/nubis_apache',
     :git => 'https://github.com/nubisproject/nubis-puppet-apache.git',
-    :ref => 'v0.1.8'
+    :ref => 'v0.1.9'
 
-# 2.x is out, but it causes strange apt update race conditions in fluentd+datadog
+# 2.x is out, but it causes strange apt update race conditions in fluentd
 mod 'puppetlabs/apt', '1.8.0'
 
 mod 'puppetlabs/rabbitmq', '5.5.0'
@@ -50,7 +50,7 @@ mod 'nubis-confd_site',
 
 mod 'srf/fluentd',
     :git => 'https://github.com/gozer/puppet-fluentd.git',
-    :ref => '74b1ac7089320d8285d6347d006b82fde280e87e'
+    :ref => 'bba6a41c967c1de12299ed31a67996e9be081d0e'
 
 mod 'mjhas/postfix', '1.0.0'
 
@@ -58,15 +58,13 @@ mod 'mjhas/postfix', '1.0.0'
 mod 'bhourigan/dnsmasq',
     :git => 'https://github.com/bhourigan/puppet-dnsmasq.git'
 
-mod 'datadog/datadog_agent', '1.9.0'
-
 mod 'nubis/nubis_discovery',
     :git => 'https://github.com/Nubisproject/nubis-puppet-discovery.git',
     :ref => 'v1.3.1'
 
 mod 'nubis/nubis_configuration',
     :git => 'https://github.com/Nubisproject/nubis-puppet-configuration.git',
-    :ref => 'v1.0.0'
+    :ref => 'v1.2.2'
 
 mod 'nubis/nubis_storage',
     :git => 'https://github.com/nubisproject/nubis-puppet-storage.git',
@@ -78,7 +76,7 @@ mod 'nubis/mig',
 
 mod 'nubis/nubis_users',
     :git => 'https://github.com/nubisproject/nubis-puppet-nubis_users',
-    :ref => 'v1.3.0'
+    :ref => 'v1.4.0'
 
 # This developer doesn't tag his releases on github
 mod 'maxchk/varnish',
@@ -96,3 +94,7 @@ mod 'saz/sudo', '3.1.0'
 
 mod 'herculesteam/augeasproviders_pam', '2.1.0'
 mod 'spantree/upstart','0.0.3'
+
+mod 'duosecurity/duo_unix',
+    :git => 'https://github.com/tinnightcap/puppet-duo_unix.git',
+    :ref => '891aa681abe30053d6609329ead26944140d05e0'

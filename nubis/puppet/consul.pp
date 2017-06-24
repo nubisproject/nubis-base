@@ -1,19 +1,20 @@
 class { 'consul':
-  version           => '0.7.5',
+  version           => '0.8.3',
   service_enable    => false,
   service_ensure    => 'stopped',
   manage_service    => false,
   restart_on_change => false,
   config_hash       => {
-      'data_dir'             => '/var/lib/consul',
-      'log_level'            => 'INFO',
-      'ui_dir'               => '/var/lib/consul/ui',
-      'client_addr'          => '0.0.0.0',
-      'server'               => false,
-      'enable_syslog'        => true,
-      'leave_on_terminate'   => true,
-      'disable_remote_exec'  => true,
-      'disable_update_check' => true,
+      'data_dir'              => '/var/lib/consul',
+      'log_level'             => 'INFO',
+      'ui_dir'                => '/var/lib/consul/ui',
+      'client_addr'           => '0.0.0.0',
+      'server'                => false,
+      'enable_syslog'         => true,
+      'leave_on_terminate'    => true,
+      'acl_enforce_version_8' => false,
+      'disable_host_node_id'  => true,
+      'disable_update_check'  => true,
   }
 }
 

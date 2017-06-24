@@ -30,7 +30,7 @@ package { $pythondev:
 
 package { $pythonpip:
   ensure => present
-}->
-python::pip { 'credstash' :
+}
+->python::pip { 'credstash' :
     ensure        => '1.10.0'
 }
