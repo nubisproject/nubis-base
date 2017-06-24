@@ -1,14 +1,66 @@
 # Change Log
 
+## [v1.5.0](https://github.com/nubisproject/nubis-base/tree/v1.5.0) (2017-06-24)
+[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v1.4.2...v1.5.0)
+
+**Implemented enhancements:**
+
+- Add cronsul to the base images [\#192](https://github.com/nubisproject/nubis-base/issues/192)
+
+**Fixed bugs:**
+
+- \[user-management\] /etc/nubis.d/01-gen-puppet holds up system bootup [\#623](https://github.com/nubisproject/nubis-base/issues/623)
+- \[jq\] Upgrade to 1.5 [\#188](https://github.com/nubisproject/nubis-base/issues/188)
+
+**Closed issues:**
+
+- Ensure gen-puppet runs \*before\* confd, early in the boot process [\#679](https://github.com/nubisproject/nubis-base/issues/679)
+- Upgrade to nubis-puppet-configuration v1.2.2 [\#677](https://github.com/nubisproject/nubis-base/issues/677)
+- Upgrade puppet fluentd module [\#674](https://github.com/nubisproject/nubis-base/issues/674)
+- apt-get does not work with the proxies [\#673](https://github.com/nubisproject/nubis-base/issues/673)
+- /etc/nubis.d/confd missing [\#668](https://github.com/nubisproject/nubis-base/issues/668)
+- \[puppet\] Upgrade nubis\_apache to v0.1.9 [\#665](https://github.com/nubisproject/nubis-base/issues/665)
+- \[datadog\] Remove all traces of datadog [\#660](https://github.com/nubisproject/nubis-base/issues/660)
+- \[fluentd\] Upgrade to ec2-metadata v0.0.16 [\#658](https://github.com/nubisproject/nubis-base/issues/658)
+- \[ubuntu\] Upgrade Puppet to 3.8.7-1puppetlabs1 [\#656](https://github.com/nubisproject/nubis-base/issues/656)
+- \[consul\] Upgrade to 0.8.3 [\#652](https://github.com/nubisproject/nubis-base/issues/652)
+- \[puppet\] Cleanup /var/lib/puppet [\#622](https://github.com/nubisproject/nubis-base/issues/622)
+- cron\[gen-puppet-watchdog\] runs \(and fails\) when user\_managment isn't enabled [\#579](https://github.com/nubisproject/nubis-base/issues/579)
+
+**Merged pull requests:**
+
+- Move gen-puppet startup earlier in the boot process [\#680](https://github.com/nubisproject/nubis-base/pull/680) ([gozer](https://github.com/gozer))
+- Upgrade to v1.2.2 [\#678](https://github.com/nubisproject/nubis-base/pull/678) ([gozer](https://github.com/gozer))
+- Add DUO mfa to base [\#676](https://github.com/nubisproject/nubis-base/pull/676) ([tinnightcap](https://github.com/tinnightcap))
+- Upgrade to our latest version of the fork for a Prometheus bugfix [\#675](https://github.com/nubisproject/nubis-base/pull/675) ([gozer](https://github.com/gozer))
+- Return success if we can't find /etc/puppet/yaml/nubis\_users/common.yaml [\#672](https://github.com/nubisproject/nubis-base/pull/672) ([gozer](https://github.com/gozer))
+- Correctly remove puppet files recursively [\#671](https://github.com/nubisproject/nubis-base/pull/671) ([gozer](https://github.com/gozer))
+- Revert "Run initial /etc/nubis.d/01-gen-puppet in the background during bootup" [\#670](https://github.com/nubisproject/nubis-base/pull/670) ([gozer](https://github.com/gozer))
+- Make sure to inculde nubis\_configuration at least once [\#669](https://github.com/nubisproject/nubis-base/pull/669) ([gozer](https://github.com/gozer))
+- Upgrade nubis\_apache to v0.1.9 [\#667](https://github.com/nubisproject/nubis-base/pull/667) ([gozer](https://github.com/gozer))
+- Get rid of DataDog [\#664](https://github.com/nubisproject/nubis-base/pull/664) ([gozer](https://github.com/gozer))
+- Upgrade jq to 1.5 and pin version there [\#663](https://github.com/nubisproject/nubis-base/pull/663) ([gozer](https://github.com/gozer))
+- Fix: Downgrade fluent-plugin-ec2-metadata to 0.0.15 [\#662](https://github.com/nubisproject/nubis-base/pull/662) ([gozer](https://github.com/gozer))
+- Cleanup /var/lib/puppet/\* after image build [\#661](https://github.com/nubisproject/nubis-base/pull/661) ([gozer](https://github.com/gozer))
+- Upgrade fluentd-plugin-ec2-metadata to v0.0.16 [\#659](https://github.com/nubisproject/nubis-base/pull/659) ([gozer](https://github.com/gozer))
+- Upgrade Ubuntu's Puppet to 3.8.7-1puppetlabs1 [\#657](https://github.com/nubisproject/nubis-base/pull/657) ([gozer](https://github.com/gozer))
+- Make sure we use completely non-deterministic Consul host ids [\#655](https://github.com/nubisproject/nubis-base/pull/655) ([gozer](https://github.com/gozer))
+- Upgrade to Consul 0.8.3 [\#654](https://github.com/nubisproject/nubis-base/pull/654) ([gozer](https://github.com/gozer))
+- Run initial /etc/nubis.d/01-gen-puppet in the background during bootup [\#650](https://github.com/nubisproject/nubis-base/pull/650) ([gozer](https://github.com/gozer))
+
 ## [v1.4.2](https://github.com/nubisproject/nubis-base/tree/v1.4.2) (2017-05-03)
 [Full Changelog](https://github.com/nubisproject/nubis-base/compare/v1.5.0-dev...v1.4.2)
 
 **Closed issues:**
 
+- Tag v1.4.2 release [\#651](https://github.com/nubisproject/nubis-base/issues/651)
+- Tag v1.4.2 release [\#647](https://github.com/nubisproject/nubis-base/issues/647)
 - Tag v1.4.2 release [\#639](https://github.com/nubisproject/nubis-base/issues/639)
 
 **Merged pull requests:**
 
+- Merge v1.4.2 release into develop. \[skip ci\] [\#649](https://github.com/nubisproject/nubis-base/pull/649) ([tinnightcap](https://github.com/tinnightcap))
+- Update CHANGELOG for v1.4.2 release \[skip ci\] [\#648](https://github.com/nubisproject/nubis-base/pull/648) ([tinnightcap](https://github.com/tinnightcap))
 - Update CHANGELOG for v1.4.2 release \[skip ci\] [\#645](https://github.com/nubisproject/nubis-base/pull/645) ([tinnightcap](https://github.com/tinnightcap))
 
 ## [v1.5.0-dev](https://github.com/nubisproject/nubis-base/tree/v1.5.0-dev) (2017-05-02)
@@ -30,6 +82,7 @@
 - confd templates and toml files are owned by ec2-user [\#193](https://github.com/nubisproject/nubis-base/issues/193)
 - awscli tool is not installed by default on ubuntu [\#172](https://github.com/nubisproject/nubis-base/issues/172)
 - create a nubis user with sudo and amz ssh-keys in all images [\#62](https://github.com/nubisproject/nubis-base/issues/62)
+- Tag v1.5.0-dev release [\#643](https://github.com/nubisproject/nubis-base/issues/643)
 - Tag v1.5.0-dev release [\#640](https://github.com/nubisproject/nubis-base/issues/640)
 
 **Merged pull requests:**
