@@ -1,5 +1,7 @@
 #!/bin/bash
 
+PROJECT_NAME=$1
+
 # Cloud-init simply appends ssh keys, so after a build we want to truncate any
 # authorized_keys files to have positive control over configured keys.
 for homedir in $(getent passwd | cut -d ':' -f 6); do
@@ -10,7 +12,9 @@ for homedir in $(getent passwd | cut -d ':' -f 6); do
    fi
 done
 
-# Remove leftover from packer
+# Stash leftover from packer
+sudo mkdir -p "/etc/nubis/puppet-masterless/$PROJECT_NAME"
+sudo mv /tmp/packer-puppet-masterless*/* "/etc/nubis/puppet-masterless/$PROJECT_NAME/"
 sudo rm -rf /tmp/packer-puppet-masterless*
 
 # Remove mail spools
