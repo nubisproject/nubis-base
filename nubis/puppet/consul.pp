@@ -34,7 +34,7 @@ class { 'consul_do':
 class { 'consul_template':
     service_enable => false,
     service_ensure => 'stopped',
-    version        => '0.11.0',
+    version        => '0.16.0',
     user           => 'root',
     group          => 'root',
 }
