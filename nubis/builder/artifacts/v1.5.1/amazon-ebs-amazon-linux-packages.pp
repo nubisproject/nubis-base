@@ -65,10 +65,10 @@ package { 'aws-cfn-bootstrap':
   ensure => '1.4-20.12.amzn1',
 }
 package { 'aws-cli':
-  ensure => '1.11.83-1.46.amzn1',
+  ensure => '1.11.132-1.47.amzn1',
 }
 package { 'awscli':
-  ensure => '1.11.83',
+  ensure => '1.11.132',
 }
 package { 'backports.ssl-match-hostname':
   ensure => '3.4.0.2',
@@ -98,10 +98,10 @@ package { 'boto':
   ensure => '2.42.0',
 }
 package { 'boto3':
-  ensure => '1.4.5',
+  ensure => '1.4.6',
 }
 package { 'botocore':
-  ensure => '1.5.46',
+  ensure => '1.6.3',
 }
 package { 'bzip2':
   ensure => '1.0.6-8.12.amzn1',
@@ -425,7 +425,7 @@ package { 'hwdata':
   ensure => '0.233-14.1.18.amzn1',
 }
 package { 'idna':
-  ensure => '2.5',
+  ensure => '2.6',
 }
 package { 'info':
   ensure => '5.1-4.10.amzn1',
@@ -449,7 +449,7 @@ package { 'irqbalance':
   ensure => '1.1.0-1.24.amzn1',
 }
 package { 'java-1.7.0-openjdk':
-  ensure => '1.7.0.141-2.6.10.1.73.amzn1',
+  ensure => '1.7.0.151-2.6.11.0.74.amzn1',
 }
 package { 'javapackages-tools':
   ensure => '0.9.1-1.5.amzn1',
@@ -476,13 +476,13 @@ package { 'kbd-misc':
   ensure => '1.15-11.4.amzn1',
 }
 package { 'kernel':
-  ensure => '4.9.32-15.41.amzn1',
+  ensure => '4.9.43-17.38.amzn1',
 }
 package { 'kernel-headers':
-  ensure => '4.9.38-16.35.amzn1',
+  ensure => '4.9.43-17.38.amzn1',
 }
 package { 'kernel-tools':
-  ensure => '4.9.38-16.35.amzn1',
+  ensure => '4.9.43-17.38.amzn1',
 }
 package { 'keyutils':
   ensure => '1.5.8-3.12.amzn1',
@@ -1082,7 +1082,7 @@ package { 'python27-boto':
   ensure => '2.42.0-1.1.amzn1',
 }
 package { 'python27-botocore':
-  ensure => '1.5.46-1.63.amzn1',
+  ensure => '1.5.95-1.65.amzn1',
 }
 package { 'python27-chardet':
   ensure => '2.0.1-7.7.amzn1',
@@ -1214,7 +1214,7 @@ package { 'redhat-lsb-core':
   ensure => '4.0-7.14.amzn1',
 }
 package { 'requests':
-  ensure => '2.18.3',
+  ensure => '2.18.4',
 }
 package { 'rmt':
   ensure => '0.4-0.6.b42.7.amzn1',
@@ -1334,7 +1334,7 @@ package { 'sysfsutils':
   ensure => '2.1.0-7.10.amzn1',
 }
 package { 'system-release':
-  ensure => '2017.03-0.0',
+  ensure => '2017.03-0.1',
 }
 package { 'systemtap-sdt-devel':
   ensure => '3.1-2.34.amzn1',
@@ -1436,7 +1436,7 @@ package { 'xz-libs':
   ensure => '5.1.2-12alpha.12.amzn1',
 }
 package { 'yum':
-  ensure => '3.4.3-150.68.amzn1',
+  ensure => '3.4.3-150.70.amzn1',
 }
 package { 'yum-metadata-parser':
   ensure => '1.1.4-10.20.amzn1',

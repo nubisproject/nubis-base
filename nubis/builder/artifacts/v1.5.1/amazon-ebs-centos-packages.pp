@@ -74,10 +74,10 @@ package { 'boto':
   ensure => '2.45.0',
 }
 package { 'boto3':
-  ensure => '1.4.5',
+  ensure => '1.4.6',
 }
 package { 'botocore':
-  ensure => '1.5.95',
+  ensure => '1.6.3',
 }
 package { 'btrfs-progs':
   ensure => '4.4.1-1.el7',
