@@ -86,10 +86,10 @@ package { 'binutils':
   ensure => '2.24-5ubuntu14.2',
 }
 package { 'boto3':
-  ensure => '1.4.5',
+  ensure => '1.4.6',
 }
 package { 'botocore':
-  ensure => '1.5.95',
+  ensure => '1.6.3',
 }
 package { 'bsdmainutils':
   ensure => '9.0.5ubuntu1',
@@ -419,10 +419,10 @@ package { 'krb5-locales':
   ensure => '1.12+dfsg-2ubuntu5.3',
 }
 package { 'landscape-client':
-  ensure => '14.12-0ubuntu5.14.04',
+  ensure => '14.12-0ubuntu6.14.04',
 }
 package { 'landscape-common':
-  ensure => '14.12-0ubuntu5.14.04',
+  ensure => '14.12-0ubuntu6.14.04',
 }
 package { 'language-selector-common':
   ensure => '0.129.3',
@@ -1060,12 +1060,6 @@ package { 'libxtables10':
 package { 'libyaml-0-2':
   ensure => '0.1.4-3ubuntu3.1',
 }
-package { 'linux-headers-3.13.0-126':
-  ensure => '3.13.0-126.175',
-}
-package { 'linux-headers-3.13.0-126-generic':
-  ensure => '3.13.0-126.175',
-}
 package { 'linux-headers-3.13.0-128':
   ensure => '3.13.0-128.177',
 }
@@ -1077,9 +1071,6 @@ package { 'linux-headers-generic':
 }
 package { 'linux-headers-virtual':
   ensure => '3.13.0.128.137',
-}
-package { 'linux-image-3.13.0-126-generic':
-  ensure => '3.13.0-126.175',
 }
 package { 'linux-image-3.13.0-128-generic':
   ensure => '3.13.0-128.177',
@@ -1103,7 +1094,7 @@ package { 'login':
   ensure => '1:4.1.5.1-1ubuntu9.5',
 }
 package { 'logrotate':
-  ensure => '3.8.7-1ubuntu1.1',
+  ensure => '3.8.7-1ubuntu1.2',
 }
 package { 'lsb-base':
   ensure => '4.1+Debian11ubuntu6.2',
@@ -1247,7 +1238,7 @@ package { 'policykit-1':
   ensure => '0.105-4ubuntu3.14.04.1',
 }
 package { 'pollinate':
-  ensure => '4.23-0ubuntu1~14.04.2',
+  ensure => '4.25-0ubuntu1~14.04.1',
 }
 package { 'popularity-contest':
   ensure => '1.57ubuntu1',
