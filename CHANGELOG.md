@@ -1,5 +1,28 @@
 # Change Log
 
+## [v1.5.1](https://github.com/nubisproject/nubis-base/tree/v1.5.1) (2017-08-18)
+[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v1.5.0...v1.5.1)
+
+**Closed issues:**
+
+- \[puppet\] Upgrade to nubis\_apache v10.1.11 [\#697](https://github.com/nubisproject/nubis-base/issues/697)
+- Upgrade to nubis-apache v1.0.10 to add tags [\#693](https://github.com/nubisproject/nubis-base/issues/693)
+- \[consul-template\] Upgrade to v0.16.0 [\#691](https://github.com/nubisproject/nubis-base/issues/691)
+- \[puppet\] Retain puppet masterless manifests somewhere predictable [\#690](https://github.com/nubisproject/nubis-base/issues/690)
+- \[puppet\] Upgrade nubis-puppet-configuration to v1.3.0 [\#688](https://github.com/nubisproject/nubis-base/issues/688)
+- Upgrade to nubis-puppet-discovery v1.3.2 [\#685](https://github.com/nubisproject/nubis-base/issues/685)
+
+**Merged pull requests:**
+
+- Update CHANGELOG for v1.5.1 release \[skip ci\] [\#701](https://github.com/nubisproject/nubis-base/pull/701) ([tinnightcap](https://github.com/tinnightcap))
+- Upgrade nubis\_apache to v0.1.11 [\#698](https://github.com/nubisproject/nubis-base/pull/698) ([gozer](https://github.com/gozer))
+- Downgrade consul-template to v0.16.0 [\#696](https://github.com/nubisproject/nubis-base/pull/696) ([gozer](https://github.com/gozer))
+- Retain puppet manifests on the instance [\#695](https://github.com/nubisproject/nubis-base/pull/695) ([gozer](https://github.com/gozer))
+- Upgrade nubis-puppet-apache to v0.1.10 [\#694](https://github.com/nubisproject/nubis-base/pull/694) ([gozer](https://github.com/gozer))
+- Upgrade consul-template to v0.19.0 [\#692](https://github.com/nubisproject/nubis-base/pull/692) ([gozer](https://github.com/gozer))
+- Substitute %%PURPOSE%% on startup [\#689](https://github.com/nubisproject/nubis-base/pull/689) ([gozer](https://github.com/gozer))
+- Upgrade to nubis-puppet-discovery v1.3.2 to silence a Puppet warning [\#686](https://github.com/nubisproject/nubis-base/pull/686) ([gozer](https://github.com/gozer))
+
 ## [v1.5.0](https://github.com/nubisproject/nubis-base/tree/v1.5.0) (2017-06-24)
 [Full Changelog](https://github.com/nubisproject/nubis-base/compare/v1.4.2...v1.5.0)
 
@@ -29,6 +52,8 @@
 
 **Merged pull requests:**
 
+- Merge v1.5.0 release into develop. \[skip ci\] [\#684](https://github.com/nubisproject/nubis-base/pull/684) ([tinnightcap](https://github.com/tinnightcap))
+- Update CHANGELOG for v1.5.0 release \[skip ci\] [\#683](https://github.com/nubisproject/nubis-base/pull/683) ([tinnightcap](https://github.com/tinnightcap))
 - Move gen-puppet startup earlier in the boot process [\#680](https://github.com/nubisproject/nubis-base/pull/680) ([gozer](https://github.com/gozer))
 - Upgrade to v1.2.2 [\#678](https://github.com/nubisproject/nubis-base/pull/678) ([gozer](https://github.com/gozer))
 - Add DUO mfa to base [\#676](https://github.com/nubisproject/nubis-base/pull/676) ([tinnightcap](https://github.com/tinnightcap))
