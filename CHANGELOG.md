@@ -1,6 +1,6 @@
 # Change Log
 
-## [v1.5.1](https://github.com/nubisproject/nubis-base/tree/v1.5.1) (2017-08-11)
+## [v1.5.1](https://github.com/nubisproject/nubis-base/tree/v1.5.1) (2017-08-18)
 [Full Changelog](https://github.com/nubisproject/nubis-base/compare/v1.5.0...v1.5.1)
 
 **Closed issues:**
@@ -14,6 +14,7 @@
 
 **Merged pull requests:**
 
+- Update CHANGELOG for v1.5.1 release \[skip ci\] [\#701](https://github.com/nubisproject/nubis-base/pull/701) ([tinnightcap](https://github.com/tinnightcap))
 - Upgrade nubis\_apache to v0.1.11 [\#698](https://github.com/nubisproject/nubis-base/pull/698) ([gozer](https://github.com/gozer))
 - Downgrade consul-template to v0.16.0 [\#696](https://github.com/nubisproject/nubis-base/pull/696) ([gozer](https://github.com/gozer))
 - Retain puppet manifests on the instance [\#695](https://github.com/nubisproject/nubis-base/pull/695) ([gozer](https://github.com/gozer))
