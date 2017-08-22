@@ -1,7 +1,7 @@
 [template]
 src = "mig-agent-cert.tmpl"
 dest = "/etc/mig/agent.crt"
-prefix = "/environments/%%ENVIRONMENT%%/global/mig"
+prefix = "/environments/%%ARENA%%/global/mig"
 
 keys = [
     "/config"

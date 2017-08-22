@@ -1,7 +1,7 @@
 [template]
 src = "mig-ca.tmpl"
 dest = "/etc/mig/ca.crt"
-prefix = "/environments/%%ENVIRONMENT%%/global/mig"
+prefix = "/environments/%%ARENA%%/global/mig"
 
 keys = [
     "/config"

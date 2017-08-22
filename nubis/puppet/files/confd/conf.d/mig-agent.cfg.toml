@@ -1,7 +1,7 @@
 [template]
 src = "mig-agent.cfg.tmpl"
 dest = "/etc/mig/mig-agent.cfg"
-prefix = "/environments/%%ENVIRONMENT%%/global/mig"
+prefix = "/environments/%%ARENA%%/global/mig"
 
 keys = [
     "/config"

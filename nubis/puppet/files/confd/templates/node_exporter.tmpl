@@ -7,12 +7,12 @@ ENABLED={{ if exists "/config/enabled" }}{{ getv "/config/enabled" }}{{ else }}0
 if [ "$ENABLED" == "1" ]; then
   # Generate fake metrics for Nubis propreties
   NUBIS_PROJECT=$(nubis-metadata NUBIS_PROJECT)
-  NUBIS_ENVIRONMENT=$(nubis-metadata NUBIS_ENVIRONMENT)
+  NUBIS_ARENA=$(nubis-metadata NUBIS_ARENA)
   NUBIS_ACCOUNT=$(nubis-metadata NUBIS_ACCOUNT)
   NUBIS_PURPOSE=$(nubis-metadata NUBIS_PURPOSE)
 
   cat <<EOF > $PROM_DIR/nubis.prom
-nubis{project="$NUBIS_PROJECT",environment="$NUBIS_ENVIRONMENT",account="$NUBIS_ACCOUNT",purpose="$NUBIS_PURPOSE"} 1
+nubis{project="$NUBIS_PROJECT",environment="$NUBIS_ARENA",account="$NUBIS_ACCOUNT",purpose="$NUBIS_PURPOSE"} 1
 EOF
 
   # generate fake metrics for AWS propreties

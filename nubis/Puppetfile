@@ -63,8 +63,8 @@ mod 'nubis/nubis_discovery',
     :ref => 'v1.3.2'
 
 mod 'nubis/nubis_configuration',
-    :git => 'https://github.com/Nubisproject/nubis-puppet-configuration.git',
-    :ref => 'v1.3.1'
+    :git => 'https://github.com/gozer/nubis-puppet-configuration.git',
+    :ref => 'feature/arena'
 
 mod 'nubis/nubis_storage',
     :git => 'https://github.com/nubisproject/nubis-puppet-storage.git',
@@ -75,8 +75,8 @@ mod 'nubis/mig',
     :ref => 'v1.0.1-2'
 
 mod 'nubis/nubis_users',
-    :git => 'https://github.com/nubisproject/nubis-puppet-nubis_users',
-    :ref => 'v1.4.0'
+    :git => 'https://github.com/gozer/nubis-puppet-nubis_users',
+    :ref => 'feature/arena'
 
 # This developer doesn't tag his releases on github
 mod 'maxchk/varnish',

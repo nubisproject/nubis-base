@@ -13,8 +13,8 @@ if [ "$(nubis-metadata NUBIS_ACCOUNT)" == "" ]; then
   exit 0
 fi
 
-NUBIS_ENVIRONMENT=$(nubis-metadata NUBIS_ENVIRONMENT)
-GRACE_FLAG="environments/$NUBIS_ENVIRONMENT/global/tainted/grace"
+NUBIS_ARENA=$(nubis-metadata NUBIS_ARENA)
+GRACE_FLAG="environments/$NUBIS_ARENA/global/tainted/grace"
 GRACE=$(consulate kv get "$GRACE_FLAG" 2>/dev/null)
 
 # Grace period not enabled

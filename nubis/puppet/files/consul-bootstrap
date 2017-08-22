@@ -9,10 +9,10 @@ eval "$(curl -fq http://169.254.169.254/latest/user-data)"
 INSTANCE_ID=$(curl -fq http://169.254.169.254/latest/meta-data/instance-id)
 REGION=$(curl -s http://169.254.169.254/latest/dynamic/instance-identity/document | jq '.region' -r)
 
-CONSUL_DC="${NUBIS_ENVIRONMENT}-${REGION}-${NUBIS_ACCOUNT}"
+CONSUL_DC="${NUBIS_ARENA}-${REGION}-${NUBIS_ACCOUNT}"
 CONSUL_SERVICE_NAME="consul"
 
-CONSUL_DOMAIN="$CONSUL_SERVICE_NAME.$NUBIS_ENVIRONMENT.$REGION.$NUBIS_ACCOUNT.$NUBIS_DOMAIN"
+CONSUL_DOMAIN="$CONSUL_SERVICE_NAME.$NUBIS_ARENA.$REGION.$NUBIS_ACCOUNT.$NUBIS_DOMAIN"
 
 # The HTTP endpoint, constructed
 CONSUL_UI="https://ui.$CONSUL_DOMAIN"
@@ -72,7 +72,7 @@ if [ -z "$CONSUL_SECRET" ]; then
   
   # discover via Consul
   if [ -z "$SECRET" ]; then
-    SECRET=$($CONSUL_CURL "$CONSUL_UI/v1/kv/environments/$NUBIS_ENVIRONMENT/global/consul/secret?raw")
+    SECRET=$($CONSUL_CURL "$CONSUL_UI/v1/kv/environments/$NUBIS_ARENA/global/consul/secret?raw")
   fi
   
   if [ ! -z "$SECRET" ]; then
@@ -124,10 +124,11 @@ fi
 
 # Auto-discover certificate and key
 if [ ! -f /etc/consul/consul.pem ]; then
-  $CONSUL_CURL -o /etc/consul/consul.pem "$CONSUL_UI/v1/kv/environments/$NUBIS_ENVIRONMENT/global/consul/cert?raw"
+  $CONSUL_CURL -o /etc/consul/consul.pem "$CONSUL_UI/v1/kv/environments/$NUBIS_ARENA/global/consul/cert?raw"
 fi
+
 if [ ! -f /etc/consul/consul.key ]; then
-  $CONSUL_CURL -o /etc/consul/consul.key "$CONSUL_UI/v1/kv/environments/$NUBIS_ENVIRONMENT/global/consul/key?raw"
+  $CONSUL_CURL -o /etc/consul/consul.key "$CONSUL_UI/v1/kv/environments/$NUBIS_ARENA/global/consul/key?raw"
 fi
 
 if [ -f /etc/consul/consul.pem ]; then
@@ -161,6 +162,10 @@ else
   echo "Failed to configure security, Consul is most likely broken!"
 fi
 
+
+if [ "$NUBIS_ARENA" != "" ]; then
+  find /etc/consul -type f -name '*.json' -print0 | xargs -0 --verbose sed -i -e "s/%%ARENA%%/$NUBIS_ARENA/g"
+fi
 
 if [ "$NUBIS_ENVIRONMENT" != "" ]; then
   find /etc/consul -type f -name '*.json' -print0 | xargs -0 --verbose sed -i -e "s/%%ENVIRONMENT%%/$NUBIS_ENVIRONMENT/g"

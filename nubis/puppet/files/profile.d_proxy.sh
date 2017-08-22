@@ -11,10 +11,10 @@ fi
 # Fallback
 if [ -z "${PROXY}" ]; then
   REGION=$(curl -s http://169.254.169.254/latest/dynamic/instance-identity/document | jq '.region' -r)
-  NUBIS_ENVIRONMENT=$(nubis-metadata NUBIS_ENVIRONMENT)
+  NUBIS_ARENA=$(nubis-metadata NUBIS_ARENA)
   NUBIS_ACCOUNT=$(nubis-metadata NUBIS_ACCOUNT)
   NUBIS_DOMAIN=$(nubis-metadata NUBIS_DOMAIN)
-  PROXY_FALLBACK="proxy.${NUBIS_ENVIRONMENT}.${REGION}.${NUBIS_ACCOUNT}.${NUBIS_DOMAIN}"
+  PROXY_FALLBACK="proxy.${NUBIS_ARENA}.${REGION}.${NUBIS_ACCOUNT}.${NUBIS_DOMAIN}"
 
   host "$PROXY_FALLBACK" >/dev/null 2>&1
   RV=$?
