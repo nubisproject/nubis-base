@@ -1,5 +1,3 @@
-﻿
-
 # Working with Cloudformation
 
 ## Set Up
