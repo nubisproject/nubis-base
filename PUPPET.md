@@ -1,4 +1,3 @@
-
 # Nubis puppet
 
 ---

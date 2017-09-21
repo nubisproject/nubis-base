@@ -1,4 +1,3 @@
-
 # nubis-base
 
 [![Version](https://img.shields.io/github/release/nubisproject/nubis-base.svg?maxAge=2592000)](https://github.com/nubisproject/nubis-base/releases)
@@ -8,8 +7,8 @@
 ## Quick start
 
 1. `git clone git@github.com:nubisproject/nubis-base.git`
-1. `git clone git@github.com:nubisproject/nubis-builder.git`
-1. Refer to README.md in nubis-builder on how to build this project.
+2. `git clone git@github.com:nubisproject/nubis-builder.git`
+3. Refer to README.md in nubis-builder on how to build this project.
 
 ## File structure
 
