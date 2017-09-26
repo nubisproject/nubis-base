@@ -110,6 +110,8 @@ file { '/etc/td-agent/config.d/ec2_metadata.conf':
         project       "#{ENV[\'NUBIS_PROJECT\']}"
         stack         "#{ENV[\'NUBIS_STACK\']}"
         purpose       "#{ENV[\'NUBIS_PURPOSE\']}"
+        environment   "#{ENV[\'NUBIS_ENVIRONMENT\']}"
+        arena         "#{ENV[\'NUBIS_ARENA\']}"
       </record>
     </match>',
   # lint:endignore

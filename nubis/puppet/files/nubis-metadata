@@ -6,6 +6,11 @@ if [ ! -d "$(dirname $USERDATA_FILE)" ]; then
   mkdir "$(dirname $USERDATA_FILE)"
 fi
 
+# If we can't read the file, use our own copy
+if [ -e "$USERDATA_FILE" ] && [ ! -r "$USERDATA_FILE" ] && [ "$(id -u)" != "0" ]; then
+  USERDATA_FILE=~/.nubis-metadata
+fi
+
 # the -z flag lets us do a conditionnal get if-modified-since
 curl --retry 5 -fqs -z $USERDATA_FILE -o $USERDATA_FILE http://169.254.169.254/latest/user-data
 

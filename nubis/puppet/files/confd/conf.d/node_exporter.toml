@@ -1,7 +1,7 @@
 [template]
 src = "node_exporter.tmpl"
 dest = "/usr/local/sbin/nubis_node_exporter"
-prefix = "/environments/%%ARENA%%/global/node_exporter"
+prefix = "/arenas/%%ARENA%%/global/node_exporter"
 
 uid = 0
 gid = 0

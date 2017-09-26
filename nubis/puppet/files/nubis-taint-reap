@@ -21,7 +21,7 @@ fi
 # Tainted > 1 means we have expired
 if [ "$TAINTED" -gt "1" ]; then
   NUBIS_ARENA=$(nubis-metadata NUBIS_ARENA)
-  DELETE_FLAG="environments/$NUBIS_ARENA/global/tainted/delete"
+  DELETE_FLAG="arenas/$NUBIS_ARENA/global/tainted/delete"
   DELETE_ENABLED=$(consulate kv get "$DELETE_FLAG")
 
   if [ "$DELETE_ENABLED" == "0" ]; then
