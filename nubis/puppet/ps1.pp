@@ -18,7 +18,7 @@ if $lsbdistid == 'Ubuntu' {
     group  => 'root',
     source => 'puppet:///nubis/files/ubuntu-bashrc',
   }
-  
+
   file {'/home/ubuntu/.bashrc':
     ensure => 'present',
     mode   => '0644',
