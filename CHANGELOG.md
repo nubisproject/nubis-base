@@ -3,8 +3,14 @@
 ## [v2.0.0](https://github.com/nubisproject/nubis-base/tree/v2.0.0) (2017-10-05)
 [Full Changelog](https://github.com/nubisproject/nubis-base/compare/v1.5.1...v2.0.0)
 
+**Closed issues:**
+
+- Tag v2.0.0 release [\#715](https://github.com/nubisproject/nubis-base/issues/715)
+
 **Merged pull requests:**
 
+- Merge v2.0.0 release into develop. \[skip ci\] [\#717](https://github.com/nubisproject/nubis-base/pull/717) ([tinnightcap](https://github.com/tinnightcap))
+- Update CHANGELOG for v2.0.0 release \[skip ci\] [\#716](https://github.com/nubisproject/nubis-base/pull/716) ([tinnightcap](https://github.com/tinnightcap))
 - Arena Support [\#712](https://github.com/nubisproject/nubis-base/pull/712) ([gozer](https://github.com/gozer))
 - Update to nubis-travis v1.4.2 [\#711](https://github.com/nubisproject/nubis-base/pull/711) ([tinnightcap](https://github.com/tinnightcap))
 - Update nubis-travis to v1.4.0 [\#709](https://github.com/nubisproject/nubis-base/pull/709) ([tinnightcap](https://github.com/tinnightcap))
