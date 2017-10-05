@@ -16,3 +16,11 @@ export NUBIS_PURPOSE
 #Expose our stack to fluentd
 NUBIS_STACK=$(nubis-metadata NUBIS_STACK)
 export NUBIS_STACK
+
+#Expose our environment to fluentd
+NUBIS_ENVIRONMENT=$(nubis-metadata NUBIS_ENVIRONMENT)
+export NUBIS_ENVIRONMENT
+
+#Expose our arena to fluentd
+NUBIS_ARENA=$(nubis-metadata NUBIS_ARENA)
+export NUBIS_ARENA

@@ -5,14 +5,19 @@ PROM_DIR=/var/lib/node_exporter/metrics
 ENABLED={{ if exists "/config/enabled" }}{{ getv "/config/enabled" }}{{ else }}0{{ end }}
 
 if [ "$ENABLED" == "1" ]; then
+
+  # Link in our build versions
+  ln -sf /etc/nubis_versions.prom "$PROM_DIR/nubis_versions.prom"
+  
   # Generate fake metrics for Nubis propreties
   NUBIS_PROJECT=$(nubis-metadata NUBIS_PROJECT)
+  NUBIS_ARENA=$(nubis-metadata NUBIS_ARENA)
   NUBIS_ENVIRONMENT=$(nubis-metadata NUBIS_ENVIRONMENT)
   NUBIS_ACCOUNT=$(nubis-metadata NUBIS_ACCOUNT)
   NUBIS_PURPOSE=$(nubis-metadata NUBIS_PURPOSE)
 
   cat <<EOF > $PROM_DIR/nubis.prom
-nubis{project="$NUBIS_PROJECT",environment="$NUBIS_ENVIRONMENT",account="$NUBIS_ACCOUNT",purpose="$NUBIS_PURPOSE"} 1
+nubis{project="$NUBIS_PROJECT",environment="$NUBIS_ENVIRONMENT",arena="$NUBIS_ARENA",account="$NUBIS_ACCOUNT",purpose="$NUBIS_PURPOSE"} 1
 EOF
 
   # generate fake metrics for AWS propreties

@@ -12,7 +12,7 @@ mod 'puppetlabs/concat', '1.2.5'
 
 mod 'nubis/nubis_apache',
     :git => 'https://github.com/nubisproject/nubis-puppet-apache.git',
-    :ref => 'v0.1.11'
+    :ref => 'v0.1.12'
 
 # 2.x is out, but it causes strange apt update race conditions in fluentd
 mod 'puppetlabs/apt', '1.8.0'
@@ -46,7 +46,7 @@ mod 'gozer/puppet-confd',
 # Skeleton to get above confd happy
 mod 'nubis-confd_site',
     :git => 'https://github.com/gozer/nubis-site_confd.git',
-    :ref => '0.1.1'
+    :ref => '0.1.2'
 
 mod 'srf/fluentd',
     :git => 'https://github.com/gozer/puppet-fluentd.git',
@@ -60,11 +60,11 @@ mod 'bhourigan/dnsmasq',
 
 mod 'nubis/nubis_discovery',
     :git => 'https://github.com/nubisproject/nubis-puppet-discovery.git',
-    :ref => 'v1.3.2'
+    :ref => 'v1.3.3'
 
 mod 'nubis/nubis_configuration',
-    :git => 'https://github.com/Nubisproject/nubis-puppet-configuration.git',
-    :ref => 'v1.3.1'
+    :git => 'https://github.com/nubisproject/nubis-puppet-configuration.git',
+    :ref => 'v1.3.2'
 
 mod 'nubis/nubis_storage',
     :git => 'https://github.com/nubisproject/nubis-puppet-storage.git',
@@ -76,7 +76,7 @@ mod 'nubis/mig',
 
 mod 'nubis/nubis_users',
     :git => 'https://github.com/nubisproject/nubis-puppet-nubis_users',
-    :ref => 'v1.4.0'
+    :ref => 'v1.4.1'
 
 # This developer doesn't tag his releases on github
 mod 'maxchk/varnish',

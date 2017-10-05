@@ -9,7 +9,7 @@
 eval $(curl -s -fq http://169.254.169.254/latest/user-data)
 
 # Set up the consul url
-CONSUL="http://localhost:8500/v1/kv/${NUBIS_STACK}/${NUBIS_ENVIRONMENT}/config"
+CONSUL="http://localhost:8500/v1/kv/${NUBIS_STACK}/${NUBIS_ARENA}/config"
 
 # Some bash functions
 
