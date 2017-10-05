@@ -1,6 +1,13 @@
 # Change Log
 
 ## [v2.0.0](https://github.com/nubisproject/nubis-base/tree/v2.0.0) (2017-10-05)
+[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v2.0.0...v2.0.0)
+
+**Merged pull requests:**
+
+- Update CHANGELOG for v2.0.0 release \[skip ci\] [\#719](https://github.com/nubisproject/nubis-base/pull/719) ([tinnightcap](https://github.com/tinnightcap))
+
+## [v2.0.0](https://github.com/nubisproject/nubis-base/tree/v2.0.0) (2017-10-05)
 [Full Changelog](https://github.com/nubisproject/nubis-base/compare/v1.5.1...v2.0.0)
 
 **Closed issues:**
