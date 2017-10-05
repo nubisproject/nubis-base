@@ -63,7 +63,7 @@ mod 'nubis/nubis_discovery',
     :ref => 'v1.3.3'
 
 mod 'nubis/nubis_configuration',
-    :git => 'https://github.com/gozer/nubis-puppet-configuration.git',
+    :git => 'https://github.com/nubisproject/nubis-puppet-configuration.git',
     :ref => 'v1.3.2'
 
 mod 'nubis/nubis_storage',
