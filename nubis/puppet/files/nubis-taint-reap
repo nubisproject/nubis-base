@@ -20,8 +20,8 @@ fi
 # Tainted = 1 is just a warning we are tainted
 # Tainted > 1 means we have expired
 if [ "$TAINTED" -gt "1" ]; then
-  NUBIS_ENVIRONMENT=$(nubis-metadata NUBIS_ENVIRONMENT)
-  DELETE_FLAG="environments/$NUBIS_ENVIRONMENT/global/tainted/delete"
+  NUBIS_ARENA=$(nubis-metadata NUBIS_ARENA)
+  DELETE_FLAG="arenas/$NUBIS_ARENA/global/tainted/delete"
   DELETE_ENABLED=$(consulate kv get "$DELETE_FLAG")
 
   if [ "$DELETE_ENABLED" == "0" ]; then

@@ -22,4 +22,4 @@ script:
 - nubis/travis/run-builds
 notifications:
   slack:
-    secure: m0UqU6EjiDFKzGSvKlndym1mdB9XeDEYQa3pKW9teJcogF2GR6za6IsvntIoQEAyBBSgJI+BTeBbZawMj4aYp0KzPDrCH9DfhP85tgBUcqAhRNdNiTQmqnSKXJe763YImk4rUJlEgtHwWu5sQGA4W2hym4srsbliN/7bK0KsDzc=
+    secure: Bgu42ldHdcCPJ1pJ0YplS5N3xwU3iS7gbsrJzRMQzBrj3nXYICqLUNFNwClAwUft3CMFHiofV/Y59X2E7likGXB8XX6J8FteL7mEqGifg8ucxrVtNGjztITnxke6XiFq2FC2bjld/RYX0d+eo2ZlkJbwWgLeHFjC+GHmaNLZfy8=
