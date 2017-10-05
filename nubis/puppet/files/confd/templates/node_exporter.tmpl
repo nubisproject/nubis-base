@@ -7,7 +7,7 @@ ENABLED={{ if exists "/config/enabled" }}{{ getv "/config/enabled" }}{{ else }}0
 if [ "$ENABLED" == "1" ]; then
 
   # Link in our build versions
-  ln -sf /etc/nubis_versions.prom $PROM_DIR/nubis_versions.prom
+  ln -sf /etc/nubis_versions.prom "$PROM_DIR/nubis_versions.prom"
   
   # Generate fake metrics for Nubis propreties
   NUBIS_PROJECT=$(nubis-metadata NUBIS_PROJECT)
