@@ -1,21 +1,35 @@
 # Change Log
 
-## [v2.0.0](https://github.com/nubisproject/nubis-base/tree/v2.0.0) (2017-10-05)
-[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v2.0.0...v2.0.0)
+## [v2.0.1](https://github.com/nubisproject/nubis-base/tree/v2.0.1) (2017-10-13)
+[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v2.0.0...v2.0.1)
 
-**Merged pull requests:**
+**Implemented enhancements:**
 
-- Update CHANGELOG for v2.0.0 release \[skip ci\] [\#719](https://github.com/nubisproject/nubis-base/pull/719) ([tinnightcap](https://github.com/tinnightcap))
+- Keep project's nubis manifests on the generated images [\#132](https://github.com/nubisproject/nubis-base/issues/132)
+
+**Closed issues:**
+
+- Handle host keys correctly [\#713](https://github.com/nubisproject/nubis-base/issues/713)
+- \[Proxy\] Use tinyproxy locally as our proxy [\#710](https://github.com/nubisproject/nubis-base/issues/710)
+- \[confd\] Upgrade to 0.13.0 [\#705](https://github.com/nubisproject/nubis-base/issues/705)
+- \[consul\] Upgrade to 0.8.5 [\#699](https://github.com/nubisproject/nubis-base/issues/699)
+- \[puppet\] Upgrade puppet modules [\#591](https://github.com/nubisproject/nubis-base/issues/591)
+- Remove credstash [\#523](https://github.com/nubisproject/nubis-base/issues/523)
+- Convert user-data to JSON via jq parsing [\#49](https://github.com/nubisproject/nubis-base/issues/49)
 
 ## [v2.0.0](https://github.com/nubisproject/nubis-base/tree/v2.0.0) (2017-10-05)
 [Full Changelog](https://github.com/nubisproject/nubis-base/compare/v1.5.1...v2.0.0)
 
 **Closed issues:**
 
+- Tag v2.0.0 release [\#718](https://github.com/nubisproject/nubis-base/issues/718)
 - Tag v2.0.0 release [\#715](https://github.com/nubisproject/nubis-base/issues/715)
 
 **Merged pull requests:**
 
+- Merge v2.0.0 release into develop. \[skip ci\] [\#723](https://github.com/nubisproject/nubis-base/pull/723) ([tinnightcap](https://github.com/tinnightcap))
+- Update CHANGELOG for v2.0.0 release \[skip ci\] [\#722](https://github.com/nubisproject/nubis-base/pull/722) ([tinnightcap](https://github.com/tinnightcap))
+- Update CHANGELOG for v2.0.0 release \[skip ci\] [\#719](https://github.com/nubisproject/nubis-base/pull/719) ([tinnightcap](https://github.com/tinnightcap))
 - Merge v2.0.0 release into develop. \[skip ci\] [\#717](https://github.com/nubisproject/nubis-base/pull/717) ([tinnightcap](https://github.com/tinnightcap))
 - Update CHANGELOG for v2.0.0 release \[skip ci\] [\#716](https://github.com/nubisproject/nubis-base/pull/716) ([tinnightcap](https://github.com/tinnightcap))
 - Arena Support [\#712](https://github.com/nubisproject/nubis-base/pull/712) ([gozer](https://github.com/gozer))
@@ -76,6 +90,7 @@
 - \[consul\] Upgrade to 0.8.3 [\#652](https://github.com/nubisproject/nubis-base/issues/652)
 - \[puppet\] Cleanup /var/lib/puppet [\#622](https://github.com/nubisproject/nubis-base/issues/622)
 - cron\[gen-puppet-watchdog\] runs \(and fails\) when user\_managment isn't enabled [\#579](https://github.com/nubisproject/nubis-base/issues/579)
+- Tag v1.5.0 release [\#682](https://github.com/nubisproject/nubis-base/issues/682)
 
 **Merged pull requests:**
 
