@@ -1,5 +1,12 @@
 # Change Log
 
+## [v2.0.2](https://github.com/nubisproject/nubis-base/tree/v2.0.2) (2017-10-24)
+[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v2.0.1...v2.0.2)
+
+**Closed issues:**
+
+- \[node\_exporter\] Expose nubis base version [\#704](https://github.com/nubisproject/nubis-base/issues/704)
+
 ## [v2.0.1](https://github.com/nubisproject/nubis-base/tree/v2.0.1) (2017-10-13)
 [Full Changelog](https://github.com/nubisproject/nubis-base/compare/v2.0.0...v2.0.1)
 
@@ -16,6 +23,12 @@
 - \[puppet\] Upgrade puppet modules [\#591](https://github.com/nubisproject/nubis-base/issues/591)
 - Remove credstash [\#523](https://github.com/nubisproject/nubis-base/issues/523)
 - Convert user-data to JSON via jq parsing [\#49](https://github.com/nubisproject/nubis-base/issues/49)
+- Tag v2.0.1 release [\#725](https://github.com/nubisproject/nubis-base/issues/725)
+
+**Merged pull requests:**
+
+- Merge v2.0.1 release into develop. \[skip ci\] [\#727](https://github.com/nubisproject/nubis-base/pull/727) ([tinnightcap](https://github.com/tinnightcap))
+- Update CHANGELOG for v2.0.1 release \[skip ci\] [\#726](https://github.com/nubisproject/nubis-base/pull/726) ([tinnightcap](https://github.com/tinnightcap))
 
 ## [v2.0.0](https://github.com/nubisproject/nubis-base/tree/v2.0.0) (2017-10-05)
 [Full Changelog](https://github.com/nubisproject/nubis-base/compare/v1.5.1...v2.0.0)
@@ -723,7 +736,7 @@
 - Add support for 3 more Consul Server bootstrap options: [\#142](https://github.com/nubisproject/nubis-base/pull/142) ([gozer](https://github.com/gozer))
 
 ## [v0.9.0](https://github.com/nubisproject/nubis-base/tree/v0.9.0) (2015-07-23)
-[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v0.1...v0.9.0)
+[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v0.79...v0.9.0)
 
 **Closed issues:**
 
@@ -739,11 +752,11 @@
 - Move creation of /etc/puppet/nubis/{files,templates} to base image. Fixes \#134 [\#135](https://github.com/nubisproject/nubis-base/pull/135) ([gozer](https://github.com/gozer))
 - Ubuntu repositories have very old versions of the ec2-ami-tools that just don't work at all. [\#130](https://github.com/nubisproject/nubis-base/pull/130) ([gozer](https://github.com/gozer))
 
-## [v0.1](https://github.com/nubisproject/nubis-base/tree/v0.1) (2015-06-11)
-[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v0.79...v0.1)
-
 ## [v0.79](https://github.com/nubisproject/nubis-base/tree/v0.79) (2015-06-11)
-[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v1.35...v0.79)
+[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v0.1...v0.79)
+
+## [v0.1](https://github.com/nubisproject/nubis-base/tree/v0.1) (2015-06-11)
+[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v1.35...v0.1)
 
 **Closed issues:**
 
