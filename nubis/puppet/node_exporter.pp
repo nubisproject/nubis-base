@@ -1,5 +1,5 @@
-$node_exporter_version = '0.12.0'
-$node_exporter_url = "https://github.com/prometheus/node_exporter/releases/download/${node_exporter_version}/node_exporter-${node_exporter_version}.linux-amd64.tar.gz"
+$node_exporter_version = '0.15.0'
+$node_exporter_url = "https://github.com/prometheus/node_exporter/releases/download/v${node_exporter_version}/node_exporter-${node_exporter_version}.linux-amd64.tar.gz"
 
 notice ("Grabbing node_exporter ${node_exporter_version}")
 staging::file { "node_exporter.${node_exporter_version}.tar.gz":
