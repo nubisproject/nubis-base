@@ -26,9 +26,13 @@ END=$(date +%s)
 DURATION=$(( END - START ))
 
 cat <<EOF > "$METRICS"
+# HELP nubis_cron_end Metric created by nubis-cron
 nubis_cron_end{cronjob="$JOB"} $END
+# HELP nubis_cron_start Metric created by nubis-cron
 nubis_cron_start{cronjob="$JOB"} $START
+# HELP nubis_cron_duration Metric created by nubis-cron
 nubis_cron_duration{cronjob="$JOB"} $DURATION
+# HELP nubis_cron_status Metric created by nubis-cron
 nubis_cron_status{cronjob="$JOB"} $RV
 EOF
 

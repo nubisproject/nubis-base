@@ -20,7 +20,7 @@ export PATH
 
 name=node_exporter
 program="/usr/local/bin/$name"
-args="-collector.textfile.directory /var/lib/node_exporter/metrics"
+args="--collector.textfile.directory /var/lib/node_exporter/metrics --collector.nfs --collector.tcpstat --no-collector.wifi --no-collector.mdadm --no-collector.xfs --no-collector.zfs"
 pidfile=/var/run/$name.pid
 user=root
 group=root
