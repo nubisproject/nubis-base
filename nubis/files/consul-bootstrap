@@ -189,4 +189,7 @@ rm -rf /var/lib/consul/serf/*
 systemctl start consul
 
 ### XXX: Wait for consul to start here
-sleep 5
+until consul info >/dev/null; do
+  echo "Waiting for Consul to startup"
+  sleep 1
+done
