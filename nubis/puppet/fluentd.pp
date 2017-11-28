@@ -129,6 +129,8 @@ fluentd::source { 'syslog_main':
   notify     => Class['fluentd::service']
 }
 
+# XXX: Debianism
+#if $osfamily == 'Debian' {
 fluentd::source { 'syslog_kern':
   configfile => 'syslog',
   type       => 'tail',
@@ -136,6 +138,19 @@ fluentd::source { 'syslog_kern':
   tag        => 'forward.system.kern',
   config     => {
     'path'     => '/var/log/kern.log',
+    'pos_file' => '/tmp/td-agent.syslog.pos',
+  },
+  notify     => Class['fluentd::service']
+}
+#}
+
+fluentd::source { 'syslog_auth':
+  configfile => 'syslog',
+  type       => 'tail',
+  format     => 'syslog',
+  tag        => 'forward.system.auth',
+  config     => {
+    'path'     => '/var/log/auth.log',
     'pos_file' => '/tmp/td-agent.syslog.pos',
   },
   notify     => Class['fluentd::service']
@@ -194,13 +209,18 @@ if $osfamily == 'RedHat' {
   }
 }
 
-cron { 'fluent-watchdog':
-  ensure      => 'present',
-  command     => 'nubis-cron fluent-watchdog "service td-agent status 1>/dev/null || service td-agent start || true"',
-  hour        => '*',
-  minute      => '*/11',
-  user        => 'root',
-  environment => [
-    'PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin:/opt/aws/bin',
-  ],
+# Ensure service auto-restarts
+file { '/etc/systemd/system/td-agent.service.d':
+  ensure => directory,
+  owner  => 'root',
+  group  => 'root',
+}
+
+::systemd::dropin_file { 'restart.conf':
+  unit    => 'td-agent.service',
+  content => @(END)
+[Service]
+Restart=on-failure
+RestartSec=60s
+END
 }

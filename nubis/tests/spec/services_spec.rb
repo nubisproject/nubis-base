@@ -14,14 +14,14 @@ describe service('sshd') do
   it { should be_enabled }
 end
 
-describe service('confd') do
-  it { should be_enabled }
-end
-
 describe service('td-agent') do
   it { should be_enabled }
 end
 
-describe service('ntpd') do
+describe service('ntpd'),  :if => os[:family] == 'redhat' do
+  it { should be_enabled }
+end
+
+describe service('ntp'),  :if => os[:family] == 'ubuntu' do
   it { should be_enabled }
 end

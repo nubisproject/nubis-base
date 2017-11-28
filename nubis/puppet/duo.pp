@@ -1,13 +1,13 @@
 case $::osfamily {
   'RedHat': {
     $package_version = $::operatingsystemrelease ? {
-      /^5/        => '1.9.21-0.el5',
-      /^(6|2017)/ => '1.9.21-0.el6',
-      /^7/        => '1.9.21-0.el7'
+      /^5/        => '1.10.1-0.el5',
+      /^(6|2017)/ => '1.10.1-0.el6',
+      /^7/        => '1.10.1-0.el7'
     }
   }
   'Debian': {
-    $package_version = '1.9.21-0'
+    $package_version = '1.10.1-0'
   }
   default: {
     fail("Module duo_unix does not support ${::osfamily}")

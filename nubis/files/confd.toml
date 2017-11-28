@@ -1,0 +1,6 @@
+confdir = "/etc/confd"
+backend = "consul"
+watch = true
+nodes = [
+  "localhost:8500",
+]

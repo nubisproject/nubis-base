@@ -4,6 +4,7 @@ if [ -r /etc/profile.d/proxy.sh ]; then
 fi
 
 TD_AGENT_USER="root"
+TD_AGENT_OPTIONS="$TD_AGENT_OPTIONS --no-supervisor"
 
 # Expose our project to fluentd
 NUBIS_PROJECT=$(nubis-metadata NUBIS_PROJECT)
