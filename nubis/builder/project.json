@@ -2,9 +2,7 @@
   "variables": {
     "builders": [
       "amazon-ebs-ubuntu",
-      "docker-ubuntu",
-      "amazon-ebs-centos",
-      "docker-centos"
+      "amazon-ebs-centos"
     ],
     "deregister": "true",
     "project_description": "Nubis base AMI",
