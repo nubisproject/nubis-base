@@ -12,6 +12,6 @@ file {
 if $osfamily == 'RedHat' {
   # For /usr/bin/host
   package { 'bind-utils':
-    ensure => 'latest'
+    ensure => '9.9.4-*'
   }
 }
