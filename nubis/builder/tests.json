@@ -4,13 +4,11 @@
     "type": "file",
     "source": "nubis/tests",
     "destination": "/tmp",
-    "except" : [ "amazon-ebs-ubuntu" ],
     "order": "100"
   },
   {
     "type": "shell",
     "script": "nubis/tests/run-tests",
-    "except" : [ "amazon-ebs-ubuntu" ],
     "order": "101"
   }
   ]

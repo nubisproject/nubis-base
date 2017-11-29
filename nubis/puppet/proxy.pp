@@ -8,3 +8,10 @@ file {
         group  => 'root',
         source => 'puppet:///nubis/files/profile.d_proxy.sh',
 }
+
+if $osfamily == 'RedHat' {
+  # For /usr/bin/host
+  package { 'bind-utils':
+    ensure => '9.9.4-*'
+  }
+}

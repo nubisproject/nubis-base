@@ -10,13 +10,6 @@ cache:
   directories:
   - "${HOME}/bin"
   - nubis/librarian-puppet
-addons:
-  apt:
-    sources:
-    - debian-sid
-    packages:
-    - shellcheck
-    - libssl1.0.0
 script:
 - nubis/travis/run-checks
 - nubis/travis/run-builds

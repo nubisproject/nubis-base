@@ -183,19 +183,13 @@ if [ "$NUBIS_PURPOSE" != "" ]; then
   find /etc/consul -type f -name '*.json' -print0 | xargs -0 --verbose sed -i -e "s/%%PURPOSE%%/$NUBIS_PURPOSE/g"
 fi
 
-
-# RHEL sysv consul init scripts are buggy
-# https://github.com/nubisproject/nubis-base/issues/247
-OSFAMILY=$(facter osfamily)
-SERVICE=$(which service)
-if [ "$OSFAMILY" = "RedHat" ]; then
-  DAEMONIZE="daemonize"
-fi
-
 # Perform a clean nuke and restart of Consul
-service consul stop
+systemctl stop consul
 rm -rf /var/lib/consul/serf/*
-$DAEMONIZE "$SERVICE" consul start
+systemctl start consul
 
 ### XXX: Wait for consul to start here
-sleep 5
+until consul info >/dev/null; do
+  echo "Waiting for Consul to startup"
+  sleep 1
+done

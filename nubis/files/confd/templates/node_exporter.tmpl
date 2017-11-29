@@ -7,7 +7,9 @@ ENABLED={{ if exists "/config/enabled" }}{{ getv "/config/enabled" }}{{ else }}0
 if [ "$ENABLED" == "1" ]; then
 
   # Link in our build versions
-  ln -sf /etc/nubis_versions.prom "$PROM_DIR/nubis_versions.prom"
+  if [ -r /etc/nubis_versions.prom ]; then
+    ln -sf /etc/nubis_versions.prom "$PROM_DIR/nubis_versions.prom"
+  fi
   
   # Generate fake metrics for Nubis propreties
   NUBIS_PROJECT=$(nubis-metadata NUBIS_PROJECT)
@@ -32,12 +34,12 @@ EOF
 aws{region="$REGION",availability_zone="$AZ",instance_type="$TYPE",ami_id="$AMI",instance_id="$INSTANCE"} 1
 EOF
 
-  service node_exporter start
+  systemctl start node_exporter
 
   # Enable Consul service check
   if [ -r "/etc/consul/svc-node-exporter.json.gz" ]; then
     gunzip /etc/consul/svc-node-exporter.json.gz
-    /etc/init.d/consul reload
+    systemctl reload consul
   fi
 
 else
@@ -45,9 +47,9 @@ else
   # Disable Consul service check
   if [ -r "/etc/consul/svc-node-exporter.json" ]; then
     gzip /etc/consul/svc-node-exporter.json
-    /etc/init.d/consul reload
+    systemctl reload consul
   fi
 
-  service node_exporter stop
+  systemctl stop node_exporter
 
 fi

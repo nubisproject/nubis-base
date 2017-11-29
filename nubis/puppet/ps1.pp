@@ -8,7 +8,6 @@ file {
 }
 
 # Disable Ubuntu's .bashrc PS1 overriding
-
 if $lsbdistid == 'Ubuntu' {
 
   file {'/etc/skel/.bashrc':
@@ -19,12 +18,30 @@ if $lsbdistid == 'Ubuntu' {
     source => 'puppet:///nubis/files/ubuntu-bashrc',
   }
 
-  file {'/home/ubuntu/.bashrc':
+  group { 'ubuntu':
     ensure => 'present',
-    mode   => '0644',
-    owner  => 'ubuntu',
-    group  => 'ubuntu',
-    source => 'puppet:///nubis/files/ubuntu-bashrc',
+    gid    => 1000,
+  }
+
+  user { 'ubuntu':
+    ensure     => 'present',
+    managehome => true,
+    uid        => 1000,
+    gid        => 1000,
+    require    => [
+      Group['ubuntu'],
+    ],
+  }
+
+  file {'/home/ubuntu/.bashrc':
+    ensure  => 'present',
+    mode    => '0644',
+    owner   => 'ubuntu',
+    group   => 'ubuntu',
+    require => [
+      User['ubuntu'],
+    ],
+    source  => 'puppet:///nubis/files/ubuntu-bashrc',
   }
 }
 
