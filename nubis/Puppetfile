@@ -78,7 +78,7 @@ mod 'nubis/consul_do',
 
 mod 'nubis/nubis_discovery',
     :git => 'https://github.com/nubisproject/nubis-puppet-discovery.git',
-    :ref => 'v1.3.3'
+    :ref => 'v1.3.4'
 
 mod 'nubis/nubis_configuration',
     :git => 'https://github.com/nubisproject/nubis-puppet-configuration.git',
