@@ -10,8 +10,8 @@ file {
 }
 
 if $osfamily == 'RedHat' {
-  # For /usr/bin/host
+  # For /usr/bin/host, basically
   package { 'bind-utils':
-    ensure => '9.9.4-*'
+    ensure => 'present',
   }
 }
