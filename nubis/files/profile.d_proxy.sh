@@ -4,14 +4,18 @@ PROXY=proxy.service.consul
 
 # If consul doesn't resolve it for us, fallback to something constructed
 if ! host $PROXY >/dev/null 2>&1; then
-  echo "Using fall-back proxy" >&2
-
   REGION=$(nubis-region)
   NUBIS_ARENA=$(nubis-metadata NUBIS_ARENA)
   NUBIS_ACCOUNT=$(nubis-metadata NUBIS_ACCOUNT)
-  NUBIS_DOMAIN=$(nubis-metadata NUBIS_DOMAIN)  
+  NUBIS_DOMAIN=$(nubis-metadata NUBIS_DOMAIN)
   
-  PROXY="proxy.${NUBIS_ARENA}.${REGION}.${NUBIS_ACCOUNT}.${NUBIS_DOMAIN}"
+  if [ ! -z "$REGION" ] && [ ! -z "$NUBIS_ARENA" ] && [ ! -z "$NUBIS_ACCOUNT" ] && [ ! -z "$NUBIS_DOMAIN" ]; then
+    echo "Using fall-back proxy" >&2
+    PROXY="proxy.${NUBIS_ARENA}.${REGION}.${NUBIS_ACCOUNT}.${NUBIS_DOMAIN}"
+  else
+    echo "No proxy available" >&2
+    unset PROXY
+  fi
 fi
 
 if [ ! -z "${PROXY}" ]; then
