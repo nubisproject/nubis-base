@@ -7,3 +7,10 @@
 Package {
   allow_virtual => false,
 }
+
+# we don't want no vim-minimal
+if $osfamily == 'RedHat' {
+  package { 'vim-enhanced':
+    ensure =>  present,
+  }
+}
