@@ -34,3 +34,12 @@ file { '/etc/duo/duo_sshd_config_runtime.pp':
   source  => 'puppet:///nubis/files/duo_sshd_config_runtime.pp',
   require => Class['duo_unix'];
 }
+
+file { '/etc/duo/duo.sh':
+  ensure  => file,
+  owner   => root,
+  group   => root,
+  mode    => '0755',
+  source  => 'puppet:///nubis/files/duo.sh',
+  require =>  File['/etc/duo/duo_sshd_config_runtime.pp'],
+}
