@@ -10,4 +10,4 @@ uid = 0
 gid = 0
 mode = "0600"
 
-reload_cmd = "puppet apply /etc/duo/duo_sshd_config_runtime.pp"
+reload_cmd = "/usr/local/bin/nubis-duo-reload"
