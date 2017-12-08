@@ -35,7 +35,7 @@ file { '/etc/duo/duo_sshd_config_runtime.pp':
   require => Class['duo_unix'];
 }
 
-file { '/etc/duo/duo.sh':
+file { '/usr/local/bin/nubis-duo-reload.sh':
   ensure  => file,
   owner   => root,
   group   => root,
