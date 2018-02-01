@@ -3,27 +3,6 @@ class { 'fluentd':
   service_ensure => stopped
 }
 
-# Make fluentd run as root so it can read all log files
-if $osfamily == 'RedHat' {
-  $td_agent_default = '/etc/sysconfig/td-agent'
-}
-elsif $osfamily == 'Debian' {
-  $td_agent_default = '/etc/default/td-agent'
-}
-else {
-  fail("Don't know where fluentd default settings file is on osfamily:${osfamily}")
-}
-
-file { $td_agent_default:
-  ensure  => 'present',
-  owner   => 'root',
-  group   => 'root',
-  source  => 'puppet:///nubis/files/fluentd.sysconfig',
-  require => [
-    Class['fluentd'],
-  ],
-}
-
 if $osfamily == 'Debian' {
   $ruby_dev = 'ruby-dev'
   $syslog_main = '/var/log/syslog'
@@ -40,10 +19,30 @@ package { [$ruby_dev, 'make', 'gcc']:
   ensure => 'present',
 }
 
+file { '/usr/local/bin/nubis-fluentd':
+  ensure => present,
+  mode   => '0755',
+  owner  => 'root',
+  group  => 'root',
+  source => 'puppet:///nubis/files/nubis-fluentd',
+}
+
+
 fluentd::install_plugin { 'ec2-metadata':
-  ensure      => '0.0.15',
+  ensure      => '0.1.1',
   plugin_type => 'gem',
   plugin_name => 'fluent-plugin-ec2-metadata',
+  require     => [
+    Package['make'],
+    Package['gcc'],
+    Package[$ruby_dev],
+  ],
+}
+
+fluentd::install_plugin { 'systemd':
+  ensure      => '0.3.1',
+  plugin_type => 'gem',
+  plugin_name => 'fluent-plugin-systemd',
   require     => [
     Package['make'],
     Package['gcc'],
@@ -60,11 +59,12 @@ fluentd::match { 'forward':
   type       => 'forward',
   pattern    => 'ec2.forward.**',
   config     => {
-    'send_timeout'       => '60s',
-    'recover_wait'       => '10s',
-    'heartbeat_interval' => '1s',
-    'phi_threshold'      => '16',
-    'hard_timeout'       => '60s',
+    'send_timeout'                     => '60s',
+    'recover_wait'                     => '10s',
+    'heartbeat_interval'               => '1s',
+    'phi_threshold'                    => '16',
+    'hard_timeout'                     => '60s',
+    'ignore_network_errors_at_startup' => true,
   },
   # XXX: This should be coming from confd, but use consul DNS discovery for now
   servers    => [
@@ -95,7 +95,7 @@ file { '/etc/td-agent/config.d/ec2_metadata.conf':
   # lint:ignore:single_quote_string_with_variables
   content => '
     <match forward.**>
-      type ec2_metadata
+      @type ec2_metadata
       output_tag ec2.${tag}
       <record>
         instance_id   ${instance_id}
@@ -117,6 +117,33 @@ file { '/etc/td-agent/config.d/ec2_metadata.conf':
   # lint:endignore
 }
 
+# Parse and forward the entire systemd journal logs
+file { '/etc/td-agent/config.d/systemd.conf':
+  ensure  => 'present',
+  owner   => 'td-agent',
+  group   => 'td-agent',
+
+  # lint:ignore:single_quote_string_with_variables
+  content => '
+    <source>
+      @type systemd
+      tag forward.systemd.journal
+      path /run/log/journal
+      read_from_head true
+    <entry>
+      fields_lowercase true
+      fields_strip_underscores true
+    </entry>
+    <storage>
+      @type local
+      persistent false
+      path systemd.pos
+    </storage>
+  </source>
+',
+  # lint:endignore
+}
+
 fluentd::source { 'syslog_main':
   configfile => 'syslog',
   type       => 'tail',
@@ -124,7 +151,7 @@ fluentd::source { 'syslog_main':
   tag        => 'forward.system.syslog',
   config     => {
     'path'     => $syslog_main,
-    'pos_file' => '/tmp/td-agent.syslog.pos',
+    'pos_file' => '/tmp/td-agent.syslog.main.pos',
   },
   notify     => Class['fluentd::service']
 }
@@ -138,7 +165,7 @@ fluentd::source { 'syslog_kern':
   tag        => 'forward.system.kern',
   config     => {
     'path'     => '/var/log/kern.log',
-    'pos_file' => '/tmp/td-agent.syslog.pos',
+    'pos_file' => '/tmp/td-agent.syslog.kern.pos',
   },
   notify     => Class['fluentd::service']
 }
@@ -151,7 +178,7 @@ fluentd::source { 'syslog_auth':
   tag        => 'forward.system.auth',
   config     => {
     'path'     => '/var/log/auth.log',
-    'pos_file' => '/tmp/td-agent.syslog.pos',
+    'pos_file' => '/tmp/td-agent.syslog.auth.pos',
   },
   notify     => Class['fluentd::service']
 }
@@ -163,7 +190,7 @@ fluentd::source { 'syslog_mail':
   tag        => 'forward.system.mail',
   config     => {
     'path'     => $syslog_mail,
-    'pos_file' => '/tmp/td-agent.syslog.pos',
+    'pos_file' => '/tmp/td-agent.syslog.mail.pos',
   },
   notify     => Class['fluentd::service']
 }
@@ -175,7 +202,7 @@ fluentd::source { 'syslog_mail_err':
   tag        => 'forward.system.mail.err',
   config     => {
     'path'     => '/var/log/mail.err',
-    'pos_file' => '/tmp/td-agent.syslog.pos',
+    'pos_file' => '/tmp/td-agent.syslog.mail.err.pos',
   },
   notify     => Class['fluentd::service']
 }
@@ -203,7 +230,7 @@ if $osfamily == 'RedHat' {
     tag        => 'forward.system.secure',
     config     => {
       'path'     => '/var/log/secure',
-      'pos_file' => '/tmp/td-agent.syslog.pos',
+      'pos_file' => '/tmp/td-agent.syslog.secure.pos',
     },
     notify     => Class['fluentd::service']
   }
@@ -216,10 +243,15 @@ file { '/etc/systemd/system/td-agent.service.d':
   group  => 'root',
 }
 
-::systemd::dropin_file { 'restart.conf':
+::systemd::dropin_file { 'nubis.conf':
   unit    => 'td-agent.service',
   content => @(END)
 [Service]
+User=root
+Group=root
+# Run our own overriden wrapper
+ExecStart=
+ExecStart=/usr/local/bin/nubis-fluentd
 Restart=on-failure
 RestartSec=60s
 END
