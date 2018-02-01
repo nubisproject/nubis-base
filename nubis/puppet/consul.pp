@@ -33,5 +33,5 @@ class { 'consul_template':
 
 # Package['tar'] is defined by consul_template above
 class { 'envconsul':
-  version  => '0.6.1',
+  version  => '0.7.3',
 }

@@ -1,10 +1,10 @@
+#!/bin/bash
+
 # Load up proxy settings
 if [ -r /etc/profile.d/proxy.sh ]; then
+  # shellcheck disable=SC1091
   . /etc/profile.d/proxy.sh
 fi
-
-TD_AGENT_USER="root"
-TD_AGENT_OPTIONS="$TD_AGENT_OPTIONS --no-supervisor"
 
 # Expose our project to fluentd
 NUBIS_PROJECT=$(nubis-metadata NUBIS_PROJECT)
@@ -25,3 +25,5 @@ export NUBIS_ENVIRONMENT
 #Expose our arena to fluentd
 NUBIS_ARENA=$(nubis-metadata NUBIS_ARENA)
 export NUBIS_ARENA
+
+exec /opt/td-agent/embedded/bin/fluentd --log /var/log/td-agent/td-agent.log --daemon /var/run/td-agent/td-agent.pid
