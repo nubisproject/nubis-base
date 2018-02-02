@@ -1,5 +1,87 @@
 # Change Log
 
+## [v2.1.0](https://github.com/nubisproject/nubis-base/tree/v2.1.0) (2018-02-02)
+[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v2.0.4...v2.1.0)
+
+**Closed issues:**
+
+- Ensure nubis user \*always\* exists [\#771](https://github.com/nubisproject/nubis-base/issues/771)
+- \[fluentd\] Upgrade to Fluentd 0.14 / td-agent 3.x [\#770](https://github.com/nubisproject/nubis-base/issues/770)
+- \[prompt\] include environment, if available [\#769](https://github.com/nubisproject/nubis-base/issues/769)
+- Upgrade puppet-storage to 1.2.5 [\#768](https://github.com/nubisproject/nubis-base/issues/768)
+- Upgrade to nubis-puppet-nubis\_users 1.4.3 [\#766](https://github.com/nubisproject/nubis-base/issues/766)
+- Disable firewalld for centos host [\#765](https://github.com/nubisproject/nubis-base/issues/765)
+
+**Merged pull requests:**
+
+- Final small update to using '@type' instead of the deprecated 'type' [\#774](https://github.com/nubisproject/nubis-base/pull/774) ([gozer](https://github.com/gozer))
+- Upgrade nubis-puppet-storage to v1.2.5 [\#773](https://github.com/nubisproject/nubis-base/pull/773) ([gozer](https://github.com/gozer))
+- Ensure we always create a nubis user [\#772](https://github.com/nubisproject/nubis-base/pull/772) ([gozer](https://github.com/gozer))
+- Upgrade to puppet-user v1.4.3 [\#767](https://github.com/nubisproject/nubis-base/pull/767) ([gozer](https://github.com/gozer))
+
+## [v2.0.4](https://github.com/nubisproject/nubis-base/tree/v2.0.4) (2017-12-08)
+[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v2.0.3...v2.0.4)
+
+**Implemented enhancements:**
+
+- \[puppet\] Include logrotate puppet module [\#724](https://github.com/nubisproject/nubis-base/issues/724)
+- Replace Amazon Linux with CentOS [\#154](https://github.com/nubisproject/nubis-base/issues/154)
+
+**Fixed bugs:**
+
+- \[node\_exporter\] Custom prometheus metric created in file now require help [\#737](https://github.com/nubisproject/nubis-base/issues/737)
+
+**Closed issues:**
+
+- Duo doesn't work on cent 7 hosts [\#756](https://github.com/nubisproject/nubis-base/issues/756)
+- \[proxy\] Make sure we handle the case where we actually don't expect a proxy to be present [\#754](https://github.com/nubisproject/nubis-base/issues/754)
+- Install vim-enhanced for centos [\#753](https://github.com/nubisproject/nubis-base/issues/753)
+- Upgrade to nubis-storage 1.2.4 [\#751](https://github.com/nubisproject/nubis-base/issues/751)
+- \[duo\] /etc/duo/pam\_duo.conf should allow only root to read [\#748](https://github.com/nubisproject/nubis-base/issues/748)
+- \[Centennial\] Upgrade nubis-puppet-nubis\_users 0.5.0 [\#745](https://github.com/nubisproject/nubis-base/issues/745)
+- \[Centennial\] Upgrade nubis-puppet-apache 0.1.14 [\#744](https://github.com/nubisproject/nubis-base/issues/744)
+- \[centennial\] Upgrade nubis-puppet-configuration to 1.3.3 [\#743](https://github.com/nubisproject/nubis-base/issues/743)
+- \[centennial\] Upgrade nubis-puppet-storage to 1.2.3 [\#742](https://github.com/nubisproject/nubis-base/issues/742)
+- Upgrade to nubis-puppet-apache v0.1.13 [\#739](https://github.com/nubisproject/nubis-base/issues/739)
+- \[apt\] Disable cronjob [\#736](https://github.com/nubisproject/nubis-base/issues/736)
+- \[puppet\] Upgrade nubis-discovery to v1.3.4 [\#732](https://github.com/nubisproject/nubis-base/issues/732)
+- \[prompt\] Add NUBIS\_ENVIRONMENT if present to the PS1 prompt [\#728](https://github.com/nubisproject/nubis-base/issues/728)
+- \[node-collector\] Verify what data we are collecting [\#721](https://github.com/nubisproject/nubis-base/issues/721)
+- \[node-exporter\] Upgrade node-exporter to v0.15.0 [\#720](https://github.com/nubisproject/nubis-base/issues/720)
+- \[duo\] Upgraded package available 1.10.0-0.el6 [\#687](https://github.com/nubisproject/nubis-base/issues/687)
+- /etc/profile.d/proxy.sh can sometimes \*not\* set PROXY\_\* variables at all [\#681](https://github.com/nubisproject/nubis-base/issues/681)
+- \[centos\] Disable SELinux [\#559](https://github.com/nubisproject/nubis-base/issues/559)
+- Tag v2.0.4 release [\#764](https://github.com/nubisproject/nubis-base/issues/764)
+- Tag v2.0.4 release [\#763](https://github.com/nubisproject/nubis-base/issues/763)
+- Tag v2.0.4 release [\#762](https://github.com/nubisproject/nubis-base/issues/762)
+- Tag v2.0.4 release [\#761](https://github.com/nubisproject/nubis-base/issues/761)
+
+**Merged pull requests:**
+
+- Upgrade to nubis-travis v1.5.1 [\#760](https://github.com/nubisproject/nubis-base/pull/760) ([gozer](https://github.com/gozer))
+- Fix duo not working for cent 7 host [\#758](https://github.com/nubisproject/nubis-base/pull/758) ([limed](https://github.com/limed))
+- Install vim-enhanced [\#757](https://github.com/nubisproject/nubis-base/pull/757) ([limed](https://github.com/limed))
+- Make sure we don't set proxy when we are expecting we can't [\#755](https://github.com/nubisproject/nubis-base/pull/755) ([gozer](https://github.com/gozer))
+- Upgrade to nubis-storage v1.2.4 [\#752](https://github.com/nubisproject/nubis-base/pull/752) ([gozer](https://github.com/gozer))
+- Make sure to always set PROXY\_\* environment variables no matter what [\#750](https://github.com/nubisproject/nubis-base/pull/750) ([gozer](https://github.com/gozer))
+- /etc/duo/pam\_duo.conf needs to be 0600 for duo to be happy [\#749](https://github.com/nubisproject/nubis-base/pull/749) ([gozer](https://github.com/gozer))
+- avoid pinning bind-utils [\#747](https://github.com/nubisproject/nubis-base/pull/747) ([gozer](https://github.com/gozer))
+- \[Centennial\] [\#746](https://github.com/nubisproject/nubis-base/pull/746) ([gozer](https://github.com/gozer))
+- \[patch v2.0.3-1\] Upgrade to nubis/apache v0.1.13 [\#740](https://github.com/nubisproject/nubis-base/pull/740) ([gozer](https://github.com/gozer))
+- Upgrades node\_exporter to v0.15.0 [\#738](https://github.com/nubisproject/nubis-base/pull/738) ([limed](https://github.com/limed))
+
+## [v2.0.3](https://github.com/nubisproject/nubis-base/tree/v2.0.3) (2017-11-02)
+[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v2.0.2...v2.0.3)
+
+**Closed issues:**
+
+- Tag v2.0.3 release [\#733](https://github.com/nubisproject/nubis-base/issues/733)
+
+**Merged pull requests:**
+
+- Merge v2.0.3 release into develop. \[skip ci\] [\#735](https://github.com/nubisproject/nubis-base/pull/735) ([tinnightcap](https://github.com/tinnightcap))
+- Update CHANGELOG for v2.0.3 release \[skip ci\] [\#734](https://github.com/nubisproject/nubis-base/pull/734) ([tinnightcap](https://github.com/tinnightcap))
+
 ## [v2.0.2](https://github.com/nubisproject/nubis-base/tree/v2.0.2) (2017-10-24)
 [Full Changelog](https://github.com/nubisproject/nubis-base/compare/v2.0.1...v2.0.2)
 
@@ -220,6 +302,7 @@
 - remove "mesg n" from root's ~/.profile [\#558](https://github.com/nubisproject/nubis-base/issues/558)
 - Tag v1.4.0 release [\#611](https://github.com/nubisproject/nubis-base/issues/611)
 - Tag v1.4.0 release [\#583](https://github.com/nubisproject/nubis-base/issues/583)
+- \[DONOTMERGE\] \[ubuntu\] Upgrade to Xenial [\#440](https://github.com/nubisproject/nubis-base/issues/440)
 
 **Merged pull requests:**
 
