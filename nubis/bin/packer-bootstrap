@@ -1,8 +1,7 @@
 #!/bin/bash
 
-redhat_puppet_package="puppet"
-ubuntu_puppet_version="3.8.7-1puppetlabs1"
-amazon_linux_puppet_package="puppet3"
+redhat_puppet_version="1.10.9-*"
+ubuntu_puppet_version="1.10.9-*"
 
 if [[ "$1" == "--verbose" ]]; then
    set -x
@@ -10,120 +9,87 @@ fi
 
 set -e
 
+if [ "$PACKER_BUILDER_TYPE" == "docker" ]; then
+  SUDO=''
+  SUDO_ARGS=''
+else
+  SUDO='sudo'
+  SUDO_ARGS='-E'
+fi
+
 if [[ -f /etc/debian_version ]]; then
    # Make sure apt never prompts
    export DEBIAN_FRONTEND=noninteractive
 
-   sudo rm -rf /var/lib/apt/lists/*
+   $SUDO rm -rf /var/lib/apt/lists/* /etc/apt/trusted.gpg.d/*
 
    # Ensure apt-add-repository is installed
-   sudo -E apt-get -y update
-   sudo -E apt-get -y install software-properties-common
+   $SUDO $SUDO_ARGS apt-get -y update
+   $SUDO $SUDO_ARGS apt-get -y install software-properties-common lsb-release sudo unzip git wget
 
-   # Install ec2-ami-tools to support the amazon instance builder. Installing this here vs puppet as
-   # this is required for packer, and feels like a better spot to do it instead of in nubis-puppet.
-   sudo -E apt-add-repository multiverse
-   sudo -E apt-get -y update
-
-   # These are dependencies for ec2-ami-tools
-   sudo -E apt-get -y install grub kpartx unzip
-   sudo -E apt-add-repository -r multiverse
-
-   # Grab them from Amazon itself, as the ones in the Ubuntu repos are too *old*
-   sudo -E apt-get -y install wget rsync
-   wget -O /tmp/ec2-ami-tools-1.5.7.zip http://s3.amazonaws.com/ec2-downloads/ec2-ami-tools-1.5.7.zip
-   ( cd /tmp && unzip /tmp/ec2-ami-tools-1.5.7.zip )
-   sudo -E rsync -av /tmp/ec2-ami-tools-1.5.7/{bin,etc,lib} /usr/local/
-
-   # After removing multiverse we need to rebuild the indexes, since this won't happen on their own,
-   # apparently.
-   sudo -E apt-get -y update
+   UBUNTU_CODENAME=$(lsb_release -c -s)
 
    # Install puppetlabs repository, we'll want access to more up to date puppet agents than what's
    # provided in Amazon's repositories.
-   wget -O /tmp/puppetlabs-release-trusty.deb https://apt.puppetlabs.com/puppetlabs-release-trusty.deb
-   sudo -E dpkg -i /tmp/puppetlabs-release-trusty.deb
-   rm -f /tmp/puppetlabs-release-trusty.deb
+   wget -O "/tmp/puppetlabs-release-pc1-$UBUNTU_CODENAME.deb" "https://apt.puppetlabs.com/puppetlabs-release-pc1-$UBUNTU_CODENAME.deb"
+   $SUDO $SUDO_ARGS dpkg -i "/tmp/puppetlabs-release-pc1-$UBUNTU_CODENAME.deb"
+   rm -f "/tmp/puppetlabs-release-pc1-$UBUNTU_CODENAME.deb"
 
-   # Running sudo -E for apt-get calls so $DEBIAN_FRONTEND is inherited, especially for dist-upgrade. Updates
+   # Running $SUDO $SUDO_ARGS for apt-get calls so $DEBIAN_FRONTEND is inherited, especially for dist-upgrade. Updates
    # such as with linux-image-* can prompt for things like menu.lst merging which doesn't play nice with packer
    #
    # Apply full system updates
-   sudo -E apt-get -y update
-   sudo -E apt-get -y upgrade
-   sudo -E apt-get -y dist-upgrade
+   $SUDO $SUDO_ARGS apt-get -y update
+   $SUDO $SUDO_ARGS apt-get -y upgrade
+   $SUDO $SUDO_ARGS apt-get -y dist-upgrade
 
    # Install puppet
-   sudo -E apt-get -y install puppet=${ubuntu_puppet_version} puppet-common=${ubuntu_puppet_version}
+   $SUDO $SUDO_ARGS apt-get -y install "puppet-agent=${ubuntu_puppet_version}"
 elif [[ -f /etc/redhat-release ]]; then
    ELV=$(rpm --queryformat '%{Version}' -qf /etc/redhat-release)
 
-   sudo -E rpm -ivh "https://yum.puppetlabs.com/puppetlabs-release-el-${ELV}.noarch.rpm"
-   sudo -E rpm -ivh "https://dl.fedoraproject.org/pub/epel/epel-release-latest-${ELV}.noarch.rpm"
+   $SUDO $SUDO_ARGS rpm -ivh "https://yum.puppetlabs.com/puppetlabs-release-pc1-el-${ELV}.noarch.rpm"
+   $SUDO $SUDO_ARGS rpm -ivh "https://dl.fedoraproject.org/pub/epel/epel-release-latest-${ELV}.noarch.rpm"
 
    # Yum can be stinky
-   sudo -E yum clean all
+   $SUDO $SUDO_ARGS yum clean all
+   $SUDO $SUDO_ARGS rm -rf /var/cache/yum/*
 
    # Apply full system updates
-   sudo -E yum -y update
+   $SUDO $SUDO_ARGS yum -y update
 
    # Install puppet & unzip
-   sudo -E yum -y install ${redhat_puppet_package} unzip
-
-elif [[ -f /etc/os-release ]]; then
-   # shellcheck disable=SC1091
-   . /etc/os-release
-
-   if [[ "$NAME" = "Amazon Linux AMI" ]]; then
-
-      # Disable auto-updating!
-      echo "Disabling Amazon Auto-Updating"
-
-      # shellcheck disable=SC2016
-      sudo perl -pi -e's[^(\s*)repo_upgrade:.*][$1repo_upgrade: false]g' /etc/cloud/cloud.cfg
-
-      # These check for update when regenerating MOTD, we don't care and it can run YUM behind
-      # our backs (because of the yum-update-motd plugin), creating racing conditions.
-      sudo rm -f /etc/update-motd.d/75-system-update /etc/update-motd.d/70-available-updates
-
-      # Install aws-amitools-ec2 to support the amazon instance builder. Installing this here vs puppet as
-      # this is required for packer, and feels like a better spot to do it instead of in nubis-puppet.
-      sudo yum -y install aws-amitools-ec2
-
-      # Yum can be stinky
-      sudo yum clean all
-
-      # Apply full system updates
-      sudo yum -y update
-
-      # Install puppet and rubygem18-json, which someone forgot to add to puppet's dependency list.
-      sudo yum -y install ${amazon_linux_puppet_package}
-   else
-      echo "Operating system $NAME unsupported"
-      exit 1
-   fi
-
+   $SUDO $SUDO_ARGS yum -y install "puppet-agent-${redhat_puppet_version}"
+   $SUDO $SUDO_ARGS yum -y install unzip sudo git selinux-policy
 else
-   echo "Unknown operating system"
+   echo "Operating system $NAME unsupported"
    exit 1
 fi
 
+# Link puppet in /usr/bin
+$SUDO ln -sf /opt/puppetlabs/bin/puppet /usr/bin/puppet
+
 # Just make sure it's there
-sudo mkdir -p /etc/puppet
-sudo touch /etc/puppet/hiera.yaml
+$SUDO mkdir -p /etc/puppet
+$SUDO rm -f /etc/puppetlabs/puppet/hiera.yaml
 
 # We're probably going to have secrets at some point. I use chown 0:0 to avoid having to figure out
 # whether root's group is root, or wheel.
-sudo chown -R 0:0 /etc/puppet
-sudo chmod 755 /etc/puppet
+$SUDO chown -R 0:0 /etc/puppet
+$SUDO chmod 755 /etc/puppet
 
 # Configure a local fileserver, accessible in puppet with puppet:///nubis/somefile
-sudo mkdir -p /etc/nubis/puppet/{files,templates}
-sudo chown 0:0 /etc/nubis/puppet/{files,templates}
-sudo chmod 1777 /etc/nubis/puppet/{files,templates}
+$SUDO mkdir -p /etc/nubis/puppet/files
+$SUDO chown 0:0 /etc/nubis/puppet/files
+$SUDO chmod 1777 /etc/nubis/puppet/files
 
-sudo bash -c 'cat > /etc/puppet/fileserver.conf' << EOF
+$SUDO bash -c 'cat > /etc/puppetlabs/puppet/fileserver.conf' << EOF
 [nubis]
     path /etc/nubis/puppet
     allow *
 EOF
+
+# Install r10k
+$SUDO /opt/puppetlabs/puppet/bin/gem install r10k -v 2.5.5
+
+$SUDO ln -sf /opt/puppetlabs/puppet/bin/r10k /usr/bin/r10k

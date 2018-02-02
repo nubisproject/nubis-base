@@ -5,70 +5,89 @@ forge "https://forgeapi.puppetlabs.com"
 ##########################################################
 
 # modules from the puppet forge
-mod 'puppetlabs/stdlib', '4.12.0'
-mod 'puppetlabs/mysql', '3.10.0'
+mod 'camptocamp/augeas', '1.6.0'
+mod 'camptocamp/systemd', '1.1.0'
+mod 'herculesteam-augeasproviders_core', '2.1.4'
+mod 'herculesteam/augeasproviders_pam', '2.1.1'
+mod 'KyleAnderson/consul', '3.2.0'
+mod 'maestrodev/wget', '1.7.3'
+mod 'puppetlabs/apache', '2.3.0'
+mod 'puppetlabs/apt', '4.4.1'
+mod 'puppetlabs/concat', '4.1.1'
+mod 'puppetlabs/firewall', '1.10.0'
+mod 'puppetlabs/mysql', '5.1.0'
+mod 'puppetlabs/ntp', '7.0.0'
+mod 'puppetlabs/stdlib', '4.23.0'
+mod 'puppetlabs-translate', '1.1.0'
+mod 'puppetlabs/vcsrepo', '2.2.0'
+mod 'puppet/archive','1.3.0'
+mod 'puppet-logrotate', '3.1.0'
+mod 'puppet/nginx', '0.9.0'
+mod 'puppet/rabbitmq', '8.0.0'
+mod 'puppet/selinux', '1.4.0'
+mod 'puppet/staging', '2.2.0'
+mod 'puppet-unattended_upgrades', '3.0.1'
+mod 'reppard/envconsul', '0.0.9'
+mod 'saz/sudo', '4.2.0'
+mod 'stahnma-epel', '1.3.0'
+mod 'stankevich/python', '1.18.2'
+mod 'thias/sysctl', '1.0.6'
+mod 'torrancew/cron', '0.2.1'
 
-mod 'puppetlabs/concat', '1.2.5'
+# Modules we had to forked or pinned at git revisions
+mod 'ajcrowe/supervisord',
+  :git => 'https://github.com/ajcrowe/puppet-supervisord.git',
+  :ref => 'db8e767f19bc27fa8dd7f91be03c0a94dd7107b9'
 
+mod 'camptocamp/postfix',
+    :git => 'https://github.com/camptocamp/puppet-postfix.git',
+    :ref => '0bfa1070fd2ba16e75f3099ca9dfdbb709e9fa12'
+
+mod 'claranet/consul_template',
+  :git => 'https://github.com/gozer/puppet-consul_template.git',
+  :ref => 'bb7942e0c82249c9b617d80afdeb77b561826e2b'
+
+mod 'duosecurity/duo_unix',
+    :git => 'https://github.com/tinnightcap/puppet-duo_unix.git',
+    :ref => '891aa681abe30053d6609329ead26944140d05e0'
+    
+mod 'echocat/nfs',
+  :git => 'https://github.com/gozer/puppet-nfs.git',
+  :ref => 'c08d61544038fd77db0ac138aab5fc07e6df6fa2'
+
+mod 'lex/dnsmasq',
+    :git => 'https://github.com/rlex/puppet-dnsmasq.git',
+    :ref => 'faa395fc8d98306ebf96794392d250ba6c159704'
+
+# This developer doesn't tag his releases on github
+mod 'maxchk/varnish',
+    :git => 'https://github.com/maxchk/puppet-varnish.git',
+    :ref => 'b55587388f016bc1327aba6a0700ba76c5f13f99'
+
+mod 'srf/fluentd',
+    :git => 'https://github.com/gozer/puppet-fluentd.git',
+    :ref => 'fb288397a9e663ac3073342cbeb26c671b039ab6'
+
+# Nubis
 mod 'nubis/nubis_apache',
     :git => 'https://github.com/nubisproject/nubis-puppet-apache.git',
-    :ref => 'v0.1.12'
-
-# 2.x is out, but it causes strange apt update race conditions in fluentd
-mod 'puppetlabs/apt', '1.8.0'
-
-mod 'puppetlabs/rabbitmq', '5.5.0'
-mod 'puppetlabs/vcsrepo', '1.5.0'
-
-# New versions coming from https://github.com/voxpupuli/puppet-nginx, not released yet
-mod 'jfryman/nginx', '999.999.999'
-
-mod 'ajcrowe/supervisord', '0.6.1'
-mod 'torrancew/cron', '0.2.1'
-mod 'echocat/nfs', '1.8.1'
-
-mod 'stankevich/python', '1.17.0'
-
-mod 'KyleAnderson/consul', '1.1.0'
-mod 'gdhbashton/consul_template', '0.2.8'
-
-mod 'reppard/envconsul', '0.0.7'
+    :ref => 'v0.1.14'
 
 mod 'nubis/consul_do',
     :git => 'https://github.com/nubisproject/nubis-puppet-consul_do.git',
     :ref => '1.0.1'
 
-# gozer's fork has minimal upstart support, upstream doesn't
-mod 'gozer/puppet-confd',
-    :git => 'https://github.com/gozer/puppet-confd.git',
-    :ref => 'nubis'
-
-# Skeleton to get above confd happy
-mod 'nubis-confd_site',
-    :git => 'https://github.com/gozer/nubis-site_confd.git',
-    :ref => '0.1.2'
-
-mod 'srf/fluentd',
-    :git => 'https://github.com/gozer/puppet-fluentd.git',
-    :ref => 'bba6a41c967c1de12299ed31a67996e9be081d0e'
-
-mod 'mjhas/postfix', '1.0.0'
-
-#mod 'lex/dnsmasq','2.6.1'
-mod 'bhourigan/dnsmasq',
-    :git => 'https://github.com/bhourigan/puppet-dnsmasq.git'
-
 mod 'nubis/nubis_discovery',
     :git => 'https://github.com/nubisproject/nubis-puppet-discovery.git',
-    :ref => 'v1.3.3'
+    :ref => 'v1.3.4'
 
 mod 'nubis/nubis_configuration',
     :git => 'https://github.com/nubisproject/nubis-puppet-configuration.git',
-    :ref => 'v1.3.2'
+    :ref => 'v1.3.3'
 
 mod 'nubis/nubis_storage',
     :git => 'https://github.com/nubisproject/nubis-puppet-storage.git',
-    :ref => 'v1.2.2'
+    :ref => 'v1.2.5'
 
 mod 'nubis/mig',
     :git => 'https://github.com/nubisproject/nubis-puppet-mig.git',
@@ -76,25 +95,6 @@ mod 'nubis/mig',
 
 mod 'nubis/nubis_users',
     :git => 'https://github.com/nubisproject/nubis-puppet-nubis_users',
-    :ref => 'v1.4.1'
+    :ref => 'v1.4.3'
 
-# This developer doesn't tag his releases on github
-mod 'maxchk/varnish',
-    :git => 'https://github.com/maxchk/puppet-varnish.git',
-    :ref => 'b55587388f016bc1327aba6a0700ba76c5f13f99'
 
-mod 'puppetlabs/firewall', '1.8.1'
-mod 'thias/sysctl', '1.0.6'
-
-mod 'maestrodev/wget', '1.7.3'
-
-mod 'puppetlabs/ntp', '4.2.0'
-
-mod 'saz/sudo', '3.1.0'
-
-mod 'herculesteam/augeasproviders_pam', '2.1.0'
-mod 'spantree/upstart','0.0.3'
-
-mod 'duosecurity/duo_unix',
-    :git => 'https://github.com/tinnightcap/puppet-duo_unix.git',
-    :ref => '891aa681abe30053d6609329ead26944140d05e0'

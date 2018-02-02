@@ -16,6 +16,7 @@ done
 sudo mkdir -p "/etc/nubis/puppet-masterless/$PROJECT_NAME"
 sudo mv /tmp/packer-puppet-masterless*/* "/etc/nubis/puppet-masterless/$PROJECT_NAME/"
 sudo rm -rf /tmp/packer-puppet-masterless*
+sudo rm -rf /tmp/nubis-puppet-files
 
 # Remove mail spools
 sudo rm -f /var/spool/mail/*
@@ -46,4 +47,3 @@ if [[ -r /proc/uptime ]]; then
 
    sudo find /var/log -newermt "$uptime seconds ago" -type f -print0 | xargs -0 sudo truncate -s 0
 fi
-

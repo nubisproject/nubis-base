@@ -2,7 +2,7 @@ class { 'consul':
   version           => '0.8.5',
   service_enable    => false,
   service_ensure    => 'stopped',
-  manage_service    => false,
+  manage_service    => true,
   restart_on_change => false,
   config_hash       => {
       'data_dir'              => '/var/lib/consul',
@@ -15,14 +15,6 @@ class { 'consul':
       'acl_enforce_version_8' => false,
       'disable_host_node_id'  => true,
       'disable_update_check'  => true,
-  }
-}
-
-# initv startup script is borked
-if $osfamily == 'RedHat' {
-  package { 'daemonize':
-    ensure          => 'present',
-    install_options => [ '--enablerepo=epel' ],
   }
 }
 
@@ -41,5 +33,5 @@ class { 'consul_template':
 
 # Package['tar'] is defined by consul_template above
 class { 'envconsul':
-  version  => '0.6.1',
+  version  => '0.7.3',
 }
