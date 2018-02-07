@@ -1,7 +1,22 @@
 # Change Log
 
+## [v2.1.0](https://github.com/nubisproject/nubis-base/tree/v2.1.0) (2018-02-07)
+[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v2.1.0...v2.1.0)
+
+**Closed issues:**
+
+- Create a swap partition on boot [\#778](https://github.com/nubisproject/nubis-base/issues/778)
+
+**Merged pull requests:**
+
+- Handle swap creation for instances at boot time [\#779](https://github.com/nubisproject/nubis-base/pull/779) ([gozer](https://github.com/gozer))
+
 ## [v2.1.0](https://github.com/nubisproject/nubis-base/tree/v2.1.0) (2018-02-02)
 [Full Changelog](https://github.com/nubisproject/nubis-base/compare/v2.0.4...v2.1.0)
+
+**Implemented enhancements:**
+
+- Replace Amazon Linux with CentOS [\#154](https://github.com/nubisproject/nubis-base/issues/154)
 
 **Closed issues:**
 
@@ -11,9 +26,17 @@
 - Upgrade puppet-storage to 1.2.5 [\#768](https://github.com/nubisproject/nubis-base/issues/768)
 - Upgrade to nubis-puppet-nubis\_users 1.4.3 [\#766](https://github.com/nubisproject/nubis-base/issues/766)
 - Disable firewalld for centos host [\#765](https://github.com/nubisproject/nubis-base/issues/765)
+- Tag v2.1.0 release [\#775](https://github.com/nubisproject/nubis-base/issues/775)
+- \[node-collector\] Verify what data we are collecting [\#721](https://github.com/nubisproject/nubis-base/issues/721)
+- \[node-exporter\] Upgrade node-exporter to v0.15.0 [\#720](https://github.com/nubisproject/nubis-base/issues/720)
+- \[node\_exporter\] Expose nubis base version [\#704](https://github.com/nubisproject/nubis-base/issues/704)
+- /etc/profile.d/proxy.sh can sometimes \*not\* set PROXY\_\* variables at all [\#681](https://github.com/nubisproject/nubis-base/issues/681)
+- \[centos\] Disable SELinux [\#559](https://github.com/nubisproject/nubis-base/issues/559)
 
 **Merged pull requests:**
 
+- Update CHANGELOG for v2.1.0 release \[skip ci\] [\#777](https://github.com/nubisproject/nubis-base/pull/777) ([nubis-automation](https://github.com/nubis-automation))
+- Update CHANGELOG for v2.1.0 release \[skip ci\] [\#776](https://github.com/nubisproject/nubis-base/pull/776) ([nubis-automation](https://github.com/nubis-automation))
 - Final small update to using '@type' instead of the deprecated 'type' [\#774](https://github.com/nubisproject/nubis-base/pull/774) ([gozer](https://github.com/gozer))
 - Upgrade nubis-puppet-storage to v1.2.5 [\#773](https://github.com/nubisproject/nubis-base/pull/773) ([gozer](https://github.com/gozer))
 - Ensure we always create a nubis user [\#772](https://github.com/nubisproject/nubis-base/pull/772) ([gozer](https://github.com/gozer))
@@ -25,7 +48,6 @@
 **Implemented enhancements:**
 
 - \[puppet\] Include logrotate puppet module [\#724](https://github.com/nubisproject/nubis-base/issues/724)
-- Replace Amazon Linux with CentOS [\#154](https://github.com/nubisproject/nubis-base/issues/154)
 
 **Fixed bugs:**
 
@@ -46,11 +68,7 @@
 - \[apt\] Disable cronjob [\#736](https://github.com/nubisproject/nubis-base/issues/736)
 - \[puppet\] Upgrade nubis-discovery to v1.3.4 [\#732](https://github.com/nubisproject/nubis-base/issues/732)
 - \[prompt\] Add NUBIS\_ENVIRONMENT if present to the PS1 prompt [\#728](https://github.com/nubisproject/nubis-base/issues/728)
-- \[node-collector\] Verify what data we are collecting [\#721](https://github.com/nubisproject/nubis-base/issues/721)
-- \[node-exporter\] Upgrade node-exporter to v0.15.0 [\#720](https://github.com/nubisproject/nubis-base/issues/720)
 - \[duo\] Upgraded package available 1.10.0-0.el6 [\#687](https://github.com/nubisproject/nubis-base/issues/687)
-- /etc/profile.d/proxy.sh can sometimes \*not\* set PROXY\_\* variables at all [\#681](https://github.com/nubisproject/nubis-base/issues/681)
-- \[centos\] Disable SELinux [\#559](https://github.com/nubisproject/nubis-base/issues/559)
 - Tag v2.0.4 release [\#764](https://github.com/nubisproject/nubis-base/issues/764)
 - Tag v2.0.4 release [\#763](https://github.com/nubisproject/nubis-base/issues/763)
 - Tag v2.0.4 release [\#762](https://github.com/nubisproject/nubis-base/issues/762)
@@ -87,7 +105,6 @@
 
 **Closed issues:**
 
-- \[node\_exporter\] Expose nubis base version [\#704](https://github.com/nubisproject/nubis-base/issues/704)
 - Tag v2.0.2 release [\#729](https://github.com/nubisproject/nubis-base/issues/729)
 
 **Merged pull requests:**
@@ -825,7 +842,7 @@
 - Add support for 3 more Consul Server bootstrap options: [\#142](https://github.com/nubisproject/nubis-base/pull/142) ([gozer](https://github.com/gozer))
 
 ## [v0.9.0](https://github.com/nubisproject/nubis-base/tree/v0.9.0) (2015-07-23)
-[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v0.1...v0.9.0)
+[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v0.79...v0.9.0)
 
 **Closed issues:**
 
@@ -841,11 +858,11 @@
 - Move creation of /etc/puppet/nubis/{files,templates} to base image. Fixes \#134 [\#135](https://github.com/nubisproject/nubis-base/pull/135) ([gozer](https://github.com/gozer))
 - Ubuntu repositories have very old versions of the ec2-ami-tools that just don't work at all. [\#130](https://github.com/nubisproject/nubis-base/pull/130) ([gozer](https://github.com/gozer))
 
-## [v0.1](https://github.com/nubisproject/nubis-base/tree/v0.1) (2015-06-11)
-[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v0.79...v0.1)
-
 ## [v0.79](https://github.com/nubisproject/nubis-base/tree/v0.79) (2015-06-11)
-[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v1.35...v0.79)
+[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v0.1...v0.79)
+
+## [v0.1](https://github.com/nubisproject/nubis-base/tree/v0.1) (2015-06-11)
+[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v1.35...v0.1)
 
 **Closed issues:**
 
