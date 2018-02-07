@@ -32,5 +32,5 @@ package { $pythonpip:
   ensure => present
 }
 ->python::pip { 'credstash' :
-    ensure        => '1.10.0'
+    ensure        => '1.14.0'
 }

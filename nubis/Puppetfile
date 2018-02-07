@@ -66,7 +66,7 @@ mod 'maxchk/varnish',
 
 mod 'srf/fluentd',
     :git => 'https://github.com/gozer/puppet-fluentd.git',
-    :ref => 'fc19205792e344cec6440fd92d50a5642eeeeed7'
+    :ref => 'fb288397a9e663ac3073342cbeb26c671b039ab6'
 
 # Nubis
 mod 'nubis/nubis_apache',
