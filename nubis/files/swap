@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Look at supplied value
+NUBIS_SWAP_SIZE_MEG=$(nubis-metadata NUBIS_SWAP_SIZE_MEG)
+
+# Use sane default otherwise
+if [ -z "$NUBIS_SWAP_SIZE_MEG" ]; then
+  NUBIS_SWAP_SIZE_MEG=512
+fi
+
+# Only disabled if explicitely set to 0
+if [ "$NUBIS_SWAP_SIZE_MEG" -gt "0" ]; then
+  SWAP_FILE=/var/swap.img
+
+  echo "Making $NUBIS_SWAP_SIZE_MEG Mb of swap in $SWAP_FILE"
+  dd if=/dev/zero of=$SWAP_FILE bs="1M" count="$NUBIS_SWAP_SIZE_MEG"
+  chmod 600 $SWAP_FILE
+  mkswap $SWAP_FILE
+  swapon $SWAP_FILE
+fi
