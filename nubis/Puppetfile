@@ -71,7 +71,7 @@ mod 'srf/fluentd',
 # Nubis
 mod 'nubis/nubis_apache',
     :git => 'https://github.com/nubisproject/nubis-puppet-apache.git',
-    :ref => 'v0.1.14'
+    :ref => 'v0.1.15'
 
 mod 'nubis/consul_do',
     :git => 'https://github.com/nubisproject/nubis-puppet-consul_do.git',
