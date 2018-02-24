@@ -30,7 +30,7 @@ function consul_peers() {
     echo "Waiting $SLEEP secs for Consul discovery to find peers..."
     sleep $SLEEP
     consul_peers=$($CONSUL_CURL "$CONSUL_UI/v1/status/peers")
-    let SLEEP=SLEEP+1
+    SLEEP=$((SLEEP + 1))
   done
 
   echo "$consul_peers"
@@ -49,7 +49,7 @@ if [ ! -f /etc/consul/zzz-join.skip ]; then
     echo "Waiting $SLEEP secs for Consul to report ready"
     sleep $SLEEP
     CONSUL_READY=$($CONSUL_CURL "$CONSUL_UI/v1/kv/consul-ready")
-    let SLEEP=SLEEP+1
+    SLEEP=$((SLEEP + 1))
   done
 fi
 
