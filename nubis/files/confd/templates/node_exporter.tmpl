@@ -10,7 +10,7 @@ if [ "$ENABLED" == "1" ]; then
   if [ -r /etc/nubis_versions.prom ]; then
     ln -sf /etc/nubis_versions.prom "$PROM_DIR/nubis_versions.prom"
   fi
-  
+
   # Generate fake metrics for Nubis propreties
   NUBIS_PROJECT=$(nubis-metadata NUBIS_PROJECT)
   NUBIS_ARENA=$(nubis-metadata NUBIS_ARENA)
@@ -18,8 +18,15 @@ if [ "$ENABLED" == "1" ]; then
   NUBIS_ACCOUNT=$(nubis-metadata NUBIS_ACCOUNT)
   NUBIS_PURPOSE=$(nubis-metadata NUBIS_PURPOSE)
 
+  # Platform
+  NUBIS_PLATFORM="$(jq -r '.variables.platform' /etc/nubis/project.json)"
+
+  if [ -z "${NUBIS_PLATFORM}" ] || [ "${NUBIS_PLATFORM}" == 'null' ]; then
+    NUBIS_PLATFORM="application"
+  fi
+
   cat <<EOF > $PROM_DIR/nubis.prom
-nubis{project="$NUBIS_PROJECT",environment="$NUBIS_ENVIRONMENT",arena="$NUBIS_ARENA",account="$NUBIS_ACCOUNT",purpose="$NUBIS_PURPOSE"} 1
+nubis{project="$NUBIS_PROJECT",environment="$NUBIS_ENVIRONMENT",arena="$NUBIS_ARENA",account="$NUBIS_ACCOUNT",purpose="$NUBIS_PURPOSE",platform="$NUBIS_PLATFORM"} 1
 EOF
 
   # generate fake metrics for AWS propreties
