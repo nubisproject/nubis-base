@@ -9,14 +9,22 @@ cleanup () {
 }
 trap cleanup EXIT
 
-METRICS_PATH=/var/lib/node_exporter/metrics
-
 METRICS=$(mktemp)
+
+METRICS_PATH=/var/lib/node_exporter/metrics
+LOGS_PATH=/var/log/nubis-cron
 
 JOB=$1
 shift
 
 START=$(date +%s)
+
+# If not invoked via a terminal, redirect stdout/stderr to log file
+if [ ! -t 0 ]; then
+  LOG_FILE="$LOGS_PATH/$JOB.log"
+  exec &> >( ts >> "$LOG_FILE") 2>&1
+  echo "Cron starting: $START"
+fi
 
 bash -c "$*"
 
@@ -37,6 +45,11 @@ nubis_cron_status{cronjob="$JOB"} $RV
 EOF
 
 mv -f "$METRICS" "$METRICS_PATH/nubis_cron_$JOB.prom"
+
+if [ ! -t 0 ]; then
+  echo "Cron Duration: $DURATION"
+  echo "Cron Exit Status: $RV"
+fi
 
 # Propagate exit code
 exit $RV
