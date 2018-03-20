@@ -1,10 +1,11 @@
 # nubis-base
 variable "aws_access_key" {}
+
 variable "aws_secret_key" {}
 
 variable "consul" {
   description = "URL to Consul"
-  default = "127.0.0.1"
+  default     = "127.0.0.1"
 }
 
 variable "consul_secret" {
@@ -12,22 +13,22 @@ variable "consul_secret" {
 }
 
 variable "region" {
-  default = "us-east-1"
+  default     = "us-east-1"
   description = "The region of AWS, for AMI lookups."
 }
 
 variable "release" {
-  default = "0"
+  default     = "0"
   description = "Release number of the architecture"
 }
 
 variable "build" {
-  default = "91"
+  default     = "91"
   description = "Build number of the architecture"
 }
 
 variable "project" {
-  default = "base"
+  default     = "base"
   description = "Name of the project"
 }
 
