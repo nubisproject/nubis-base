@@ -28,6 +28,15 @@ if [ "$TAINTED" -gt "1" ]; then
     echo "Would have expired this resource, unset $DELETE_FLAG to enable"
   else
     echo "Expiring this instance NOW"
-    shutdown -h now
+    INSTANCE_ID=$(curl -fq http://169.254.169.254/latest/meta-data/instance-id)
+
+    if aws --region "$(nubis-region)" autoscaling terminate-instance-in-auto-scaling-group --instance-id "$INSTANCE_ID"; then
+      echo "Issued AWS ASG Termination for $INSTANCE_ID"
+    elif aws --region "$(nubis-region)" ec2 terminate-instances --instance-ids "$INSTANCE_ID"; then
+      echo "Issued AWS Termination for $INSTANCE_ID"
+    else
+      echo "Issuing system shutdown now"
+      shutdown -h now
+    fi
   fi
 fi
