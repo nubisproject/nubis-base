@@ -1,3 +1,4 @@
+# for /usr/bin/ts
 package { 'moreutils':
   ensure => 'present',
 }
