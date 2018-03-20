@@ -1,6 +1,10 @@
 #!/bin/bash
 
 if [ "$PAM_TYPE" == "open_session" ]; then
+  USER_TAINT=$(eval echo "~$PAM_USER/.no-taint")
+  if [ -e "$USER_TAINT" ]; then
+    exit
+  fi
   if [ ! -r /.tainted ]; then
     NOW=$(date)
     HOST=$PAM_RHOST
