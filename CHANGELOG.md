@@ -1,17 +1,30 @@
 # Change Log
 
-## [v2.1.0](https://github.com/nubisproject/nubis-base/tree/v2.1.0) (2018-02-07)
-[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v2.1.0...v2.1.0)
+## [v2.2.0](https://github.com/nubisproject/nubis-base/tree/v2.2.0) (2018-04-06)
+[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v2.1.0...v2.2.0)
 
 **Closed issues:**
 
-- Create a swap partition on boot [\#778](https://github.com/nubisproject/nubis-base/issues/778)
+- \[nubis-cron\] Capture output and ship to ES [\#796](https://github.com/nubisproject/nubis-base/issues/796)
+- \[taint\] Issues aws ec2 terminate-instance call on taint reaping [\#793](https://github.com/nubisproject/nubis-base/issues/793)
+- \[taint\] Allow disabling of auto-tainting for certain special automation users [\#791](https://github.com/nubisproject/nubis-base/issues/791)
+- \[puppet\] Upgrade to nubis-nubis\_configuration 1.3.4 [\#786](https://github.com/nubisproject/nubis-base/issues/786)
+- \[puppet\] Upgrade to nubis-puppet-apache 0.1.15 [\#784](https://github.com/nubisproject/nubis-base/issues/784)
+- Update nubis-travis to v1.5.0 [\#759](https://github.com/nubisproject/nubis-base/issues/759)
+- \[node\_exporter\] Expose a platform tag [\#585](https://github.com/nubisproject/nubis-base/issues/585)
 
 **Merged pull requests:**
 
-- Handle swap creation for instances at boot time [\#779](https://github.com/nubisproject/nubis-base/pull/779) ([gozer](https://github.com/gozer))
+- Capture nubis-cron logs and ship them to ElasticSearch [\#797](https://github.com/nubisproject/nubis-base/pull/797) ([gozer](https://github.com/gozer))
+- Allow system user to disable auto-tainting [\#795](https://github.com/nubisproject/nubis-base/pull/795) ([gozer](https://github.com/gozer))
+- Try and use AWS APIs to gracefully terminate instances [\#794](https://github.com/nubisproject/nubis-base/pull/794) ([gozer](https://github.com/gozer))
+- Upgrade nubis-puppet-configuration to 1.3.4 [\#792](https://github.com/nubisproject/nubis-base/pull/792) ([gozer](https://github.com/gozer))
+- Update Slack integration token [\#790](https://github.com/nubisproject/nubis-base/pull/790) ([tinnightcap](https://github.com/tinnightcap))
+- Expose platform label [\#789](https://github.com/nubisproject/nubis-base/pull/789) ([limed](https://github.com/limed))
+- Migrate to travis docker checks [\#788](https://github.com/nubisproject/nubis-base/pull/788) ([tinnightcap](https://github.com/tinnightcap))
+- Upgrade nubis-puppet-apache to 0.1.15 [\#785](https://github.com/nubisproject/nubis-base/pull/785) ([gozer](https://github.com/gozer))
 
-## [v2.1.0](https://github.com/nubisproject/nubis-base/tree/v2.1.0) (2018-02-02)
+## [v2.1.0](https://github.com/nubisproject/nubis-base/tree/v2.1.0) (2018-02-07)
 [Full Changelog](https://github.com/nubisproject/nubis-base/compare/v2.0.4...v2.1.0)
 
 **Implemented enhancements:**
@@ -20,12 +33,14 @@
 
 **Closed issues:**
 
+- Create a swap partition on boot [\#778](https://github.com/nubisproject/nubis-base/issues/778)
 - Ensure nubis user \*always\* exists [\#771](https://github.com/nubisproject/nubis-base/issues/771)
 - \[fluentd\] Upgrade to Fluentd 0.14 / td-agent 3.x [\#770](https://github.com/nubisproject/nubis-base/issues/770)
 - \[prompt\] include environment, if available [\#769](https://github.com/nubisproject/nubis-base/issues/769)
 - Upgrade puppet-storage to 1.2.5 [\#768](https://github.com/nubisproject/nubis-base/issues/768)
 - Upgrade to nubis-puppet-nubis\_users 1.4.3 [\#766](https://github.com/nubisproject/nubis-base/issues/766)
 - Disable firewalld for centos host [\#765](https://github.com/nubisproject/nubis-base/issues/765)
+- Tag v2.1.0 release [\#780](https://github.com/nubisproject/nubis-base/issues/780)
 - Tag v2.1.0 release [\#775](https://github.com/nubisproject/nubis-base/issues/775)
 - \[node-collector\] Verify what data we are collecting [\#721](https://github.com/nubisproject/nubis-base/issues/721)
 - \[node-exporter\] Upgrade node-exporter to v0.15.0 [\#720](https://github.com/nubisproject/nubis-base/issues/720)
@@ -35,6 +50,9 @@
 
 **Merged pull requests:**
 
+- Update CHANGELOG for v2.1.0 release \[skip ci\] [\#782](https://github.com/nubisproject/nubis-base/pull/782) ([nubis-automation](https://github.com/nubis-automation))
+- Update CHANGELOG for v2.1.0 release \[skip ci\] [\#781](https://github.com/nubisproject/nubis-base/pull/781) ([nubis-automation](https://github.com/nubis-automation))
+- Handle swap creation for instances at boot time [\#779](https://github.com/nubisproject/nubis-base/pull/779) ([gozer](https://github.com/gozer))
 - Update CHANGELOG for v2.1.0 release \[skip ci\] [\#777](https://github.com/nubisproject/nubis-base/pull/777) ([nubis-automation](https://github.com/nubis-automation))
 - Update CHANGELOG for v2.1.0 release \[skip ci\] [\#776](https://github.com/nubisproject/nubis-base/pull/776) ([nubis-automation](https://github.com/nubis-automation))
 - Final small update to using '@type' instead of the deprecated 'type' [\#774](https://github.com/nubisproject/nubis-base/pull/774) ([gozer](https://github.com/gozer))
