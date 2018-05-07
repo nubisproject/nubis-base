@@ -10,7 +10,7 @@ fi
 fetch_metadata() {
 
 # cloud-init is present, abort and rely on it having populated $USERDATA_FILE
-if curl --retry 5 -fqs $METADATA_URL_PREFIX/user-data | grep -s '^#cloud-config'; then
+if curl --retry 5 -fqs $METADATA_URL_PREFIX/user-data | grep -qs '^#cloud-config'; then
   return 0
 fi
 
