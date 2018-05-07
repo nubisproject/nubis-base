@@ -5,8 +5,8 @@
 #
 # [ -e /usr/local/lib/nubis/nubis-lib.sh ] && . /usr/local/lib/nubis/nubis-lib.sh || exit 1
 
-# Source the consul connection details from the metadata api
-eval $(curl -s -fq http://169.254.169.254/latest/user-data)
+NUBIS_ARENA=$(nubis-metadata NUBIS_ARENA)
+NUBIS_STACK=$(nubis-metadata NUBIS_STACK)
 
 # Set up the consul url
 CONSUL="http://localhost:8500/v1/kv/${NUBIS_STACK}/${NUBIS_ARENA}/config"

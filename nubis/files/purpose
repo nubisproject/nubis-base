@@ -1,5 +1,6 @@
 #!/bin/bash
-eval "$(curl -fqs http://169.254.169.254/latest/user-data)"
+
+NUBIS_PURPOSE=$(nubis-metadata NUBIS_PURPOSE)
 
 # Usage:
 #  $> nubis-purpose
