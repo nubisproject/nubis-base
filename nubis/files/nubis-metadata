@@ -1,9 +1,17 @@
 #!/bin/bash
 
 USERDATA_FILE=/var/cache/nubis/userdata
+METADATA_URL_PREFIX=http://169.254.169.254/latest
 
 if [ ! -d "$(dirname $USERDATA_FILE)" ]; then
   mkdir "$(dirname $USERDATA_FILE)"
+fi
+
+fetch_metadata() {
+
+# cloud-init is present, abort and rely on it having populated $USERDATA_FILE
+if curl --retry 5 -fqs $METADATA_URL_PREFIX/user-data | grep -s '^#cloud-config'; then
+  return 0
 fi
 
 # If we can't read the file, use our own copy
@@ -12,7 +20,7 @@ if [ -e "$USERDATA_FILE" ] && [ ! -r "$USERDATA_FILE" ] && [ "$(id -u)" != "0" ]
 fi
 
 # the -z flag lets us do a conditionnal get if-modified-since
-curl --retry 5 -fqs -z $USERDATA_FILE -o $USERDATA_FILE http://169.254.169.254/latest/user-data
+curl --retry 5 -fqs -z $USERDATA_FILE -o $USERDATA_FILE $METADATA_URL_PREFIX/user-data
 
 CURL_RV=$?
 
@@ -26,7 +34,7 @@ if [ "$CURL_RV" == "23" ] && [ "$(id -u)" != "0" ]; then
     CURL_RV=0
   else
     USERDATA_FILE=~/.nubis-metadata
-    curl --retry 5 -fqs -z $USERDATA_FILE -o $USERDATA_FILE http://169.254.169.254/latest/user-data
+    curl --retry 5 -fqs -z $USERDATA_FILE -o $USERDATA_FILE $METADATA_URL_PREFIX/user-data
     CURL_RV=$?
   fi
 fi
@@ -35,6 +43,10 @@ if [ "$CURL_RV" != "0" ]; then
   echo "ERROR: curl failed! ($CURL_RV)"
   exit $CURL_RV
 fi
+
+}
+
+fetch_metadata
 
 if [ "$1" ]; then
   # shellcheck disable=SC1090
