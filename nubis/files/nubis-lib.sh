@@ -5,11 +5,13 @@
 #
 # [ -e /usr/local/lib/nubis/nubis-lib.sh ] && . /usr/local/lib/nubis/nubis-lib.sh || exit 1
 
-NUBIS_ARENA=$(nubis-metadata NUBIS_ARENA)
-NUBIS_STACK=$(nubis-metadata NUBIS_STACK)
+eval "$(nubis-metadata)"
 
 # Set up the consul url
 CONSUL="http://localhost:8500/v1/kv/${NUBIS_STACK}/${NUBIS_ARENA}/config"
+
+# Convinience variables
+CURL="curl --retry 60 -fks"
 
 # Some bash functions
 
@@ -117,6 +119,30 @@ function log {
 function die() {
     [ -n "$1" ] && log "[ERROR]: $1"
     exit 1
+}
+
+# Replace %%VARIABLE_NAME%% with appropriate variable
+# runs in consul directory
+function consul-search-and-replace() {
+    if [ "$NUBIS_ARENA" != "" ]; then
+        find /etc/consul -type f -name '*.json' -print0 | xargs -0 --verbose sed -i -e "s/%%ARENA%%/$NUBIS_ARENA/g"
+    fi
+
+    if [ "$NUBIS_ENVIRONMENT" != "" ]; then
+        find /etc/consul -type f -name '*.json' -print0 | xargs -0 --verbose sed -i -e "s/%%ENVIRONMENT%%/$NUBIS_ENVIRONMENT/g"
+    fi
+
+    if [ "$NUBIS_STACK" != "" ]; then
+        find /etc/consul -type f -name '*.json' -print0 | xargs -0 --verbose sed -i -e "s/%%STACK%%/$NUBIS_STACK/g"
+    fi
+
+    if [ "$NUBIS_PROJECT" != "" ]; then
+        find /etc/consul -type f -name '*.json' -print0 | xargs -0 --verbose sed -i -e "s/%%PROJECT%%/$NUBIS_PROJECT/g"
+    fi
+
+    if [ "$NUBIS_PURPOSE" != "" ]; then
+        find /etc/consul -type f -name '*.json' -print0 | xargs -0 --verbose sed -i -e "s/%%PURPOSE%%/$NUBIS_PURPOSE/g"
+    fi
 }
 
 # Checks to see if consul is up and running
