@@ -1,5 +1,22 @@
 # Change Log
 
+## [v2.3.0](https://github.com/nubisproject/nubis-base/tree/v2.3.0) (2018-07-17)
+[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v2.2.0...v2.3.0)
+
+**Closed issues:**
+
+- \[gem\] Pin bundler at 1.16.1 [\#811](https://github.com/nubisproject/nubis-base/issues/811)
+- Use nubis-metadata instead of AWS user-data directly [\#803](https://github.com/nubisproject/nubis-base/issues/803)
+- \[nubis-metadata\] Stop querying AWS metadata [\#801](https://github.com/nubisproject/nubis-base/issues/801)
+
+**Merged pull requests:**
+
+- Pin bundler at 1.16.1 [\#812](https://github.com/nubisproject/nubis-base/pull/812) ([gozer](https://github.com/gozer))
+- Refactor nubis-lib [\#809](https://github.com/nubisproject/nubis-base/pull/809) ([limed](https://github.com/limed))
+- Upgrade to nubis-puppet-configuration v1.3.5 [\#806](https://github.com/nubisproject/nubis-base/pull/806) ([gozer](https://github.com/gozer))
+- Use nubis-metadata [\#804](https://github.com/nubisproject/nubis-base/pull/804) ([gozer](https://github.com/gozer))
+- \[nubis-metadata\] Detect usage of cloud-init and avoid AWS metadata API in that case [\#802](https://github.com/nubisproject/nubis-base/pull/802) ([gozer](https://github.com/gozer))
+
 ## [v2.2.0](https://github.com/nubisproject/nubis-base/tree/v2.2.0) (2018-04-06)
 [Full Changelog](https://github.com/nubisproject/nubis-base/compare/v2.1.0...v2.2.0)
 
@@ -12,9 +29,12 @@
 - \[puppet\] Upgrade to nubis-puppet-apache 0.1.15 [\#784](https://github.com/nubisproject/nubis-base/issues/784)
 - Update nubis-travis to v1.5.0 [\#759](https://github.com/nubisproject/nubis-base/issues/759)
 - \[node\_exporter\] Expose a platform tag [\#585](https://github.com/nubisproject/nubis-base/issues/585)
+- Tag v2.2.0 release [\#798](https://github.com/nubisproject/nubis-base/issues/798)
 
 **Merged pull requests:**
 
+- Update CHANGELOG for v2.2.0 release \[skip ci\] [\#800](https://github.com/nubisproject/nubis-base/pull/800) ([nubis-automation](https://github.com/nubis-automation))
+- Update CHANGELOG for v2.2.0 release \[skip ci\] [\#799](https://github.com/nubisproject/nubis-base/pull/799) ([nubis-automation](https://github.com/nubis-automation))
 - Capture nubis-cron logs and ship them to ElasticSearch [\#797](https://github.com/nubisproject/nubis-base/pull/797) ([gozer](https://github.com/gozer))
 - Allow system user to disable auto-tainting [\#795](https://github.com/nubisproject/nubis-base/pull/795) ([gozer](https://github.com/gozer))
 - Try and use AWS APIs to gracefully terminate instances [\#794](https://github.com/nubisproject/nubis-base/pull/794) ([gozer](https://github.com/gozer))
@@ -47,6 +67,7 @@
 - \[node\_exporter\] Expose nubis base version [\#704](https://github.com/nubisproject/nubis-base/issues/704)
 - /etc/profile.d/proxy.sh can sometimes \*not\* set PROXY\_\* variables at all [\#681](https://github.com/nubisproject/nubis-base/issues/681)
 - \[centos\] Disable SELinux [\#559](https://github.com/nubisproject/nubis-base/issues/559)
+- \[node\_exporter\] Export the ASG information for a node as part of the node metrics [\#480](https://github.com/nubisproject/nubis-base/issues/480)
 
 **Merged pull requests:**
 
@@ -524,6 +545,7 @@
 - Update builder artifacts for v1.3.0-dev release [\#425](https://github.com/nubisproject/nubis-base/pull/425) ([gozer](https://github.com/gozer))
 - Update builder artifacts for v1.2.3 release [\#424](https://github.com/nubisproject/nubis-base/pull/424) ([gozer](https://github.com/gozer))
 - Previous fix was broken, this one is finally correct [\#421](https://github.com/nubisproject/nubis-base/pull/421) ([gozer](https://github.com/gozer))
+- Update CHANGELOG for v1.2.2 release [\#420](https://github.com/nubisproject/nubis-base/pull/420) ([tinnightcap](https://github.com/tinnightcap))
 - Update puppet-fluentd for new package signing keys [\#575](https://github.com/nubisproject/nubis-base/pull/575) ([gozer](https://github.com/gozer))
 
 ## [v1.2.2](https://github.com/nubisproject/nubis-base/tree/v1.2.2) (2016-08-02)
@@ -537,7 +559,6 @@
 
 **Merged pull requests:**
 
-- Update CHANGELOG for v1.2.2 release [\#420](https://github.com/nubisproject/nubis-base/pull/420) ([tinnightcap](https://github.com/tinnightcap))
 - Update builder artifacts for v1.2.2 release [\#419](https://github.com/nubisproject/nubis-base/pull/419) ([tinnightcap](https://github.com/tinnightcap))
 - Install and enable NTPd by default [\#417](https://github.com/nubisproject/nubis-base/pull/417) ([gozer](https://github.com/gozer))
 - Set leave\_on\_terminate = true [\#415](https://github.com/nubisproject/nubis-base/pull/415) ([gozer](https://github.com/gozer))
@@ -860,7 +881,7 @@
 - Add support for 3 more Consul Server bootstrap options: [\#142](https://github.com/nubisproject/nubis-base/pull/142) ([gozer](https://github.com/gozer))
 
 ## [v0.9.0](https://github.com/nubisproject/nubis-base/tree/v0.9.0) (2015-07-23)
-[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v0.79...v0.9.0)
+[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v0.1...v0.9.0)
 
 **Closed issues:**
 
@@ -876,11 +897,11 @@
 - Move creation of /etc/puppet/nubis/{files,templates} to base image. Fixes \#134 [\#135](https://github.com/nubisproject/nubis-base/pull/135) ([gozer](https://github.com/gozer))
 - Ubuntu repositories have very old versions of the ec2-ami-tools that just don't work at all. [\#130](https://github.com/nubisproject/nubis-base/pull/130) ([gozer](https://github.com/gozer))
 
-## [v0.79](https://github.com/nubisproject/nubis-base/tree/v0.79) (2015-06-11)
-[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v0.1...v0.79)
-
 ## [v0.1](https://github.com/nubisproject/nubis-base/tree/v0.1) (2015-06-11)
-[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v1.35...v0.1)
+[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v0.79...v0.1)
+
+## [v0.79](https://github.com/nubisproject/nubis-base/tree/v0.79) (2015-06-11)
+[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v1.35...v0.79)
 
 **Closed issues:**
 
