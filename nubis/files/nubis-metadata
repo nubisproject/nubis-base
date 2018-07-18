@@ -1,13 +1,16 @@
 #!/bin/bash
 
-USERDATA_FILE=/var/cache/nubis/userdata
+METADATA_DIRECTORY='/var/cache/nubis'
+USERDATA_FILE="${METADATA_DIRECTORY}/userdata"
+INSTANCE_IDENTITY_FILE="${METADATA_DIRECTORY}/instance-identity"
+INSTANCE_IDENTITY_JSON="${METADATA_DIRECTORY}/instance-identity.json"
 METADATA_URL_PREFIX=http://169.254.169.254/latest
 
-if [ ! -d "$(dirname $USERDATA_FILE)" ]; then
-  mkdir "$(dirname $USERDATA_FILE)"
+if [ ! -d "${METADATA_DIRECTORY}" ]; then
+  mkdir "${METADATA_DIRECTORY}"
 fi
 
-fetch_metadata() {
+fetch_userdata() {
 
 # cloud-init is present, abort and rely on it having populated $USERDATA_FILE
 if curl --retry 5 -fqs $METADATA_URL_PREFIX/user-data | grep -qs '^#cloud-config'; then
@@ -46,13 +49,61 @@ fi
 
 }
 
-fetch_metadata
+fetch_instance_identity() {
+    # If we can't read the file, use our own copy
+    if [ -e "${INSTANCE_IDENTITY_FILE}" ] && [ ! -r "${INSTANCE_IDENTITY_FILE}" ] && [ "$(id -u)" != "0" ]; then
+        INSTANCE_IDENTITY_FILE="${HOME}/.nubis-metadata"
+        INSTANCE_IDENTITY_JSON="${HOME}/.instance-identity.json"
+    fi
+
+    # The -z flag lets us do a conditionnal get if-modified-since
+    curl --retry 5 -fqs -z "${INSTANCE_IDENTITY_JSON}" -o "${INSTANCE_IDENTITY_JSON}" "${METADATA_URL_PREFIX}/dynamic/instance-identity/document"
+    CURL_RV=$?
+
+    # If we can't write to the userdata file and we aren't root
+    # use a possibly outdated one or retry using a cache in our
+    # own home
+    # CURLE_WRITE_ERROR (23)
+    if [ "$CURL_RV" == "23" ] && [ "$(id -u)" != "0" ]; then
+        # Use the possibly outdated userdata file if we can read it
+        if [ -r "${INSTANCE_IDENTITY_FILE}" ]; then
+            CURL_RV=0
+        else
+            INSTANCE_IDENTITY_JSON="${HOME}/.instance-identity.json"
+            curl --retry 5 -fqs -z "${INSTANCE_IDENTITY_JSON}" -o "${INSTANCE_IDENTITY_JSON}" "${METADATA_URL_PREFIX}/dynamic/instance-identity/document"
+            CURL_RV=$?
+        fi
+    fi
+
+    if [ "$CURL_RV" != "0" ]; then
+        echo "ERROR: curl failed! (${CURL_RV})"
+        exit "${CURL_RV}"
+    fi
+
+    # Create instance identity bash file using json file
+    {
+        echo "INSTANCE_IDENTITY_PRIVATEIP=\"$(jq -r .privateIp "${INSTANCE_IDENTITY_JSON}")\""; \
+        echo "INSTANCE_IDENTITY_INSTANCEID=\"$(jq -r .instanceId "${INSTANCE_IDENTITY_JSON}")\""; \
+        echo "INSTANCE_IDENTITY_INSTANCETYPE=\"$(jq -r .instanceType "${INSTANCE_IDENTITY_JSON}")\""; \
+        echo "INSTANCE_IDENTITY_AVAILABILITYZONE=\"$(jq -r .availabilityZone "${INSTANCE_IDENTITY_JSON}")\""; \
+        echo "INSTANCE_IDENTITY_ACCOUNTID=\"$(jq -r .accountId "${INSTANCE_IDENTITY_JSON}")\""; \
+        echo "INSTANCE_IDENTITY_ARCHITECTURE=\"$(jq -r .architecture "${INSTANCE_IDENTITY_JSON}")\""; \
+        echo "INSTANCE_IDENTITY_IMAGEID=\"$(jq -r .imageId "${INSTANCE_IDENTITY_JSON}")\""; \
+        echo "INSTANCE_IDENTITY_PENDINGTIME=\"$(jq -r .pendingTime "${INSTANCE_IDENTITY_JSON}")\""; \
+        echo "INSTANCE_IDENTITY_REGION=\"$(jq -r .region "${INSTANCE_IDENTITY_JSON}")\""
+    } > "${INSTANCE_IDENTITY_FILE}"
+}
+
+fetch_userdata
+fetch_instance_identity
 
 if [ "$1" ]; then
   # shellcheck disable=SC1090
-  source $USERDATA_FILE 2>/dev/null
+  source "${USERDATA_FILE}" 2>/dev/null
+  # shellcheck source=/dev/null
+  source "${INSTANCE_IDENTITY_FILE}" 2>/dev/null
   eval VALUE="\$$1"
-  echo "$VALUE"
+  echo "${VALUE}"
 else
-  cat $USERDATA_FILE
+  cat ${USERDATA_FILE}
 fi
