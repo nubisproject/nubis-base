@@ -10,6 +10,35 @@
 - Use nubis-metadata instead of AWS user-data directly [\#803](https://github.com/nubisproject/nubis-base/issues/803)
 - \[nubis-metadata\] Stop querying AWS metadata [\#801](https://github.com/nubisproject/nubis-base/issues/801)
 - Tag v2.2.0 release [\#798](https://github.com/nubisproject/nubis-base/issues/798)
+- Tag v2.3.0 release [\#823](https://github.com/nubisproject/nubis-base/issues/823)
+- Tag v2.3.0 release [\#820](https://github.com/nubisproject/nubis-base/issues/820)
+- Tag v2.3.0 release [\#814](https://github.com/nubisproject/nubis-base/issues/814)
+
+**Merged pull requests:**
+
+- Update CHANGELOG for v2.3.0 release \[skip ci\] [\#825](https://github.com/nubisproject/nubis-base/pull/825) ([nubis-automation](https://github.com/nubis-automation))
+- Update CHANGELOG for v2.3.0 release \[skip ci\] [\#824](https://github.com/nubisproject/nubis-base/pull/824) ([nubis-automation](https://github.com/nubis-automation))
+- Update CHANGELOG for v2.3.0 release \[skip ci\] [\#822](https://github.com/nubisproject/nubis-base/pull/822) ([nubis-automation](https://github.com/nubis-automation))
+- Update CHANGELOG for v2.3.0 release \[skip ci\] [\#821](https://github.com/nubisproject/nubis-base/pull/821) ([nubis-automation](https://github.com/nubis-automation))
+- Expose instance identity document on host [\#818](https://github.com/nubisproject/nubis-base/pull/818) ([tinnightcap](https://github.com/tinnightcap))
+- Update CHANGELOG for v2.3.0 release \[skip ci\] [\#816](https://github.com/nubisproject/nubis-base/pull/816) ([nubis-automation](https://github.com/nubis-automation))
+- Update CHANGELOG for v2.3.0 release \[skip ci\] [\#815](https://github.com/nubisproject/nubis-base/pull/815) ([nubis-automation](https://github.com/nubis-automation))
+- Pin bundler at 1.16.1 [\#812](https://github.com/nubisproject/nubis-base/pull/812) ([gozer](https://github.com/gozer))
+- Refactor nubis-lib [\#809](https://github.com/nubisproject/nubis-base/pull/809) ([limed](https://github.com/limed))
+- Upgrade to nubis-puppet-configuration v1.3.5 [\#806](https://github.com/nubisproject/nubis-base/pull/806) ([gozer](https://github.com/gozer))
+- Use nubis-metadata [\#804](https://github.com/nubisproject/nubis-base/pull/804) ([gozer](https://github.com/gozer))
+- \[nubis-metadata\] Detect usage of cloud-init and avoid AWS metadata API in that case [\#802](https://github.com/nubisproject/nubis-base/pull/802) ([gozer](https://github.com/gozer))
+
+## [v2.3.0](https://github.com/nubisproject/nubis-base/tree/v2.3.0) (2018-07-19)
+[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v2.2.0...v2.3.0)
+
+**Closed issues:**
+
+- Extend nubis-metadata to include identity document [\#817](https://github.com/nubisproject/nubis-base/issues/817)
+- \[gem\] Pin bundler at 1.16.1 [\#811](https://github.com/nubisproject/nubis-base/issues/811)
+- Use nubis-metadata instead of AWS user-data directly [\#803](https://github.com/nubisproject/nubis-base/issues/803)
+- \[nubis-metadata\] Stop querying AWS metadata [\#801](https://github.com/nubisproject/nubis-base/issues/801)
+- Tag v2.2.0 release [\#798](https://github.com/nubisproject/nubis-base/issues/798)
 - Tag v2.3.0 release [\#820](https://github.com/nubisproject/nubis-base/issues/820)
 - Tag v2.3.0 release [\#814](https://github.com/nubisproject/nubis-base/issues/814)
 
