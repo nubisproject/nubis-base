@@ -1,5 +1,16 @@
 # Change Log
 
+## [v2.3.0](https://github.com/nubisproject/nubis-base/tree/v2.3.0) (2018-07-19)
+[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v2.3.0...v2.3.0)
+
+**Closed issues:**
+
+- Extend nubis-metadata to include identity document [\#817](https://github.com/nubisproject/nubis-base/issues/817)
+
+**Merged pull requests:**
+
+- Expose instance identity document on host [\#818](https://github.com/nubisproject/nubis-base/pull/818) ([tinnightcap](https://github.com/tinnightcap))
+
 ## [v2.3.0](https://github.com/nubisproject/nubis-base/tree/v2.3.0) (2018-07-17)
 [Full Changelog](https://github.com/nubisproject/nubis-base/compare/v2.2.0...v2.3.0)
 
@@ -11,6 +22,8 @@
 
 **Merged pull requests:**
 
+- Update CHANGELOG for v2.3.0 release \[skip ci\] [\#816](https://github.com/nubisproject/nubis-base/pull/816) ([nubis-automation](https://github.com/nubis-automation))
+- Update CHANGELOG for v2.3.0 release \[skip ci\] [\#815](https://github.com/nubisproject/nubis-base/pull/815) ([nubis-automation](https://github.com/nubis-automation))
 - Pin bundler at 1.16.1 [\#812](https://github.com/nubisproject/nubis-base/pull/812) ([gozer](https://github.com/gozer))
 - Refactor nubis-lib [\#809](https://github.com/nubisproject/nubis-base/pull/809) ([limed](https://github.com/limed))
 - Upgrade to nubis-puppet-configuration v1.3.5 [\#806](https://github.com/nubisproject/nubis-base/pull/806) ([gozer](https://github.com/gozer))
@@ -545,7 +558,6 @@
 - Update builder artifacts for v1.3.0-dev release [\#425](https://github.com/nubisproject/nubis-base/pull/425) ([gozer](https://github.com/gozer))
 - Update builder artifacts for v1.2.3 release [\#424](https://github.com/nubisproject/nubis-base/pull/424) ([gozer](https://github.com/gozer))
 - Previous fix was broken, this one is finally correct [\#421](https://github.com/nubisproject/nubis-base/pull/421) ([gozer](https://github.com/gozer))
-- Update CHANGELOG for v1.2.2 release [\#420](https://github.com/nubisproject/nubis-base/pull/420) ([tinnightcap](https://github.com/tinnightcap))
 - Update puppet-fluentd for new package signing keys [\#575](https://github.com/nubisproject/nubis-base/pull/575) ([gozer](https://github.com/gozer))
 
 ## [v1.2.2](https://github.com/nubisproject/nubis-base/tree/v1.2.2) (2016-08-02)
@@ -559,6 +571,7 @@
 
 **Merged pull requests:**
 
+- Update CHANGELOG for v1.2.2 release [\#420](https://github.com/nubisproject/nubis-base/pull/420) ([tinnightcap](https://github.com/tinnightcap))
 - Update builder artifacts for v1.2.2 release [\#419](https://github.com/nubisproject/nubis-base/pull/419) ([tinnightcap](https://github.com/tinnightcap))
 - Install and enable NTPd by default [\#417](https://github.com/nubisproject/nubis-base/pull/417) ([gozer](https://github.com/gozer))
 - Set leave\_on\_terminate = true [\#415](https://github.com/nubisproject/nubis-base/pull/415) ([gozer](https://github.com/gozer))
