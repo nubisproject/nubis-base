@@ -62,10 +62,10 @@ package { 'binutils':
   ensure => '2.26.1-1ubuntu1~16.04.6',
 }
 package { 'boto3':
-  ensure => '1.7.61',
+  ensure => '1.7.60',
 }
 package { 'botocore':
-  ensure => '1.10.61',
+  ensure => '1.10.60',
 }
 package { 'bsd-mailx':
   ensure => '8.1.2-0.20160123cvs-2',
