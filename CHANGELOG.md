@@ -10,6 +10,7 @@
 - Use nubis-metadata instead of AWS user-data directly [\#803](https://github.com/nubisproject/nubis-base/issues/803)
 - \[nubis-metadata\] Stop querying AWS metadata [\#801](https://github.com/nubisproject/nubis-base/issues/801)
 - Tag v2.2.0 release [\#798](https://github.com/nubisproject/nubis-base/issues/798)
+- Tag v2.3.0 release [\#829](https://github.com/nubisproject/nubis-base/issues/829)
 - Tag v2.3.0 release [\#826](https://github.com/nubisproject/nubis-base/issues/826)
 - Tag v2.3.0 release [\#823](https://github.com/nubisproject/nubis-base/issues/823)
 - Tag v2.3.0 release [\#820](https://github.com/nubisproject/nubis-base/issues/820)
@@ -17,6 +18,8 @@
 
 **Merged pull requests:**
 
+- Update CHANGELOG for v2.3.0 release \[skip ci\] [\#831](https://github.com/nubisproject/nubis-base/pull/831) ([nubis-automation](https://github.com/nubis-automation))
+- Update CHANGELOG for v2.3.0 release \[skip ci\] [\#830](https://github.com/nubisproject/nubis-base/pull/830) ([nubis-automation](https://github.com/nubis-automation))
 - Update CHANGELOG for v2.3.0 release \[skip ci\] [\#828](https://github.com/nubisproject/nubis-base/pull/828) ([nubis-automation](https://github.com/nubis-automation))
 - Update CHANGELOG for v2.3.0 release \[skip ci\] [\#827](https://github.com/nubisproject/nubis-base/pull/827) ([nubis-automation](https://github.com/nubis-automation))
 - Update CHANGELOG for v2.3.0 release \[skip ci\] [\#825](https://github.com/nubisproject/nubis-base/pull/825) ([nubis-automation](https://github.com/nubis-automation))
