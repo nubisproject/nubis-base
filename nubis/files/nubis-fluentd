@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [ "$(nubis-metadata status)" != 'ready' ]; then
+    # Assume this is a build and exit silently
+    exit 0
+fi
+
 # Load up proxy settings
 if [ -r /etc/profile.d/proxy.sh ]; then
   # shellcheck disable=SC1091

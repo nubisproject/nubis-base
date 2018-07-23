@@ -11,6 +11,10 @@ if [ -r /etc/profile.d/proxy.sh ]; then
   . /etc/profile.d/proxy.sh
 fi
 
+if [ -f /usr/bin/nubis-metadata ]; then
+  /usr/bin/nubis-metadata init 2>&1 | $LOGGER
+fi
+
 if [ -d /etc/nubis.d ]; then
   run-parts /etc/nubis.d 2>&1 | $LOGGER
 fi

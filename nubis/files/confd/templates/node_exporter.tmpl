@@ -11,6 +11,11 @@ if [ "$ENABLED" == "1" ]; then
     ln -sf /etc/nubis_versions.prom "$PROM_DIR/nubis_versions.prom"
   fi
 
+  if [ "$(nubis-metadata status)" != 'ready' ]; then
+    # Assume this is a build and exit silently
+    exit 0
+  fi
+
   # Generate fake metrics for Nubis propreties
   NUBIS_PROJECT=$(nubis-metadata NUBIS_PROJECT)
   NUBIS_ARENA=$(nubis-metadata NUBIS_ARENA)
