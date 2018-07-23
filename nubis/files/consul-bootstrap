@@ -4,6 +4,11 @@ export PATH=/usr/local/bin:$PATH
 
 # This is an auto-joiner for consul, should be moved to /etc/nubis.d/00-consul-bootstrap or similar
 
+if [ "$(nubis-metadata status)" != 'ready' ]; then
+    # Assume this is a build and exit silently
+    exit 0
+fi
+
 eval "$(nubis-metadata)"
 
 INSTANCE_ID=$(curl -fq http://169.254.169.254/latest/meta-data/instance-id)

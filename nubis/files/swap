@@ -1,7 +1,9 @@
 #!/bin/bash
 
 # Look at supplied value
-NUBIS_SWAP_SIZE_MEG=$(nubis-metadata NUBIS_SWAP_SIZE_MEG)
+if [ "$(nubis-metadata status)" == 'ready' ]; then
+  NUBIS_SWAP_SIZE_MEG=$(nubis-metadata NUBIS_SWAP_SIZE_MEG)
+fi
 
 # Use sane default otherwise
 if [ -z "$NUBIS_SWAP_SIZE_MEG" ]; then
