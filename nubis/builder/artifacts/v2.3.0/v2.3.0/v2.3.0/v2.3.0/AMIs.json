@@ -17,21 +17,21 @@
       "packer_run_uuid": "286ed8a0-a88d-746d-7eb1-12be91913906"
     },
     {
-      "name": "amazon-ebs-centos",
-      "builder_type": "amazon-ebs",
-      "build_time": 1532029855,
-      "files": null,
-      "artifact_id": "ap-northeast-1:ami-6adeb787,ap-northeast-2:ami-72b90e1c,ap-southeast-1:ami-e4bdf80e,ap-southeast-2:ami-18c3647a,eu-central-1:ami-089f9ee3,eu-west-1:ami-73aab499,sa-east-1:ami-e0ac8a8c,us-east-1:ami-26cacf59,us-west-1:ami-b34caed0,us-west-2:ami-9f346be7",
-      "packer_run_uuid": "51d7facb-2af6-e2c7-7546-149bc11655d0"
-    },
-    {
       "name": "amazon-ebs-ubuntu",
       "builder_type": "amazon-ebs",
-      "build_time": 1532029869,
+      "build_time": 1532031411,
       "files": null,
-      "artifact_id": "ap-northeast-1:ami-b9157d54,ap-northeast-2:ami-c2bb0cac,ap-southeast-1:ami-e0bdf80a,ap-southeast-2:ami-06c36464,eu-central-1:ami-b592935e,eu-west-1:ami-a1859b4b,sa-east-1:ami-dda583b1,us-east-1:ami-b33530cc,us-west-1:ami-cd4fadae,us-west-2:ami-90346be8",
-      "packer_run_uuid": "51d7facb-2af6-e2c7-7546-149bc11655d0"
+      "artifact_id": "ap-northeast-1:ami-64513989,ap-northeast-2:ami-e5a7108b,ap-southeast-1:ami-dbbaff31,ap-southeast-2:ami-5ff0573d,eu-central-1:ami-69a3a282,eu-west-1:ami-74bfa19e,sa-east-1:ami-37a0865b,us-east-1:ami-73e6e30c,us-west-1:ami-9844a6fb,us-west-2:ami-28306f50",
+      "packer_run_uuid": "ae54706b-de50-16e5-9efe-f3628ed2fd1d"
+    },
+    {
+      "name": "amazon-ebs-centos",
+      "builder_type": "amazon-ebs",
+      "build_time": 1532031994,
+      "files": null,
+      "artifact_id": "ap-northeast-1:ami-8c5e3661,ap-northeast-2:ami-16a61178,ap-southeast-1:ami-4ccdb7a6,ap-southeast-2:ami-2df7504f,eu-central-1:ami-8e9f9e65,eu-west-1:ami-69a7b983,sa-east-1:ami-84ab8de8,us-east-1:ami-c4e5e0bb,us-west-1:ami-a14fadc2,us-west-2:ami-3a316e42",
+      "packer_run_uuid": "ae54706b-de50-16e5-9efe-f3628ed2fd1d"
     }
   ],
-  "last_run_uuid": "51d7facb-2af6-e2c7-7546-149bc11655d0"
+  "last_run_uuid": "ae54706b-de50-16e5-9efe-f3628ed2fd1d"
 }

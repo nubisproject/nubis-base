@@ -5,7 +5,13 @@ set -e
 # /usr/local/bin isn't set yet in our PATH
 export PATH=/usr/local/bin:$PATH
 
-eval "$(nubis-metadata)"
+# Wait for nubis-metadata, we will be invoked again soon
+if [ "$(nubis-metadata status)" != 'ready' ]; then
+    exit 0
+fi
+
+NUBIS_SUDO_GROUPS="$(nubis-metadata NUBIS_SUDO_GROUPS)"
+NUBIS_USER_GROUPS="$(nubis-metadata NUBIS_USER_GROUPS)"
 
 if [ -z "${NUBIS_SUDO_GROUPS}" ]; then
     NUBIS_SUDO_GROUPS_TMP="[]"

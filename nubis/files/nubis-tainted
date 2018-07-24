@@ -8,7 +8,7 @@ if [ ! -r /.tainted ]; then
   exit 0
 fi
 
-if [ "$(nubis-metadata NUBIS_ACCOUNT)" == "" ]; then
+if [ "$(nubis-metadata status)" != 'ready' ]; then
   # Assume this is a Packer Builder, so bail out silently
   exit 0
 fi

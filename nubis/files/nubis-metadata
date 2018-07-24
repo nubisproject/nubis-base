@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 METADATA_DIRECTORY='/var/cache/nubis'
 USERDATA_FILE="${METADATA_DIRECTORY}/userdata"
 INSTANCE_IDENTITY_FILE="${METADATA_DIRECTORY}/instance-identity"
@@ -7,103 +9,187 @@ INSTANCE_IDENTITY_JSON="${METADATA_DIRECTORY}/instance-identity.json"
 METADATA_URL_PREFIX=http://169.254.169.254/latest
 
 if [ ! -d "${METADATA_DIRECTORY}" ]; then
-  mkdir "${METADATA_DIRECTORY}"
+    mkdir "${METADATA_DIRECTORY}" || exit 1
 fi
 
-fetch_userdata() {
-
-# cloud-init is present, abort and rely on it having populated $USERDATA_FILE
-if curl --retry 5 -fqs $METADATA_URL_PREFIX/user-data | grep -qs '^#cloud-config'; then
-  return 0
-fi
-
-# If we can't read the file, use our own copy
-if [ -e "$USERDATA_FILE" ] && [ ! -r "$USERDATA_FILE" ] && [ "$(id -u)" != "0" ]; then
-  USERDATA_FILE=~/.nubis-metadata
-fi
-
-# the -z flag lets us do a conditionnal get if-modified-since
-curl --retry 5 -fqs -z $USERDATA_FILE -o $USERDATA_FILE $METADATA_URL_PREFIX/user-data
-
-CURL_RV=$?
-
-# If we can't write to the userdata file and we aren't root
-# use a possibly outdated one or retry using a cache in our
-# own home
-# CURLE_WRITE_ERROR (23)
-if [ "$CURL_RV" == "23" ] && [ "$(id -u)" != "0" ]; then
-  # Use the possibly outdated userdata file if we can read it
-  if [ -r "$USERDATA_FILE" ]; then
-    CURL_RV=0
-  else
-    USERDATA_FILE=~/.nubis-metadata
-    curl --retry 5 -fqs -z $USERDATA_FILE -o $USERDATA_FILE $METADATA_URL_PREFIX/user-data
-    CURL_RV=$?
-  fi
-fi
-
-if [ "$CURL_RV" != "0" ]; then
-  echo "ERROR: curl failed! ($CURL_RV)"
-  exit $CURL_RV
-fi
-
+show-help() {
+    echo -en "Usage: ${0} [options] command\\n\\n"
+    echo -en "Commands:\\n"
+    echo -en "  init               Initialize the userdata and instance-identity files\\n"
+    echo -en "                       This is intended to be run on boot by root\\n"
+    echo -en "  show-userdata      Print out all VALUEs in userdata\\n"
+    echo -en "  show-identity      Print out all VALUEs in instance-identity\\n"
+    echo -en "  update-userdata    Refresh userdata in case it has changed\\n"
+    echo -en "  [VALUE]            Print out the named VALUE\\n"
+    echo -en "                       This is the default behavior as in:\\n"
+    echo -en "                       '${0} NUBIS_PROJECT'\\n\\n"
+    echo -en "Options:\\n"
+    echo -en "  --help       -h    Print this help information and exit\\n"
+    echo -en "  --setx       -x    Turn on bash setx, should be set before other arguments\\n"
+    echo -en "                       Basically set -x\\n\\n"
 }
 
-fetch_instance_identity() {
-    # If we can't read the file, use our own copy
-    if [ -e "${INSTANCE_IDENTITY_FILE}" ] && [ ! -r "${INSTANCE_IDENTITY_FILE}" ] && [ "$(id -u)" != "0" ]; then
-        INSTANCE_IDENTITY_FILE="${HOME}/.nubis-metadata"
-        INSTANCE_IDENTITY_JSON="${HOME}/.instance-identity.json"
-    fi
+initialize-userdata() {
+    # cloud-init is present, abort and rely on it having populated ${USERDATA_FILE}
+    if curl --retry 5 -fqs $METADATA_URL_PREFIX/user-data | grep -qs '^#cloud-config'; then
+        return 0
+    else
+        # If the userdata file exists, remove it
+        if [ -f "${USERDATA_FILE}" ]; then
+            rm -f "${USERDATA_FILE:-'NO_SUCH_FILE'}" || exit 1
+        fi
 
-    # The -z flag lets us do a conditionnal get if-modified-since
-    curl --retry 5 -fqs -z "${INSTANCE_IDENTITY_JSON}" -o "${INSTANCE_IDENTITY_JSON}" "${METADATA_URL_PREFIX}/dynamic/instance-identity/document"
-    CURL_RV=$?
-
-    # If we can't write to the userdata file and we aren't root
-    # use a possibly outdated one or retry using a cache in our
-    # own home
-    # CURLE_WRITE_ERROR (23)
-    if [ "$CURL_RV" == "23" ] && [ "$(id -u)" != "0" ]; then
-        # Use the possibly outdated userdata file if we can read it
-        if [ -r "${INSTANCE_IDENTITY_FILE}" ]; then
-            CURL_RV=0
-        else
-            INSTANCE_IDENTITY_JSON="${HOME}/.instance-identity.json"
-            curl --retry 5 -fqs -z "${INSTANCE_IDENTITY_JSON}" -o "${INSTANCE_IDENTITY_JSON}" "${METADATA_URL_PREFIX}/dynamic/instance-identity/document"
-            CURL_RV=$?
+        # Grab the user-data from the metadata endpoint
+        if ! curl --retry 5 -fqs -o "${USERDATA_FILE}" "${METADATA_URL_PREFIX}/user-data" ; then
+            echo -e "\\n\\033[1;31mERROR: Failed getting userdata! \\033[0m\\n" 1>&2
+            exit 1
         fi
     fi
-
-    if [ "$CURL_RV" != "0" ]; then
-        echo "ERROR: curl failed! (${CURL_RV})"
-        exit "${CURL_RV}"
-    fi
-
-    # Create instance identity bash file using json file
-    {
-        echo "INSTANCE_IDENTITY_PRIVATEIP=\"$(jq -r .privateIp "${INSTANCE_IDENTITY_JSON}")\""; \
-        echo "INSTANCE_IDENTITY_INSTANCEID=\"$(jq -r .instanceId "${INSTANCE_IDENTITY_JSON}")\""; \
-        echo "INSTANCE_IDENTITY_INSTANCETYPE=\"$(jq -r .instanceType "${INSTANCE_IDENTITY_JSON}")\""; \
-        echo "INSTANCE_IDENTITY_AVAILABILITYZONE=\"$(jq -r .availabilityZone "${INSTANCE_IDENTITY_JSON}")\""; \
-        echo "INSTANCE_IDENTITY_ACCOUNTID=\"$(jq -r .accountId "${INSTANCE_IDENTITY_JSON}")\""; \
-        echo "INSTANCE_IDENTITY_ARCHITECTURE=\"$(jq -r .architecture "${INSTANCE_IDENTITY_JSON}")\""; \
-        echo "INSTANCE_IDENTITY_IMAGEID=\"$(jq -r .imageId "${INSTANCE_IDENTITY_JSON}")\""; \
-        echo "INSTANCE_IDENTITY_PENDINGTIME=\"$(jq -r .pendingTime "${INSTANCE_IDENTITY_JSON}")\""; \
-        echo "INSTANCE_IDENTITY_REGION=\"$(jq -r .region "${INSTANCE_IDENTITY_JSON}")\""
-    } > "${INSTANCE_IDENTITY_FILE}"
 }
 
-fetch_userdata
-fetch_instance_identity
+initialize-instance-identity() {
+    # If the instance-identity.json file exists, remove it
+    if [ -f "${INSTANCE_IDENTITY_JSON}" ]; then
+        rm -f "${INSTANCE_IDENTITY_JSON:-'NO_SUCH_FILE'}" || exit 1
+    fi
 
-if [ "$1" ]; then
-  # shellcheck disable=SC1090
-  source "${USERDATA_FILE}" 2>/dev/null
-  # shellcheck source=/dev/null
-  source "${INSTANCE_IDENTITY_FILE}" 2>/dev/null
-  eval VALUE="\$$1"
-  echo "${VALUE}"
-else
-  cat ${USERDATA_FILE}
+    # Grab the instance-identity/document from the metadata endpoint
+    if ! curl --retry 5 -fqs -o "${INSTANCE_IDENTITY_JSON}" "${METADATA_URL_PREFIX}/dynamic/instance-identity/document" ; then
+        echo -e "\\n\\033[1;31mERROR: Failed getting instance-identity/document! \\033[0m\\n" 1>&2
+        exit 1
+    fi
+
+    # If the instance-identity.json file exists, remove it
+    if [ -f "${INSTANCE_IDENTITY_FILE}" ]; then
+        rm -f "${INSTANCE_IDENTITY_FILE:-'NO_SUCH_FILE'}" || exit 1
+    fi
+
+    # Create instance identity bash file using json file as source
+    if [ -f "${INSTANCE_IDENTITY_JSON}" ]; then
+        {
+            echo "INSTANCE_IDENTITY_PRIVATEIP=\"$(jq -r .privateIp "${INSTANCE_IDENTITY_JSON}")\""; \
+            echo "INSTANCE_IDENTITY_INSTANCEID=\"$(jq -r .instanceId "${INSTANCE_IDENTITY_JSON}")\""; \
+            echo "INSTANCE_IDENTITY_INSTANCETYPE=\"$(jq -r .instanceType "${INSTANCE_IDENTITY_JSON}")\""; \
+            echo "INSTANCE_IDENTITY_AVAILABILITYZONE=\"$(jq -r .availabilityZone "${INSTANCE_IDENTITY_JSON}")\""; \
+            echo "INSTANCE_IDENTITY_ACCOUNTID=\"$(jq -r .accountId "${INSTANCE_IDENTITY_JSON}")\""; \
+            echo "INSTANCE_IDENTITY_ARCHITECTURE=\"$(jq -r .architecture "${INSTANCE_IDENTITY_JSON}")\""; \
+            echo "INSTANCE_IDENTITY_IMAGEID=\"$(jq -r .imageId "${INSTANCE_IDENTITY_JSON}")\""; \
+            echo "INSTANCE_IDENTITY_PENDINGTIME=\"$(jq -r .pendingTime "${INSTANCE_IDENTITY_JSON}")\""; \
+            echo "INSTANCE_IDENTITY_REGION=\"$(jq -r .region "${INSTANCE_IDENTITY_JSON}")\""
+        } > "${INSTANCE_IDENTITY_FILE}"
+    else
+        echo -e "\\n\\033[1;31mERROR: instance-identity.json file does not exist! \\033[0m" 1>&2
+        echo -e "\\033[1;31mERROR: unable to create instance-identity file.\\033[0m\\n" 1>&2
+        exit 1
+    fi
+}
+
+show-userdata () {
+    # Make sure the userdata file exists
+    if [ ! -f "${USERDATA_FILE}" ]; then
+        echo -e "\\n\\033[1;31mERROR: ${USERDATA_FILE} does not exist! \\033[0m" 1>&2
+        echo -e "\\033[1;31mERROR: Perhaps you need to ${0} init\\033[0m\\n" 1>&2
+        exit 1
+    fi
+    if [ "${1}" ]; then
+        # shellcheck source=/dev/null
+        source "${USERDATA_FILE}" 2>/dev/null
+        eval VALUE="\$${1}"
+        echo "${VALUE}"
+    else
+        cat "${USERDATA_FILE}"
+    fi
+}
+
+show-instance-identity () {
+    # Make sure the userdata file exists
+    if [ ! -f "${INSTANCE_IDENTITY_FILE}" ]; then
+        echo -e "\\n\\033[1;31mERROR: ${INSTANCE_IDENTITY_FILE} does not exist! \\033[0m" 1>&2
+        echo -e "\\033[1;31mERROR: Perhaps you need to ${0} init\\033[0m\\n" 1>&2
+        exit 1
+    fi
+    if [ "${1}" ]; then
+        # shellcheck source=/dev/null
+        source "${INSTANCE_IDENTITY_FILE}" 2>/dev/null
+        eval VALUE="\$${1}"
+        echo "${VALUE}"
+    else
+        cat "${INSTANCE_IDENTITY_FILE}"
+    fi
+}
+
+while [ "${1}" != "" ]; do
+    case ${1} in
+        -h | --help | help )
+            show-help
+            exit 0
+        ;;
+        -x | --debug | --setx )
+            shift
+            set -x
+        ;;
+        status )
+            shift
+            if [ -f "${INSTANCE_IDENTITY_FILE}" ] && [ -f "${USERDATA_FILE}" ]; then
+                echo "ready"
+            else
+                echo "not-ready"
+            fi
+            GOT_COMMAND=1
+        ;;
+        init )
+            shift
+            initialize-userdata
+            initialize-instance-identity
+            GOT_COMMAND=1
+        ;;
+        show-userdata )
+            shift
+            show-userdata
+            GOT_COMMAND=1
+        ;;
+        show-identity )
+            shift
+            show-instance-identity
+            GOT_COMMAND=1
+        ;;
+            update-userdata )
+            shift
+            initialize-userdata
+            GOT_COMMAND=1
+        ;;
+        * )
+            # Lets be nice and upcase any requests
+            #+ Also trun hyphen into underscore (bash does not allow hyphen in variable names)
+            UPCASE="$(tr '[:lower:]-' '[:upper:]_' <<< "${1}")"
+            # Check for the value in userdata first
+            VALUE="$(show-userdata "${UPCASE}")"
+            # Check for the value in instance-identity second
+            if [ ! "${VALUE}" ]; then
+                VALUE="$(show-instance-identity "${UPCASE}")"
+            fi
+            # If we did not get a value, raise an error
+            #+ otherwise return the value
+            if [ ! "${VALUE}" ]; then
+                echo -e "\\n\\033[1;31mERROR: No such VALUE: '${UPCASE}'\\033[0m\\n" 1>&2
+                exit 1
+            else
+                echo "${VALUE}"
+            fi
+            shift
+            # We do not support requesting multiple VALUES at onece
+            if [ "${1}" ]; then
+                echo -e "\\n\\033[1;31mERROR: ${0} does not support multiple VALUE lookups.\\033[0m\\n" 1>&2
+                exit 1
+            fi
+            GOT_COMMAND=1
+        ;;
+    esac
+done
+
+# If we did not get a valid command print the help message
+if [ "${GOT_COMMAND:-0}" == 0 ]; then
+    echo -e "\\n\\033[0;32mWARNING: Usage 'nubis-metadata DESIRED_VALUE'\\033[0m" 1>&2
+    echo -e "\\033[0;32mWARNING: You should not source this file as that will be depricated in a future release.\\033[0m\\n" 1>&2
+    show-userdata
 fi

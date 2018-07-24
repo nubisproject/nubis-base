@@ -1,4 +1,4 @@
-if [ "$PS1" ]; then
+if [ "$PS1" ] && [ "$(nubis-metadata status)" == 'ready' ]; then
   ACCOUNT=$(nubis-metadata NUBIS_ACCOUNT)
   REGION=$(nubis-region)
   ARENA=$(nubis-metadata NUBIS_ARENA)
@@ -15,4 +15,6 @@ if [ "$PS1" ]; then
   fi
 
   PS1="[\u@$ACCOUNT/$REGION/$ARENA {$PROJECT} \W]\$ "
+elif [ "$PS1" ]; then
+  PS1="[\u@\h \W]\$ "
 fi

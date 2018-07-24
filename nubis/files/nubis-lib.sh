@@ -5,7 +5,18 @@
 #
 # [ -e /usr/local/lib/nubis/nubis-lib.sh ] && . /usr/local/lib/nubis/nubis-lib.sh || exit 1
 
-eval "$(nubis-metadata)"
+if [ "$(nubis-metadata status)" != 'ready' ]; then
+    # Assume this is a build and exit
+    echo "nubis-metadata reporting $(nubis-metadata status)"
+    echo "try again later"
+    exit 0
+else
+    NUBIS_STACK="$(nubis-metadata NUBIS_STACK)"
+    NUBIS_ARENA="$(nubis-metadata NUBIS_ARENA)"
+    NUBIS_ENVIRONMENT="$(nubis-metadata NUBIS_ENVIRONMENT)"
+    NUBIS_PROJECT="$(nubis-metadata NUBIS_PROJECT)"
+    NUBIS_PURPOSE="$(nubis-metadata NUBIS_PURPOSE)"
+fi
 
 # Set up the consul url
 CONSUL="http://localhost:8500/v1/kv/${NUBIS_STACK}/${NUBIS_ARENA}/config"
