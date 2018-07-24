@@ -1,6 +1,18 @@
 # Change Log
 
-## [v2.3.0](https://github.com/nubisproject/nubis-base/tree/v2.3.0) (2018-07-19)
+## [v2.3.0](https://github.com/nubisproject/nubis-base/tree/v2.3.0) (2018-07-24)
+[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v2.3.0...v2.3.0)
+
+**Closed issues:**
+
+- Update nubis-metadata to expose identity\_document values [\#836](https://github.com/nubisproject/nubis-base/issues/836)
+
+**Merged pull requests:**
+
+- Update nubis-metadata [\#837](https://github.com/nubisproject/nubis-base/pull/837) ([tinnightcap](https://github.com/tinnightcap))
+- Whitespace indenting only [\#835](https://github.com/nubisproject/nubis-base/pull/835) ([tinnightcap](https://github.com/tinnightcap))
+
+## [v2.3.0](https://github.com/nubisproject/nubis-base/tree/v2.3.0) (2018-07-20)
 [Full Changelog](https://github.com/nubisproject/nubis-base/compare/v2.2.0...v2.3.0)
 
 **Closed issues:**
@@ -10,6 +22,7 @@
 - Use nubis-metadata instead of AWS user-data directly [\#803](https://github.com/nubisproject/nubis-base/issues/803)
 - \[nubis-metadata\] Stop querying AWS metadata [\#801](https://github.com/nubisproject/nubis-base/issues/801)
 - Tag v2.2.0 release [\#798](https://github.com/nubisproject/nubis-base/issues/798)
+- Tag v2.3.0 release [\#832](https://github.com/nubisproject/nubis-base/issues/832)
 - Tag v2.3.0 release [\#829](https://github.com/nubisproject/nubis-base/issues/829)
 - Tag v2.3.0 release [\#826](https://github.com/nubisproject/nubis-base/issues/826)
 - Tag v2.3.0 release [\#823](https://github.com/nubisproject/nubis-base/issues/823)
@@ -18,6 +31,8 @@
 
 **Merged pull requests:**
 
+- Update CHANGELOG for v2.3.0 release \[skip ci\] [\#834](https://github.com/nubisproject/nubis-base/pull/834) ([nubis-automation](https://github.com/nubis-automation))
+- Update CHANGELOG for v2.3.0 release \[skip ci\] [\#833](https://github.com/nubisproject/nubis-base/pull/833) ([nubis-automation](https://github.com/nubis-automation))
 - Update CHANGELOG for v2.3.0 release \[skip ci\] [\#831](https://github.com/nubisproject/nubis-base/pull/831) ([nubis-automation](https://github.com/nubis-automation))
 - Update CHANGELOG for v2.3.0 release \[skip ci\] [\#830](https://github.com/nubisproject/nubis-base/pull/830) ([nubis-automation](https://github.com/nubis-automation))
 - Update CHANGELOG for v2.3.0 release \[skip ci\] [\#828](https://github.com/nubisproject/nubis-base/pull/828) ([nubis-automation](https://github.com/nubis-automation))
