@@ -5,23 +5,26 @@
 
 **Closed issues:**
 
-- Update nubis-metadata to expose identity\_document values [\#836](https://github.com/nubisproject/nubis-base/issues/836)
+- Errors on login due to PS1 acript [\#843](https://github.com/nubisproject/nubis-base/issues/843)
+- nubis-metadata init needs to happen \*before\* everything else [\#841](https://github.com/nubisproject/nubis-base/issues/841)
 
 **Merged pull requests:**
 
-- Update nubis-metadata [\#837](https://github.com/nubisproject/nubis-base/pull/837) ([tinnightcap](https://github.com/tinnightcap))
-- Whitespace indenting only [\#835](https://github.com/nubisproject/nubis-base/pull/835) ([tinnightcap](https://github.com/tinnightcap))
+- Fix errors on login [\#844](https://github.com/nubisproject/nubis-base/pull/844) ([tinnightcap](https://github.com/tinnightcap))
+- Initialize our metadata cache \*before\* everything else [\#842](https://github.com/nubisproject/nubis-base/pull/842) ([gozer](https://github.com/gozer))
 
-## [v2.3.0](https://github.com/nubisproject/nubis-base/tree/v2.3.0) (2018-07-20)
+## [v2.3.0](https://github.com/nubisproject/nubis-base/tree/v2.3.0) (2018-07-24)
 [Full Changelog](https://github.com/nubisproject/nubis-base/compare/v2.2.0...v2.3.0)
 
 **Closed issues:**
 
+- Update nubis-metadata to expose identity\_document values [\#836](https://github.com/nubisproject/nubis-base/issues/836)
 - Extend nubis-metadata to include identity document [\#817](https://github.com/nubisproject/nubis-base/issues/817)
 - \[gem\] Pin bundler at 1.16.1 [\#811](https://github.com/nubisproject/nubis-base/issues/811)
 - Use nubis-metadata instead of AWS user-data directly [\#803](https://github.com/nubisproject/nubis-base/issues/803)
 - \[nubis-metadata\] Stop querying AWS metadata [\#801](https://github.com/nubisproject/nubis-base/issues/801)
 - Tag v2.2.0 release [\#798](https://github.com/nubisproject/nubis-base/issues/798)
+- Tag v2.3.0 release [\#838](https://github.com/nubisproject/nubis-base/issues/838)
 - Tag v2.3.0 release [\#832](https://github.com/nubisproject/nubis-base/issues/832)
 - Tag v2.3.0 release [\#829](https://github.com/nubisproject/nubis-base/issues/829)
 - Tag v2.3.0 release [\#826](https://github.com/nubisproject/nubis-base/issues/826)
@@ -31,6 +34,10 @@
 
 **Merged pull requests:**
 
+- Update CHANGELOG for v2.3.0 release \[skip ci\] [\#840](https://github.com/nubisproject/nubis-base/pull/840) ([nubis-automation](https://github.com/nubis-automation))
+- Update CHANGELOG for v2.3.0 release \[skip ci\] [\#839](https://github.com/nubisproject/nubis-base/pull/839) ([nubis-automation](https://github.com/nubis-automation))
+- Update nubis-metadata [\#837](https://github.com/nubisproject/nubis-base/pull/837) ([tinnightcap](https://github.com/tinnightcap))
+- Whitespace indenting only [\#835](https://github.com/nubisproject/nubis-base/pull/835) ([tinnightcap](https://github.com/tinnightcap))
 - Update CHANGELOG for v2.3.0 release \[skip ci\] [\#834](https://github.com/nubisproject/nubis-base/pull/834) ([nubis-automation](https://github.com/nubis-automation))
 - Update CHANGELOG for v2.3.0 release \[skip ci\] [\#833](https://github.com/nubisproject/nubis-base/pull/833) ([nubis-automation](https://github.com/nubis-automation))
 - Update CHANGELOG for v2.3.0 release \[skip ci\] [\#831](https://github.com/nubisproject/nubis-base/pull/831) ([nubis-automation](https://github.com/nubis-automation))
