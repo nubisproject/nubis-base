@@ -5,14 +5,15 @@ LOGGER="logger --stderr --priority local7.info --tag nubis-startup"
 PATH=/usr/local/bin:$PATH
 export PATH
 
+# Initialize our metadata cache
+if [ -f /usr/bin/nubis-metadata ]; then
+  /usr/bin/nubis-metadata init 2>&1 | $LOGGER
+fi
+
 # Load up proxy settings
 if [ -r /etc/profile.d/proxy.sh ]; then
   # shellcheck disable=SC1091
   . /etc/profile.d/proxy.sh
-fi
-
-if [ -f /usr/bin/nubis-metadata ]; then
-  /usr/bin/nubis-metadata init 2>&1 | $LOGGER
 fi
 
 if [ -d /etc/nubis.d ]; then
