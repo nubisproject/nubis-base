@@ -10,19 +10,16 @@ if [ "$(nubis-metadata status)" != 'ready' ]; then
     exit 0
 fi
 
-NUBIS_SUDO_GROUPS="$(nubis-metadata NUBIS_SUDO_GROUPS)"
-NUBIS_USER_GROUPS="$(nubis-metadata NUBIS_USER_GROUPS)"
-
-if [ -z "${NUBIS_SUDO_GROUPS}" ]; then
-    NUBIS_SUDO_GROUPS_TMP="[]"
+if nubis-metadata NUBIS_SUDO_GROUPS > /dev/null 2>&1; then
+    NUBIS_SUDO_GROUPS_TMP=$(nubis-metadata NUBIS_SUDO_GROUPS | sed -e's/^/["/g' | sed -e's/$/"]/' | sed -e's/,/","/g')
 else
-    NUBIS_SUDO_GROUPS_TMP=$(echo "${NUBIS_SUDO_GROUPS}" | sed -e's/^/["/g' | sed -e's/$/"]/' | sed -e's/,/","/g' )
+    NUBIS_SUDO_GROUPS_TMP="[]"
 fi
 
-if [ -z "${NUBIS_USER_GROUPS}" ]; then
-    NUBIS_USER_GROUPS_TMP="[]"
+if nubis-metadata NUBIS_USER_GROUPS > /dev/null 2>&1; then
+    NUBIS_USER_GROUPS_TMP=$(nubis-metadata NUBIS_USER_GROUPS | sed -e's/^/["/g' | sed -e's/$/"]/' | sed -e's/,/","/g')
 else
-    NUBIS_USER_GROUPS_TMP=$(echo "${NUBIS_USER_GROUPS}" | sed -e's/^/["/g' | sed -e's/$/"]/' | sed -e's/,/","/g')
+    NUBIS_USER_GROUPS_TMP="[]"
 fi
 
 cat <<EOF > /etc/nubis/puppet/nubis_users.pp
