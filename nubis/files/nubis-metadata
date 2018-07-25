@@ -7,6 +7,8 @@ USERDATA_FILE="${METADATA_DIRECTORY}/userdata"
 INSTANCE_IDENTITY_FILE="${METADATA_DIRECTORY}/instance-identity"
 INSTANCE_IDENTITY_JSON="${METADATA_DIRECTORY}/instance-identity.json"
 METADATA_URL_PREFIX=http://169.254.169.254/latest
+#PARENT_COMMAND="$(ps -o comm= $PPID)"
+PARENT_ARGUMENTS="$(ps -o args= $PPID)"
 
 if [ ! -d "${METADATA_DIRECTORY}" ]; then
     mkdir "${METADATA_DIRECTORY}" || exit 1
@@ -42,6 +44,7 @@ initialize-userdata() {
         # Grab the user-data from the metadata endpoint
         if ! curl --retry 5 -fqs -o "${USERDATA_FILE}" "${METADATA_URL_PREFIX}/user-data" ; then
             echo -e "\\n\\033[1;31mERROR: Failed getting userdata! \\033[0m\\n" 1>&2
+            echo -e "\\n\\033[1;31mERROR: Called by:'${PARENT_ARGUMENTS}'\\033[0m\\n" 1>&2
             exit 1
         fi
     fi
@@ -56,6 +59,7 @@ initialize-instance-identity() {
     # Grab the instance-identity/document from the metadata endpoint
     if ! curl --retry 5 -fqs -o "${INSTANCE_IDENTITY_JSON}" "${METADATA_URL_PREFIX}/dynamic/instance-identity/document" ; then
         echo -e "\\n\\033[1;31mERROR: Failed getting instance-identity/document! \\033[0m\\n" 1>&2
+        echo -e "\\n\\033[1;31mERROR: Called by:'${PARENT_ARGUMENTS}'\\033[0m\\n" 1>&2
         exit 1
     fi
 
@@ -80,6 +84,7 @@ initialize-instance-identity() {
     else
         echo -e "\\n\\033[1;31mERROR: instance-identity.json file does not exist! \\033[0m" 1>&2
         echo -e "\\033[1;31mERROR: unable to create instance-identity file.\\033[0m\\n" 1>&2
+        echo -e "\\n\\033[1;31mERROR: Called by:'${PARENT_ARGUMENTS}'\\033[0m\\n" 1>&2
         exit 1
     fi
 }
@@ -89,6 +94,7 @@ show-userdata () {
     if [ ! -f "${USERDATA_FILE}" ]; then
         echo -e "\\n\\033[1;31mERROR: ${USERDATA_FILE} does not exist! \\033[0m" 1>&2
         echo -e "\\033[1;31mERROR: Perhaps you need to ${0} init\\033[0m\\n" 1>&2
+        echo -e "\\n\\033[1;31mERROR: Called by:'${PARENT_ARGUMENTS}'\\033[0m\\n" 1>&2
         exit 1
     fi
     if [ "${1}" ]; then
@@ -106,6 +112,7 @@ show-instance-identity () {
     if [ ! -f "${INSTANCE_IDENTITY_FILE}" ]; then
         echo -e "\\n\\033[1;31mERROR: ${INSTANCE_IDENTITY_FILE} does not exist! \\033[0m" 1>&2
         echo -e "\\033[1;31mERROR: Perhaps you need to ${0} init\\033[0m\\n" 1>&2
+        echo -e "\\n\\033[1;31mERROR: Called by:'${PARENT_ARGUMENTS}'\\033[0m\\n" 1>&2
         exit 1
     fi
     if [ "${1}" ]; then
@@ -172,6 +179,7 @@ while [ "${1}" != "" ]; do
             #+ otherwise return the value
             if [ ! "${VALUE}" ]; then
                 echo -e "\\n\\033[1;31mERROR: No such VALUE: '${UPCASE}'\\033[0m\\n" 1>&2
+                echo -e "\\n\\033[1;31mERROR: Called by:'${PARENT_ARGUMENTS}'\\033[0m\\n" 1>&2
                 exit 1
             else
                 echo "${VALUE}"
@@ -180,6 +188,7 @@ while [ "${1}" != "" ]; do
             # We do not support requesting multiple VALUES at onece
             if [ "${1}" ]; then
                 echo -e "\\n\\033[1;31mERROR: ${0} does not support multiple VALUE lookups.\\033[0m\\n" 1>&2
+                echo -e "\\n\\033[1;31mERROR: Called by:'${PARENT_ARGUMENTS}'\\033[0m\\n" 1>&2
                 exit 1
             fi
             GOT_COMMAND=1
@@ -190,6 +199,7 @@ done
 # If we did not get a valid command print the help message
 if [ "${GOT_COMMAND:-0}" == 0 ]; then
     echo -e "\\n\\033[0;32mWARNING: Usage 'nubis-metadata DESIRED_VALUE'\\033[0m" 1>&2
-    echo -e "\\033[0;32mWARNING: You should not source this file as that will be depricated in a future release.\\033[0m\\n" 1>&2
+    echo -e "\\033[0;32mWARNING: You should not source this file as that will be depricated in a future release.\\033[0m" 1>&2
+    echo -e "\\n\\033[0;32mWARNING: Called by:'${PARENT_ARGUMENTS}'\\033[0m\\n" 1>&2
     show-userdata
 fi
