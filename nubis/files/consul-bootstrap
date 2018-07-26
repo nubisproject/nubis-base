@@ -9,10 +9,24 @@ if [ "$(nubis-metadata status)" != 'ready' ]; then
     exit 0
 fi
 
-eval "$(nubis-metadata)"
-
-INSTANCE_ID=$(curl -fq http://169.254.169.254/latest/meta-data/instance-id)
-REGION=$(nubis-region)
+if nubis-metadata NUBIS_PROJECT > /dev/null 2>&1; then
+    NUBIS_PROJECT=$(nubis-metadata NUBIS_PROJECT)
+fi
+if nubis-metadata NUBIS_ARENA > /dev/null 2>&1; then
+    NUBIS_ARENA=$(nubis-metadata NUBIS_ARENA)
+fi
+if nubis-metadata NUBIS_ACCOUNT > /dev/null 2>&1; then
+    NUBIS_ACCOUNT=$(nubis-metadata NUBIS_ACCOUNT)
+fi
+if nubis-metadata NUBIS_DOMAIN > /dev/null 2>&1; then
+    NUBIS_DOMAIN=$(nubis-metadata NUBIS_DOMAIN)
+fi
+if nubis-metadata INSTANCE_IDENTITY_REGION > /dev/null 2>&1; then
+    REGION=$(nubis-metadata INSTANCE_IDENTITY_REGION)
+fi
+if nubis-metadata INSTANCE_IDENTITY_INSTANCEID > /dev/null 2>&1; then
+    INSTANCE_ID=$(nubis-metadata INSTANCE_IDENTITY_INSTANCEID)
+fi
 
 CONSUL_DC="${NUBIS_ARENA}-${REGION}-${NUBIS_ACCOUNT}"
 CONSUL_SERVICE_NAME="consul"
