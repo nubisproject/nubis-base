@@ -50,7 +50,7 @@ mod 'claranet/consul_template',
 mod 'duosecurity/duo_unix',
     :git => 'https://github.com/tinnightcap/puppet-duo_unix.git',
     :ref => '891aa681abe30053d6609329ead26944140d05e0'
-    
+
 mod 'echocat/nfs',
   :git => 'https://github.com/gozer/puppet-nfs.git',
   :ref => 'c08d61544038fd77db0ac138aab5fc07e6df6fa2'
@@ -83,7 +83,7 @@ mod 'nubis/nubis_discovery',
 
 mod 'nubis/nubis_configuration',
     :git => 'https://github.com/nubisproject/nubis-puppet-configuration.git',
-    :ref => 'v1.3.5'
+    :ref => 'v1.3.6'
 
 mod 'nubis/nubis_storage',
     :git => 'https://github.com/nubisproject/nubis-puppet-storage.git',
@@ -95,6 +95,4 @@ mod 'nubis/mig',
 
 mod 'nubis/nubis_users',
     :git => 'https://github.com/nubisproject/nubis-puppet-nubis_users',
-    :ref => 'v1.4.3'
-
-
+    :ref => 'v1.5.0'

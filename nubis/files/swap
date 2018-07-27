@@ -2,7 +2,7 @@
 
 # Look at supplied value
 if [ "$(nubis-metadata status)" == 'ready' ]; then
-  NUBIS_SWAP_SIZE_MEG=$(nubis-metadata NUBIS_SWAP_SIZE_MEG)
+  NUBIS_SWAP_SIZE_MEG=$(nubis-metadata NUBIS_SWAP_SIZE_MEG 2>/dev/null)
 fi
 
 # Use sane default otherwise
