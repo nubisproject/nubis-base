@@ -1,7 +1,7 @@
 # Change Log
 
 ## [v2.3.0](https://github.com/nubisproject/nubis-base/tree/v2.3.0) (2018-07-27)
-[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v2.3.0...v2.3.0)
+[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v2.2.0...v2.3.0)
 
 **Closed issues:**
 
@@ -12,35 +12,17 @@
 - Fix nubis-gen-puppet to point to new hiera and yaml location [\#854](https://github.com/nubisproject/nubis-base/issues/854)
 - Silence nubis-metadata outputs [\#850](https://github.com/nubisproject/nubis-base/issues/850)
 - Fix gen-puppet script [\#848](https://github.com/nubisproject/nubis-base/issues/848)
-- Refactor nubis-lib.sh [\#808](https://github.com/nubisproject/nubis-base/issues/808)
-- Upgarde to nubis-puppet-configureation 1.3.5 for metadata fixes [\#805](https://github.com/nubisproject/nubis-base/issues/805)
-
-**Merged pull requests:**
-
-- Add back %%PURPOSE%% %%STACK%% %%ENVIRONMENT%% substitution to /etc/consul/\* [\#866](https://github.com/nubisproject/nubis-base/pull/866) ([gozer](https://github.com/gozer))
-- Use the metadata value for swap, if provided [\#864](https://github.com/nubisproject/nubis-base/pull/864) ([gozer](https://github.com/gozer))
-- Fix metadata errors from fluent and consul startup scripts [\#862](https://github.com/nubisproject/nubis-base/pull/862) ([tinnightcap](https://github.com/tinnightcap))
-- Bump nubis-puppet-configuration tag [\#860](https://github.com/nubisproject/nubis-base/pull/860) ([limed](https://github.com/limed))
-- Expose caller to nubis-metadata [\#858](https://github.com/nubisproject/nubis-base/pull/858) ([tinnightcap](https://github.com/tinnightcap))
-- Cleanup extra artifacts. Bug already fixed in release [\#857](https://github.com/nubisproject/nubis-base/pull/857) ([tinnightcap](https://github.com/tinnightcap))
-- Bump nubis-puppet-nubis\_users to v1.5.0 [\#856](https://github.com/nubisproject/nubis-base/pull/856) ([tinnightcap](https://github.com/tinnightcap))
-- Pointing hiera config to new location [\#855](https://github.com/nubisproject/nubis-base/pull/855) ([limed](https://github.com/limed))
-- Silence nubis-metadata output if output does not exist [\#851](https://github.com/nubisproject/nubis-base/pull/851) ([limed](https://github.com/limed))
-- Fixing gen-puppet to deal with errors [\#849](https://github.com/nubisproject/nubis-base/pull/849) ([limed](https://github.com/limed))
-
-## [v2.3.0](https://github.com/nubisproject/nubis-base/tree/v2.3.0) (2018-07-24)
-[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v2.2.0...v2.3.0)
-
-**Closed issues:**
-
 - Errors on login due to PS1 acript [\#843](https://github.com/nubisproject/nubis-base/issues/843)
 - nubis-metadata init needs to happen \*before\* everything else [\#841](https://github.com/nubisproject/nubis-base/issues/841)
 - Update nubis-metadata to expose identity\_document values [\#836](https://github.com/nubisproject/nubis-base/issues/836)
 - Extend nubis-metadata to include identity document [\#817](https://github.com/nubisproject/nubis-base/issues/817)
 - \[gem\] Pin bundler at 1.16.1 [\#811](https://github.com/nubisproject/nubis-base/issues/811)
+- Refactor nubis-lib.sh [\#808](https://github.com/nubisproject/nubis-base/issues/808)
+- Upgarde to nubis-puppet-configureation 1.3.5 for metadata fixes [\#805](https://github.com/nubisproject/nubis-base/issues/805)
 - Use nubis-metadata instead of AWS user-data directly [\#803](https://github.com/nubisproject/nubis-base/issues/803)
 - \[nubis-metadata\] Stop querying AWS metadata [\#801](https://github.com/nubisproject/nubis-base/issues/801)
 - Tag v2.2.0 release [\#798](https://github.com/nubisproject/nubis-base/issues/798)
+- Tag v2.3.0 release [\#867](https://github.com/nubisproject/nubis-base/issues/867)
 - Tag v2.3.0 release [\#845](https://github.com/nubisproject/nubis-base/issues/845)
 - Tag v2.3.0 release [\#838](https://github.com/nubisproject/nubis-base/issues/838)
 - Tag v2.3.0 release [\#832](https://github.com/nubisproject/nubis-base/issues/832)
@@ -52,6 +34,18 @@
 
 **Merged pull requests:**
 
+- Update CHANGELOG for v2.3.0 release \[skip ci\] [\#869](https://github.com/nubisproject/nubis-base/pull/869) ([nubis-automation](https://github.com/nubis-automation))
+- Update CHANGELOG for v2.3.0 release \[skip ci\] [\#868](https://github.com/nubisproject/nubis-base/pull/868) ([nubis-automation](https://github.com/nubis-automation))
+- Add back %%PURPOSE%% %%STACK%% %%ENVIRONMENT%% substitution to /etc/consul/\* [\#866](https://github.com/nubisproject/nubis-base/pull/866) ([gozer](https://github.com/gozer))
+- Use the metadata value for swap, if provided [\#864](https://github.com/nubisproject/nubis-base/pull/864) ([gozer](https://github.com/gozer))
+- Fix metadata errors from fluent and consul startup scripts [\#862](https://github.com/nubisproject/nubis-base/pull/862) ([tinnightcap](https://github.com/tinnightcap))
+- Bump nubis-puppet-configuration tag [\#860](https://github.com/nubisproject/nubis-base/pull/860) ([limed](https://github.com/limed))
+- Expose caller to nubis-metadata [\#858](https://github.com/nubisproject/nubis-base/pull/858) ([tinnightcap](https://github.com/tinnightcap))
+- Cleanup extra artifacts. Bug already fixed in release [\#857](https://github.com/nubisproject/nubis-base/pull/857) ([tinnightcap](https://github.com/tinnightcap))
+- Bump nubis-puppet-nubis\_users to v1.5.0 [\#856](https://github.com/nubisproject/nubis-base/pull/856) ([tinnightcap](https://github.com/tinnightcap))
+- Pointing hiera config to new location [\#855](https://github.com/nubisproject/nubis-base/pull/855) ([limed](https://github.com/limed))
+- Silence nubis-metadata output if output does not exist [\#851](https://github.com/nubisproject/nubis-base/pull/851) ([limed](https://github.com/limed))
+- Fixing gen-puppet to deal with errors [\#849](https://github.com/nubisproject/nubis-base/pull/849) ([limed](https://github.com/limed))
 - Update CHANGELOG for v2.3.0 release \[skip ci\] [\#847](https://github.com/nubisproject/nubis-base/pull/847) ([nubis-automation](https://github.com/nubis-automation))
 - Update CHANGELOG for v2.3.0 release \[skip ci\] [\#846](https://github.com/nubisproject/nubis-base/pull/846) ([nubis-automation](https://github.com/nubis-automation))
 - Fix errors on login [\#844](https://github.com/nubisproject/nubis-base/pull/844) ([tinnightcap](https://github.com/tinnightcap))
