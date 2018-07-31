@@ -39,7 +39,14 @@ initialize-userdata() {
         #+ If so, wait till the file is created before returning
         #+ Else return 0 as this is probably a build job
         if curl --retry 5 -fqs $METADATA_URL_PREFIX/user-data | grep -qs "${USERDATA_FILE}"; then
+            COUNT=0
             until [ -f  "${USERDATA_FILE}" ]; do
+                # If we do not have ${USERDATA_FILE} after 60 seconds, bail out
+                if [ $(( COUNT ++ )) == 12 ]; then
+                    echo -e "\\n\\033[1;31mERROR: Timeout waiting for ${USERDATA_FILE}\\033[0m\\n" 1>&2
+                    echo -e "\\n\\033[1;31mERROR: Called by:'${PARENT_ARGUMENTS}'\\033[0m\\n" 1>&2
+                    exit 1
+                fi
                 echo -e "\\n\\033[0;32mNOTICE: ${USERDATA_FILE} not yet created, sleep 5\\033[0m" 1>&2
                 echo -e "\\n\\033[0;32mNOTICE: Called by:'${PARENT_ARGUMENTS}'\\033[0m\\n" 1>&2
                 sleep 5
