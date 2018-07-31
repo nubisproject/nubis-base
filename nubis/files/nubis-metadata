@@ -42,7 +42,7 @@ initialize-userdata() {
             COUNT=0
             until [ -f  "${USERDATA_FILE}" ]; do
                 # If we do not have ${USERDATA_FILE} after 60 seconds, bail out
-                if [ (( COUNT ++ )) == 12 ]; then
+                if [ $(( COUNT ++ )) == 12 ]; then
                     echo -e "\\n\\033[1;31mERROR: Timeout waiting for ${USERDATA_FILE}\\033[0m\\n" 1>&2
                     echo -e "\\n\\033[1;31mERROR: Called by:'${PARENT_ARGUMENTS}'\\033[0m\\n" 1>&2
                     exit 1
