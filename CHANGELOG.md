@@ -1,5 +1,13 @@
 # Change Log
 
+## [v2.3.0](https://github.com/nubisproject/nubis-base/tree/v2.3.0) (2018-08-01)
+[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v2.3.0...v2.3.0)
+
+**Merged pull requests:**
+
+- Add a timeout waiting for userdata file [\#874](https://github.com/nubisproject/nubis-base/pull/874) ([tinnightcap](https://github.com/tinnightcap))
+- Wait for cloud-init to create userdata file [\#873](https://github.com/nubisproject/nubis-base/pull/873) ([tinnightcap](https://github.com/tinnightcap))
+
 ## [v2.3.0](https://github.com/nubisproject/nubis-base/tree/v2.3.0) (2018-07-27)
 [Full Changelog](https://github.com/nubisproject/nubis-base/compare/v2.2.0...v2.3.0)
 
@@ -22,6 +30,7 @@
 - Use nubis-metadata instead of AWS user-data directly [\#803](https://github.com/nubisproject/nubis-base/issues/803)
 - \[nubis-metadata\] Stop querying AWS metadata [\#801](https://github.com/nubisproject/nubis-base/issues/801)
 - Tag v2.2.0 release [\#798](https://github.com/nubisproject/nubis-base/issues/798)
+- Tag v2.3.0 release [\#870](https://github.com/nubisproject/nubis-base/issues/870)
 - Tag v2.3.0 release [\#867](https://github.com/nubisproject/nubis-base/issues/867)
 - Tag v2.3.0 release [\#845](https://github.com/nubisproject/nubis-base/issues/845)
 - Tag v2.3.0 release [\#838](https://github.com/nubisproject/nubis-base/issues/838)
@@ -34,6 +43,8 @@
 
 **Merged pull requests:**
 
+- Update CHANGELOG for v2.3.0 release \[skip ci\] [\#872](https://github.com/nubisproject/nubis-base/pull/872) ([nubis-automation](https://github.com/nubis-automation))
+- Update CHANGELOG for v2.3.0 release \[skip ci\] [\#871](https://github.com/nubisproject/nubis-base/pull/871) ([nubis-automation](https://github.com/nubis-automation))
 - Update CHANGELOG for v2.3.0 release \[skip ci\] [\#869](https://github.com/nubisproject/nubis-base/pull/869) ([nubis-automation](https://github.com/nubis-automation))
 - Update CHANGELOG for v2.3.0 release \[skip ci\] [\#868](https://github.com/nubisproject/nubis-base/pull/868) ([nubis-automation](https://github.com/nubis-automation))
 - Add back %%PURPOSE%% %%STACK%% %%ENVIRONMENT%% substitution to /etc/consul/\* [\#866](https://github.com/nubisproject/nubis-base/pull/866) ([gozer](https://github.com/gozer))
