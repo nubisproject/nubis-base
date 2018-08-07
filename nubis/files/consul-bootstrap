@@ -15,7 +15,7 @@ fi
 if nubis-metadata NUBIS_ARENA > /dev/null 2>&1; then
     NUBIS_ARENA=$(nubis-metadata NUBIS_ARENA)
 fi
-if nubis-metadata NUBIS_ENVINRONMENT > /dev/null 2>&1; then
+if nubis-metadata NUBIS_ENVIRONMENT > /dev/null 2>&1; then
     NUBIS_ENVIRONMENT=$(nubis-metadata NUBIS_ENVIRONMENT)
 fi
 if nubis-metadata NUBIS_STACK > /dev/null 2>&1; then
