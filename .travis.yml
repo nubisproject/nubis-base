@@ -1,16 +1,11 @@
 sudo: required
-
 language: ruby
-
 services:
-  - docker
-
+- docker
 before_install:
-  - docker pull nubisproject/nubis-travis:master
-
+- docker pull nubisproject/nubis-travis:master
 script:
-  - docker run --mount type=bind,source="$(pwd)",target=/nubis/files nubisproject/nubis-travis:master
-
+- docker run --mount type=bind,source="$(pwd)",target=/nubis/files nubisproject/nubis-travis:master
 notifications:
   slack:
-    secure: SwTS8rFQUt3LV/dyH6sX22ZEaqyj2IZfiPagLIGEuoyJ/LGBv8HqKFx1GDq/nUtSbvbVaxFjOuiGaYeTHfO0y8pOOBqG+2SWkvAdT3O/NiQjFio1BlOxYeiYA6Zs4t6ZQ+k6pytbFkpISYvkX2fQxTcY5XnzlMl/S9Am8CdMVEo=
+    secure: dJ9tuNKJ0xpcWaVGZFEIxqqddYiXujzzNsUlgKBrgdPMs/q44lqLj4VN0sCImY3Rfhq57vsT6byVI91csJWeIUW/Id4TaRsp05UDGRlnkY1sgh8y2P+WNg3Ql/+hly0BB8CKqBNZCbZXCA/pFcm+cyPERVD9k1Zss3ihznpDGsg=
