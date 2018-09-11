@@ -62,10 +62,10 @@ package { 'binutils':
   ensure => '2.26.1-1ubuntu1~16.04.6',
 }
 package { 'boto3':
-  ensure => '1.7.67',
+  ensure => '1.7.81',
 }
 package { 'botocore':
-  ensure => '1.10.67',
+  ensure => '1.10.81',
 }
 package { 'bsd-mailx':
   ensure => '8.1.2-0.20160123cvs-2',
@@ -98,7 +98,7 @@ package { 'ca-certificates':
   ensure => '20170717~16.04.1',
 }
 package { 'certifi':
-  ensure => '2018.4.16',
+  ensure => '2018.8.13',
 }
 package { 'cffi':
   ensure => '1.11.5',
@@ -110,7 +110,7 @@ package { 'cloud-guest-utils':
   ensure => '0.27-0ubuntu25.1',
 }
 package { 'cloud-init':
-  ensure => '18.2-4-g05926e48-0ubuntu1~16.04.2',
+  ensure => '18.3-9-g2e62cb8a-0ubuntu1~16.04.2',
 }
 package { 'cloud-initramfs-copymods':
   ensure => '0.27ubuntu1.5',
@@ -347,10 +347,10 @@ package { 'git-man':
   ensure => '1:2.7.4-0ubuntu1.4',
 }
 package { 'gnupg':
-  ensure => '1.4.20-1ubuntu3.2',
+  ensure => '1.4.20-1ubuntu3.3',
 }
 package { 'gpgv':
-  ensure => '1.4.20-1ubuntu3.2',
+  ensure => '1.4.20-1ubuntu3.3',
 }
 package { 'grep':
   ensure => '2.25-1~16.04.1',
@@ -365,7 +365,7 @@ package { 'grub-gfxpayload-lists':
   ensure => '0.7',
 }
 package { 'grub-legacy-ec2':
-  ensure => '18.2-4-g05926e48-0ubuntu1~16.04.2',
+  ensure => '18.3-9-g2e62cb8a-0ubuntu1~16.04.2',
 }
 package { 'grub-pc':
   ensure => '2.02~beta2-36ubuntu3.18',
@@ -692,10 +692,10 @@ package { 'libgirepository-1.0-1':
   ensure => '1.46.0-3ubuntu1',
 }
 package { 'libglib2.0-0':
-  ensure => '2.48.2-0ubuntu3',
+  ensure => '2.48.2-0ubuntu4',
 }
 package { 'libglib2.0-data':
-  ensure => '2.48.2-0ubuntu3',
+  ensure => '2.48.2-0ubuntu4',
 }
 package { 'libgmp-dev':
   ensure => '2:6.1.0+dfsg-2',
@@ -869,7 +869,7 @@ package { 'libmpx0':
   ensure => '5.4.0-6ubuntu1~16.04.10',
 }
 package { 'libmspack0':
-  ensure => '0.5-1ubuntu0.16.04.1',
+  ensure => '0.5-1ubuntu0.16.04.2',
 }
 package { 'libncurses5':
   ensure => '6.0+20160213-1ubuntu1',
@@ -1139,7 +1139,7 @@ package { 'libxext6':
   ensure => '2:1.3.3-1',
 }
 package { 'libxml2':
-  ensure => '2.9.3+dfsg1-1ubuntu0.5',
+  ensure => '2.9.3+dfsg1-1ubuntu0.6',
 }
 package { 'libxmlsec1':
   ensure => '1.2.20-2ubuntu4',
@@ -1160,28 +1160,28 @@ package { 'libyaml-0-2':
   ensure => '0.1.6-3',
 }
 package { 'linux-aws':
-  ensure => '4.4.0.1063.65',
+  ensure => '4.4.0.1065.67',
 }
-package { 'linux-aws-headers-4.4.0-1063':
-  ensure => '4.4.0-1063.72',
+package { 'linux-aws-headers-4.4.0-1065':
+  ensure => '4.4.0-1065.75',
 }
 package { 'linux-base':
   ensure => '4.5ubuntu1~16.04.1',
 }
-package { 'linux-headers-4.4.0-1063-aws':
-  ensure => '4.4.0-1063.72',
+package { 'linux-headers-4.4.0-1065-aws':
+  ensure => '4.4.0-1065.75',
 }
 package { 'linux-headers-aws':
-  ensure => '4.4.0.1063.65',
+  ensure => '4.4.0.1065.67',
 }
-package { 'linux-image-4.4.0-1063-aws':
-  ensure => '4.4.0-1063.72',
+package { 'linux-image-4.4.0-1065-aws':
+  ensure => '4.4.0-1065.75',
 }
 package { 'linux-image-aws':
-  ensure => '4.4.0.1063.65',
+  ensure => '4.4.0.1065.67',
 }
 package { 'linux-libc-dev':
-  ensure => '4.4.0-131.157',
+  ensure => '4.4.0-133.159',
 }
 package { 'locale':
   ensure => ['2.1.2'],
@@ -1250,7 +1250,7 @@ package { 'mdadm':
   ensure => '3.3-2ubuntu7.6',
 }
 package { 'mig-agent':
-  ensure => '20160715-0.a06734a.prod',
+  ensure => '20180803-0.e8eb90a.prod',
 }
 package { 'mime-support':
   ensure => '3.59ubuntu1',
@@ -1319,7 +1319,7 @@ package { 'ntp':
   ensure => '1:4.2.8p4+dfsg-3ubuntu5.9',
 }
 package { 'open-iscsi':
-  ensure => '2.0.873+git0.3b4b4500-14ubuntu3.4',
+  ensure => '2.0.873+git0.3b4b4500-14ubuntu3.5',
 }
 package { 'open-vm-tools':
   ensure => '2:10.2.0-3~ubuntu0.16.04.1',
@@ -1628,22 +1628,22 @@ package { 'resolvconf':
   ensure => '1.78ubuntu6',
 }
 package { 'rspec':
-  ensure => ['3.7.0'],
+  ensure => ['3.8.0'],
 }
 package { 'rspec-core':
-  ensure => ['3.7.1'],
+  ensure => ['3.8.0'],
 }
 package { 'rspec-expectations':
-  ensure => ['3.7.0'],
+  ensure => ['3.8.1'],
 }
 package { 'rspec-its':
   ensure => ['1.2.0'],
 }
 package { 'rspec-mocks':
-  ensure => ['3.7.0'],
+  ensure => ['3.8.0'],
 }
 package { 'rspec-support':
-  ensure => ['3.7.1'],
+  ensure => ['3.8.0'],
 }
 package { 'rsync':
   ensure => '3.1.1-3ubuntu1.2',
@@ -1724,10 +1724,10 @@ package { 'sosreport':
   ensure => '3.5-1~ubuntu16.04.3',
 }
 package { 'specinfra':
-  ensure => ['2.75.0'],
+  ensure => ['2.76.0'],
 }
 package { 'squashfs-tools':
-  ensure => '1:4.3-3ubuntu2.16.04.2',
+  ensure => '1:4.3-3ubuntu2.16.04.3',
 }
 package { 'ssh-import-id':
   ensure => '5.5-0ubuntu1',

@@ -35,13 +35,13 @@ package { 'at':
   ensure => '3.1.13-23.el7',
 }
 package { 'audit':
-  ensure => '2.8.1-3.el7',
+  ensure => '2.8.1-3.el7_5.1',
 }
 package { 'audit-libs':
-  ensure => '2.8.1-3.el7',
+  ensure => '2.8.1-3.el7_5.1',
 }
 package { 'audit-libs-python':
-  ensure => '2.8.1-3.el7',
+  ensure => '2.8.1-3.el7_5.1',
 }
 package { 'authconfig':
   ensure => '6.2.8-30.el7',
@@ -89,10 +89,10 @@ package { 'boto':
   ensure => '2.45.0',
 }
 package { 'boto3':
-  ensure => '1.7.67',
+  ensure => '1.7.81',
 }
 package { 'botocore':
-  ensure => '1.10.67',
+  ensure => '1.10.81',
 }
 package { 'btrfs-progs':
   ensure => '4.9.1-1.el7',
@@ -107,7 +107,7 @@ package { 'centos-logos':
   ensure => '70.0.6-3.el7.centos',
 }
 package { 'centos-release':
-  ensure => '7-5.1804.el7.centos.2',
+  ensure => '7-5.1804.4.el7.centos',
 }
 package { 'cffi':
   ensure => '1.6.0',
@@ -230,16 +230,16 @@ package { 'docutils':
   ensure => '0.11',
 }
 package { 'dracut':
-  ensure => '033-535.el7',
+  ensure => '033-535.el7_5.1',
 }
 package { 'dracut-config-generic':
-  ensure => '033-535.el7',
+  ensure => '033-535.el7_5.1',
 }
 package { 'dracut-config-rescue':
-  ensure => '033-535.el7',
+  ensure => '033-535.el7_5.1',
 }
 package { 'dracut-network':
-  ensure => '033-535.el7',
+  ensure => '033-535.el7_5.1',
 }
 package { 'duo_unix':
   ensure => '1.10.1-0.el7',
@@ -434,7 +434,7 @@ package { 'iniparse':
   ensure => '0.4',
 }
 package { 'initscripts':
-  ensure => '9.49.41-1.el7',
+  ensure => '9.49.41-1.el7_5.1',
 }
 package { 'io-console':
   ensure => ['0.4.2'],
@@ -494,13 +494,13 @@ package { 'kernel':
   ensure => '3.10.0-514.16.1.el7',
 }
 package { 'kernel-headers':
-  ensure => '3.10.0-862.9.1.el7',
+  ensure => '3.10.0-862.11.6.el7',
 }
 package { 'kernel-tools':
-  ensure => '3.10.0-862.9.1.el7',
+  ensure => '3.10.0-862.11.6.el7',
 }
 package { 'kernel-tools-libs':
-  ensure => '3.10.0-862.9.1.el7',
+  ensure => '3.10.0-862.11.6.el7',
 }
 package { 'kexec-tools':
   ensure => '2.0.15-13.el7',
@@ -521,7 +521,7 @@ package { 'kmod-libs':
   ensure => '20-21.el7',
 }
 package { 'kpartx':
-  ensure => '0.4.9-119.el7',
+  ensure => '0.4.9-119.el7_5.1',
 }
 package { 'krb5-libs':
   ensure => '1.15.1-19.el7',
@@ -542,7 +542,7 @@ package { 'libbasicobjects':
   ensure => '0.1.1-29.el7',
 }
 package { 'libblkid':
-  ensure => '2.23.2-52.el7',
+  ensure => '2.23.2-52.el7_5.1',
 }
 package { 'libcap':
   ensure => '2.22-9.el7',
@@ -605,7 +605,7 @@ package { 'libgpg-error':
   ensure => '1.12-3.el7',
 }
 package { 'libgudev1':
-  ensure => '219-57.el7',
+  ensure => '219-57.el7_5.1',
 }
 package { 'libidn':
   ensure => '1.28-4.el7',
@@ -623,7 +623,7 @@ package { 'libmodman':
   ensure => '2.0.1-8.el7',
 }
 package { 'libmount':
-  ensure => '2.23.2-52.el7',
+  ensure => '2.23.2-52.el7_5.1',
 }
 package { 'libmpc':
   ensure => '1.0.1-3.el7',
@@ -728,7 +728,7 @@ package { 'libutempter':
   ensure => '1.1.6-4.el7',
 }
 package { 'libuuid':
-  ensure => '2.23.2-52.el7',
+  ensure => '2.23.2-52.el7_5.1',
 }
 package { 'libverto':
   ensure => '0.2.5-4.el7',
@@ -782,13 +782,13 @@ package { 'man-db':
   ensure => '2.6.3-9.el7',
 }
 package { 'mariadb-libs':
-  ensure => '1:5.5.56-2.el7',
+  ensure => '1:5.5.60-1.el7_5',
 }
 package { 'microcode_ctl':
-  ensure => '2:2.1-29.2.el7_5',
+  ensure => '2:2.1-29.10.el7_5',
 }
 package { 'mig-agent':
-  ensure => '20160715_0.a06734a.prod-1',
+  ensure => '20180803_0.e8eb90a.prod-1',
 }
 package { 'minitar':
   ensure => ['0.6.1'],
@@ -1190,7 +1190,7 @@ package { 'python-markupsafe':
   ensure => '0.11-10.el7',
 }
 package { 'python-perf':
-  ensure => '3.10.0-862.9.1.el7',
+  ensure => '3.10.0-862.11.6.el7',
 }
 package { 'python-pillow':
   ensure => '2.0.0-19.gitd1c6db8.el7',
@@ -1355,10 +1355,10 @@ package { 'sed':
   ensure => '4.2.2-5.el7',
 }
 package { 'selinux-policy':
-  ensure => '3.13.1-192.el7_5.4',
+  ensure => '3.13.1-192.el7_5.6',
 }
 package { 'selinux-policy-targeted':
-  ensure => '3.13.1-192.el7_5.4',
+  ensure => '3.13.1-192.el7_5.6',
 }
 package { 'semantic_puppet':
   ensure => ['0.1.2'],
@@ -1403,13 +1403,13 @@ package { 'sudo':
   ensure => '1.8.19p2-14.el7_5',
 }
 package { 'systemd':
-  ensure => '219-57.el7',
+  ensure => '219-57.el7_5.1',
 }
 package { 'systemd-libs':
-  ensure => '219-57.el7',
+  ensure => '219-57.el7_5.1',
 }
 package { 'systemd-sysv':
-  ensure => '219-57.el7',
+  ensure => '219-57.el7_5.1',
 }
 package { 'sysvinit-tools':
   ensure => '2.88-14.dsf.el7',
@@ -1442,7 +1442,7 @@ package { 'trousers':
   ensure => '0.3.14-2.el7',
 }
 package { 'tuned':
-  ensure => '2.9.0-1.el7',
+  ensure => '2.9.0-1.el7_5.2',
 }
 package { 'tzdata':
   ensure => '2018e-3.el7',
@@ -1460,7 +1460,7 @@ package { 'ustr':
   ensure => '1.0.4-16.el7',
 }
 package { 'util-linux':
-  ensure => '2.23.2-52.el7',
+  ensure => '2.23.2-52.el7_5.1',
 }
 package { 'vim-common':
   ensure => '2:7.4.160-4.el7',
@@ -1502,10 +1502,10 @@ package { 'yum-metadata-parser':
   ensure => '1.1.4-10.el7',
 }
 package { 'yum-plugin-fastestmirror':
-  ensure => '1.1.31-45.el7',
+  ensure => '1.1.31-46.el7_5',
 }
 package { 'yum-utils':
-  ensure => '1.1.31-45.el7',
+  ensure => '1.1.31-46.el7_5',
 }
 package { 'zlib':
   ensure => '1.2.7-17.el7',
