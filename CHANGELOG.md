@@ -1,63 +1,55 @@
 # Change Log
 
+## [v2.4.2](https://github.com/nubisproject/nubis-base/tree/v2.4.2) (2019-06-19)
+[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v2.4.0...v2.4.2)
+
+**Closed issues:**
+
+- Tag v2.4.0 release [\#896](https://github.com/nubisproject/nubis-base/issues/896)
+
+**Merged pull requests:**
+
+- Update CHANGELOG for v2.4.1 release \[skip ci\] [\#900](https://github.com/nubisproject/nubis-base/pull/900) ([gozer](https://github.com/gozer))
+
 ## [v2.4.0](https://github.com/nubisproject/nubis-base/tree/v2.4.0) (2019-03-06)
-[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v2.4.0...v2.4.0)
+[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v2.3.1...v2.4.0)
 
 **Closed issues:**
 
 - Tag v2.4.0 release [\#893](https://github.com/nubisproject/nubis-base/issues/893)
 
-## [v2.4.0](https://github.com/nubisproject/nubis-base/tree/v2.4.0) (2019-02-23)
-[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v2.3.1...v2.4.0)
-
-**Closed issues:**
-
-- Tag v2.3.1 release [\#889](https://github.com/nubisproject/nubis-base/issues/889)
-
 **Merged pull requests:**
 
+- Update CHANGELOG for v2.4.0 release \[skip ci\] [\#898](https://github.com/nubisproject/nubis-base/pull/898) ([nubis-automation](https://github.com/nubis-automation))
+- Update CHANGELOG for v2.4.0 release \[skip ci\] [\#897](https://github.com/nubisproject/nubis-base/pull/897) ([nubis-automation](https://github.com/nubis-automation))
 - Update CHANGELOG for v2.4.0 release \[skip ci\] [\#895](https://github.com/nubisproject/nubis-base/pull/895) ([nubis-automation](https://github.com/nubis-automation))
 - Update CHANGELOG for v2.4.0 release \[skip ci\] [\#894](https://github.com/nubisproject/nubis-base/pull/894) ([nubis-automation](https://github.com/nubis-automation))
 - Update Travis-CI integration key for Slack [\#892](https://github.com/nubisproject/nubis-base/pull/892) ([gozer](https://github.com/gozer))
-
-## [v2.3.1](https://github.com/nubisproject/nubis-base/tree/v2.3.1) (2018-08-21)
-[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v2.3.1...v2.3.1)
-
-**Merged pull requests:**
-
-- Revert "Revert "New MIG agent release"" [\#885](https://github.com/nubisproject/nubis-base/pull/885) ([tinnightcap](https://github.com/tinnightcap))
 
 ## [v2.3.1](https://github.com/nubisproject/nubis-base/tree/v2.3.1) (2018-08-21)
 [Full Changelog](https://github.com/nubisproject/nubis-base/compare/v2.3.0...v2.3.1)
 
 **Closed issues:**
 
-- Tag v2.3.0 release [\#880](https://github.com/nubisproject/nubis-base/issues/880)
+- Tag v2.3.1 release [\#889](https://github.com/nubisproject/nubis-base/issues/889)
 - Tag v2.3.1 release [\#886](https://github.com/nubisproject/nubis-base/issues/886)
 
 **Merged pull requests:**
 
+- Update CHANGELOG for v2.3.1 release \[skip ci\] [\#891](https://github.com/nubisproject/nubis-base/pull/891) ([nubis-automation](https://github.com/nubis-automation))
+- Update CHANGELOG for v2.3.1 release \[skip ci\] [\#890](https://github.com/nubisproject/nubis-base/pull/890) ([nubis-automation](https://github.com/nubis-automation))
 - Update CHANGELOG for v2.3.1 release \[skip ci\] [\#888](https://github.com/nubisproject/nubis-base/pull/888) ([nubis-automation](https://github.com/nubis-automation))
 - Update CHANGELOG for v2.3.1 release \[skip ci\] [\#887](https://github.com/nubisproject/nubis-base/pull/887) ([nubis-automation](https://github.com/nubis-automation))
+- Revert "Revert "New MIG agent release"" [\#885](https://github.com/nubisproject/nubis-base/pull/885) ([tinnightcap](https://github.com/tinnightcap))
 - Revert "New MIG agent release" [\#884](https://github.com/nubisproject/nubis-base/pull/884) ([tinnightcap](https://github.com/tinnightcap))
-- New MIG agent release [\#883](https://github.com/nubisproject/nubis-base/pull/883) ([zsck](https://github.com/zsck))
+- New MIG agent release [\#883](https://github.com/nubisproject/nubis-base/pull/883) ([arcrose](https://github.com/arcrose))
 
 ## [v2.3.0](https://github.com/nubisproject/nubis-base/tree/v2.3.0) (2018-08-07)
-[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v2.3.0...v2.3.0)
-
-**Closed issues:**
-
-- Typo in NUBIS\_ENVINRONMENT [\#878](https://github.com/nubisproject/nubis-base/issues/878)
-
-**Merged pull requests:**
-
-- Fix tyop preventing %%ENVIRONMENT%% expansion in /etc/consul [\#879](https://github.com/nubisproject/nubis-base/pull/879) ([gozer](https://github.com/gozer))
-
-## [v2.3.0](https://github.com/nubisproject/nubis-base/tree/v2.3.0) (2018-08-01)
 [Full Changelog](https://github.com/nubisproject/nubis-base/compare/v2.2.0...v2.3.0)
 
 **Closed issues:**
 
+- Typo in NUBIS\_ENVINRONMENT [\#878](https://github.com/nubisproject/nubis-base/issues/878)
 - \[consul\] %%PURPOSE%% %%STACK%% %%ENVIRONMENT%% Not substituted anymore [\#865](https://github.com/nubisproject/nubis-base/issues/865)
 - \[swap\] Setting swap size is broken [\#863](https://github.com/nubisproject/nubis-base/issues/863)
 - Clean up metadata errors from consul and fluent startup [\#861](https://github.com/nubisproject/nubis-base/issues/861)
@@ -74,7 +66,9 @@
 - Upgarde to nubis-puppet-configureation 1.3.5 for metadata fixes [\#805](https://github.com/nubisproject/nubis-base/issues/805)
 - Use nubis-metadata instead of AWS user-data directly [\#803](https://github.com/nubisproject/nubis-base/issues/803)
 - \[nubis-metadata\] Stop querying AWS metadata [\#801](https://github.com/nubisproject/nubis-base/issues/801)
-- Tag v2.2.0 release [\#798](https://github.com/nubisproject/nubis-base/issues/798)
+- Extend nubis-metadata so it can also include information from AWS instance-identity/document [\#346](https://github.com/nubisproject/nubis-base/issues/346)
+- Convert scripts to using nubis-metadata instead of fetching user-data themselves [\#345](https://github.com/nubisproject/nubis-base/issues/345)
+- Tag v2.3.0 release [\#880](https://github.com/nubisproject/nubis-base/issues/880)
 - Tag v2.3.0 release [\#875](https://github.com/nubisproject/nubis-base/issues/875)
 - Tag v2.3.0 release [\#870](https://github.com/nubisproject/nubis-base/issues/870)
 - Tag v2.3.0 release [\#867](https://github.com/nubisproject/nubis-base/issues/867)
@@ -89,6 +83,9 @@
 
 **Merged pull requests:**
 
+- Update CHANGELOG for v2.3.0 release \[skip ci\] [\#882](https://github.com/nubisproject/nubis-base/pull/882) ([nubis-automation](https://github.com/nubis-automation))
+- Update CHANGELOG for v2.3.0 release \[skip ci\] [\#881](https://github.com/nubisproject/nubis-base/pull/881) ([nubis-automation](https://github.com/nubis-automation))
+- Fix tyop preventing %%ENVIRONMENT%% expansion in /etc/consul [\#879](https://github.com/nubisproject/nubis-base/pull/879) ([gozer](https://github.com/gozer))
 - Update CHANGELOG for v2.3.0 release \[skip ci\] [\#877](https://github.com/nubisproject/nubis-base/pull/877) ([nubis-automation](https://github.com/nubis-automation))
 - Update CHANGELOG for v2.3.0 release \[skip ci\] [\#876](https://github.com/nubisproject/nubis-base/pull/876) ([nubis-automation](https://github.com/nubis-automation))
 - Add a timeout waiting for userdata file [\#874](https://github.com/nubisproject/nubis-base/pull/874) ([tinnightcap](https://github.com/tinnightcap))
@@ -662,7 +659,6 @@
 - Update builder artifacts for v1.3.0-dev release [\#425](https://github.com/nubisproject/nubis-base/pull/425) ([gozer](https://github.com/gozer))
 - Update builder artifacts for v1.2.3 release [\#424](https://github.com/nubisproject/nubis-base/pull/424) ([gozer](https://github.com/gozer))
 - Previous fix was broken, this one is finally correct [\#421](https://github.com/nubisproject/nubis-base/pull/421) ([gozer](https://github.com/gozer))
-- Update CHANGELOG for v1.2.2 release [\#420](https://github.com/nubisproject/nubis-base/pull/420) ([tinnightcap](https://github.com/tinnightcap))
 - Update puppet-fluentd for new package signing keys [\#575](https://github.com/nubisproject/nubis-base/pull/575) ([gozer](https://github.com/gozer))
 
 ## [v1.2.2](https://github.com/nubisproject/nubis-base/tree/v1.2.2) (2016-08-02)
@@ -676,6 +672,7 @@
 
 **Merged pull requests:**
 
+- Update CHANGELOG for v1.2.2 release [\#420](https://github.com/nubisproject/nubis-base/pull/420) ([tinnightcap](https://github.com/tinnightcap))
 - Update builder artifacts for v1.2.2 release [\#419](https://github.com/nubisproject/nubis-base/pull/419) ([tinnightcap](https://github.com/tinnightcap))
 - Install and enable NTPd by default [\#417](https://github.com/nubisproject/nubis-base/pull/417) ([gozer](https://github.com/gozer))
 - Set leave\_on\_terminate = true [\#415](https://github.com/nubisproject/nubis-base/pull/415) ([gozer](https://github.com/gozer))
@@ -998,7 +995,7 @@
 - Add support for 3 more Consul Server bootstrap options: [\#142](https://github.com/nubisproject/nubis-base/pull/142) ([gozer](https://github.com/gozer))
 
 ## [v0.9.0](https://github.com/nubisproject/nubis-base/tree/v0.9.0) (2015-07-23)
-[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v0.1...v0.9.0)
+[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v0.79...v0.9.0)
 
 **Closed issues:**
 
@@ -1014,11 +1011,11 @@
 - Move creation of /etc/puppet/nubis/{files,templates} to base image. Fixes \#134 [\#135](https://github.com/nubisproject/nubis-base/pull/135) ([gozer](https://github.com/gozer))
 - Ubuntu repositories have very old versions of the ec2-ami-tools that just don't work at all. [\#130](https://github.com/nubisproject/nubis-base/pull/130) ([gozer](https://github.com/gozer))
 
-## [v0.1](https://github.com/nubisproject/nubis-base/tree/v0.1) (2015-06-11)
-[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v0.79...v0.1)
-
 ## [v0.79](https://github.com/nubisproject/nubis-base/tree/v0.79) (2015-06-11)
-[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v1.35...v0.79)
+[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v0.1...v0.79)
+
+## [v0.1](https://github.com/nubisproject/nubis-base/tree/v0.1) (2015-06-11)
+[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v1.35...v0.1)
 
 **Closed issues:**
 
@@ -1163,6 +1160,7 @@
 - add bare-bones registry [\#6](https://github.com/nubisproject/nubis-base/pull/6) ([gozer](https://github.com/gozer))
 - cleanup and doc [\#5](https://github.com/nubisproject/nubis-base/pull/5) ([gozer](https://github.com/gozer))
 - Base import [\#4](https://github.com/nubisproject/nubis-base/pull/4) ([gozer](https://github.com/gozer))
+
 
 
 \* *This Change Log was automatically generated by [github_changelog_generator](https://github.com/skywinder/Github-Changelog-Generator)*
