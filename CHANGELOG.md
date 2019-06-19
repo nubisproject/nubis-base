@@ -9,6 +9,7 @@
 
 **Merged pull requests:**
 
+- Update CHANGELOG for v2.4.2 release \[skip ci\] [\#903](https://github.com/nubisproject/nubis-base/pull/903) ([gozer](https://github.com/gozer))
 - Update CHANGELOG for v2.4.1 release \[skip ci\] [\#900](https://github.com/nubisproject/nubis-base/pull/900) ([gozer](https://github.com/gozer))
 
 ## [v2.4.0](https://github.com/nubisproject/nubis-base/tree/v2.4.0) (2019-03-06)
