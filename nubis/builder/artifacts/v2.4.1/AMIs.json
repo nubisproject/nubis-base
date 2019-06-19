@@ -1,0 +1,21 @@
+{
+  "builds": [
+    {
+      "name": "amazon-ebs-ubuntu",
+      "builder_type": "amazon-ebs",
+      "build_time": 1560977135,
+      "files": null,
+      "artifact_id": "us-east-1:ami-0835ea6aa9b7dce50,us-west-2:ami-0ecd69673a7a5e9f5",
+      "packer_run_uuid": "9080fc08-1bd1-2b77-f171-42338a9eecf0"
+    },
+    {
+      "name": "amazon-ebs-centos",
+      "builder_type": "amazon-ebs",
+      "build_time": 1560977411,
+      "files": null,
+      "artifact_id": "us-east-1:ami-0d5eb718c67726baa,us-west-2:ami-025859e4c9fbe62f6",
+      "packer_run_uuid": "9080fc08-1bd1-2b77-f171-42338a9eecf0"
+    }
+  ],
+  "last_run_uuid": "9080fc08-1bd1-2b77-f171-42338a9eecf0"
+}
