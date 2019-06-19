@@ -1,11 +1,15 @@
 # Change Log
 
-## [v2.4.1](https://github.com/nubisproject/nubis-base/tree/v2.4.1) (2019-06-19)
-[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v2.4.0...v2.4.1)
+## [v2.4.2](https://github.com/nubisproject/nubis-base/tree/v2.4.2) (2019-06-19)
+[Full Changelog](https://github.com/nubisproject/nubis-base/compare/v2.4.0...v2.4.2)
 
 **Closed issues:**
 
 - Tag v2.4.0 release [\#896](https://github.com/nubisproject/nubis-base/issues/896)
+
+**Merged pull requests:**
+
+- Update CHANGELOG for v2.4.1 release \[skip ci\] [\#900](https://github.com/nubisproject/nubis-base/pull/900) ([gozer](https://github.com/gozer))
 
 ## [v2.4.0](https://github.com/nubisproject/nubis-base/tree/v2.4.0) (2019-03-06)
 [Full Changelog](https://github.com/nubisproject/nubis-base/compare/v2.3.1...v2.4.0)
